@@ -1,0 +1,93 @@
+---
+title: "Data-Driven Documents: RMarkdown"
+date: "R Workshop"
+output: 
+  html_document:
+    df_print: paged
+    theme: cosmo
+    highlight: haddock
+    toc: yes
+    toc_float: yes
+    code_fold: show
+    self-countained: true
+---
+
+<br>
+
+# **Introduction**  
+A great feature of RStudio is that you can create data-driven documents. That is, documents that use combine text and analysis into a "reproducible" documents. This is done using [R Markdown](https://rmarkdown.rstudio.com/). In other words, it allows you to write all of the text, syntax for the analysis, etc. and keep it in a document. This way you are not bouncing between programs and everything is reproducible. This is ideal if you are using a publicly available data set.
+
+<br>
+
+## **Getting Started**  
+First, you need to install the `rmarkdown` package using:  
+
+```{r, echo = TRUE, eval = FALSE}
+install.packages( "rmarkdown" )
+```
+
+<br>
+
+Now, let's take a look at how it works. Open a new R Markdown file using the drop-down menu as shown below:  
+
+<br>
+
+![](../images/markdown_file_pic.png)
+
+<br>
+
+Then, use the options to pick the type of file you want to create.
+
+<br>
+
+Afterwards, click on the knit function in the .Rmd pane:  
+
+<br>
+
+![](../images/knit_pic.png) 
+<br>
+
+You did it!  
+
+<br>
+
+## **Next Steps**  
+Easy enough right? Great! That was a simple example, there is a *lot* more you can do. If you are ready to charge forward, then here are some helpful links:  
+
+  * Get inspired by looking through the R Markdown [gallery](https://rmarkdown.rstudio.com/gallery.html).  
+
+  * Walk through the R Markdown [lessons](https://rmarkdown.rstudio.com/lesson-1.html) in the R Studio website.
+
+  * [The R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf?_ga=2.20453179.2030628553.1595556878-981053003.1531765846)  
+  
+  * [The R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf?_ga=2.89551512.2030628553.1595556878-981053003.1531765846)  
+
+<br>
+
+## **Some Examples**  
+Take a look at the [RWorkshop github page](https://github.com/jacobtnyoung/RWorkshop). Click on the [topics](https://github.com/jacobtnyoung/RWorkshop/tree/main/topics) folder.  
+
+You will see a `.Rmd` file for all of the sections we covered today. Let's look through a few.  
+
+<br>
+
+Here is another example. Take a look through the [Open Criminology Phoenix](https://jacobtnyoung.github.io/OpenCrimPhx/) pages. In particular, take a look at this page examining [crime in Phoenix](https://jacobtnyoung.github.io/OpenCrimPhx/crime-trends.html). This page is a .html file that is created using [this](https://github.com/jacobtnyoung/OpenCrimPhx/blob/main/crime-trends.Rmd) RMarkdown file.
+
+<br>
+
+## **Questions?**
+  
+____
+
+<br>
+
+#### [Back to R Workshop page](https://jacobtnyoung.github.io/RWorkshop/)
+
+<br>
+  
+##### ***Please*** report any needed corrections to the [Issues](https://github.com/jacobtnyoung/RWorkshop/issues) page. Thanks!
+  
+<br>
+<br>
+  
+###### ***Last updated `r format(Sys.time(), '%d %B, %Y')`***
