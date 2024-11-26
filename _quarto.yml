@@ -1,0 +1,39 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Social Network Analysis for Crime Analysts using R"
+  search: true
+  reader-mode: true
+
+  page-footer: 
+    left: |
+      Social Network Analysis for Crime Analysts using R was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a>
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+
+  site-url: https://jacobtnyoung.github.io/snaca-r/
+  repo-url: https://github.com/jacobtnyoung/snaca-r
+  repo-branch: main
+  repo-actions: [issue]
+
+  chapters:
+    - index.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: minty
+
+    navbar:
+      right:
+
+      # add a link to report an issue
+        - text: "Report an Issue"
+          href: "https://github.com/jacobtnyoung/snaca-r/issues"
+
+    author-meta: "Jacob T.N. Young"
+
+editor: visual
