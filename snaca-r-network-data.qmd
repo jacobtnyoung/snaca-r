@@ -323,7 +323,7 @@ edge_d <- matrix(
 
 # create the network object
 edge_d_net <- as.network( 
-  edge.d,directed = TRUE,
+  edge_d_directed = TRUE,
   matrix.type = "edgelist" )
 
 # take a look
@@ -367,8 +367,6 @@ class( mat_u )
 
 ```
 
-<br>
-
 We need to adjust the arguments to read in the file how we want it. Specifically, we want to do the following:
 
 -   Set the `as.is =` argument equal to `TRUE` so that it reads the data as it is.
@@ -380,52 +378,47 @@ We need to adjust the arguments to read in the file how we want it. Specifically
 ```{r,echo=TRUE,eval=FALSE}
 
 # look at the arguments
-mat.u2 <- read.csv( 
+mat_u2 <- read.csv( 
   url,
   as.is = TRUE,
   header = TRUE,
   row.names = 1 
   )
 
-mat.u2
+mat_u2
 
 # compare them
-mat.u
-mat.u2
+mat_u
+mat_u2
 
 ```
-
-<br>
 
 Now, make the object into one of `class` network:
 
 ```{r,echo=TRUE,eval=FALSE}
+
 # we have to first coerce the object to a matrix
-mat.u2 <- as.matrix( 
-  mat.u2 )
+mat_u2 <- as.matrix( mat_u2 )
 
 # recall that since this network is undirected
 # we set the directed= argument to FALSE
-net.u <- as.network( 
-  mat.u2,
+net_u <- as.network( 
+  mat_u2,
   directed = FALSE
    )
 
-net.u
+net_u
 
 # we could combine the as.matrix and as.network functions
-net.u <- as.network( 
+net_u <- as.network( 
   as.matrix( 
-    mat.u2 
-    ), 
+    mat_u2 ), 
   directed = FALSE 
   )
 
-net.u
+net_u
 
 ```
-
-<br>
 
 We could also import the file if it is saved locally (i.e. we are not going to the web to get it). *Typically* we do not do this because it is a bad practice. That is, creating a version of a file locally. But, sometimes you might be offline or you have files that cannot be put online.
 
@@ -435,9 +428,9 @@ Then, set the directory where the file is using the `setwd()` function. You can 
 
 ```{r, echo=FALSE, eval=TRUE}
 
-url <- "https://github.com/jacobtnyoung/sna-textbook/raw/main/data/data-undirected-example.csv"
+url <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-directed-example.csv"
 
-net.d <- as.network( 
+net_d <- as.network( 
   as.matrix( 
     read.csv( 
       url, 
@@ -454,10 +447,10 @@ Then, use `read.csv` as above:
 
 ```{r, echo=TRUE, eval=FALSE}
 
-setwd(" PUT THE CORRECT PATH HERE")
+setwd( "PUT THE CORRECT PATH HERE" )
 
-mat.d <- read.csv(
-  "data-undirected-example.csv",
+mat_d <- read.csv(
+  "data-directed-example.csv",
   as.is=TRUE,
   header=TRUE,
   row.names=1
@@ -467,8 +460,8 @@ mat.d <- read.csv(
 # the network is directed since 
 # this is the default, 
 # but a good habit to get into.
-net.d <- as.network(
-  as.matrix( data.d ),
+net_d <- as.network(
+  as.matrix( data_d ),
   directed=TRUE
   )
 
@@ -477,31 +470,9 @@ net.d <- as.network(
 ```{r}
 
 # now, print the object.
-net.d
+net_d
 
 ```
-
-<br>
-
-# **Summary**
-
-Why are you learning this? As you can probably guess, we are going to be working with matrices and objects of class `network` a LOT in this course!
-
-------------------------------------------------------------------------
-
-### ***Questions?***
-
-<br>
-
-##### ***Please*** report any needed corrections to the [Issues](https://github.com/jacobtnyoung/SAND/issues/new) page. Thanks!
-
-<br>
-
-<p align="center">
-
-[Back to SAND main page](https://jacobtnyoung.github.io/SAND/)
-
-</p>
 
 ## Test Your Knowledge
 
@@ -509,4 +480,4 @@ Why are you learning this? As you can probably guess, we are going to be working
 
 ## Tutorial Summary
 
-This tutorial introduced you to the power of RMarkdown for creating reproducible, data-driven documents using RStudio. By combining narrative text, code, and analytical outputs into a single file, RMarkdown ensures transparency and efficiency in reporting workflows, eliminating the need to switch between multiple programs. This can be a valuable tool for any crime analyst. We (briefly) covered how to generate various output formats, such as HTML, Word, and PDF, which are customizable to suit different professional contexts. The tutorial also covers the basics of Markdown for text formatting, embedding images, creating tables, and hyperlinks, offering a comprehensive foundation for crafting professional documents.
+???
