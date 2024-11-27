@@ -103,57 +103,6 @@ x[1:5] <- 0 # change the first through fifth elements in x to 0.
 
 Using brackets to identify particular elements, called *indexing*, is VERY useful. By using indexing, we can create objects from other objects, or reference particular locations. The utility of this will be more obvious later.
 
-#### **You try it!**
-
-```{r, include=FALSE}
-
-# this initializes the tutorial to run
-tutorial::go_interactive( greedy = FALSE )
-
-```
-
-```{r ex="try_it", type="pre-exercise-code", tut=TRUE}
-
-y <- c( 1,2,3,4,5,6,7,8,9,10 )
-y[4]
-y[4:7]
-y[c( 2,9 )]
-y[5:8] <- 0
-
-```
-
-```{r ex="try_it", type="sample-code", tut=TRUE}
-# Create a vector called y, with the elements 1 through 10.
-
-# what is the fourth element in y?
-
-# what are the first through seventh elements in y?
-
-# what are the second and ninth elements in y?
-
-# change the fifth through eighth elements in y to 0.
-
-```
-
-```{r ex="try_it", type="solution", tut=TRUE}
-
-# Create a vector called y, with the elements 1 through 10.
-y <- c( 1,2,3,4,5,6,7,8,9,10 )
-
-# what is the fourth element in y?
-y[4]
-
-# what are the first through seventh elements in y?
-y[1:7]
-
-# what are the second and ninth elements in y?
-y[c( 2,9 )]
-
-# change the fifth through eighth elements in y to 0.
-y[5:8] <- 0
-
-```
-
 ### **6. Types of objects ("classes") in R**
 
 Objects in R can be of different types or **classes**. There are four:

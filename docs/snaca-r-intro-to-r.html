@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./snaca-r-rmarkdown.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -150,6 +151,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./snaca-r-intro-to-r.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tutorial 01 - Getting Started with R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-r-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 02 - Introduction to Data-Driven Documents and Github Issues</span></a>
   </div>
 </li>
     </ul>
@@ -269,31 +276,6 @@ For example: <code>x &lt;- 2 # this assigns the value 2 to object x.</code></p>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># change the first through fifth elements in x to 0.  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using brackets to identify particular elements, called <em>indexing</em>, is VERY useful. By using indexing, we can create objects from other objects, or reference particular locations. The utility of this will be more obvious later.</p>
-<section id="you-try-it" class="level4">
-<h4 class="anchored" data-anchor-id="you-try-it"><strong>You try it!</strong></h4>
-<div class="cell" data-layout-align="center" data-ex="try_it" type="pre-exercise-code" data-tut="true">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 5 6 7</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 9</code></pre>
-</div>
-</div>
-<div class="cell" data-layout-align="center" data-ex="try_it" type="solution" data-tut="true">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 4 5 6 7</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 9</code></pre>
-</div>
-</div>
-</section>
 <section id="types-of-objects-classes-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="types-of-objects-classes-in-r"><strong>6. Types of objects (“classes”) in R</strong></h3>
 <p>Objects in R can be of different types or <strong>classes</strong>. There are four:</p>
@@ -315,64 +297,64 @@ For example: <code>x &lt;- 2 # this assigns the value 2 to object x.</code></p>
 </ul>
 <p>For example, let’s build a few objects:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nums <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"Shelley"</span>, <span class="st">"Trevor"</span> )</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>( <span class="fu">c</span>( <span class="st">"female"</span>, <span class="st">"male"</span> ) )</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>is_female <span class="ot">&lt;-</span> sex <span class="sc">==</span> <span class="st">"female"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>nums <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"Shelley"</span>, <span class="st">"Trevor"</span> )</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>( <span class="fu">c</span>( <span class="st">"female"</span>, <span class="st">"male"</span> ) )</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>is_female <span class="ot">&lt;-</span> sex <span class="sc">==</span> <span class="st">"female"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that numbers <strong>do not</strong> require <code>" "</code> around them but characters <strong>do</strong> require <code>" "</code> around them. Also, that the object <code>is.female</code> is created by stating a condition.</p>
 <p>Each object has a class, which defines the “type” of vector a particular object is:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>name_list <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"Hugo"</span>,<span class="st">"Desmond"</span>,<span class="st">"Largo"</span> ) <span class="co"># assign the characters to an object.</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>( name_list ) <span class="co"># is the object a character vector?</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>( name_list ) <span class="co">#is the object a numeric vector?  </span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>( name_list ) <span class="co"># is the object a factor vector?</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>( name_list ) <span class="co"># is the object a logical vector?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>name_list <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"Hugo"</span>,<span class="st">"Desmond"</span>,<span class="st">"Largo"</span> ) <span class="co"># assign the characters to an object.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>( name_list ) <span class="co"># is the object a character vector?</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>( name_list ) <span class="co">#is the object a numeric vector?  </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>( name_list ) <span class="co"># is the object a factor vector?</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>( name_list ) <span class="co"># is the object a logical vector?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Missing values are dealt with in R by NA.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">3</span>,<span class="cn">NA</span>,<span class="dv">10</span> ) <span class="co"># create a vector with a missing value.</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>y <span class="co"># multiple the vector by 2.  </span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>( y ) <span class="co"># which positions in y have missing values?  </span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>y[ <span class="fu">is.na</span>( y )] <span class="co">#subset meeting condition.</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>y[ <span class="sc">!</span><span class="fu">is.na</span>( y )] <span class="co"># subset meeting a different condition.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">3</span>,<span class="cn">NA</span>,<span class="dv">10</span> ) <span class="co"># create a vector with a missing value.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>y <span class="co"># multiple the vector by 2.  </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>( y ) <span class="co"># which positions in y have missing values?  </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>y[ <span class="fu">is.na</span>( y )] <span class="co">#subset meeting condition.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y[ <span class="sc">!</span><span class="fu">is.na</span>( y )] <span class="co"># subset meeting a different condition.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="matrices-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="matrices-in-r"><strong>7. Matrices in R</strong></h3>
 <p>In addition to vectors, we can create a matrix, which is a 2-dimensional representation of data. A matrix has dimensions <em>r X c</em> which means rows by columns. The number of rows and columns a matrix has is referred to as its “order” or “dimensionality”. This information is returned by using the <code>dim()</code> function. Matrices can be created by combining existing vectors using the <code>rbind()</code> and <code>cbind()</code> functions. The <code>rbind()</code> function means “row bind” and binds together vectors by rows. Think of it as stacking vectors on each other. The <code>cbind()</code> function means “column bind” and binds together vectors by rows. Think of it as placing them side by side. Let’s take a look:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span> )</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">1</span> )</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>( x,y ) <span class="co">#bind x and y by row to create a 2 X 5 matrix.</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="co">#just enter the name of the object to print it.</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>( x,y ) <span class="co">#bind x and y by column to create a 5 X 2 matrix.</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>m2 <span class="co">#just enter the name of the object to print it.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span> )</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">1</span> )</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>( x,y ) <span class="co">#bind x and y by row to create a 2 X 5 matrix.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="co">#just enter the name of the object to print it.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>( x,y ) <span class="co">#bind x and y by column to create a 5 X 2 matrix.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>m2 <span class="co">#just enter the name of the object to print it.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For both functions, the dimensions of the vectors must be the same (i.e.&nbsp;same number of rows and columns).<br>
 Let’s see some examples:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>l  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span> )</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">5</span> )</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>( l,n ) <span class="co"># returns an error because the dimensions differ.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>l  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span> )</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">5</span> )</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>( l,n ) <span class="co"># returns an error because the dimensions differ.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can index the matrix <code>m1</code> or <code>m2</code> by using the brackets <code>[ ]</code> with a comma between the two dimensions. Since a matrix is 2-dimensions, we can reference a specific element, an entire row, or an entire column:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">2</span>,<span class="dv">2</span>] <span class="co">#what is the value of the element in the 2nd row, 2nd column?</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>m1[,<span class="dv">2</span>]  <span class="co">#what are the values in the second column?</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">2</span>,]  <span class="co">#what are the values in the second row?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">2</span>,<span class="dv">2</span>] <span class="co">#what is the value of the element in the 2nd row, 2nd column?</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m1[,<span class="dv">2</span>]  <span class="co">#what are the values in the second column?</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">2</span>,]  <span class="co">#what are the values in the second row?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m2[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#change the value to zero.</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>m2[<span class="dv">2</span>,]  <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#change the second row to zeros.</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>m2[,<span class="dv">2</span>]  <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#change the second column to zeros.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m2[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#change the value to zero.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>m2[<span class="dv">2</span>,]  <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#change the second row to zeros.</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>m2[,<span class="dv">2</span>]  <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#change the second column to zeros.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In the code chunk above, note the difference between <code>[,#]</code> and <code>[#,]</code>. A comma in front of the argument (i.e.&nbsp;<code>[,#]</code>) applies to the columns) and a common after the argument (i.e.&nbsp;<code>[#,]</code>) applies to the rows.</p>
 <p>Also, notice that <code>m1[2,2]</code>, is an object, just as <code>m1</code> is an object. In effect, we are <em>subsetting</em> the object <code>m1</code> when we index it.</p>
 <p>Matrices can also be created from a list of numbers using the <code>matrix()</code> and <code>c()</code> functions.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>( <span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span> ),<span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">3</span> )</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>( <span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span> ),<span class="at">nrow=</span><span class="dv">3</span>,<span class="at">ncol=</span><span class="dv">3</span> )</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="one-of-the-most-important-functions-in-r-help" class="level3">
@@ -382,8 +364,8 @@ The <code>help()</code> function, or a simple <code>?</code>, can be used to get
 <p>Take a look at the help page. The first line shows you the function and the package it is written for in brackets (more on packages below). The help page provides a description, how to use it (i.e.&nbsp;what are the arguments), and a description of what each argument does. Further details and examples are provided as well.</p>
 <p>Let’s take a look at another function that creates sequences of numbers, the <code>seq( )</code> function. There are several ways to use the <code>seq( )</code> function. The most common are:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>( <span class="at">from=</span>, <span class="at">to=</span>, <span class="at">by=</span> ) <span class="co"># Starts at from, ends at to, steps defined by by.</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>( <span class="at">from=</span>, <span class="at">to=</span>, <span class="at">length=</span> ) <span class="co"># Starts at from, ends at to, steps defined by length.  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>( <span class="at">from=</span>, <span class="at">to=</span>, <span class="at">by=</span> ) <span class="co"># Starts at from, ends at to, steps defined by by.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>( <span class="at">from=</span>, <span class="at">to=</span>, <span class="at">length=</span> ) <span class="co"># Starts at from, ends at to, steps defined by length.  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For example:<br>
 if we want to create an object of 5 values that starts with 1 and ends with 5, we type: <code>seq( from=1, to=5, by=1 )</code>.<br>
@@ -407,10 +389,10 @@ For example, the function <code>rgraph()</code> in the package <code>sna</code> 
 <p>A final point on loading packages. Since anyone can write and contributes packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.</p>
 <p>For example, the <code>sna</code> package and the <code>tnet</code> package both have a function called <code>betweenness</code>, but the functions are programmed differently. When you load <code>tnet</code> after loading <code>sna</code> (or <em>visa versa</em>), R will give you a warning that an “object is being masked”. That means the functionality of <code>betweenness</code> in <code>sna</code> is no longer used. Let’s check it out:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>( <span class="st">"sna"</span> )</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( sna )</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>( <span class="st">"tnet"</span> )</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( tnet )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>( <span class="st">"sna"</span> )</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( sna )</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>( <span class="st">"tnet"</span> )</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( tnet )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This can be a bit frustrating. In such cases, you can unload the package using the <code>detach()</code> function. See: <code>?detach</code> for an example.</p>
 </section>
@@ -420,10 +402,10 @@ For example, the function <code>rgraph()</code> in the package <code>sna</code> 
 <p>To see what exists in the workspace, type: <code>ls()</code>.</p>
 <p>We can remove specific variables with the <code>rm()</code> function. This helps clear up space (i.e.&nbsp;conserve memory). For example:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span> ) <span class="co"># create the object.</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()          <span class="co"># see the objects.</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>( x )         <span class="co"># remove the object x.</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()          <span class="co"># no more x.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>( <span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">1</span> ) <span class="co"># create the object.</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()          <span class="co"># see the objects.</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>( x )         <span class="co"># remove the object x.</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>()          <span class="co"># no more x.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To remove everything from the workspace use: <code>rm( list=ls() )</code>. This is helpful for starting a session to make sure everything is cleaned out.</p>
 <p>When you start R, it nominates one of the directories on your hard drive as a working directory, which is where it looks for user-written programs and data files.</p>
@@ -724,6 +706,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./snaca-r-rmarkdown.html" class="pagination-link">
+        <span class="nav-page-text">Tutorial 02 - Introduction to Data-Driven Documents and Github Issues</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
