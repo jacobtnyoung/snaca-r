@@ -22,6 +22,7 @@ book:
     - index.qmd
     - snaca-r-intro-to-r.qmd
     - snaca-r-rmarkdown.qmd
+    - snaca-r-network-data.qmd
 
 bibliography: references.bib
 

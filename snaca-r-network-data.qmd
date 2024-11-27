@@ -65,7 +65,7 @@ This command reads as follows:
 
 We can see the object by just typing the object name: `mat`. *Note* that if the number of elements does not correctly match the dimensions of the matrix, R gives you an error.
 
-For example:
+For example: 
 
 ```{r}
 
@@ -322,8 +322,9 @@ edge_d <- matrix(
   byrow = TRUE )
 
 # create the network object
-edge_d_net <- as.network( 
-  edge_d_directed = TRUE,
+edge_d_net <- as.network(
+  edge_d,
+  directed = TRUE,
   matrix.type = "edgelist" )
 
 # take a look
