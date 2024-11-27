@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jacob T.N. Young">
 
-<title>snaca-r-intro-to-r</title>
+<title>Social Network Analysis for Crime Analysts using R - Tutorial 01 - Getting Started with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,30 +58,152 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="snaca-r-intro-to-r_files/libs/clipboard/clipboard.min.js"></script>
-<script src="snaca-r-intro-to-r_files/libs/quarto-html/quarto.js"></script>
-<script src="snaca-r-intro-to-r_files/libs/quarto-html/popper.min.js"></script>
-<script src="snaca-r-intro-to-r_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="snaca-r-intro-to-r_files/libs/quarto-html/anchor.min.js"></script>
-<link href="snaca-r-intro-to-r_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="snaca-r-intro-to-r_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="snaca-r-intro-to-r_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="snaca-r-intro-to-r_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="snaca-r-intro-to-r_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
 
 
 </head>
 
-<body class="fullcontent">
+<body class="nav-sidebar floating">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-r-intro-to-r.html">Tutorial 01 - Getting Started with R</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Social Network Analysis for Crime Analysts using R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jacobtnyoung/snaca-r" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./snaca-r-intro-to-r.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Tutorial 01 - Getting Started with R</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#things-about-r-to-get-you-started" id="toc-things-about-r-to-get-you-started" class="nav-link active" data-scroll-target="#things-about-r-to-get-you-started"><em>10 Things about R to get you started:</em></a>
+  <ul class="collapse">
+  <li><a href="#what-is-r" id="toc-what-is-r" class="nav-link" data-scroll-target="#what-is-r"><strong>1. What is R</strong></a></li>
+  <li><a href="#installing-and-starting" id="toc-installing-and-starting" class="nav-link" data-scroll-target="#installing-and-starting"><strong>2. Installing and Starting</strong></a></li>
+  <li><a href="#objects-in-r" id="toc-objects-in-r" class="nav-link" data-scroll-target="#objects-in-r"><strong>3. Objects in R</strong></a></li>
+  </ul></li>
+  <li><a href="#functions-in-r" id="toc-functions-in-r" class="nav-link" data-scroll-target="#functions-in-r"><strong>4. Functions in R</strong></a></li>
+  <li><a href="#referencing-and-indexing-objects-in-r" id="toc-referencing-and-indexing-objects-in-r" class="nav-link" data-scroll-target="#referencing-and-indexing-objects-in-r"><strong>5. Referencing and Indexing Objects in R</strong></a>
+  <ul class="collapse">
+  <li><a href="#types-of-objects-classes-in-r" id="toc-types-of-objects-classes-in-r" class="nav-link" data-scroll-target="#types-of-objects-classes-in-r"><strong>6. Types of objects (“classes”) in R</strong></a></li>
+  <li><a href="#matrices-in-r" id="toc-matrices-in-r" class="nav-link" data-scroll-target="#matrices-in-r"><strong>7. Matrices in R</strong></a></li>
+  <li><a href="#one-of-the-most-important-functions-in-r-help" id="toc-one-of-the-most-important-functions-in-r-help" class="nav-link" data-scroll-target="#one-of-the-most-important-functions-in-r-help"><strong>8. One of the most important functions in R: <code>help()</code></strong></a></li>
+  <li><a href="#packages-and-the-install.packages-and-library-functions" id="toc-packages-and-the-install.packages-and-library-functions" class="nav-link" data-scroll-target="#packages-and-the-install.packages-and-library-functions"><strong>9. Packages and the <code>install.packages()</code> and <code>library()</code> Functions</strong></a></li>
+  <li><a href="#r-session-management" id="toc-r-session-management" class="nav-link" data-scroll-target="#r-session-management"><strong>10. R Session Management</strong></a></li>
+  <li><a href="#bonus-r-studio" id="toc-bonus-r-studio" class="nav-link" data-scroll-target="#bonus-r-studio"><strong>11. (Bonus!) R Studio</strong></a></li>
+  <li><a href="#rstudio-workthrough" id="toc-rstudio-workthrough" class="nav-link" data-scroll-target="#rstudio-workthrough">RStudio workthrough</a></li>
+  </ul></li>
+  <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge">Test Your Knowledge</a></li>
+  <li><a href="#tutorial-summary" id="toc-tutorial-summary" class="nav-link" data-scroll-target="#tutorial-summary">Tutorial Summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tutorial 01 - Getting Started with R</h1>
+</div>
 
 
-<section id="tutorial-01---getting-started-with-r" class="level1 unnumbered">
-<h1 class="unnumbered">Tutorial 01 - Getting Started with R</h1>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
 <p>In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. Even if you have used R before (awesome!), I would encourage you to review the tutorial as a refresher.</p>
 <section id="things-about-r-to-get-you-started" class="level2">
 <h2 class="anchored" data-anchor-id="things-about-r-to-get-you-started"><em>10 Things about R to get you started:</em></h2>
@@ -195,16 +318,16 @@ For example: <code>x &lt;- 2 # this assigns the value 2 to object x.</code></p>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nums <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"Shelley"</span>, <span class="st">"Trevor"</span> )</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>( <span class="fu">c</span>( <span class="st">"female"</span>, <span class="st">"male"</span> ) )</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>is.female <span class="ot">&lt;-</span> sex <span class="sc">==</span> <span class="st">"female"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>is_female <span class="ot">&lt;-</span> sex <span class="sc">==</span> <span class="st">"female"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that numbers <strong>do not</strong> require <code>" "</code> around them but characters <strong>do</strong> require <code>" "</code> around them. Also, that the object <code>is.female</code> is created by stating a condition.</p>
 <p>Each object has a class, which defines the “type” of vector a particular object is:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>name.list <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"Hugo"</span>,<span class="st">"Desmond"</span>,<span class="st">"Largo"</span> ) <span class="co"># assign the characters to an object.</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>( name.list ) <span class="co"># is the object a character vector?</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>( name.list ) <span class="co">#is the object a numeric vector?  </span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>( name.list ) <span class="co"># is the object a factor vector?</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>( name.list ) <span class="co"># is the object a logical vector?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>name_list <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="st">"Hugo"</span>,<span class="st">"Desmond"</span>,<span class="st">"Largo"</span> ) <span class="co"># assign the characters to an object.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>( name_list ) <span class="co"># is the object a character vector?</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.numeric</span>( name_list ) <span class="co">#is the object a numeric vector?  </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">is.factor</span>( name_list ) <span class="co"># is the object a factor vector?</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.logical</span>( name_list ) <span class="co"># is the object a logical vector?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Missing values are dealt with in R by NA.</p>
 <div class="cell" data-layout-align="center">
@@ -355,12 +478,12 @@ You can set the working directory also by typing: <code>setwd("</code>your desir
 </section>
 <section id="tutorial-summary" class="level2">
 <h2 class="anchored" data-anchor-id="tutorial-summary">Tutorial Summary</h2>
-<p>This tutorial provides a quick introduction to R. R is a versatile and open-source programming language designed for data science and statistical analysis. As we will see, it is one of the best environments for working with social network data. We began with an overview of R’s history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R’s extensive documentation, installing and loading packages, and managing the R workspace effectively. We also reviewed (briefly) RStudio, a powerful integrated development environment (IDE) that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.</p>
-</section>
+<p>This tutorial provides a quick introduction to R. R is a versatile and open-source programming language designed for data science and statistical analysis. As we will see, it is one of the best environments for working with social network data. We began with an overview of R’s history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R’s extensive documentation, installing and loading packages, and managing the R workspace effectively. We also reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.</p>
+
+
 </section>
 
-</main>
-<!-- /main column -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -594,7 +717,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Social Network Analysis for Crime Analysts using R was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a></div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
 
 
 
