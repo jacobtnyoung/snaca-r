@@ -28,7 +28,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: minty
+    theme: lux
 
     navbar:
       right:
