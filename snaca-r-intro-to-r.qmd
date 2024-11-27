@@ -8,431 +8,395 @@ knitr::opts_chunk$set(
   fig.align = "center"
   )
 
-library( here )      # for the directory
-library( ggraph )    # for plotting
-library( igraph )    # for working with graphs
-library( ggplot2 )   # for plotting
-library( gridExtra ) # for plotting multiple plots
-library( grid )      # to include the null graphical object
+```
+
+# Tutorial 01 - Getting Started with R {.unnumbered}
+
+In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. Even if you have used R before (awesome!), I would encourage you to review the tutorial as a refresher.
+
+## *10 Things about R to get you started:*
+
+### **1. What is R**
+
+R is a dialect of the *S* language that was written by John Chambers and others at Bell tutorials in the 70s. In the 90s, R was developed and made avaitutorialle to the public with the GNU general public license. Importantly, R is *free*, meaning that you don't have to pay for it (duh), but it is also **open source**, meaning that you have freedom to use and modify it.
+
+R is an operating system for data science software. Just as Windows allows you to turn on your computer, open a web browser, moved files around, and write a paper using MS Word, R allows you to install and run packages and manage files while organizing large data projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.
+
+### **2. Installing and Starting**
+
+Go to <http://cran.r-project.org>. Find the "Download R for..." link that is appropriate for your operating system.
+
+When R starts it loads some basic info and provides you with a prompt: `>`
+
+This prompt is the fundamental entry point for communicating with R. We type expressions at the prompt, R evaluates these expressions, and returns output.
+
+### **3. Objects in R**
+
+R is a programming language. That means, it allows us to give instructions to our computer to do stuff. We will see that there is a lot of "stuff" we can do. But, the basic orientation to R is understanding **objects**.
+
+What is an *object*? Without getting to philosophical, an *object* is something we create in the R environment. Think of an R session as a box. We are creating objects and putting them into the box. This is quite different from data analysis programs like SPSS or Stata.
+
+We create objects by using the assignment operator: `<-`
+
+What you type on the right is assigned to what you type on the left. For example:\
+`y <- 4` (we have assigned the value 4 to the object y)\
+`x <- 6` (we have assigned the value 6 to the object x)\
+`z <- y` (we have assigned the value of the object y to the object z, i.e. z = 4)
+
+After assigning a value to an object, type the name of the object and hit return/enter to see what the value is.
+
+Objects can start with a letter or a period. *But*, you cannot name a object starting with a number (or other symbols used by R).\
+Some examples:\
+`the.number.two <- 2`\
+`2 <- the.number.two`\
+`2.the.number <- 2`\
+`;.2 <- 2`
+
+R is case sensitive (i.e. `A` is a different object than `a`). R is insensitive to white space though.\
+These two examples are treated the same in R:\
+`x <- 2`\
+`x<-              2`
+
+To have R ignore text, use the `#` sign to make comments.\
+For example: `x <- 2 # this assigns the value 2 to object x.`
+
+In R there are no carriage returns (e.g. Stata uses `///` in code). Sorry :(
+
+## **4. Functions in R**
+
+A major strength of R is the ability to manipulate objects using functions. A function takes an argument (aka input) and returns some value (aka output).
+
+For example, suppose we wanted to create a list of numbers, called a *vector*. We want to create an object that is defined by the list of numbers. In R, there is a preprogrammed function `c()`, which combines or *concatenates* values to create a single object. We can create an object `x`, that is a vector of 1, 2, 3, 4, and 5 using: `x <- c(1,2,3,4,5)`.
+
+This reads: the object x is assigned the values 1, 2, 3, 4, and 5. The function is "`c`" and the argument is `1,2,3,4,5`.
+
+The number of values (aka elements) a vector contains is referred to as the "length". We can use the `length()` function to return this information for us. For example: `length(x)` shows that the vector `x` has 5 values or elements.
+
+*Reminder*: R is a language, so part of the learning curve is getting familiar with the names of functions.
+
+## **5. Referencing and Indexing Objects in R**
+
+In R, specific elements in an object are referenced by using brackets (i.e. `[` or `]`).
+
+For example, let's create a vector and work with it:
+
+```{r,echo=TRUE,eval=FALSE}
+
+x <- c( 1,2,3,4,5 ) # create the vector.
+x
+x[5] # what is the fifth element  in x?  
+x[2:4] # what are the second through fourth elements in x?  
+x[ c( 1,4 )] # what are the first and fourth elements in x?  
 
 ```
 
-# Introduction to Social Network Analysis for Crime Analysts
+*Note* the difference in use between `[#:#]` and `[c(#,#)]`. The colon `:` means "through" and the comma `,` means "and".
 
-Why add "social network analysis" to your crime analyst toolkit? To answer this question, it probably helps to know what social network analysis is! In this chapter, I want to introduce you to how people who study networks **think** about research problems and the types of data they use to examine these research problems from a network perspective. As such, we have the following *learning goals*:
+We can also change values by indexing:
 
--   By the end of the chapter, be able to answer these questions:
+```{r,echo=TRUE,eval=FALSE}
 
-    -   What is "network science" and how is it different from "usual" research?
-
-    -   What do networks "look like"?
-
-## Motivating Question and Empirical Example
-
-To get a sense of what we do when we study networks, let's start with a motivating question:
-
-*What determines whether a police officer endorses the use of body-worn cameras and whether they activate their body-camera during an incident?*
-
-Most accounts tend to focus on several factors:
-
--   Individual characteristics (e.g. age, experience)
--   Situational characteristics (e.g. time of day, incident)
-
-In other words, usually the explanation focuses on something about the person and/or something about the situation. Both of these explanations, though, tend to think about units as independent. For example, police officers endorse body-worn cameras because of their age or because of the characteristics of their beat. This may be true, but the underlying assumption is that officer endorsement is entirely independent from other officers in the department. This is the assumption of **independence across units**.
-
-In the study of networks, we are interested in the *dependence* between units as an explanatory tool. That is we are interested in **the network**!
-
-For example, in a study by [Young & Ready (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) entitled, *Diffusion of Ideas and Technology: The Role of Networks in Influencing the Endorsement and Use of On-Officer Video Cameras*, the authors adopted a network perspective to examine two research questions:
-
--   How do police officers "frame" body-worn cameras?
--   Is the meaning officers attribute to cameras created and transmitted in groups?
-
-To answer these questions, they proposed the following model:
-
-```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/ch-01-model-figure.jpeg" )
-```
-
-In this model, they argued that police officers views of body-worn cameras influence whether they use their cameras in incidents. But, where do these views come from? The authors proposed a *contagion* process whereby officers who shared incidents together exchanged views about the legitimacy of body-worn cameras.
-
-Thus, the network matters! Rather than focusing on differences between individuals in terms of some attribute or situational experience, the study by [Young & Ready (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) was explicitly focused on the role that relationships between officers play in spreading attitudes, ideas, beliefs, etc. about body-worn cameras. This is thinking about the problem of officer endorsement through the lens of a **network perspective**. This study is an example of what is called *Network Science*.
-
-## Network Science
-
-Network **science** is an approach to science that views the world as being composed of systems of actors connected through relational ties (i.e. a **network**). Stop for a moment and ask yourself the following question:
-
--   *What are some ways people can be connected?*
-
-All of these various connections you thought of fit within the domain of study that is network science.
-
-Network science takes these **relational structures** as the primary domain of interest. In so doing, research questions take the following forms:
-
--   How does the network matter?
-    -   Here the network is an *independent variable*. In the case above, the network of shared incidents was as independent variable that influenced views of body-worn cameras.
--   What effects the network?
-    -   Here, the network is a *dependent variable*. For example, do younger individuals who are involved in crime have more co-offenders?
-
-## Network Analysis
-
-Network **analysis** is the set of tools used to study *relational variables*. <u>What is a relational variable?</u> A relational variable refers to a variable that measures the relationship between entities rather than the attributes of the entities themselves. In SNA, relational variables are used to describe the ties, interactions, or connections between actors (nodes) in a network. These variables do not focus on the individual characteristics of the actors but rather on how they relate to one another. For example, in a criminal network, a relational variable could be the frequency of communication between two individuals, the level of trust between them, or the type of criminal activity they collaborate on.
-
-<u>How is a relational variable different?</u> The main contrast to relational variables is attribute variables (or actor variables), which describe the properties or characteristics of the entities themselves. These might include an individual's age, gender, occupation, or criminal history. Attribute variables provide information about the individual actors (nodes), while relational variables focus on the connections between them.
-
-Network **analysis** is the set of tools used to study *relational variables*. Just as there are tools for examining attribute variables (e.g. the correlation between age and criminal offending), SNA encompasses a set of methods for systematically understanding and identifying connections among actors (i.e. relational variables).
-
-<u>Consider three different questions</u>:
-
--   Are kids who are risk-seeking more likely to drink alcohol?
--   Are kids who have friends that drink alcohol more likely to drink alcohol?
--   Are kids who drink alcohol more likely to be popular?
-
-Now, <u>think about this</u>:
-
--   How are these questions different?
--   Is the causal logic the same?
--   Are the policy implications the same? What are the variables?
-
-<br>
-
-Taken some time to think it through? Good! Let's examine these questions closer.
-
-The questions differ substantially in causal logic:
-
--   In the first question, the *independent* variable is risk-seeking and the *dependent* variable is alcohol consumption. In the second question, the independent variable is alcohol consumption among friends. These two questions have different policy implications. The first would focus on reducing risk-seeking. The second would focus on disrupting the network. As a result, how we think about the problem has implications for which policy we design to address the problem.
-
--   In the third question, the independent variable is alcohol consumption and the dependent variable is a network variable, popularity. The policy implication here would be to reduce alcohol consumption if we were concerned about who (or who is not) popular.
-
-Again, network science is about focusing on the *relational* aspect fo what is being studied. Think about a separate [example](https://www.theonion.com/sudden-death-of-aunt-creates-rupture-in-family-gossip-p-1819578447) from America's "finest news source", the Onion. As you read through it, ask yourself "what does this story tell you about the **relational** structure of information transmission in the Shelton family?":
-
-```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/ch-01-gossip.jpeg" )
-```
-
-What does this story tell us about the **relational** structure of information transmission in the Shelton family? It is *vulnerable*? The network was flowing with juicy gossip until Aunt Laurie passed.
-
-To understand, we can draw a picture illustrating the network described in the story:
-
-```{r, fig.cap = "", out.width = "30%"}
-knitr::include_graphics( "images/ch-01-gossip-laurie-01.jpeg" )
-```
-
-What makes it vulnerable? What happened when aunt Laurie died? Communication is completely disrupted!
-
-```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/ch-01-gossip-laurie-02.jpeg" )
-```
-
-Consider a separate network arrangement:
-
-```{r, fig.cap = "", out.width = "30%"}
-knitr::include_graphics( "images/ch-01-gossip-laurie-03.jpeg" )
-```
-
-Now what happens when aunt Laurie dies?
-
-```{r, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "images/ch-01-gossip-laurie-04.jpeg" )
-```
-
-Communication is *not* disrupted. This is because the network now has ties which make it less vulnerable to disruption. In social network jargon this is called **redundancy**.
-
-The point here is this: these topics are inherently *relational*. They are not about comparing different, independent units. In other words, we are not comparing attributes of the individuals involved (e.g. who is moer prone to gossip). The questions (and in the case of the Onion article, the joke) are about dependence between units.
-
-## Network Science and Network Analysis
-
-In doing network research (i.e. asking questions that involve networks and performing network analysis to answer the question), it is important to consider two crucial ideas:
-
--   Conceptualization
-    -   The process of defining what a concept is by creating a conceptual definition.
--   Operationalization
-    -   The process of creating a concrete measure following a conceptual definition of a concept.
-
-Network science **conceptualizes** theoretical concepts that are inherently relational and **operationalizes** these constructs by drawing on the formal properties of graphs.
-
-Let's take an example. Suppose we are interested in the concept of *power* in a gang. Some gang members may be more powerful than others and we may want to develop an intervention that focuses on the most powerful members. But, what does it mean to say that someone is powerful? There are many different ways to conceptualize power.
-
-One way is to think about it as being a central member of the gang. So, we could create a conceptual definition: powerful gang members are those who are central to the gang network. Ok, so how do we measure it? In other words, how do we *operationalize* power based on our *conceptual* definition? We could say that individuals who are central in the gang are those who are perceived as being central. So, we could ask gang members "who is the most central person in your gang?". Then, we would have an operationalization of power in the gang.
-
-To illustrate, consider a case study of a gang operating in an urban neighborhood. Law enforcement agencies had been investigating the gang for months, but traditional surveillance methods were failing to identify the key players who were directing most of the criminal activities. To tackle this, researchers decided to take a network perspective to the problem, guided by the conceptual definition that power within the gang is held by those perceived as central. They conducted interviews with current and former gang members, asking them directly, "Who is the most important person in your gang?" This simple question revealed individuals who were not initially flagged by police investigations but were considered highly influential by their peers. Upon further analysis, it became clear that these individuals controlled significant communication pathways and resources within the gang. By focusing on those perceived as central, law enforcement was able to disrupt key relationships and dismantle the gang's leadership structure, demonstrating the effectiveness of operationalizing power through social perception (Papachristos, 2006).
-
-The process of identifying a concept, developing a conceptual definition, and creating an operational measure is an essential skill for crime analysts to hone.
-
-What makes SNA so powerful is that it allows us to use concepts and tools from mathematics to operationalize theoretical constructs that are relational, avoding much of the murkiness of many concepts in the social sciences that are difficult to measure. To get a sense of how this works, we need to review some basic data elements.
-
-## Basic Data Elements
-
-*What do networks "look like"?*
-
-### Network (relational) data represents:
-
--   **Connections** (also called ties, arcs, edges, lines, ties) among,
-
--   **Entities** (also called nodes, vertices, actors, points, dots)
-
-To be consistent, I will use the term *node* to refer to entities and *edge* to refer to connections.
-
-A *node* can be anything that can link to something else. Anything.
-
-An *edge* can be anything that can record a connection between nodes. Anything.
-
-Examples:
-
--   In a friendship network the nodes are individuals and the edges are friendships.
-
--   In a co-offending network the nodes are individuals and the edges are offenses. That is, individuals are connected through offenses in which they both were present.
-
-On a graph, nodes are represented by *points* and edges are represented by *lines*.
-
-```{r}
-
-# ----
-# This creates the graphs for the plots below
-
-# Create the graph objects
-graph  <- graph_from_data_frame( 
-  data.frame( 
-    from = c( 1, 1, 2, 3, 4, 5, 5, 6, 4, 8,  8,  9 ),
-    to   = c( 2, 3, 3, 4, 5, 6, 7, 7, 8, 9, 10, 10 ) ), 
-  directed = FALSE )
-
-digraph  <- graph_from_data_frame( 
-  data.frame( 
-    from = c( 1, 2, 1, 2, 3, 3,  4, 4, 4,  5, 6, 5, 7, 6, 7,  8, 9, 8, 10, 9, 10  ),
-    to   = c( 2, 1, 3, 3, 1, 2,  3, 5, 8,  6, 5, 7, 5, 7, 7,  9, 8, 10, 8, 10, 9  ) ), 
-  directed = TRUE )
-
-# Set the random seed to render the same plot
-set.seed( 507 )
-
-# Set a fixed layout using the Fruchterman-Reingold layout
-layout <- layout_with_fr( graph )
-dilayout <- layout_with_fr( digraph )
+x[5]   <- 3 # change the fifth element in x to 5.  
+x[1:5] <- 0 # change the first through fifth elements in x to 0.  
 
 ```
 
-```{r, fig.height=5, fig.width=5}
+Using brackets to identify particular elements, called *indexing*, is VERY useful. By using indexing, we can create objects from other objects, or reference particular locations. The utility of this will be more obvious later.
 
-# Plot the graph using ggraph, add arrows and the "Node" text annotation
-ggraph( graph, layout = layout ) +                  # 'fr' stands for the Fruchterman-Reingold layout
-  geom_edge_link( color = "black", width = 0.8 ) +  # Add edges, no labels
-  geom_node_point( color = "skyblue", size = 6 ) +  # Add nodes
-  theme_void() +                                    # Remove the background for a cleaner look
+#### **You try it!**
 
-  # Add arrow pointing to a node
-  geom_segment( aes( x = -3.1, y = -1.6, xend = -3.3, yend = -1.3 ), 
-               color = "orange", size = 1, linetype = "solid",
-               arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
+```{r, include=FALSE}
 
-  # Annotate the word "Node" pointing to the nodes
-  annotate( "text", x = -3.2, y = -1.7, label = "Node", color = "orange", size = 5 ) +
-
-  # Add arrow pointing to a node
-  geom_segment( aes( x = -0.3, y = 1.3, xend = 0.3, yend = 1.5 ), 
-                color = "orange", size = 1, linetype = "solid",
-                arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
-  
-  # Annotate the word "Node" pointing to the nodes
-  annotate( "text", x = -0.3, y = 1.2, label = "Node", color = "orange", size = 5 ) +
-  
-  # Add arrow pointing to an edge
-  geom_segment( aes( x = -1, y = 0.2, xend = -1.1, yend = -0.3 ), 
-                color = "red", size = 1, linetype = "solid",
-                arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
-  
-  # Annotate the word "Node" pointing to the nodes
-  annotate( "text", x = -1, y = 0.35, label = "Edge", color = "red", size = 5 ) +
-
-  # Add arrow pointing to an edge
-  geom_segment( aes( x = 1.3, y = -0.5, xend = 0.8, yend = -1.1 ), 
-                color = "red", size = 1, linetype = "solid",
-                arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
-  
-  # Annotate the word "Node" pointing to the nodes
-  annotate( "text", x = 1.3, y = -0.35, label = "Edge", color = "red", size = 5 ) 
+# this initializes the tutorial to run
+tutorial::go_interactive( greedy = FALSE )
 
 ```
 
-### Edges
+```{r ex="try_it", type="pre-exercise-code", tut=TRUE}
 
-#### Directionality
-
-Edges can be *undirected*, where an edge from A to B is the same as an edge from B to A:
-
-```{r, fig.height=3, fig.width=3}
-
-p1 <-
-  ggraph( graph, layout = layout ) +                  # 'fr' stands for the Fruchterman-Reingold layout
-  geom_edge_link( color = "black", width = 0.8 ) +  # Add edges, no labels
-  geom_node_point( color = "skyblue", size = 6 ) +  # Add nodes
-  theme_void()                                      # Remove the background for a cleaner look
-
-p1
+y <- c( 1,2,3,4,5,6,7,8,9,10 )
+y[4]
+y[4:7]
+y[c( 2,9 )]
+y[5:8] <- 0
 
 ```
 
-or *directed*, where an edge from A to B is separate from an edge from B to A:
+```{r ex="try_it", type="sample-code", tut=TRUE}
+# Create a vector called y, with the elements 1 through 10.
 
-```{r, fig.height=3, fig.width=3}
+# what is the fourth element in y?
 
-p2 <- 
-  ggraph( digraph, layout = dilayout ) +   # Use the fixed layout coordinates
-  geom_edge_link( aes( start_cap = label_rect( node1.name ), 
-                     end_cap = circle( 3, 'mm' ) ),
-                 arrow = arrow( length = unit( 0.015, "npc" ) ), 
-                 color = "black", width = 0.8 ) +  # Add directed edges with arrowheads
-  geom_node_point( color = "skyblue", size = 6 ) +  # Add nodes
-  theme_void()
+# what are the first through seventh elements in y?
 
-p2
+# what are the second and ninth elements in y?
+
+# change the fifth through eighth elements in y to 0.
 
 ```
 
-The difference is important. For example, suppose the edges of the networks below measure communication of information.
+```{r ex="try_it", type="solution", tut=TRUE}
 
-```{r, fig.height=3, fig.width=5}
+# Create a vector called y, with the elements 1 through 10.
+y <- c( 1,2,3,4,5,6,7,8,9,10 )
 
-# Display the plots side by side
-grid.arrange( p1, nullGrob(), p2, ncol = 3, widths = c( 1, 0.5, 1 ) )  # Add space using nullGrob
+# what is the fourth element in y?
+y[4]
 
-```
+# what are the first through seventh elements in y?
+y[1:7]
 
-Suppose each of the edges in the networks above measure communication. *How are these structures different?*
+# what are the second and ninth elements in y?
+y[c( 2,9 )]
 
-In the undirected network (on the left), all information can reach all three groups. To see this, start at any node and you can reach (by tracing) any other node following the lines.
-
-But, in the directed network (on the right), information is "stuck" in the three clusters. Why? This is because information comes from the center node and goes to each cluster. And it does not leave. Even though they all communicate in each cluster, information does not leave the clusters. To see this, start with any node and follow the arrows. Once you get into a single cluster, you cannot leave!
-
-#### Value
-
-Edges can take on different values. They can be:
-
--   Binary (0 or 1; present or absent)
--   Valued integers (0, 1, 2,...)
--   Continuous weights (0.24, 1.79,...)
--   Signed (+ or -)
-
-For example, in a friendship network the tie could measure whether we are friends or not (binary), how strong our friendship is (either using integers or continuous measures), or we whether we like (signed +) or dislike (signed -) each other.
-
-#### Meanings
-
-Edges can have different meanings and therefore be of different *types*:
-
--   Social relationships (e.g. sister, friend, likes, knows)
--   Interactions (has sex with, talks to, seeks advice from)
--   Flows (diseases, attitudes, information)
-
-These different types are important to keep in mind when we are thinking about what a tie represents.
-
-### Nodes
-
-#### Modes/Node Partitions
-
-Networks can differ with respect to the sets of nodes that define them. This refers to the *modes* of the network or the *partitioning* of the nodes:
-
--   One-mode/uni-partite (connections among one type of node). For example, A and B are friends. There is only one group of nodes, individuals.
--   Multi-mode/multi-partite (connections among two or more types of nodes). For example A and B attend protests 1 and 2. There are two sets of nodes, individuals and protests. A and B are connected through their shared participation in the protests.
-
-```{r, fig.height=5, fig.width=5}
-
-# Create a bipartite graph
-
-bgraph <- graph_from_data_frame( 
-  data.frame(
-    from = c( 1,1,1, 2,2,2, 3, 3, 3,  4, 5, 5  ),
-    to = c(   6,7,8, 6,8,9, 9,10,11,  9, 9,11  )
-    ), 
-  directed = FALSE 
-  )
-
-# assign a bipartite attribute
-V( bgraph )$type <- c( FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE )
-
-# Set node labels
-V( bgraph )$label <- c( "1", "2", "3", "4", "5", "A", "B", "C", "D", "E", "F" )
-
-# Set a fixed layout using the Fruchterman-Reingold layout
-set.seed( 507 )
-blayout <- layout_with_fr( bgraph )
-
-# Plot the bipartite graph
-ggraph( bgraph, layout = blayout) +   # Fruchterman-Reingold layout
-  geom_edge_link( color = "black", width = 0.8 ) +  # Edges
-  geom_node_point( aes( shape = as.factor( type ), color = as.factor( type ) ), size = 12 ) +  # Nodes
-  scale_shape_manual( values = c( 18, 16 ) ) +
-  scale_color_manual( values = c( "#3770ad","#d63c41" ) ) +
-  geom_node_text( aes( label = label ), vjust = 0.4, size = 5 ) +  # Labels for the nodes
-  theme_void() +  # Clean background
-  theme( legend.position = "none" )  + # Remove the legend
-
-  # Add arrow pointing to a node
-  geom_segment( aes( x = 0, y = 0.6, xend = 1.2, yend = 0.1 ), 
-                color = "#3770ad", size = 1, linetype = "solid",
-                arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
-  
-  geom_segment( aes( x = -1.5, y = 0.6, xend = -2.2, yend = -0.35 ), 
-                color = "#3770ad", size = 1, linetype = "solid",
-                arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
-  
-    # Annotate the word "Node" pointing to the nodes
-  annotate( "text", x = -0.7, y = 0.7, label = "Nodes in first mode", color = "#3770ad", size = 5 ) +
-  
-  # Add arrow pointing to a node
-  geom_segment( aes( x = 1.5, y = -1.4, xend = 0, yend = -1 ), 
-                color = "#d63c41", size = 1, linetype = "solid",
-                arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
-  
-  geom_segment( aes( x = 2.5, y = -1.4, xend = 3, yend = 0 ), 
-                color = "#d63c41", size = 1, linetype = "solid",
-                arrow = arrow( length = unit( 0.02, "npc" ) ) ) +
-  
-  # Annotate the word "Node" pointing to the nodes
-  annotate( "text", x = 2.5, y = -1.5, label = "Nodes in second mode", color = "#d63c41", size = 5 )
-  
-```
-
-As an example, the network for the study discussed above by [Young & Ready (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) is shown below:
-
-```{r, fig.cap = "", out.width = "60%"}
-
-knitr::include_graphics( "images/ch-01-net-06.jpeg" )
+# change the fifth through eighth elements in y to 0.
+y[5:8] <- 0
 
 ```
 
-In this network, incidents (white circles) connect officers (squares and triangles). This is a two-mode/bipartite network because there are two sets of nodes: incidents and officers. The plot shows two types of officers, those who were in the treatment condition of the study (i.e. they were assigned a body-worn camera) and those who were in the control condition (i.e. they did not receive a camera). The focus of the study was how exposure to body-cameras during incidents influenced views, especially for those who were not assigned a camera.
+### **6. Types of objects ("classes") in R**
 
-As another example, [Schjarback & Young (2017)](https://link.springer.com/article/10.1007/s12103-017-9395-5) examined the tendency for United States senators to sign different types of legislation. Specifically, the authors were interested in whether crime control legislation was more likely to be signed if individuals were from the same party.
+Objects in R can be of different types or **classes**. There are four:
 
-```{r, fig.cap = "", out.width = "50%"}
-knitr::include_graphics( "images/ch-01-net-07.jpeg" )
+-   numeric, a number (e.g. `1, 2`)
+-   character, a letter or word (e.g. `"Shelley", "Trevor"`)
+-   factor, a category (e.g. `female, male`)
+-   logical, True or False values (e.g. `TRUE, FALSE`)
+
+Each type of vector serves different purposes:
+
+-   *numeric*: keep track of quantitative measures, counts, or orders of things\
+-   *character*: store non-numeric data, typically unstructured text\
+-   *factor*: represent distinct and mutually-exclusive categories\
+-   *logical*: designate cases that meet some criteria, usually group inclusion
+
+For example, let's build a few objects:
+
+```{r,echo=TRUE,eval=FALSE}
+
+nums <- c( 1, 2, 3 )
+names <- c( "Shelley", "Trevor" )
+sex <- factor( c( "female", "male" ) )
+is_female <- sex == "female"
+
 ```
 
-In this network, there are two sets of nodes: bills (crime control and non-control) and senators (Democrats and Republicans).
+Note that numbers **do not** require `" "` around them but characters **do** require `" "` around them. Also, that the object `is.female` is created by stating a condition.
 
-#### Plexity
+Each object has a class, which defines the "type" of vector a particular object is:
 
-Networks can also differ with respect to the types of edges.
+```{r,echo=TRUE,eval=FALSE}
 
--   Simplex (connections among nodes are of one type)
--   Multiplex (connections among nodes are of multiple types)
+name_list <- c( "Hugo","Desmond","Largo" ) # assign the characters to an object.
+is.character( name_list ) # is the object a character vector?
+is.numeric( name_list ) #is the object a numeric vector?  
+is.factor( name_list ) # is the object a factor vector?
+is.logical( name_list ) # is the object a logical vector?
+
+```
+
+Missing values are dealt with in R by NA.
+
+```{r,echo=TRUE,eval=FALSE}
+
+y <- c( 3,NA,10 ) # create a vector with a missing value.
+2*y # multiple the vector by 2.  
+is.na( y ) # which positions in y have missing values?  
+y[ is.na( y )] #subset meeting condition.
+y[ !is.na( y )] # subset meeting a different condition.
+
+```
+
+### **7. Matrices in R**
+
+In addition to vectors, we can create a matrix, which is a 2-dimensional representation of data. A matrix has dimensions *r X c* which means rows by columns. The number of rows and columns a matrix has is referred to as its "order" or "dimensionality". This information is returned by using the `dim()` function. Matrices can be created by combining existing vectors using the `rbind()` and `cbind()` functions. The `rbind()` function means "row bind" and binds together vectors by rows. Think of it as stacking vectors on each other. The `cbind()` function means "column bind" and binds together vectors by rows. Think of it as placing them side by side. Let's take a look:
+
+```{r,echo=TRUE,eval=FALSE}
+
+x  <- c( 6,5,4,3,2 )
+y  <- c( 8,7,5,3,1 )
+m1 <- rbind( x,y ) #bind x and y by row to create a 2 X 5 matrix.
+m1 #just enter the name of the object to print it.
+m2 <- cbind( x,y ) #bind x and y by column to create a 5 X 2 matrix.
+m2 #just enter the name of the object to print it.
+
+```
+
+For both functions, the dimensions of the vectors must be the same (i.e. same number of rows and columns).\
+Let's see some examples:
+
+```{r,echo=TRUE,eval=FALSE}
+
+l  <- c( 6,5,4,3,2 )
+n  <- c( 8,7,5 )
+m2 <- rbind( l,n ) # returns an error because the dimensions differ.
+
+```
+
+We can index the matrix `m1` or `m2` by using the brackets `[ ]` with a comma between the two dimensions. Since a matrix is 2-dimensions, we can reference a specific element, an entire row, or an entire column:
+
+```{r,echo=TRUE,eval=FALSE}
+
+m1[2,2] #what is the value of the element in the 2nd row, 2nd column?
+m1[,2]  #what are the values in the second column?
+m1[2,]  #what are the values in the second row?
+
+```
+
+```{r,echo=TRUE,eval=FALSE}
+
+m2[2,2] <- 0 #change the value to zero.
+m2[2,]  <- 0 #change the second row to zeros.
+m2[,2]  <- 0 #change the second column to zeros.
+
+```
+
+In the code chunk above, note the difference between `[,#]` and `[#,]`. A comma in front of the argument (i.e. `[,#]`) applies to the columns) and a common after the argument (i.e. `[#,]`) applies to the rows.
+
+Also, notice that `m1[2,2]`, is an object, just as `m1` is an object. In effect, we are *subsetting* the object `m1` when we index it.
+
+Matrices can also be created from a list of numbers using the `matrix()` and `c()` functions.
+
+```{r,echo=TRUE,eval=FALSE}
+
+m3 <- matrix( c( 1,0,1,0,0,1,0,1,0 ),nrow=3,ncol=3 )
+m3
+
+```
+
+### **8. One of the most important functions in R: `help()`**
+
+A useful feature of R is an extensive documentation of each of the functions. To access the main R help archive online, type: `help.start()`\
+The `help()` function, or a simple `?`, can be used to get help about a specific function. For example: `help(c)` or `?c` returns the help page for the `c()` function.
+
+Take a look at the help page. The first line shows you the function and the package it is written for in brackets (more on packages below). The help page provides a description, how to use it (i.e. what are the arguments), and a description of what each argument does. Further details and examples are provided as well.
+
+Let's take a look at another function that creates sequences of numbers, the `seq( )` function. There are several ways to use the `seq( )` function. The most common are:
+
+```{r,echo=TRUE,eval=FALSE}
+
+seq( from=, to=, by= ) # Starts at from, ends at to, steps defined by by.
+seq( from=, to=, length= ) # Starts at from, ends at to, steps defined by length.  
+
+```
+
+For example:\
+if we want to create an object of 5 values that starts with 1 and ends with 5, we type: `seq( from=1, to=5, by=1 )`.\
+if we want to create an object of 5 values that starts with 1 and ends with 9, we type: `seq( from=1, to=9, by=2 )`.\
+We could also have used the `length=` argument: `seq( from=1, to=10, length=5 )`.
+
+Since R knows that `from=` or `to=` or `by=` or `length=` are arguments, we do not have to type them in the syntax: `seq( 1, 9, 2 )` is identical to `seq( from=1, to=9, by=2 )` (as far as R is concerned).
+
+For the help function to work, you need to know the exact name of the function. If you don't know this, but have a fuzzy idea of what it might be are what you want the function to do, you can use the `help.search("`fuzzy notion`")` function (or just put `??` in front of the word).
+
+For example, say you want to calculate the standard deviation for an object, but do not know the function name. Try: `help.search( "standarddeviation" )` or `??standarddeviation` (note the absence of a space). This returns the list of help topics that contain the phrase. We see that the standard deviation function is called `sd()`.
+
+### **9. Packages and the `install.packages()` and `library()` Functions**
+
+R has MANY preprogrammed functions that are automatically loaded when you open the program. Functions are stored in "packages". Although there are many preprogrammed functions, there are even MORE functions that you can install on your own. A package in R is a collection of functions, usually written for a specific purpose.
+
+We can see the packages available from CRAN at [http://cran.r-project.org/](http://cran.r-project.org). Just click on the "packages" link or go to <https://cran.r-project.org/web/packages/index.html>. As of writing this there are nearly 13,000 packages. There is a WIDE variety of packages available, this is another reason why R is awesome. If you can think it, someone has probably written a package for it in R (and if not, *you* can write one and contribute \[isn't it great!\]).
+
+**Take a few moments and look through the packages**
+
+If there is a particular package you want to add, you simply use the `install.packages()` function like this: `install.packages("`package name`")`.
+
+After the package is installed on your machine, you do not need to reinstall it each time you open a new session. Rather, you just need to load the package using the `library()` function like this: `library("`package name`")`.
+
+Some packages require other packages for them to work. If there is an error, you need to install the additional packages.
+
+Note that each time you open R you have to load any packages that you manually loaded using the `install.packages()` function. In other words, if we closed R and then reopened it, we would need to type `library( "ergm" )` to load the functions in `ergm`. Note that we *do not* have to reinstall the package using `install.packages()`, we just have to load the library.
+
+If you have installed the package, but have not loaded it, R will return an error saying that a particular function is not found.\
+For example, the function `rgraph()` in the package `sna` (which is a set of tools for working with social networks that we will use for this course) is used to create random graphs. Type `?rgraph` and you get an error stating that there is no documentation avaitutorialle. This is because the `sna` library has not been loaded (even if you have installed `sna`). Typing `install.packages( "sna" )` and `library( sna )` prior to `?rgraph()` will solve this problem.
+
+A final point on loading packages. Since anyone can write and contributes packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.
+
+For example, the `sna` package and the `tnet` package both have a function called `betweenness`, but the functions are programmed differently. When you load `tnet` after loading `sna` (or *visa versa*), R will give you a warning that an "object is being masked". That means the functionality of `betweenness` in `sna` is no longer used. Let's check it out:
+
+```{r,echo=TRUE,eval=FALSE}
+
+install.packages( "sna" )
+library( sna )
+install.packages( "tnet" )
+library( tnet )
+
+```
+
+This can be a bit frustrating. In such cases, you can unload the package using the `detach()` function. See: `?detach` for an example.
+
+### **10. R Session Management**
+
+All variables created in R are stored in the "workspace". Think of it as a work bench that has a bunch of stuff on it that you have created.
+
+To see what exists in the workspace, type: `ls()`.
+
+We can remove specific variables with the `rm()` function. This helps clear up space (i.e. conserve memory). For example:
+
+```{r,echo=TRUE,eval=FALSE}
+
+x <- seq( 1,5,1 ) # create the object.
+ls()	      # see the objects.
+rm( x )         # remove the object x.
+ls()          # no more x.
+
+```
+
+To remove everything from the workspace use: `rm( list=ls() )`. This is helpful for starting a session to make sure everything is cleaned out.
+
+When you start R, it nominates one of the directories on your hard drive as a working directory, which is where it looks for user-written programs and data files.
+
+To determine the current directory, type: `getwd()`.\
+You can set the working directory also by typing: `setwd("`your desired directory here`")`.
+
+For example, if you are using Windows OS and want to set your directory to be the "C" drive, type: `setwd( "C:/" )`. *NOTE*: when you copy and paste filepaths in Windows, the folders are denoted with `\`, while R uses `/`.
+
+Or, if you are using Mac OS and want to set your directory to be a folder called "Users", type: `setwd( "/Users" )`.
+
+On the Windows OS you can set R to automatically start up in your preferred working directory by right clicking on the program shortcut, choosing properties, and completing the 'Start in' field. On the Mac OS you can set the initial working directory using the Preferences menu.
+
+To save the workspace use the `save.image()` function. This function requires a file path, a file name, and the extension ".RData" which is the format for an R workspace file.
+
+For example, to save a workspace called "OurFirstTutorial" to the current directory, simply type: `save.image("OurFirstTutorial.Rdata")`. You can also write in the directory of you want to save it somewhere else. You can also do this by the pull-down menu with the File/Save option.
+
+To load a previously saved workspace, you can either click on the file outside of R or use the `load()` function (e.g. `load("OurFirstTutorial.Rdata")`). If you get an error, make sure you are referring the correct directory. You can also choose Load Workspace from the pull-down menu.
+
+Note that only the objects in the workspace are saved, not the text of what you have written.
+
+### **11. (Bonus!) R Studio**
+
+You may be surprised to discover how little functionality is implemented in the standard R GUI (i.e. graphical user interface). The standard R GUI implements only very rudimentary functionality through menus: reading help, managing multiple graphics windows, editing some source and data files, and some other basic functionality. There are no menu items, buttons, or palettes for loading data, transforming data, plotting data, or doing any real work with data. Commercial applications like SAS, SPSS, and Stata include user interfaces with much more functionality.
+
+This was just the nature of working with R until some awesome human beings created RStudio. RStudio is one of several projects to build an easier-to-use GUI for R. It is a free, open-source IDE (i.e. integrated development environment) for working with R. Unlike the standard R GUI, RStudio tiles windows on the screen and puts different windows in different tabs. RStudio can be downloaded from: <http://www.rstudio.com>.
+
+### RStudio workthrough
+
+Ok, now open RStudio and let's take a look!
+
+Now, that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. However, there are more tools available in RStudio which we will use.
 
 ## Test Your Knowledge
 
--   What is the difference between conceptualization and operationalization?
--   Can you provide an example of how a concept, such as "power" in a gang, can be operationalized using social network analysis?
--   How does network science differ from traditional social science approaches?
--   What is a relational variable, and how does it differ from an attribute variable?
--   Give an example of a relational variable in a criminal network and explain how it differs from a node's attribute.
--   How can a network be treated as an independent variable? Provide an example.
--   How can a network be treated as a dependent variable? Provide an example.
--   Explain the difference between a one-mode network and a two-mode (bipartite) network. Provide an example of each.
--   What are the implications of having a directed versus undirected network?
--   What is the difference between binary, valued, and signed edges? Give an example of each.
--   What is a "vulnerable" network, and why is identifying vulnerable points important in crime analysis?
--   Based on the example of the gossip network above, explain how network redundancy can protect against disruption. How could this concept be applied to criminal networks?
--   How can visualizing a network provide insights that may be difficult to see through traditional data analysis methods?
+-   After installing R, what does the `>` prompt represent?
+-   Create an object called `a` with the value 7.
+-   Which of the following is a valid object name?
+    -   3cats
+    -   .hidden_data
+    -   my-object
+    -   _underscore
+-   Explain what the following code does: `b <- 10`?
+-   What is a function in R? Explain using the `c()` function as an example.
+-   Create an object called `numbers` that contains the values 2, 4, 6, 8, and 10 using the `c()` function.
+-   Type the following code: `length( numbers )`. What is the meaning of the number it returns?
+-   Create a vector `z` with the values 10 through 20. Now, write code to retrieve:
+    -   The 3rd element in `z`.
+    -   The 2nd through 5th elements in `z`.
+    -   The 1st and last elements in `z`.
+-   What is the difference between `z[3:5]` and `z[ c(3,5) ]`?
+-   What is the purpose of the `install.packages()` function? The `library()` function?
+-   Why might you see a "function not found" error when trying to use a function from a package?
+-   Look through the packages on the CRAN repository. Find one and install it.
 
-## Summary
+## Tutorial Summary
 
-We started this question by asking: why do "social network analysis"? This chapter has sought to introduce the logic of *network science* so as to help you think about research problems through a network lens. We then examined some of the building blocks of network analysis to get at the question of "what networks look like".
-
-In the next chapter, we will delve deeper into the theoretical background of network science.
+This tutorial provides a quick introduction to R. R is a versatile and open-source programming language designed for data science and statistical analysis. As we will see, it is one of the best environments for working with social network data. We began with an overview of R's history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R's extensive documentation, installing and loading packages, and managing the R workspace effectively. We also reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.
