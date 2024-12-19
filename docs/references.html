@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jacob T.N. Young">
 
-<title>Social Network Analysis for Crime Analysts using R</title>
+<title>Social Network Analysis for Crime Analysts using R - References</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./snaca-r-intro-to-r.html" rel="next">
+<link href="./snaca-r-degree-centrality.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -108,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -144,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">References</span></a>
   </div>
 </li>
@@ -154,20 +173,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Social Network Analysis for Crime Analysts using R</h1>
+<h1 class="title">References</h1>
 </div>
 
 
@@ -182,17 +195,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>The field of crime analysis is rapidly evolving, driven by advancements in technology and the growing availability of rich, complex data. Among the most pressing challenges for crime analysts is the need to make sense of these data, particularly when they involve relationships between individuals, groups, or organizations. Social network analysis (SNA) provides a powerful set of tools for mapping and understanding these connections, enabling analysts to uncover patterns, identify key players, and generate actionable insights. This book, <strong>Social Network Analysis for Crime Analysts using R</strong>, is designed to bridge the gap between theory and application, offering crime analysts a practical guide to using <a href=""><strong>R</strong></a>, an open-source statistical programming language, and <a href=""><strong>RStudio</strong></a>, an integrated development environment that provides a user-friendly interface for coding, data analysis, visualization, and report generation.</p>
-<p>Why R and RStudio? RStudio is more than just software. It provide a robust ecosystem that empowers users to wrangle, visualize, and analyze data with precision and flexibility. For crime analysts, learning the R language and how to work in RStudio offers a significant advantage: they are free, widely supported by a global community, and capable of handling the types of network data that traditional tools struggle to process. With RStudio, analysts can customize workflows, automate repetitive tasks, and leverage advanced techniques such as clustering algorithms, centrality measures, and visualization methods: all essential for modern SNA. By working in RStudio, even those new to programming can gain the confidence to manipulate data and produce meaningful outputs. The ability to write reproducible code also ensures that analyses are transparent and can be revisited or adapted as cases evolve.</p>
-<p>This book is written with the unique needs of crime analysts in mind. Using real-world examples and step-by-step instructions, it demonstrates how SNA can be conducted in Rstudio to solve practical problems, from identifying influential actors in a gang network to assessing the vulnerability of criminal enterprises. The focus is not only on teaching the mechanics of RStudio but also on fostering a deeper understanding of the concepts behind social network analysis. Whether you are new to network analysis or seeking to expand your analytic toolkit, this book will provide you with the skills and confidence to harness the power of RStudio and SNA in your work. Together, these tools can transform how crime analysts approach data, enabling them to uncover critical insights and ultimately contribute to safer communities.</p>
-<p>This book is a companion to <a href=""><em>Social Network Analysis for Crime Analysts</em></a>. It is organized as <em>tutorials</em> that show the “how to” of SNA in RStudio that correspond to conceptual chapters in the <a href=""><em>Social Network Analysis for Crime Analysts</em></a> textbook.</p>
-<p>Each tutorial in this book will contain R code which is in “code chunks”. You will notice a code chunk because the font will change. Code chunks will have text that <code>looks like this</code>. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by coping and pasting the <code>code</code> and seeing it work on your end.</p>
-<p>Let’s get to it!</p>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-wasserman1994social" class="csl-entry" role="listitem">
+Wasserman, Stanley, and Katherine Faust. 1994. <em>Social Network
+Analysis: Methods and Applications</em>. Vol. 8. Structural Analysis in
+the Social Sciences. Cambridge, UK: Cambridge University Press.
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -430,11 +441,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./snaca-r-degree-centrality.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Degree Centrality and Centralization</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./snaca-r-intro-to-r.html" class="pagination-link">
-        <span class="nav-page-text">Getting Started with R</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -443,7 +454,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">Social Network Analysis for Crime Analysts using R was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a></div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

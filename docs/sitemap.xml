@@ -2,22 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/index.html</loc>
-    <lastmod>2024-12-19T19:34:55.949Z</lastmod>
+    <lastmod>2024-12-19T20:26:51.457Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-intro-to-r.html</loc>
-    <lastmod>2024-12-19T19:34:55.964Z</lastmod>
+    <lastmod>2024-12-19T20:26:51.472Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-rmarkdown.html</loc>
-    <lastmod>2024-12-19T19:34:55.970Z</lastmod>
+    <lastmod>2024-12-19T20:26:51.478Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-network-data.html</loc>
-    <lastmod>2024-12-19T19:34:55.980Z</lastmod>
+    <lastmod>2024-12-19T20:26:51.489Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-visualization.html</loc>
-    <lastmod>2024-12-19T19:34:56.005Z</lastmod>
+    <lastmod>2024-12-19T20:26:51.517Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-degree-centrality.html</loc>
+    <lastmod>2024-12-19T20:26:51.559Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/snaca-r/references.html</loc>
+    <lastmod>2024-12-19T20:26:51.563Z</lastmod>
   </url>
 </urlset>

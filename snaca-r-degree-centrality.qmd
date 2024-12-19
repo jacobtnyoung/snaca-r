@@ -177,7 +177,7 @@ for undirected graphs where $C_D(n^*)$ is the maximum degree in the graph. We ca
 ```{r}
 
 # In separate pieces
-deviations <- max( deg_u_mat ) - deg.u_mat
+deviations <- max( deg_u_mat ) - deg_u_mat
 sum_deviations <- sum( deviations )
 numerator <- sum_deviations
 denominator <- ( g-1 )*( g-2 )
@@ -369,7 +369,7 @@ mean_i_deg
 mean_o_deg
 
 # we could also use the mean() function
-mean( idegvd_mat )
+mean( ideg_d_mat )
 mean( odeg_d_mat )
 
 ```
@@ -691,17 +691,16 @@ A few questions:
 -   What does the indegree centralization score of `r round( centralization( pi_net_d, degree, mode="digraph", cmode = "indegree" ), 2 )` indicate?
 -   What does the outdegree centralization score of `r round( centralization( pi_net_d, degree, mode="digraph", cmode = "outdegree" ), 2 )` indicate?
 
-
 ## Test Your Knowledge Excercises
 
-- For the undirected binary graph `u_mat`, calculate the degree centrality for each node manually. Verify your results using the `colSums()` function. What does the degree centrality of each node represent in this network? Which node has the highest degree centrality? Why do you think this is the case?
-- In the example above, nodes were plotted with sizes proportional to their degree centrality. Using the shaded plot, describe the relationship between node size and shade intensity. Which node has the darkest shade? Explain what this represents in terms of degree centrality.
-- Calculate the standardized degree centrality for `u_mat`. How does standardizing degree centrality help in comparing nodes across networks of different sizes? 
-- Compute the degree centralization for `u_mat` manually and verify it using the `centralization()` function. What does the result tell you about the network's structure?
-- For the directed graph `d_mat`, compute both indegree and outdegree centrality for each node using `colSums()` and `rowSums()`. Plot the graph with nodes sized by indegree and outdegree separately. Which nodes are most central in terms of indegree? What does this imply about their role in the network? Which nodes are most central in terms of outdegree? What does this imply?
-- For the *Get Along With* network, describe the significance of symmetrizing the network. Interpret the degree centrality scores and the centralization score. What does the structure of this network suggest about relationships in the unit?
-- For the *Power/Influence* network, compare and contrast the plots sized by indegree and outdegree centrality. What do the indegree and outdegree centralization scores suggest about the distribution of power and influence in the network?
-- Compare the degree centralization scores for the undirected *Get Along With* network and the directed *Power/Influence* network. Which network is more centralized? How does the type of network (undirected vs. directed) influence the interpretation of centralization?
+-   For the undirected binary graph `u_mat`, calculate the degree centrality for each node manually. Verify your results using the `colSums()` function. What does the degree centrality of each node represent in this network? Which node has the highest degree centrality? Why do you think this is the case?
+-   In the example above, nodes were plotted with sizes proportional to their degree centrality. Using the shaded plot, describe the relationship between node size and shade intensity. Which node has the darkest shade? Explain what this represents in terms of degree centrality.
+-   Calculate the standardized degree centrality for `u_mat`. How does standardizing degree centrality help in comparing nodes across networks of different sizes?
+-   Compute the degree centralization for `u_mat` manually and verify it using the `centralization()` function. What does the result tell you about the network's structure?
+-   For the directed graph `d_mat`, compute both indegree and outdegree centrality for each node using `colSums()` and `rowSums()`. Plot the graph with nodes sized by indegree and outdegree separately. Which nodes are most central in terms of indegree? What does this imply about their role in the network? Which nodes are most central in terms of outdegree? What does this imply?
+-   For the *Get Along With* network, describe the significance of symmetrizing the network. Interpret the degree centrality scores and the centralization score. What does the structure of this network suggest about relationships in the unit?
+-   For the *Power/Influence* network, compare and contrast the plots sized by indegree and outdegree centrality. What do the indegree and outdegree centralization scores suggest about the distribution of power and influence in the network?
+-   Compare the degree centralization scores for the undirected *Get Along With* network and the directed *Power/Influence* network. Which network is more centralized? How does the type of network (undirected vs. directed) influence the interpretation of centralization?
 
 ## Tutorial Summary
 
