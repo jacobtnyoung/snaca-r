@@ -17,13 +17,13 @@ Let's be honest, network analysis is awesome. Where does that awesomeness come f
 Not convinced? Examine the plot below. Without me giving you any information about this figure (which is from James Moody and Peter Mucha's paper, [*Portrait of Political Party Polarization*](https://www.cambridge.org/core/journals/network-science/article/portrait-of-political-party-polarization1/F4D2FC8C75B3A160CE68BC3A4A4F6736#article)), what does it tell you?
 
 ```{r, echo=FALSE, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "../assets/images/moody-mucha-polarization.png" )
+knitr::include_graphics( "/Users/jyoung20/Github/snaca-r/assets/images/moody-mucha-polarization.png" )
 ```
 
 What about this one showing political blogs? (from David Lazer and colleagues paper [*Computational Social Science*](https://www.science.org/doi/10.1126/science.1167742)). What does the visualization "say" or "tell you"?
 
 ```{r, echo=FALSE, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "../assets/images/lazer-etal-blogs.pgn" )
+knitr::include_graphics( "/Users/jyoung20/Github/snaca-r/assets/images/lazer-etal-blogs.png" )
 ```
 
 In this tutorial, you will be introduced to the basics of visualizing networks using the `gplot()` function in the `sna` package. We will also look at some approaches to building plots to help guide you in honing your SNA toolkit.
@@ -617,14 +617,14 @@ gplot( PI_net,
 
 ## Test Your Knowledge
 
-  - Using the `Moreno` dataset, compare the circle layout and the Fruchterman-Reingold layout. Which layout better adheres to the aesthetic principles discussed above? Why?
-  - Modify the `Moreno` visualization to color nodes by gender. How does this addition change your interpretation of the network structure?
-  - When plotting an undirected network, why might `gplot()` still display arrows? How can this be resolved?
-  - Experiment with adding labels to a network plot. What are some ways to customize label appearance? Why might label size or color be important?
-  - Use the `rescale()` function to adjust node sizes based on a vertex attribute. Try some different values. How do the difference values influence your understanding of the network?
-  - Explain why saving node coordinates using the `coord=` argument can be useful. Demonstrate how to save and reuse coordinates in a network plot.
-  - Describe the concept of layering in network visualization. Create a plot that layers at least three attributes (e.g., node size, color, edge attributes).
-  - Compare a basic network plot of the PINS dataset with one that incorporates multiple attributes. What additional insights does the more detailed visualization provide?
+-   Using the `Moreno` dataset, compare the circle layout and the Fruchterman-Reingold layout. Which layout better adheres to the aesthetic principles discussed above? Why?
+-   Modify the `Moreno` visualization to color nodes by gender. How does this addition change your interpretation of the network structure?
+-   When plotting an undirected network, why might `gplot()` still display arrows? How can this be resolved?
+-   Experiment with adding labels to a network plot. What are some ways to customize label appearance? Why might label size or color be important?
+-   Use the `rescale()` function to adjust node sizes based on a vertex attribute. Try some different values. How do the difference values influence your understanding of the network?
+-   Explain why saving node coordinates using the `coord=` argument can be useful. Demonstrate how to save and reuse coordinates in a network plot.
+-   Describe the concept of layering in network visualization. Create a plot that layers at least three attributes (e.g., node size, color, edge attributes).
+-   Compare a basic network plot of the PINS dataset with one that incorporates multiple attributes. What additional insights does the more detailed visualization provide?
 
 ## Tutorial Summary
 

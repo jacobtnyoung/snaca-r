@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 
 ```
 
-# Tutorial 01 - Getting Started with R {.unnumbered}
+# Getting Started with R {.unnumbered}
 
 In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. Even if you have used R before (awesome!), I would encourage you to review the tutorial as a refresher.
 
@@ -332,7 +332,7 @@ Now, that you have RStudio up and running, try rerunning some of the code above.
     -   3cats
     -   .hidden_data
     -   my-object
-    -   _underscore
+    -   \_underscore
 -   Explain what the following code does: `b <- 10`?
 -   What is a function in R? Explain using the `c()` function as an example.
 -   Create an object called `numbers` that contains the values 2, 4, 6, 8, and 10 using the `c()` function.
