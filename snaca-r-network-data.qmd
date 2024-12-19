@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 
 ```
 
-# Tutorial 03 - Working with Networks in R {.unnumbered}
+# Working with Networks in R {.unnumbered}
 
 In the [**Network Data Structures**]() chapter of the [*Social Network Analysis for Crime Analysts*]() textbook, we reviewed how networks can be represented as sociomatrices. These matrices form the basic unit of data analysis in SNA. In this tutorial, we will review how we can build networks in R. Understanding how to work with networks in R is essential for crime analysts because networks provide a powerful lens for analyzing relationships and interactions that drive criminal behavior. Whether you're mapping connections between individuals in a gang, examining the flow of illicit goods, or identifying key actors in a criminal enterprise, networks reveal critical structures and patterns that traditional data analysis might overlook. 
 

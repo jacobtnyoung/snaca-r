@@ -23,6 +23,7 @@ book:
     - snaca-r-intro-to-r.qmd
     - snaca-r-rmarkdown.qmd
     - snaca-r-network-data.qmd
+    - snaca-r-visualization.qmd
 
 bibliography: references.bib
 
