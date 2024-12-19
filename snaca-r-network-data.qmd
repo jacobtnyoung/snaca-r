@@ -12,9 +12,9 @@ knitr::opts_chunk$set(
 
 # Working with Networks in R {.unnumbered}
 
-In the [**Network Data Structures**]() chapter of the [*Social Network Analysis for Crime Analysts*]() textbook, we reviewed how networks can be represented as sociomatrices. These matrices form the basic unit of data analysis in SNA. In this tutorial, we will review how we can build networks in R. Understanding how to work with networks in R is essential for crime analysts because networks provide a powerful lens for analyzing relationships and interactions that drive criminal behavior. Whether you're mapping connections between individuals in a gang, examining the flow of illicit goods, or identifying key actors in a criminal enterprise, networks reveal critical structures and patterns that traditional data analysis might overlook. 
+In the [**Network Data Structures**]() chapter of the [*Social Network Analysis for Crime Analysts*]() textbook, we reviewed how networks can be represented as sociomatrices. These matrices form the basic unit of data analysis in SNA. In this tutorial, we will review how we can build networks in R. Understanding how to work with networks in R is essential for crime analysts because networks provide a powerful lens for analyzing relationships and interactions that drive criminal behavior. Whether you're mapping connections between individuals in a gang, examining the flow of illicit goods, or identifying key actors in a criminal enterprise, networks reveal critical structures and patterns that traditional data analysis might overlook.
 
-As a reminder, in the tutorials for this textbook, R code appears `like this` and can be copied directly into R or RStudio. Let's start getting our hands dirty (figuratively of course) by building some networks in R! 
+As a reminder, in the tutorials for this textbook, R code appears `like this` and can be copied directly into R or RStudio. Let's start getting our hands dirty (figuratively of course) by building some networks in R!
 
 ## Working with matrices
 
@@ -65,7 +65,7 @@ This command reads as follows:
 
 We can see the object by just typing the object name: `mat`. *Note* that if the number of elements does not correctly match the dimensions of the matrix, R gives you an error.
 
-For example: 
+For example:
 
 ```{r}
 
@@ -475,7 +475,7 @@ net_d
 
 ```
 
-## Test Your Knowledge
+## Test Your Knowledge Exercises
 
 -   ???
 

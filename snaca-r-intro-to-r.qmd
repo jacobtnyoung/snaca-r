@@ -324,7 +324,7 @@ Ok, now open RStudio and let's take a look!
 
 Now, that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. However, there are more tools available in RStudio which we will use.
 
-## Test Your Knowledge
+## Test Your Knowledge Exercises
 
 -   After installing R, what does the `>` prompt represent?
 -   Create an object called `a` with the value 7.

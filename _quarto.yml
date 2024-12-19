@@ -24,6 +24,7 @@ book:
     - snaca-r-rmarkdown.qmd
     - snaca-r-network-data.qmd
     - snaca-r-visualization.qmd
+    - snaca-r-degree-centrality.qmd
 
 bibliography: references.bib
 

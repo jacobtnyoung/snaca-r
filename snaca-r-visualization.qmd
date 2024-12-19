@@ -17,7 +17,7 @@ Let's be honest, network analysis is awesome. Where does that awesomeness come f
 Not convinced? Examine the plot below. Without me giving you any information about this figure (which is from James Moody and Peter Mucha's paper, [*Portrait of Political Party Polarization*](https://www.cambridge.org/core/journals/network-science/article/portrait-of-political-party-polarization1/F4D2FC8C75B3A160CE68BC3A4A4F6736#article)), what does it tell you?
 
 ```{r, echo=FALSE, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "/Users/jyoung20/Github/snaca-r/assets/images/moody-mucha-polarization.png" )
+knitr::include_graphics( ".../assets/images/moody-mucha-polarization.png" )
 ```
 
 What about this one showing political blogs? (from David Lazer and colleagues paper [*Computational Social Science*](https://www.science.org/doi/10.1126/science.1167742)). What does the visualization "say" or "tell you"?
@@ -615,7 +615,7 @@ gplot( PI_net,
 
 ```
 
-## Test Your Knowledge
+## Test Your Knowledge Exercises
 
 -   Using the `Moreno` dataset, compare the circle layout and the Fruchterman-Reingold layout. Which layout better adheres to the aesthetic principles discussed above? Why?
 -   Modify the `Moreno` visualization to color nodes by gender. How does this addition change your interpretation of the network structure?
