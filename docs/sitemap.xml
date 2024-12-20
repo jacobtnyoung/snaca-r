@@ -2,38 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/index.html</loc>
-    <lastmod>2024-12-20T16:27:25.861Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.841Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-intro-to-r.html</loc>
-    <lastmod>2024-12-20T16:27:25.881Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.856Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-rmarkdown.html</loc>
-    <lastmod>2024-12-20T16:27:25.888Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.864Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-network-data.html</loc>
-    <lastmod>2024-12-20T16:27:25.900Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.878Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-visualization.html</loc>
-    <lastmod>2024-12-20T16:27:25.928Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.904Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-degree-centrality.html</loc>
-    <lastmod>2024-12-20T16:27:25.969Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.947Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-closeness-centrality.html</loc>
-    <lastmod>2024-12-20T16:27:26.001Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.978Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-betweenness-centrality.html</loc>
-    <lastmod>2024-12-20T16:27:26.025Z</lastmod>
+    <lastmod>2024-12-20T17:25:54.999Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-bipartite.html</loc>
+    <lastmod>2024-12-20T17:25:55.040Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-projection.html</loc>
+    <lastmod>2024-12-20T17:25:55.066Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/references.html</loc>
-    <lastmod>2024-12-20T16:27:26.028Z</lastmod>
+    <lastmod>2024-12-20T17:25:55.069Z</lastmod>
   </url>
 </urlset>

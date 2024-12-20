@@ -28,13 +28,14 @@ book:
     - snaca-r-closeness-centrality.qmd
     - snaca-r-betweenness-centrality.qmd
     - snaca-r-bipartite.qmd
+    - snaca-r-projection.qmd
     - references.qmd
 
 bibliography: references.bib
 
 format:
   html:
-    theme: lux
+    theme: solar
 
     navbar:
       right:

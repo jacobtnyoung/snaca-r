@@ -1,68 +1,42 @@
----
-title: "Lab 9 - Projection and Weighted Graphs in R"
-date: "CRJ 605 Statistical Analysis of Networks"
-output: 
-  html_document:
-    df_print: paged
-    theme: lumen
-    highlight: haddock
-    toc: yes
-    toc_float: yes
-    code_fold: show
-    self_contained: true
----
+```{r setup, include=FALSE}
 
-<style>
-body {
-text-align: left}
-</style>
-
-```{r, echo=FALSE}
-
-# set the defaults for the codechunks
-knitr::opts_chunk$set( eval=TRUE, echo=TRUE, message=FALSE, warning=FALSE )
+knitr::opts_chunk$set(
+  eval = TRUE,
+  echo = TRUE, 
+  message=FALSE, 
+  warning=FALSE 
+  )
 
 ```
 
 ```{r,echo=FALSE}
-
-# libraries needed
 
 library( sna )     # for sna functions
 library( network ) # for working with network objects
 
 ```
 
-----
+# Projection & Weighted Graphs {.unnumbered}
 
-<br>
+As discussed in the [Bipartite Graphs & Two-Mode Networks]() chapter of the textbook, bipartite graphs are useful for operationalizing contexts where nodes come from *two* separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident *within* a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur *between* these partitions (i.e. not within).
 
-As discussed in the [Bipartite Graphs & Two-Mode Networks](../lectures/lecture-06-bipartite.pdf) lecture, bipartite graphs are useful for operationalizing contexts where nodes come from *two* separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident *within* a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur *between* these partitions (i.e. not within). In the [Projection & Weighted Graphs](../lectures/lecture-07-projection-weighted.pdf) lecture, we saw that **projection** is the process by which we map the connectivity between modes to a single mode. And, we saw that we can use a weighted graph or a binarized graph in the analysis of the project.
+Then, in the [Projection]() chapter, we saw that **projection** is the process by which we map the connectivity between modes to a single mode. And, we saw that we can use a weighted graph or a binarized graph in the analysis of the project.
 
-In this lab, we will review how a unipartite or one-mode network can be created through projection. We will also review how to work with weighted graphs.
+In this tutorial, we will review how a unipartite or one-mode network can be created through projection.
 
-*Why are you learning this?* Bipartite graphs are a common network structure used in many network analysis projects. Being able to work with these objects and summarize their structure is an important tool for your skill set as a social network analyst!
+## One-Mode Networks by Projection
 
-<br>
+Following @breiger1974duality, we can build the adjacency matrix for each projected network through matrix algebra. Specifically, multiplying an adjacency matrix by it's **transpose**. The transpose of a matrix *A* simply reverses the columns and rows: $\sf{A^T_{ij}}$ = $\sf{A_{ji}}$.
 
-# **One-Mode Networks by Projection**  
+The two-mode, *NxM*, adjacency matrix, when multiplied by it's transpose, produces either:
 
-*How do we do this?*
+-   An *NxN* matrix (ties among *N* nodes via *M*)
 
-Following [Breiger (1974)](https://www.jstor.org/stable/2576011), we can build the adjacency matrix for each projected network through matrix algebra. Specifically, multiplying an adjacency matrix by it’s **transpose**. The transpose of a matrix *A* simply reverses the columns and rows: $\sf{A^T_{ij}}$ =  $\sf{A_{ji}}$.
-
-The two-mode, *NxM*, adjacency matrix, when multiplied by it’s transpose, produces either:  
-
- * An *NxN* matrix (ties among *N* nodes via *M*)
-
- * An *MxM* matrix (ties among *M* nodes via *N*)  
+-   An *MxM* matrix (ties among *M* nodes via *N*)
 
 To examine how this works, let's first set up an example:
 
 ```{r}
-
-# clear the workspace
-rm( list = ls() )
 
 # create an example matrix
 A <- rbind(
@@ -83,9 +57,7 @@ A
 
 ```
 
-<br>
-
-## **Transposition**
+### Transposition
 
 In R, the `t()` function, or `transpose()` returns the transposition of a matrix. To see the the help on the `transpose()` function, just use `?t` to pull up the help page.
 
@@ -96,11 +68,9 @@ t( A )
 
 ```
 
-*What is different?* Compare the difference between `A` and `t( A )`. 
+*What is different?* Compare the difference between `A` and `t( A )`.
 
-<br>
-
-### **Matrix Multiplication in R**
+#### Matrix Multiplication in R
 
 To create the project, we need to use matrix algebra. To multiply matrices in R, we have to use the following operator: `%*%`. This is different then `*` in that `%*%` tells R to use matrix multiplication. For example, compare the differences:
 
@@ -120,24 +90,20 @@ a %*% b
 
 *What is the difference?* When we use `a * b`, it is not using matrix multiplication.
 
-<br>
-
 To multiply two matrices, the number of columns in the first matrix must match the number of rows in the second matrix. This is called *conformability*. Only matrices with *conformable* dimensions can be multiplied. For example, 5x6 X 6x5 works, but not 5x6 X 5x6. When two matrices are multiplied by each other, this renders the *product* matrix. The *product* matrix has the number of rows equal to the first matrix and the number of columns equal to the second matrix.
 
-<br>
+Recall that from the two-mode, *NxM*, adjacency matrix, we can produce two different matrices:
 
-Recall that from the two-mode, *NxM*, adjacency matrix, we can produce two different matrices:  
+-   An *NxN* matrix (ties among *N* nodes via *M*)
 
- * An *NxN* matrix (ties among *N* nodes via *M*)
- 
-   * This is created by using *NxM* X t(*NxM*), or *NxM* X *MxN*  
+    -   This is created by using *NxM* X t(*NxM*), or *NxM* X *MxN*
 
- * An *MxM* matrix (ties among *M* nodes via *N*)  
- 
-    * This is created by using t(*NxM*) X *NxM*, or *MxN* X *NxM*  
+-   An *MxM* matrix (ties among *M* nodes via *N*)
+
+    -   This is created by using t(*NxM*) X *NxM*, or *MxN* X *NxM*
 
 Let's create each of these with our example network.
- 
+
 ```{r}
 
 # create the NxN matrix
@@ -148,13 +114,11 @@ t( A ) %*% A
 
 ```
 
-<br>
+## Projections
 
-# **Projections**
+### The Person Matrix
 
-## **The Person Matrix**
-
-Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the [Projection & Weighted Graphs](../lectures/lecture-07-projection-weighted.pdf) lecture that [Breiger (1974)](https://www.jstor.org/stable/2576011) referred to the *person* matrix (i.e. the *NxN* matrix) and the *group* matrix (i.e. the *MxM* matrix).
+Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the [Projection]() chapter that @breiger1974duality referred to the *person* matrix (i.e. the *NxN* matrix) and the *group* matrix (i.e. the *MxM* matrix).
 
 ```{r}
 
@@ -167,13 +131,9 @@ P
 
 *What does the diagonal represent in this matrix? What do the off-diagonal elements represent?*
 
-<br>
+The *diagonal* elements represent the number of nodes in the second mode of the bipartite graph to which a node is connected. Put differently, if we have a **two-mode network** where one set of nodes are individuals and the other set of nodes are events, then the *diagonal* of the projection for the "person" matrix represents the number of events that an individual attended.
 
-The *diagonal* elements represent the number of nodes in the second mode of the bipartite graph to which a node is connected. Put differently, if we have a **two-mode network** where one set of nodes are individuals and the other set of nodes are events, then the *diagonal* of the projection for the "person" matrix represents the number of events that an individual attended.  
-
-The *off-diagonal* elements represent the ties between nodes in the same node set of the bipartite graph. That is, ties between individuals. 
-
-<br>
+The *off-diagonal* elements represent the ties between nodes in the same node set of the bipartite graph. That is, ties between individuals.
 
 To visualize this by plotting each network, then we can better see what is happening. We will use the `gplot()` function, so be sure to call the `sna` package library.
 
@@ -189,7 +149,7 @@ par(
   )
 
 # set the seed to reproduce the plot
-set.seed( 605 )
+set.seed( 507 )
 
 # plot the bipartite network
 gplot( A,
@@ -223,11 +183,9 @@ title( "Unipartite Projection of\n Person Matrix", line = -1 )
 
 From the plots we can see what the projection is doing. It is creating a unipartite graph based on the ties in the bipartite graph. For example, consider nodes *A*, *B*, and *C*. In the bipartite graph, *B*, is connected to *A* and *C* through node *1*. We see this in the unipartite graph where *A*, *B*, and *C* are connected. In other words, we have taken the links between *A*, *B*, and *C* in the bipartite graph and reproduced them in a unipartite graph.
 
-<br>
+### The Group Matrix
 
-## **The Group Matrix**
-
-Now, let's take a look at the "group" matrix. The projection for the "group" matrix has a different interpretation. Let's work through this to see it.   
+Now, let's take a look at the "group" matrix. The projection for the "group" matrix has a different interpretation. Let's work through this to see it.
 
 ```{r}
 
@@ -239,8 +197,6 @@ G
 ```
 
 *What does the diagonal represent in this matrix? What do the off-diagonal elements represent?*
-
-<br>
 
 The *diagonal* elements represent the number of nodes in the first mode of the bipartite graph to which a node is connected. If we have a **two-mode network** where one set of nodes are individuals and the other set of nodes are events, then the *diagonal* of the projection for the "group" matrix represents the number of individuals that attend an event. The *off-diagonal* elements represent the ties between events. Essentially, how events are connected by people attending them. Let's plot this to see it.
 
@@ -256,7 +212,7 @@ par(
   )
 
 # set the seed to reproduce the plot
-set.seed( 605 )
+set.seed( 507 )
 
 # plot the bipartite network
 gplot( A,
@@ -287,25 +243,21 @@ title( "Unipartite Projection of\n Group Matrix", line = -1 )
 
 ```
 
-<br>
-
 From the plots we can see what the projection is doing. It is creating a unipartite graph based on the ties in the bipartite graph, but this time it is for the other node set. For example, consider nodes *1*, *2*, and *3*. In the bipartite graph, *1*, is connected to *2* through node *A* and *C*. Node *2* and *3* are connected through node *D*. We see this in the unipartite graph where *1* is connected to *2* and *2* is connected to *3*. In other words, we have taken the links between *1*, *2*, and *3* in the bipartite graph and reproduced them in a unipartite graph.
 
-<br>
+## Projecting [Young & Ready's (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) Police Officer Network
 
-# **Structural Properties of [Young & Ready's (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) Police Officer Network**  
+Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks]() chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
 
-Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks](../lectures/lecture-06-bipartite.pdf) lecture, [Young & Ready (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
-
-The adjacency matrix is available in the [SNA Textbook](https://jacobtnyoung.github.io/sna-textbook/index.html) [data]() folder. Let's import the the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.
+Let's import the the matrix, create a network, assign an attribute, and plot it. Then, we will work create the projection.
 
 ```{r}
 
 # set the location for the file
-loc <- "https://github.com/jacobtnyoung/sna-textbook/raw/main/data/data-officer-events-adj.csv"
+loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-officer-events-adj.csv"
 
 # read in the .csv file
-camMat <- as.matrix(
+cam_mat <- as.matrix(
   read.csv( 
     loc,
     as.is = TRUE,
@@ -316,37 +268,31 @@ camMat <- as.matrix(
 
 ```
 
-We can check the dimensions of the matrix using the `dim()` function. The `camMat` matrix has `r dim( camMat )[1]` rows and `r dim( camMat )[2]` columns. Recall that this is police officers and incidents, so there are `r dim( camMat )[1]` police officers and `r dim( camMat )[2]` incidents that connect officers.
-
+We can check the dimensions of the matrix using the `dim()` function. The `cam_mat` matrix has `r dim( cam_mat )[1]` rows and `r dim( cam_mat )[2]` columns. Recall that this is police officers and incidents, so there are `r dim( cam_mat )[1]` police officers and `r dim( cam_mat )[2]` incidents that connect officers.
 
 ```{r}
 
 # identify the number of police officers
-N <- dim( camMat )[1]
+N <- dim( cam_mat )[1]
 
 # identify the number of incidents
-M <- dim( camMat )[2]
+M <- dim( cam_mat )[2]
 
 ```
 
-<br>
+### Create the Projections
 
-## **Create the Projections**
-
-Now that we have it put together, let's create the projections. To do this, we just need to employ matrix multiplication on the `camMat` matrix.
+Now that we have it put together, let's create the projections. To do this, we just need to employ matrix multiplication on the `cam_mat` matrix.
 
 ```{r}
 
 # create the "person" matrix
-camMatP <- camMat %*% t( camMat )
+cam_mat_P <- cam_mat %*% t( cam_mat )
 
 # create the "group" matrix
-camMatG <- t( camMat ) %*% camMat
-
+cam_mat_G <- t( cam_mat ) %*% cam_mat
 
 ```
-
-<br>
 
 Now, let's plot the networks!
 
@@ -359,22 +305,22 @@ par(
   )
 
 # set the seed to reproduce the plot
-set.seed( 605 )
+set.seed( 507 )
 
 # plot the bipartite network
-gplot( camMat,
+gplot( cam_mat,
        gmode="twomode",
        usearrows=FALSE,
        edge.col="grey60",
        vertex.col = c( 
-         rep( "#34e5eb", dim( camMat )[1] ), 
-         rep( "#4f0a1a", dim( camMat )[2] ) ),
+         rep( "#34e5eb", dim( cam_mat )[1] ), 
+         rep( "#4f0a1a", dim( cam_mat )[2] ) ),
        edge.lwd=1.2
        )
 title( "Bipartite Matrix of Officers and Incidents", line = 1 )
 
 # plot the person matrix
-gplot( camMatP,
+gplot( cam_mat_P,
        gmode = "graph",
        usearrows = FALSE,
        edge.col="grey60",
@@ -384,7 +330,7 @@ gplot( camMatP,
 title( "Unipartite Projection of\n Officers (Person) Matrix", line = 1 )
 
 # plot the group matrix
-gplot( camMatG,
+gplot( cam_mat_G,
        gmode = "graph",
        usearrows = FALSE,
        edge.col="grey60",
@@ -396,44 +342,35 @@ title( "Unipartite Projection of\n Incidents (Group) Matrix", line = 1 )
 
 ```
 
-<br>
-
 Now that we have reduced our bipartite graph to a unipartite graph, we can employ the same descriptive tools we have previously used.
 
-<br>
+### Using the Weights in the Plot
 
-## **Using the Weights in the Plot**
+Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the [Projection]() chapter. We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let's build a few functions.
 
-Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the [Projection & Weighted Graphs](../lectures/lecture-07-projection-weighted.pdf) lecture. 
-We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let's build a few functions.
-
-<br>
-
-### **Reworking the `rescale()` function to incorporate edge weights**
+#### Reworking the `rescale()` function to incorporate edge weights
 
 First, we will create the `edge.rescale()` function to help us here. This function returns a weighted edgelist that can be used to aid with plotting. Then, we will create the `edge.shade()` function that shades the edges based on the size of the edge.
 
 ```{r}
 
-edge.rescale <- function( uniMat, low, high ){
-  diag( uniMat ) <- 0
-  min_w <- min( uniMat[uniMat != 0] )
-  max_w <- max( uniMat[uniMat != 0] )
-  rscl <- ( ( high-low )  * ( uniMat[uniMat != 0] - min_w ) ) / ( max_w - min_w ) + low
+edge.rescale <- function( uni_mat, low, high ){
+  diag( uni_mat ) <- 0
+  min_w <- min( uni_mat[uni_mat != 0] )
+  max_w <- max( uni_mat[uni_mat != 0] )
+  rscl <- ( ( high-low )  * ( uni_mat[uni_mat != 0] - min_w ) ) / ( max_w - min_w ) + low
   rscl
 }
 
-edge.shade <- function( uniMat ){
-  net.edges <- edge.rescale( uniMat, 0.01, 1 )
-  vec.to.color <- as.vector( abs( net.edges ) )
-  vec.to.color <- 1 - vec.to.color # subtract 1 to flip the grey function scale.
-  edge.cols <- grey( vec.to.color )
-  return( edge.cols )
+edge.shade <- function( uni_mat ){
+  net_edges <- edge.rescale( uni_mat, 0.01, 1 )
+  vec_to_color <- as.vector( abs( net_edges ) )
+  vec_to_color <- 1 - vec_to_color # subtract 1 to flip the grey function scale.
+  edge_cols <- grey( vec_to_color )
+  return( edge_cols )
 }
 
 ```
-
-<br>
 
 Now, let's plot the networks with the edges adjusted. We will plot the bipartite graph, the officer network, and the officer network with the shading.
 
@@ -446,20 +383,20 @@ par(
   )
 
 # plot the bipartite network
-gplot( camMat,
+gplot( cam_mat,
        gmode="twomode",
        usearrows=FALSE,
        edge.col="grey60",
        vertex.col = c( 
-         rep( "#34e5eb", dim( camMat )[1] ), 
-         rep( "#4f0a1a", dim( camMat )[2] ) ),
+         rep( "#34e5eb", dim( cam_mat )[1] ), 
+         rep( "#4f0a1a", dim( cam_mat )[2] ) ),
        edge.lwd=1.2
        )
 title( "Bipartite Matrix of Officers and Incidents", line = 1 )
 
 # plot the person matrix
-set.seed( 605 )
-gplot( camMatP,
+set.seed( 507 )
+gplot( cam_mat_P,
        gmode = "graph",
        usearrows = FALSE,
        vertex.col = "#34e5eb"
@@ -467,12 +404,12 @@ gplot( camMatP,
 title( "Unipartite Projection of\n Officers (Person) Matrix\n (no shading)", line = 1 )
 
 # plot the person matrix
-set.seed( 605 )
-gplot( camMatP,
+set.seed( 507 )
+gplot( cam_mat_P,
        gmode = "graph",
        usearrows = FALSE,
-       edge.col = edge.shade( camMatP ),           # note the usage here
-       edge.lwd = edge.rescale( camMatP, 0.1, 5 ), # note the usage here
+       edge.col = edge.shade( cam_mat_P ),           # note the usage here
+       edge.lwd = edge.rescale( cam_mat_P, 0.1, 5 ), # note the usage here
        vertex.col = "#34e5eb"
        )
 title( "Unipartite Projection of\n Officers (Person) Matrix", line = 1 )
@@ -490,20 +427,20 @@ par(
   )
 
 # plot the bipartite network
-gplot( camMat,
+gplot( cam_mat,
        gmode="twomode",
        usearrows=FALSE,
        edge.col="grey60",
        vertex.col = c( 
-         rep( "#34e5eb", dim( camMat )[1] ), 
-         rep( "#4f0a1a", dim( camMat )[2] ) ),
+         rep( "#34e5eb", dim( cam_mat )[1] ), 
+         rep( "#4f0a1a", dim( cam_mat )[2] ) ),
        edge.lwd=1.2
        )
 title( "Bipartite Matrix of Officers and Incidents", line = 1 )
 
 # plot the group matrix
-set.seed( 605 )
-gplot( camMatG,
+set.seed( 507 )
+gplot( cam_mat_G,
        gmode = "graph",
        usearrows = FALSE,
        vertex.col = "#4f0a1a",
@@ -513,12 +450,12 @@ title( "Unipartite Projection of\n Incidents (Group) Matrix\n (no shading)", lin
 
 
 # plot the group matrix
-set.seed( 605 )
-gplot( camMatG,
+set.seed( 507 )
+gplot( cam_mat_G,
        gmode = "graph",
        usearrows = FALSE,
-       edge.col = edge.shade( camMatG ),           # note the usage here
-       edge.lwd = edge.rescale( camMatG, 0.1, 5 ), # note the usage here
+       edge.col = edge.shade( cam_mat_G ),           # note the usage here
+       edge.lwd = edge.rescale( cam_mat_G, 0.1, 5 ), # note the usage here
        vertex.col = "#4f0a1a",
        vertex.sides = 4
        )
@@ -526,26 +463,19 @@ title( "Unipartite Projection of\n Incidents (Group) Matrix", line = 1 )
 
 ```
 
-<br>
+## Test Your Knowledge Excercises
 
-----
+-   Explain the process of projection in the context of bipartite graphs. Why is it useful for crime analysts?
+-   Using R, describe the difference between the `t()` function and `%*%` operator. Provide an example illustrating their use.
+-   What are the conditions required for two matrices to be conformable for matrix multiplication? Why is this important when creating projections?
+-   Create R code to generate the "person" matrix (NxN) and "group" matrix (MxM) from a given bipartite adjacency matrix. What do the diagonal and off-diagonal elements represent in each projection?
+-   What is the significance of the diagonal elements in the "person" matrix for crime analysts studying shared events?
+-   Write R code to visualize the "group" matrix using the `gplot()` function. How would you ensure that event nodes have distinct shapes and colors?
+-   What are edge weights in a projection, and how can they be represented visually in R?
+-   Describe how the `edge.rescale()` and `edge.shade()` functions created above work to adjust edge properties in a weighted graph. Why might this be helpful in a crime analysis context?
+-   Why might a crime analyst choose to visualize both weighted and unweighted projections of a bipartite network? What insights can be gained from each?
+-   When plotting the unipartite projections, why is it important to use consistent colors and shapes for nodes? How does this enhance the interpretation of the graph?
 
-# **Wrapping up...**
+## Tutorial Summary
 
-In this lab, we reviewed how a unipartite or one-mode network can be created through projection. We also reviewed how to work with weighted graphs.
-
-<br>
-
-<p align="center">
-[Back to SAND main page](https://jacobtnyoung.github.io/SAND/)
-</p>
-
-<br>
-
-#### ***Please*** report any needed corrections to the [Issues](https://github.com/jacobtnyoung/SAND/issues/new) page. Thanks!
-
-<br>
-
-<p align="center">
-[Back to SAND main page](https://jacobtnyoung.github.io/SAND/)
-</p>
+This tutorial introduced crime analysts to the concept of projecting bipartite networks into unipartite networks, a critical technique for analyzing relational structures involving two distinct sets of nodes, such as people and events. We showed how analysts can create projections by multiplying an adjacency matrix with its transpose to generate either a "person" matrix, representing relationships between individuals, or a "group" matrix, representing connections between events. Visualization techniques using the `gplot()` function were demonstrated, showing how unipartite graphs are derived from bipartite structures and how weighted edges can be used to represent the strength of connections. Through these methods, crime analysts gained tools to investigate patterns of collaboration, shared events, and broader social structures, providing valuable perspectives for understanding crime and enforcement dynamics.
