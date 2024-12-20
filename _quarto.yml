@@ -26,6 +26,7 @@ book:
     - snaca-r-visualization.qmd
     - snaca-r-degree-centrality.qmd
     - snaca-r-closeness-centrality.qmd
+    - snaca-r-betweenness-centrality.qmd
     - references.qmd
 
 bibliography: references.bib

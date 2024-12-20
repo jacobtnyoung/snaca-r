@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/index.html</loc>
-    <lastmod>2024-12-19T20:55:03.613Z</lastmod>
+    <lastmod>2024-12-20T16:27:25.861Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-intro-to-r.html</loc>
-    <lastmod>2024-12-19T20:55:03.628Z</lastmod>
+    <lastmod>2024-12-20T16:27:25.881Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-rmarkdown.html</loc>
-    <lastmod>2024-12-19T20:55:03.635Z</lastmod>
+    <lastmod>2024-12-20T16:27:25.888Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-network-data.html</loc>
-    <lastmod>2024-12-19T20:55:03.646Z</lastmod>
+    <lastmod>2024-12-20T16:27:25.900Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-visualization.html</loc>
-    <lastmod>2024-12-19T20:55:03.675Z</lastmod>
+    <lastmod>2024-12-20T16:27:25.928Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-degree-centrality.html</loc>
-    <lastmod>2024-12-19T20:55:03.717Z</lastmod>
+    <lastmod>2024-12-20T16:27:25.969Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-closeness-centrality.html</loc>
-    <lastmod>2024-12-19T20:55:03.748Z</lastmod>
+    <lastmod>2024-12-20T16:27:26.001Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jacobtnyoung.github.io/snaca-r/snaca-r-betweenness-centrality.html</loc>
+    <lastmod>2024-12-20T16:27:26.025Z</lastmod>
   </url>
   <url>
     <loc>https://jacobtnyoung.github.io/snaca-r/references.html</loc>
-    <lastmod>2024-12-19T20:55:03.751Z</lastmod>
+    <lastmod>2024-12-20T16:27:26.028Z</lastmod>
   </url>
 </urlset>
