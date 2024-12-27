@@ -1,13 +1,13 @@
 # =============================================================================== #
-# Build LONDON data files for SNA textbook.
+# Build LONDON data files for SNACA R textbook.
 # =============================================================================== #
 
 
 # ----
-# This syntax file builds data files stored in the sna-textbook repo.
+# This syntax file builds data files stored in the snaca-r repo.
 # These data files are used in the 507 and the SAND course.
 # This script is run once to build the files and export them 
-# to the data folder in the sna-textbook repo.
+# to the data folder in the snaca-r repo.
 
 # Data is on co-offending in a London-based inner-city street gang, 2005-2009, 
 # operating from a social housing estate. Data comes from anonymised police arrest 
