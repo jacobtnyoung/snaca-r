@@ -277,8 +277,8 @@ div.csl-indent {
 
 </header>
 
-<p>As discussed in the <a href="">Bipartite Graphs &amp; Two-Mode Networks</a> chapter of the textbook, bipartite graphs are useful for operationalizing contexts where nodes come from <em>two</em> separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident <em>within</em> a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur <em>between</em> these partitions (i.e.&nbsp;not within).</p>
-<p>Then, in the <a href="">Projection</a> chapter, we saw that <strong>projection</strong> is the process by which we map the connectivity between modes to a single mode. And, we saw that we can use a weighted graph or a binarized graph in the analysis of the project.</p>
+<p>As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter of the textbook, bipartite graphs are useful for operationalizing contexts where nodes come from <em>two</em> separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident <em>within</em> a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur <em>between</em> these partitions (i.e.&nbsp;not within).</p>
+<p>Then, in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Projection</a> chapter, we saw that <strong>projection</strong> is the process by which we map the connectivity between modes to a single mode. And, we saw that we can use a weighted graph or a binarized graph in the analysis of the project.</p>
 <p>In this tutorial, we will review how a unipartite or one-mode network can be created through projection.</p>
 <section id="one-mode-networks-by-projection" class="level2">
 <h2 class="anchored" data-anchor-id="one-mode-networks-by-projection">One-Mode Networks by Projection</h2>
@@ -399,7 +399,7 @@ F 0 0 0 2 1 2</code></pre>
 <h2 class="anchored" data-anchor-id="projections">Projections</h2>
 <section id="the-person-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="the-person-matrix">The Person Matrix</h3>
-<p>Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the <a href="">Projection</a> chapter that <span class="citation" data-cites="breiger1974duality">Breiger (<a href="references.html#ref-breiger1974duality" role="doc-biblioref">1974</a>)</span> referred to the <em>person</em> matrix (i.e.&nbsp;the <em>NxN</em> matrix) and the <em>group</em> matrix (i.e.&nbsp;the <em>MxM</em> matrix).</p>
+<p>Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Projection</a> chapter that <span class="citation" data-cites="breiger1974duality">Breiger (<a href="references.html#ref-breiger1974duality" role="doc-biblioref">1974</a>)</span> referred to the <em>person</em> matrix (i.e.&nbsp;the <em>NxN</em> matrix) and the <em>group</em> matrix (i.e.&nbsp;the <em>MxM</em> matrix).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the "person" matrix: recall this is A X t(A)</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> A <span class="sc">%*%</span> <span class="fu">t</span>( A )</span>
@@ -531,7 +531,7 @@ F 0 0 0 2 1 2</code></pre>
 </section>
 <section id="projecting-young-readys-2015-police-officer-network" class="level2">
 <h2 class="anchored" data-anchor-id="projecting-young-readys-2015-police-officer-network">Projecting <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready’s (2015)</a> Police Officer Network</h2>
-<p>Now, let’s work with a real example. As discussed in the <a href="">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
+<p>Now, let’s work with a real example. As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
 <p>Let’s import the the matrix, create a network, assign an attribute, and plot it. Then, we will work create the projection.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the location for the file</span></span>
@@ -616,7 +616,7 @@ F 0 0 0 2 1 2</code></pre>
 </section>
 <section id="using-the-weights-in-the-plot" class="level3">
 <h3 class="anchored" data-anchor-id="using-the-weights-in-the-plot">Using the Weights in the Plot</h3>
-<p>Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the <a href="">Projection</a> chapter. We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let’s build a few functions.</p>
+<p>Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Projection</a> chapter. We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let’s build a few functions.</p>
 <section id="reworking-the-rescale-function-to-incorporate-edge-weights" class="level4">
 <h4 class="anchored" data-anchor-id="reworking-the-rescale-function-to-incorporate-edge-weights">Reworking the <code>rescale()</code> function to incorporate edge weights</h4>
 <p>First, we will create the <code>edge.rescale()</code> function to help us here. This function returns a weighted edgelist that can be used to aid with plotting. Then, we will create the <code>edge.shade()</code> function that shades the edges based on the size of the edge.</p>

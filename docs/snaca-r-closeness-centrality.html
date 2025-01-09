@@ -280,7 +280,7 @@ div.csl-indent {
 
 </header>
 
-<p>How do we know whether a node is important in a network? As was discussed at the beginning of the chapter on <a href="">Degree Centrality</a>, one of the most popular concepts in network analysis is <em>centrality</em>. In that chapter, we covered how centrality can be measured by the number of edges incident on a node. But, that is not they only way that a node can be <em>central</em>. The chapter on <a href="">Closeness Centrality</a> discussed an alternative conceptualization, <em>closeness</em>, where important nodes are those who are “close” to other nodes in the network.</p>
+<p>How do we know whether a node is important in a network? As was discussed at the beginning of the chapter on <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html">Degree Centrality</a>, one of the most popular concepts in network analysis is <em>centrality</em>. In that chapter, we covered how centrality can be measured by the number of edges incident on a node. But, that is not they only way that a node can be <em>central</em>. The chapter on <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html">Closeness Centrality</a> discussed an alternative conceptualization, <em>closeness</em>, where important nodes are those who are “close” to other nodes in the network.</p>
 <p>In this tutorial, we will examine how to calculate closeness centrality and centralization scores in R using the <code>closeness()</code> and <code>centralization()</code> functions in the <code>sna</code> package.</p>
 <section id="closeness-centrality-undirected-binary-graphs" class="level2">
 <h2 class="anchored" data-anchor-id="closeness-centrality-undirected-binary-graphs">Closeness Centrality (Undirected Binary Graphs)</h2>
@@ -496,7 +496,7 @@ stand.close 0.44 0.67 0.8 0.57 0.57</code></pre>
 </section>
 <section id="closeness-centralization" class="level3">
 <h3 class="anchored" data-anchor-id="closeness-centralization">Closeness Centralization</h3>
-<p>We can also summarize the entire network, in terms of how close nodes are to each other. <em>Group closeness centralization</em> tells us how much variation there is in the closeness scores. As we saw in the textbook chapters on <a href="">Degree Centrality</a> and <a href="">Closeness Centrality</a>, this measure is bound between 0 and 1 where a value of 0 indicates complete uniformity across nodes in there centrality scores and a value of 1 indicates that one node has the highest possible centrality score, and all others are at the minimum.</p>
+<p>We can also summarize the entire network, in terms of how close nodes are to each other. <em>Group closeness centralization</em> tells us how much variation there is in the closeness scores. As we saw in the textbook chapters on <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html">Degree Centrality</a> and <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html">Closeness Centrality</a>, this measure is bound between 0 and 1 where a value of 0 indicates complete uniformity across nodes in there centrality scores and a value of 1 indicates that one node has the highest possible centrality score, and all others are at the minimum.</p>
 <p>This is calculated as: <span class="math inline">\(C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}\)</span>.</p>
 <p>Where <span class="math inline">\(C'_C(n^*)\)</span> is the maximum or largest standardized closeness centrality score. For a more elaborate discussion of this equation, see <span class="citation" data-cites="wasserman1994social">(<a href="references.html#ref-wasserman1994social" role="doc-biblioref">Wasserman and Faust 1994, 8:191–92</a>)</span>. To calculate the group closeness centrality, we can use the <code>centralization()</code> function in <code>sna</code> and specify <code>closeness</code> in the <code>FUN</code> argument.</p>
 <div class="cell">
@@ -519,7 +519,7 @@ stand.close 0.44 0.67 0.8 0.57 0.57</code></pre>
 <li>Now suppose Laura sends a tie to Miguel and Bruce sends a tie to Miguel (i.e.&nbsp;Laura -&gt; Miguel &lt;- Bruce).</li>
 <li><em>How far is Laura from Bruce now?</em></li>
 </ul>
-<p>Let’s take a look at this using the network from the <a href="">Closeness Centrality</a> chapter.</p>
+<p>Let’s take a look at this using the network from the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html">Closeness Centrality</a> chapter.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the object</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>d_mat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
@@ -618,7 +618,7 @@ stand.close 0.44 0.67 0.8 0.57 0.57</code></pre>
 </section>
 <section id="closeness-centrality-in-pins-get-along-with-network" class="level2">
 <h2 class="anchored" data-anchor-id="closeness-centrality-in-pins-get-along-with-network">Closeness Centrality in PINS <em>Get Along With</em> Network</h2>
-<p>The <a href="https://cjrc.la.psu.edu/research/"><em>Prison Inmate Networks Study (PINS)</em></a> examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:</p>
+<p>The <a href="https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/"><em>Prison Inmate Networks Study (PINS)</em></a> examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:</p>
 <ul>
 <li><p>The <em>get along with network</em> was created by asking individuals whom they “get along with” on the unit. We can think of this as “friends” in a prison setting. (People don’t really have “friends” in prison, but there are people they “get along with”)</p></li>
 <li><p>The <em>power and influence network</em> was created by asking individuals whom they believed was “powerful and influential” on the unit.</p></li>

@@ -470,7 +470,7 @@ PI_net <- network( PI_mat, directed = TRUE )
 
 # define the attributes object
 PI_attrs <- read.csv( 
-    "https://raw.githubusercontent.com/jacobtnyoung/sna-textbook/main/data/data-PINS-w1-age-race-attributes.csv",
+    "https://raw.githubusercontent.com/jacobtnyoung/snaca-r/main/data/data-PINS-w1-age-race-attributes.csv",
     as.is = TRUE,
     header = TRUE 
     )
