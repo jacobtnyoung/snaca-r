@@ -18,13 +18,13 @@ library( network ) # for working with network objects
 
 # Bipartite Graphs & Two-Mode Networks {.unnumbered}
 
-As discussed in the [Bipartite Graphs & Two-Mode Networks]() chapter of the textbook, bipartite graphs are useful for operationalizing contexts where nodes come from *two* separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident *within* a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur *between* these partitions (i.e. not within).
+As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter of the textbook, bipartite graphs are useful for operationalizing contexts where nodes come from *two* separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident *within* a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur *between* these partitions (i.e. not within).
 
 This tutorial examines various properties of bipartite graphs (e.g. density, degree centrality) and shows how to work with these structures in R using the `network` and `sna` packages.
 
 ## Bipartite Graphs/Two-Mode Networks
 
-To begin, let's build the example bipartite graph from the [Bipartite Graphs & Two-Mode Networks]() chapter:
+To begin, let's build the example bipartite graph from the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter:
 
 ```{r}
 
@@ -120,7 +120,7 @@ gplot(
 
 ```
 
-As we saw in the [Basics of Network Visualization]() tutorial, there are a lot of options that help us convey important information about a network. When we are working with a two mode network object, we need to make sure that whatever information we pass to the nodes matches the order of the nodes in the network. For example, we saw above that the network first labels the actor nodes and then labels the event nodes. If we wanted to choose a different set of colors, for example, using the `vertex.col=` argument, then we would want a set of colors for the actors and a set of colors for the events. Then, we would want these combined into a single object. Let's do that here to demonstrate:
+As we saw in the [Basics of Network Visualization](snaca-r-visualization.html) tutorial, there are a lot of options that help us convey important information about a network. When we are working with a two mode network object, we need to make sure that whatever information we pass to the nodes matches the order of the nodes in the network. For example, we saw above that the network first labels the actor nodes and then labels the event nodes. If we wanted to choose a different set of colors, for example, using the `vertex.col=` argument, then we would want a set of colors for the actors and a set of colors for the events. Then, we would want these combined into a single object. Let's do that here to demonstrate:
 
 ```{r}
 
@@ -172,7 +172,7 @@ This setup, where we define the actor properties and event properties and combin
 
 ## Structural Properties of Bipartite Graphs/Two-Mode Networks
 
-As reviewed in the [Bipartite Graphs & Two-Mode Networks]() chapter of the textbook, there are multiple structural properties of bipartite graphs that we can examine to help us describe the network.
+As reviewed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter of the textbook, there are multiple structural properties of bipartite graphs that we can examine to help us describe the network.
 
 ### Density
 
@@ -303,7 +303,7 @@ gplot(
 
 ## Structural Properties of [Young & Ready (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) Police Officer Network
 
-Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks]() chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
+Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
 
 Let's import the the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.
 
@@ -330,7 +330,7 @@ M <- dim( cam_mat )[2]
 
 ```
 
-Now, we want to coerce this to an object of class `network`. 
+Now, we want to coerce this to an object of class `network`.
 
 ```{r}
 

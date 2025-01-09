@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 
 # Working with Networks in R {.unnumbered}
 
-In the [**Network Data Structures**]() chapter of the [*Social Network Analysis for Crime Analysts*]() textbook, we reviewed how networks can be represented as sociomatrices. These matrices form the basic unit of data analysis in SNA. In this tutorial, we will review how we can build networks in R. Understanding how to work with networks in R is essential for crime analysts because networks provide a powerful lens for analyzing relationships and interactions that drive criminal behavior. Whether you're mapping connections between individuals in a gang, examining the flow of illicit goods, or identifying key actors in a criminal enterprise, networks reveal critical structures and patterns that traditional data analysis might overlook.
+In the [**Network Data Structures**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html) chapter of the [*Social Network Analysis for Crime Analysts*](https://jacobtnyoung.github.io/snaca-textbook/) textbook, we reviewed how networks can be represented as sociomatrices. These matrices form the basic unit of data analysis in SNA. In this tutorial, we will review how we can build networks in R. Understanding how to work with networks in R is essential for crime analysts because networks provide a powerful lens for analyzing relationships and interactions that drive criminal behavior. Whether you're mapping connections between individuals in a gang, examining the flow of illicit goods, or identifying key actors in a criminal enterprise, networks reveal critical structures and patterns that traditional data analysis might overlook.
 
 As a reminder, in the tutorials for this textbook, R code appears `like this` and can be copied directly into R or RStudio. Let's start getting our hands dirty (figuratively of course) by building some networks in R!
 
@@ -101,7 +101,7 @@ We can refer to specific elements, rows, or columns by using the `[` and `]` sym
 
 For example, lets look at the relation Jen sends to Tom.
 
-Recall from th [**Network Data Structures**]() chapter that this is element 1,2 in the matrix (i.e. row one, column two). In R code that is: `mat[1,2]`.
+Recall from th [**Network Data Structures**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html) chapter that this is element 1,2 in the matrix (i.e. row one, column two). In R code that is: `mat[1,2]`.
 
 This command reads as follows: for the object `mat`, return the value at row 1 column 2. The row number is the first dimension and the column is the second dimension. Remember: "rows by columns"
 
@@ -179,7 +179,7 @@ Got it? If yes, then GREAT! If no, hang in there: you got this! If you are a bit
 
 ## Exploring the `network` Package
 
-Now that we have our object `mat` is created, let's manipulate it into a network and a graph. To do this, we can use the `network` package. `network` is a package containing tools to create and modify network objects created by [Carter Butts](http://erzuli.ss.uci.edu/~buttsc/). See the [network page](http://cran.r-project.org/web/packages/network/index.html) for an overview of package functionality.
+Now that we have our object `mat` is created, let's manipulate it into a network and a graph. To do this, we can use the `network` package. `network` is a package containing tools to create and modify network objects created by [Carter Butts](https://ncasd.org/~buttsc/). See the [network page](http://cran.r-project.org/web/packages/network/index.html) for an overview of package functionality.
 
 First, we need to install the package using: `install.packages( "network" )`. *Note*: if you have already installed the package, no **do not** need to reinstall it.
 
@@ -477,8 +477,19 @@ net_d
 
 ## Test Your Knowledge Exercises
 
--   ???
+-   Create a 5x5 adjacency matrix using the `matrix()` function. 
+    -   What happens if the number of elements doesn't match the dimensions of the matrix?
+    -   Assign meaningful row and column names to the adjacency matrix using the `rownames()` and `colnames()` functions. 
+    -   How can you reference a specific row or column by name?
+-   Use the `[` and `]` symbols to extract specific elements, rows, or columns from a matrix.  
+-   Coerce an adjacency matrix into a `network` object using the `as.network()` function. 
+    -   What argument must you modify to create an undirected network?  
+-   Create an edgelist for a directed network and convert it to a `network` object. How does this process differ from working with adjacency matrices?  
+-   Summarize a `network` object using the `summary()` function. 
+    -   What insights can you gain from this output?  
+-   Explain the difference between directed and undirected networks in the context of the `as.network()` function. 
+    -   What specific arguments are used to define these properties?  
 
 ## Tutorial Summary
 
-???
+This tutorial introduced the basics of working with network data in R, focusing on creating, manipulating, and importing network structures. It began with constructing adjacency matrices using the `matrix()` function, followed by assigning meaningful row and column names for clarity and exploring matrix indexing to extract specific elements, rows, or columns. The tutorial then transitioned to coercing matrices into `network` objects using the `as.network()` function from the `network` package, with special attention to specifying whether a network is directed or undirected. The use of edgelists as an alternative to adjacency matrices was demonstrated, highlighting the importance of specifying the correct matrix type in the `as.network()` function. The tutorial also covered importing network data from external sources, including CSV files from URLs or local directories, and converting them into network objects. The emphasis was on building a solid foundation for working with network data structures, which are essential for analyzing relationships and interactions in crime analysis.

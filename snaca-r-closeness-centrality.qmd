@@ -18,7 +18,7 @@ library( network ) # for working with network objects
 
 # Closeness Centrality and Centralization {.unnumbered}
 
-How do we know whether a node is important in a network? As was discussed at the beginning of the chapter on [Degree Centrality](), one of the most popular concepts in network analysis is *centrality*. In that chapter, we covered how centrality can be measured by the number of edges incident on a node. But, that is not they only way that a node can be *central*. The chapter on [Closeness Centrality]() discussed an alternative conceptualization, *closeness*, where important nodes are those who are "close" to other nodes in the network.
+How do we know whether a node is important in a network? As was discussed at the beginning of the chapter on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html), one of the most popular concepts in network analysis is *centrality*. In that chapter, we covered how centrality can be measured by the number of edges incident on a node. But, that is not they only way that a node can be *central*. The chapter on [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html) discussed an alternative conceptualization, *closeness*, where important nodes are those who are "close" to other nodes in the network.
 
 In this tutorial, we will examine how to calculate closeness centrality and centralization scores in R using the `closeness()` and `centralization()` functions in the `sna` package.
 
@@ -222,7 +222,7 @@ closeness( u_mat,gmode="graph" ) / ( g-1 )
 
 ### Closeness Centralization
 
-We can also summarize the entire network, in terms of how close nodes are to each other. *Group closeness centralization* tells us how much variation there is in the closeness scores. As we saw in the textbook chapters on [Degree Centrality]() and [Closeness Centrality](), this measure is bound between 0 and 1 where a value of 0 indicates complete uniformity across nodes in there centrality scores and a value of 1 indicates that one node has the highest possible centrality score, and all others are at the minimum.
+We can also summarize the entire network, in terms of how close nodes are to each other. *Group closeness centralization* tells us how much variation there is in the closeness scores. As we saw in the textbook chapters on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html) and [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html), this measure is bound between 0 and 1 where a value of 0 indicates complete uniformity across nodes in there centrality scores and a value of 1 indicates that one node has the highest possible centrality score, and all others are at the minimum.
 
 This is calculated as: $C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}$.
 
@@ -244,11 +244,11 @@ In a directed binary graph, closeness centrality has the same interpretation (i.
 
 For example, consider two scenarios:
 
-- Suppose Laura sends a tie to Miguel and he sends a tie to Bruce (i.e. Laura -\> Miguel -\> Bruce). Here, Laura is of distance 2 from Bruce. 
-- Now suppose Laura sends a tie to Miguel and Bruce sends a tie to Miguel (i.e. Laura -\> Miguel \<- Bruce). 
-- *How far is Laura from Bruce now?*
+-   Suppose Laura sends a tie to Miguel and he sends a tie to Bruce (i.e. Laura -\> Miguel -\> Bruce). Here, Laura is of distance 2 from Bruce.
+-   Now suppose Laura sends a tie to Miguel and Bruce sends a tie to Miguel (i.e. Laura -\> Miguel \<- Bruce).
+-   *How far is Laura from Bruce now?*
 
-Let's take a look at this using the network from the [Closeness Centrality]() chapter.
+Let's take a look at this using the network from the [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html) chapter.
 
 ```{r}
 
@@ -339,7 +339,7 @@ centralization( d_mat, closeness, mode="digraph" )
 
 ## Closeness Centrality in PINS *Get Along With* Network
 
-The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/research/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
+The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
 
 -   The *get along with network* was created by asking individuals whom they "get along with" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 
@@ -604,15 +604,15 @@ A few questions:
 
 ## Test Your Knowledge Excercises
 
-- Explain the concept of closeness centrality in your own words. How does it differ from degree centrality?
-- Using the `u_mat` matrix in the tutorial, manually calculate the closeness centrality for the node "Jen." Show your calculations step by step.
-- Using the "Get Along With" network, identify why only the largest component is analyzed for closeness centrality. What are the potential consequences of ignoring smaller components?
-- In the "Power and Influence Network," why do we adjust the `gmode` argument when calculating closeness centrality? What are the implications of analyzing a directed network as undirected?
-- For both the "Get Along With" and "Power and Influence" networks, calculate the standardized closeness centrality for a specific node of your choice. Compare the results between the two networks.
-- Interpret the group closeness centralization score for the "Get Along With" network. What does this score reveal about the structure of the network?
-- Explain why `Inf` values appear in the geodesic distance matrix for directed graphs and how these values are handled during calculations.
-- Using the "Power and Influence Network," examine the visual representation of the first component. What structural patterns do you observe, and how do these relate to the closeness centrality scores?
-- After calculating the closeness centralization scores for both networks, compare their values. What do the differences in scores suggest about the overall structure of the two networks?
+-   Explain the concept of closeness centrality in your own words. How does it differ from degree centrality?
+-   Using the `u_mat` matrix in the tutorial, manually calculate the closeness centrality for the node "Jen." Show your calculations step by step.
+-   Using the "Get Along With" network, identify why only the largest component is analyzed for closeness centrality. What are the potential consequences of ignoring smaller components?
+-   In the "Power and Influence Network," why do we adjust the `gmode` argument when calculating closeness centrality? What are the implications of analyzing a directed network as undirected?
+-   For both the "Get Along With" and "Power and Influence" networks, calculate the standardized closeness centrality for a specific node of your choice. Compare the results between the two networks.
+-   Interpret the group closeness centralization score for the "Get Along With" network. What does this score reveal about the structure of the network?
+-   Explain why `Inf` values appear in the geodesic distance matrix for directed graphs and how these values are handled during calculations.
+-   Using the "Power and Influence Network," examine the visual representation of the first component. What structural patterns do you observe, and how do these relate to the closeness centrality scores?
+-   After calculating the closeness centralization scores for both networks, compare their values. What do the differences in scores suggest about the overall structure of the two networks?
 
 ## Tutorial Summary
 

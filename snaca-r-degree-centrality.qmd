@@ -18,7 +18,7 @@ library( network ) # for working with network objects
 
 # Degree Centrality and Centralization {.unnumbered}
 
-How do we know whether a node is important in a network? As was discussed in the textbook chapter on [Degree Centrality](), one of the most popular concepts in network analysis is *centrality*. That is, important nodes are those who are central. Also, we can compare networks by examining how they differ (or are similar) based on the distribution of centrality scores. In this lab, we will examine how to calculate degree centrality and centralization scores in R using the `degree()` and `centralization()` functions in the `sna` package.
+How do we know whether a node is important in a network? As was discussed in the textbook chapter on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html), one of the most popular concepts in network analysis is *centrality*. That is, important nodes are those who are central. Also, we can compare networks by examining how they differ (or are similar) based on the distribution of centrality scores. In this lab, we will examine how to calculate degree centrality and centralization scores in R using the `degree()` and `centralization()` functions in the `sna` package.
 
 ## Degree Centrality (Undirected Binary Graphs)
 
@@ -168,7 +168,7 @@ mean( deg_u_mat )
 
 <br>
 
-We can also calculate how centralized the graph itself is. *Group degree centralization* measures the extent to which the actors in a social network differ from one another in their individual degree centralities. Following [Wasserman & Faust (1994)](https://www.cambridge.org/core/books/social-network-analysis/90030086891EB3491D096034684EFFB8), an index of *group degree centralization* can be calculated as:
+We can also calculate how centralized the graph itself is. *Group degree centralization* measures the extent to which the actors in a social network differ from one another in their individual degree centralities. Following @wasserman1994social, an index of *group degree centralization* can be calculated as:
 
 $$C_D = \frac{\sum\limits_{i=1}^g [C_D(n^*) - C_D(n_i)]}{[(g-1)(g-2)]}$$
 
@@ -481,7 +481,7 @@ o_cent_d <- centralization( d_mat, degree, mode="digraph", cmode="outdegree" )
 
 ## Degree Centrality in PINS *Get Along With* and *Power/Influence* Networks
 
-The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/research/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
+The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
 
 -   The *get along with network* was created by asking individuals whom they "get along with" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 

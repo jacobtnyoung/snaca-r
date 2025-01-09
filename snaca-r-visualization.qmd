@@ -443,7 +443,7 @@ As we create a plot, we want to think about what information we should convey an
 
 ## Plotting the Power/Influence Network from the Prison Inmate Networks Study (PINS)
 
-The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/research/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks.
+The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks.
 
 Let's plot the *power and influence network*, which was created by asking individuals whom they believed was "powerful and influential" on the unit. We will continue working with the `gplot()` function.
 

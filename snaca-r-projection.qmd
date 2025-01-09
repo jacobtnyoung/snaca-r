@@ -18,9 +18,9 @@ library( network ) # for working with network objects
 
 # Projection & Weighted Graphs {.unnumbered}
 
-As discussed in the [Bipartite Graphs & Two-Mode Networks]() chapter of the textbook, bipartite graphs are useful for operationalizing contexts where nodes come from *two* separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident *within* a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur *between* these partitions (i.e. not within).
+As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter of the textbook, bipartite graphs are useful for operationalizing contexts where nodes come from *two* separate classes. In contrast to one-mode networks, or unipartite graphs, where edges can be incident *within* a particular node/vertex set, in two-mode or bipartite graphs there are two partitions of nodes (called modes), and edges only occur *between* these partitions (i.e. not within).
 
-Then, in the [Projection]() chapter, we saw that **projection** is the process by which we map the connectivity between modes to a single mode. And, we saw that we can use a weighted graph or a binarized graph in the analysis of the project.
+Then, in the [Projection](https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html) chapter, we saw that **projection** is the process by which we map the connectivity between modes to a single mode. And, we saw that we can use a weighted graph or a binarized graph in the analysis of the project.
 
 In this tutorial, we will review how a unipartite or one-mode network can be created through projection.
 
@@ -118,7 +118,7 @@ t( A ) %*% A
 
 ### The Person Matrix
 
-Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the [Projection]() chapter that @breiger1974duality referred to the *person* matrix (i.e. the *NxN* matrix) and the *group* matrix (i.e. the *MxM* matrix).
+Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the [Projection](https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html) chapter that @breiger1974duality referred to the *person* matrix (i.e. the *NxN* matrix) and the *group* matrix (i.e. the *MxM* matrix).
 
 ```{r}
 
@@ -247,7 +247,7 @@ From the plots we can see what the projection is doing. It is creating a unipart
 
 ## Projecting [Young & Ready's (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) Police Officer Network
 
-Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks]() chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
+Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html) chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
 
 Let's import the the matrix, create a network, assign an attribute, and plot it. Then, we will work create the projection.
 
@@ -346,7 +346,7 @@ Now that we have reduced our bipartite graph to a unipartite graph, we can emplo
 
 ### Using the Weights in the Plot
 
-Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the [Projection]() chapter. We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let's build a few functions.
+Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the [Projection](https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html) chapter. We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let's build a few functions.
 
 #### Reworking the `rescale()` function to incorporate edge weights
 
