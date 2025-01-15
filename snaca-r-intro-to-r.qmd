@@ -12,15 +12,19 @@ knitr::opts_chunk$set(
 
 # Getting Started with R {.unnumbered}
 
-In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. Even if you have used R before (awesome!), I would encourage you to review the tutorial as a refresher.
+In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. We will also cover R Studio. Even if you have used R and/or R Studio before (awesome!), I would encourage you to review the tutorial as a refresher.
+
+As a reminder, this tutorial (and the tutorials throughout this book) will contain R code which is in "code chunks". You will notice a code chunk because the font will change. Code chunks will have text that `looks like this`. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by coping and pasting the `code` and seeing it work on your end.
+
+<br>
 
 ## *10 Things about R to get you started:*
 
 ### **1. What is R**
 
-R is a dialect of the *S* language that was written by John Chambers and others at Bell tutorials in the 70s. In the 90s, R was developed and made avaitutorialle to the public with the GNU general public license. Importantly, R is *free*, meaning that you don't have to pay for it (duh), but it is also **open source**, meaning that you have freedom to use and modify it.
+R is a dialect of the *S* language that was written by John Chambers and others at Bell labs in the 70s. In the 90s, R was developed and made available to the public with the GNU general public license. Importantly, R is *free*, meaning that you don't have to pay for it (duh), but it is also **open source**, meaning that you have freedom to use and modify it.
 
-R is an operating system for data science software. Just as Windows allows you to turn on your computer, open a web browser, moved files around, and write a paper using MS Word, R allows you to install and run packages and manage files while organizing large data projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.
+Think of R as an operating system. Just as Windows allows you to turn on your computer, open a web browser, moved files around, and write a paper using MS Word, R allows you to install and run packages, perform analyses, and manage files while organizing data for crime analyst projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.
 
 ### **2. Installing and Starting**
 
@@ -34,7 +38,7 @@ This prompt is the fundamental entry point for communicating with R. We type exp
 
 R is a programming language. That means, it allows us to give instructions to our computer to do stuff. We will see that there is a lot of "stuff" we can do. But, the basic orientation to R is understanding **objects**.
 
-What is an *object*? Without getting to philosophical, an *object* is something we create in the R environment. Think of an R session as a box. We are creating objects and putting them into the box. This is quite different from data analysis programs like SPSS or Stata.
+What is an *object*? Without getting to philosophical, an *object* is something we create in the R environment. To help, consider this analogy: think of an R session as a box. As we give different instructions to R, we are creating objects and putting them into the box. We are also telling R to do different things to these objects. This may seem unusual at first as it is quite different from data analysis programs like SPSS or Stata which are spreadsheet oriented.
 
 We create objects by using the assignment operator: `<-`
 
@@ -244,9 +248,7 @@ For example, say you want to calculate the standard deviation for an object, but
 
 R has MANY preprogrammed functions that are automatically loaded when you open the program. Functions are stored in "packages". Although there are many preprogrammed functions, there are even MORE functions that you can install on your own. A package in R is a collection of functions, usually written for a specific purpose.
 
-We can see the packages available from CRAN at [http://cran.r-project.org/](http://cran.r-project.org). Just click on the "packages" link or go to <https://cran.r-project.org/web/packages/index.html>. As of writing this there are nearly 13,000 packages. There is a WIDE variety of packages available, this is another reason why R is awesome. If you can think it, someone has probably written a package for it in R (and if not, *you* can write one and contribute \[isn't it great!\]).
-
-**Take a few moments and look through the packages**
+We can see the packages available from CRAN at [http://cran.r-project.org/](http://cran.r-project.org). Just click on the "packages" link or go to <https://cran.r-project.org/web/packages/index.html>. There is a WIDE variety of packages available (tens of thousands of packages are available!), this is another reason why R is awesome. If you can think it, someone has probably written a package for it in R (and if not, *you* can write one and contribute). Isn't it great!!! Take a few moments and look through the packages by following this link: [packages by name](https://cran.r-project.org/web/packages/available_packages_by_name.html).
 
 If there is a particular package you want to add, you simply use the `install.packages()` function like this: `install.packages("`package name`")`.
 
@@ -254,10 +256,11 @@ After the package is installed on your machine, you do not need to reinstall it 
 
 Some packages require other packages for them to work. If there is an error, you need to install the additional packages.
 
-Note that each time you open R you have to load any packages that you manually loaded using the `install.packages()` function. In other words, if we closed R and then reopened it, we would need to type `library( "ergm" )` to load the functions in `ergm`. Note that we *do not* have to reinstall the package using `install.packages()`, we just have to load the library.
+Note that each time you open R you have to load any packages that you manually loaded using the `install.packages()` function. In other words, if we closed R and then reopened it, we would need to type `library( "sna" )` to load the functions in `sna`. Note that we *do not* have to reinstall the package using `install.packages()`, we just have to load the library.
 
-If you have installed the package, but have not loaded it, R will return an error saying that a particular function is not found.\
-For example, the function `rgraph()` in the package `sna` (which is a set of tools for working with social networks that we will use for this course) is used to create random graphs. Type `?rgraph` and you get an error stating that there is no documentation avaitutorialle. This is because the `sna` library has not been loaded (even if you have installed `sna`). Typing `install.packages( "sna" )` and `library( sna )` prior to `?rgraph()` will solve this problem.
+If you have installed the package, but have not loaded it, R will return an error saying that a particular function is not found.
+
+For example, the function `rgraph()` in the package `sna` (which is a set of tools for working with social networks) is used to create random graphs. Type `?rgraph` and you get an error stating that there is no documentation available. This is because the `sna` library has not been loaded (even if you have installed `sna`). Typing `install.packages( "sna" )` and `library( sna )` prior to `?rgraph()` will solve this problem.
 
 A final point on loading packages. Since anyone can write and contributes packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.
 
@@ -316,13 +319,17 @@ Note that only the objects in the workspace are saved, not the text of what you 
 
 You may be surprised to discover how little functionality is implemented in the standard R GUI (i.e. graphical user interface). The standard R GUI implements only very rudimentary functionality through menus: reading help, managing multiple graphics windows, editing some source and data files, and some other basic functionality. There are no menu items, buttons, or palettes for loading data, transforming data, plotting data, or doing any real work with data. Commercial applications like SAS, SPSS, and Stata include user interfaces with much more functionality.
 
-This was just the nature of working with R until some awesome human beings created RStudio. RStudio is one of several projects to build an easier-to-use GUI for R. It is a free, open-source IDE (i.e. integrated development environment) for working with R. Unlike the standard R GUI, RStudio tiles windows on the screen and puts different windows in different tabs. RStudio can be downloaded from: <http://www.rstudio.com>.
+This was just the nature of working with R until some awesome human beings created R Studio. R Studio is one of several projects to build an easier-to-use GUI for R. It is a free, open-source IDE (i.e. integrated development environment) for working with R. Unlike the standard R GUI, R Studio tiles windows on the screen and puts different windows in different tabs. R Studio can be downloaded from: <http://www.rstudio.com>.
 
-### RStudio workthrough
+### R Studio workthrough
 
-Ok, now open RStudio and let's take a look!
+Ok, now open R Studio and let's take a look!
 
-Now, that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. However, there are more tools available in RStudio which we will use.
+Now, that you have R Studio up and running, try rerunning some of the code above. You will see that R operates within the R Studio environment. So, you can do everything in R Studio that we did above in R. However, there are more tools available in R Studio.
+
+<br>
+
+---
 
 ## Test Your Knowledge Exercises
 
@@ -348,4 +355,4 @@ Now, that you have RStudio up and running, try rerunning some of the code above.
 
 ## Tutorial Summary
 
-This tutorial provides a quick introduction to R. R is a versatile and open-source programming language designed for data science and statistical analysis. As we will see, it is one of the best environments for working with social network data. We began with an overview of R's history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R's extensive documentation, installing and loading packages, and managing the R workspace effectively. We also reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.
+This tutorial provides a quick introduction to R and R Studio. R is a versatile and open-source programming language that is well-suited for social network analysis. As we will see, it is one of the best environments for crime analysts to work with social network data and conduct analyses. We began with an overview of R's history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R's extensive documentation, installing and loading packages, and managing the R workspace effectively. We also reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.
