@@ -12,7 +12,9 @@ knitr::opts_chunk$set(
 
 # Creating Data-Driven Documents using RMarkdown {.unnumbered}
 
-In this tutorial, you will be introduced to RMarkdown using RStudio. Learning RMarkdown is essential for crime analysts in criminal justice professions because it allows you to create dynamic, data-driven documents that seamlessly integrate narrative text, statistical analysis, and data visualizations. One of the standout features of RStudio is its ability to produce "reproducible" documents, where all text, analysis syntax, and outputs are maintained in a single file. This eliminates the need to bounce between multiple programs, reducing the risk of errors, and ensuring that your work is fully transparent and repeatable. For crime analysts working with publicly available datasets or collaborating across agencies, this reproducibility is invaluable---it streamlines workflows, fosters accountability, and allows for easy sharing of both the analysis process and results. Mastering RMarkdown not only enhances the efficiency of your reporting but also elevates the integrity and clarity of your analytical work.
+In this tutorial, you will be introduced to RMarkdown using RStudio. Learning RMarkdown is essential for crime analysts in criminal justice professions because it allows you to create dynamic, data-driven documents that seamlessly integrate narrative text, statistical analysis, and data visualizations. One of the standout features of RStudio is its ability to produce "reproducible" documents, where all text, analysis syntax, and outputs are maintained in a single file. This eliminates the need to bounce between multiple programs, reducing the risk of errors, and ensuring that your work is fully transparent and repeatable. For crime analysts working with publicly available datasets or collaborating across agencies, this reproducibility is invaluable---it streamlines workflows, fosters accountability, and allows for easy sharing of both the analysis process and results. Mastering RMarkdown not only enhances the efficiency of your reporting but also elevates the integrity and clarity of your analytical work. I hope that sells you on the value of it, so let's get started!
+
+<br>
 
 ## Data-Driven Documents
 
@@ -21,7 +23,6 @@ In this tutorial, you will be introduced to RMarkdown using RStudio. Learning RM
 Data-driven documents are formats that combine text and analysis (i.e. data and code). By combining everything in a single file, we promote transparency and reproducibility. For any given table, figure, or model in the document, you should be able to easily discern how it was created, from what data, and what analysis was used.
 
 We will use the [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) format.
-
 
 All of the document formats build from a simple text formatting convention called [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
@@ -121,11 +122,7 @@ If you have problems, you can find some nice tutorials like this one: <https://w
 
 ### Working with Markdown
 
-Markdown is a set of simple conventions for formatting text in R Markdown (RMD) files.
-
-It makes it easy to create professional documents with minimal effort.
-
-Here are the basic formatting rules for Markdown:
+Markdown is a set of simple conventions for formatting text in R Markdown (.RMD) files. It makes it easy to create professional documents with minimal effort. Here are the basic formatting rules for Markdown:
 
 #### Headers
 
@@ -238,6 +235,8 @@ Or you can link directly to an image online using the URL address of the image:
 | Fifth entry      | Sixth entry      | Seventh entry   | Eight entry     |
 | Ninth entry      | Tenth entry      | Eleventh entry  | Twelfth entry   |
 | Thirteenth entry | Fourteenth entry | Fifteenth entry | Sixteenth entry |
+
+<br>
 
 ## Tutorial Summary
 

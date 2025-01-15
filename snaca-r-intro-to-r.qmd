@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 
 # Getting Started with R {.unnumbered}
 
-In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. We will also cover R Studio. Even if you have used R and/or R Studio before (awesome!), I would encourage you to review the tutorial as a refresher.
+In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. We will also cover RStudio. Even if you have used R and/or RStudio before (awesome!), I would encourage you to review the tutorial as a refresher.
 
 As a reminder, this tutorial (and the tutorials throughout this book) will contain R code which is in "code chunks". You will notice a code chunk because the font will change. Code chunks will have text that `looks like this`. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by coping and pasting the `code` and seeing it work on your end.
 
@@ -315,21 +315,21 @@ To load a previously saved workspace, you can either click on the file outside o
 
 Note that only the objects in the workspace are saved, not the text of what you have written.
 
-### **11. (Bonus!) R Studio**
+### **11. (Bonus!) RStudio**
 
 You may be surprised to discover how little functionality is implemented in the standard R GUI (i.e. graphical user interface). The standard R GUI implements only very rudimentary functionality through menus: reading help, managing multiple graphics windows, editing some source and data files, and some other basic functionality. There are no menu items, buttons, or palettes for loading data, transforming data, plotting data, or doing any real work with data. Commercial applications like SAS, SPSS, and Stata include user interfaces with much more functionality.
 
-This was just the nature of working with R until some awesome human beings created R Studio. R Studio is one of several projects to build an easier-to-use GUI for R. It is a free, open-source IDE (i.e. integrated development environment) for working with R. Unlike the standard R GUI, R Studio tiles windows on the screen and puts different windows in different tabs. R Studio can be downloaded from: <http://www.rstudio.com>.
+This was just the nature of working with R until some awesome human beings created RStudio. RStudio is one of several projects to build an easier-to-use GUI for R. It is a free, open-source IDE (i.e. integrated development environment) for working with R. Unlike the standard R GUI, RStudio tiles windows on the screen and puts different windows in different tabs. RStudio can be downloaded from: <http://www.rstudio.com>.
 
-### R Studio workthrough
+### RStudio workthrough
 
-Ok, now open R Studio and let's take a look!
+Ok, now open RStudio and let's take a look!
 
-Now, that you have R Studio up and running, try rerunning some of the code above. You will see that R operates within the R Studio environment. So, you can do everything in R Studio that we did above in R. However, there are more tools available in R Studio.
+Now, that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. So, you can do everything in RStudio that we did above in R. However, there are more tools available in RStudio.
 
 <br>
 
----
+------------------------------------------------------------------------
 
 ## Test Your Knowledge Exercises
 
@@ -355,4 +355,4 @@ Now, that you have R Studio up and running, try rerunning some of the code above
 
 ## Tutorial Summary
 
-This tutorial provides a quick introduction to R and R Studio. R is a versatile and open-source programming language that is well-suited for social network analysis. As we will see, it is one of the best environments for crime analysts to work with social network data and conduct analyses. We began with an overview of R's history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R's extensive documentation, installing and loading packages, and managing the R workspace effectively. We also reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.
+This tutorial provides a quick introduction to R and RStudio. R is a versatile and open-source programming language that is well-suited for social network analysis. As we will see, it is one of the best environments for crime analysts to work with social network data and conduct analyses. We began with an overview of R's history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R's extensive documentation, installing and loading packages, and managing the R workspace effectively. We also reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.
