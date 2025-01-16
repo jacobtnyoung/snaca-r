@@ -287,8 +287,8 @@ Jim    0   0   1    1   0</code></pre>
 </div>
 </div>
 <p>We can refer to specific elements, rows, or columns by using the <code>[</code> and <code>]</code> symbols. This reads as: “object[row,column]”.</p>
-<p>For example, lets look at the relation Jen sends to Tom.</p>
-<p>Recall from th <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html"><strong>Network Data Structures</strong></a> chapter that this is element 1,2 in the matrix (i.e.&nbsp;row one, column two). In R code that is: <code>mat[1,2]</code>.</p>
+<p>For example, let’s look at the relation Jen sends to Tom.</p>
+<p>Recall from the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html"><strong>Network Data Structures</strong></a> chapter that this is element 1,2 in the matrix (i.e.&nbsp;row one, column two). In R code that is: <code>mat[1,2]</code>.</p>
 <p>This command reads as follows: for the object <code>mat</code>, return the value at row 1 column 2. The row number is the first dimension and the column is the second dimension. Remember: “rows by columns”</p>
 <p>We can also call the values for an entire row or column. A single value is called a <em>scalar</em>.</p>
 <div class="cell" data-layout-align="center">
@@ -346,7 +346,7 @@ Leaf   0   1
 Jim    0   1</code></pre>
 </div>
 </div>
-<p>We can also call a group of values that that do not contain specified values by putting a <code>-</code> (i.e.&nbsp;a minus sign) in front of the c function:</p>
+<p>We can also call a group of values that do not contain specified values by putting a <code>-</code> (i.e.&nbsp;a minus sign) in front of the c function:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>     Jen Tom Bob Leaf Jim
@@ -363,19 +363,19 @@ Leaf   0    0   1
 Jim    0    1   0</code></pre>
 </div>
 </div>
-<p>Got it? If yes, then GREAT! If no, hang in there: you got this! If you are a bit hesitant with working with indexing, the best way to get better is to practice. Feel free to work back through the section above to get better at this basic skill we will use a LOT in subsequen tutorials.</p>
+<p>Got it? If yes, then GREAT! If no, hang in there: you got this! If you are a bit hesitant with working with indexing, the best way to get better is to practice. Feel free to work back through the section above to get better at this basic skill we will use a LOT in subsequent tutorials.</p>
 </section>
 <section id="exploring-the-network-package" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-network-package">Exploring the <code>network</code> Package</h2>
-<p>Now that we have our object <code>mat</code> is created, let’s manipulate it into a network and a graph. To do this, we can use the <code>network</code> package. <code>network</code> is a package containing tools to create and modify network objects created by <a href="https://ncasd.org/~buttsc/">Carter Butts</a>. See the <a href="http://cran.r-project.org/web/packages/network/index.html">network page</a> for an overview of package functionality.</p>
+<p>Now that we have created the <code>mat</code> object, let’s manipulate it into a network and a graph. To do this, we can use the <code>network</code> package. <code>network</code> is a package containing tools to create and modify network objects created by <a href="https://ncasd.org/~buttsc/">Carter Butts</a>. See the <a href="http://cran.r-project.org/web/packages/network/index.html">network page</a> for an overview of package functionality.</p>
 <p>First, we need to install the package using: <code>install.packages( "network" )</code>. <em>Note</em>: if you have already installed the package, no <strong>do not</strong> need to reinstall it.</p>
 <p>If it is already installed, we should check to make sure we have the most recent version: <code>update.packages( "network" )</code></p>
 <p>Whenever we start R, we need to load the package because it is not automatically loaded. To do this, use the <code>library()</code> function. <code>library( "network" )</code></p>
 <p>To get a list of the contents of the package, as for help with respect to the package itself use the <code>help()</code> function, but tell R we want help on the particular package: <code>help( package="network" )</code>.</p>
 <section id="working-with-unidirected-binary-networks" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-unidirected-binary-networks">Working with <em>Unidirected</em>, Binary Networks</h3>
-<p>Now that the package is loaded, lets create a new object from our matrix that is a network. In R lingo, we will use the <code>network()</code> function to create an object that is of <em>class</em> <code>network</code>. To use some of the functions, it has to be a specific class.</p>
-<p>Just like you can’t perform calculations on a object that is of class <code>character</code> (e.g.&nbsp;a list of names), the functions in this page are designed to work with a <code>network</code> object.</p>
+<p>Now that the package is loaded, let’s create a new object from our matrix that is a network. In R lingo, we will use the <code>network()</code> function to create an object that is of <em>class</em> <code>network</code>. To use some of the functions, it has to be a specific class.</p>
+<p>Just like you can’t perform calculations on an object that is of class <code>character</code> (e.g.&nbsp;a list of names), the functions in this page are designed to work with a <code>network</code> object.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code>     Jen Tom Bob Leaf Jim
@@ -698,6 +698,7 @@ No edge attributes</code></pre>
 No edge attributes</code></pre>
 </div>
 </div>
+<p><br></p>
 </section>
 </section>
 <section id="test-your-knowledge-exercises" class="level2">

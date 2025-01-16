@@ -260,14 +260,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. We will also cover RStudio. Even if you have used R and/or RStudio before (awesome!), I would encourage you to review the tutorial as a refresher.</p>
-<p>As a reminder, this tutorial (and the tutorials throughout this book) will contain R code which is in “code chunks”. You will notice a code chunk because the font will change. Code chunks will have text that <code>looks like this</code>. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by coping and pasting the <code>code</code> and seeing it work on your end.</p>
+<p>As a reminder, this tutorial (and the tutorials throughout this book) will contain R code which is in “code chunks”. You will notice a code chunk because the font will change. Code chunks will have text that <code>looks like this</code>. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by copying and pasting the <code>code</code> and seeing it work on your end.</p>
 <p><br></p>
 <section id="things-about-r-to-get-you-started" class="level2">
 <h2 class="anchored" data-anchor-id="things-about-r-to-get-you-started"><em>10 Things about R to get you started:</em></h2>
 <section id="what-is-r" class="level3">
 <h3 class="anchored" data-anchor-id="what-is-r"><strong>1. What is R</strong></h3>
 <p>R is a dialect of the <em>S</em> language that was written by John Chambers and others at Bell labs in the 70s. In the 90s, R was developed and made available to the public with the GNU general public license. Importantly, R is <em>free</em>, meaning that you don’t have to pay for it (duh), but it is also <strong>open source</strong>, meaning that you have freedom to use and modify it.</p>
-<p>Think of R as an operating system. Just as Windows allows you to turn on your computer, open a web browser, moved files around, and write a paper using MS Word, R allows you to install and run packages, perform analyses, and manage files while organizing data for crime analyst projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.</p>
+<p>Think of R as an operating system. Just as Windows allows you to turn on your computer, open a web browser, move files around, and write a paper using MS Word, R allows you to install and run packages, perform analyses, and manage files while organizing data for crime analyst projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.</p>
 </section>
 <section id="installing-and-starting" class="level3">
 <h3 class="anchored" data-anchor-id="installing-and-starting"><strong>2. Installing and Starting</strong></h3>
@@ -278,14 +278,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="objects-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="objects-in-r"><strong>3. Objects in R</strong></h3>
 <p>R is a programming language. That means, it allows us to give instructions to our computer to do stuff. We will see that there is a lot of “stuff” we can do. But, the basic orientation to R is understanding <strong>objects</strong>.</p>
-<p>What is an <em>object</em>? Without getting to philosophical, an <em>object</em> is something we create in the R environment. To help, consider this analogy: think of an R session as a box. As we give different instructions to R, we are creating objects and putting them into the box. We are also telling R to do different things to these objects. This may seem unusual at first as it is quite different from data analysis programs like SPSS or Stata which are spreadsheet oriented.</p>
+<p>What is an <em>object</em>? Without getting too philosophical, an <em>object</em> is something we create in the R environment. To help, consider this analogy: think of an R session as a box. As we give different instructions to R, we are creating objects and putting them into the box. We are also telling R to do different things to these objects. This may seem unusual at first as it is quite different from data analysis programs like SPSS or Stata which are spreadsheet oriented.</p>
 <p>We create objects by using the assignment operator: <code>&lt;-</code></p>
 <p>What you type on the right is assigned to what you type on the left. For example:<br>
 <code>y &lt;- 4</code> (we have assigned the value 4 to the object y)<br>
 <code>x &lt;- 6</code> (we have assigned the value 6 to the object x)<br>
 <code>z &lt;- y</code> (we have assigned the value of the object y to the object z, i.e.&nbsp;z = 4)</p>
 <p>After assigning a value to an object, type the name of the object and hit return/enter to see what the value is.</p>
-<p>Objects can start with a letter or a period. <em>But</em>, you cannot name a object starting with a number (or other symbols used by R).<br>
+<p>Objects can start with a letter or a period. <em>But</em>, you cannot name an object starting with a number (or other symbols used by R).<br>
 Some examples:<br>
 <code>the.number.two &lt;- 2</code><br>
 <code>2 &lt;- the.number.two</code><br>
@@ -422,7 +422,7 @@ if we want to create an object of 5 values that starts with 1 and ends with 5, w
 if we want to create an object of 5 values that starts with 1 and ends with 9, we type: <code>seq( from=1, to=9, by=2 )</code>.<br>
 We could also have used the <code>length=</code> argument: <code>seq( from=1, to=10, length=5 )</code>.</p>
 <p>Since R knows that <code>from=</code> or <code>to=</code> or <code>by=</code> or <code>length=</code> are arguments, we do not have to type them in the syntax: <code>seq( 1, 9, 2 )</code> is identical to <code>seq( from=1, to=9, by=2 )</code> (as far as R is concerned).</p>
-<p>For the help function to work, you need to know the exact name of the function. If you don’t know this, but have a fuzzy idea of what it might be are what you want the function to do, you can use the <code>help.search("</code>fuzzy notion<code>")</code> function (or just put <code>??</code> in front of the word).</p>
+<p>For the help function to work, you need to know the exact name of the function. If you don’t know this, but have a fuzzy idea of what it might be or what you want the function to do, you can use the <code>help.search("</code>fuzzy notion<code>")</code> function (or just put <code>??</code> in front of the word).</p>
 <p>For example, say you want to calculate the standard deviation for an object, but do not know the function name. Try: <code>help.search( "standarddeviation" )</code> or <code>??standarddeviation</code> (note the absence of a space). This returns the list of help topics that contain the phrase. We see that the standard deviation function is called <code>sd()</code>.</p>
 </section>
 <section id="packages-and-the-install.packages-and-library-functions" class="level3">
@@ -435,7 +435,7 @@ We could also have used the <code>length=</code> argument: <code>seq( from=1, to
 <p>Note that each time you open R you have to load any packages that you manually loaded using the <code>install.packages()</code> function. In other words, if we closed R and then reopened it, we would need to type <code>library( "sna" )</code> to load the functions in <code>sna</code>. Note that we <em>do not</em> have to reinstall the package using <code>install.packages()</code>, we just have to load the library.</p>
 <p>If you have installed the package, but have not loaded it, R will return an error saying that a particular function is not found.</p>
 <p>For example, the function <code>rgraph()</code> in the package <code>sna</code> (which is a set of tools for working with social networks) is used to create random graphs. Type <code>?rgraph</code> and you get an error stating that there is no documentation available. This is because the <code>sna</code> library has not been loaded (even if you have installed <code>sna</code>). Typing <code>install.packages( "sna" )</code> and <code>library( sna )</code> prior to <code>?rgraph()</code> will solve this problem.</p>
-<p>A final point on loading packages. Since anyone can write and contributes packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.</p>
+<p>A final point on loading packages. Since anyone can write and contribute packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.</p>
 <p>For example, the <code>sna</code> package and the <code>tnet</code> package both have a function called <code>betweenness</code>, but the functions are programmed differently. When you load <code>tnet</code> after loading <code>sna</code> (or <em>visa versa</em>), R will give you a warning that an “object is being masked”. That means the functionality of <code>betweenness</code> in <code>sna</code> is no longer used. Let’s check it out:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>( <span class="st">"sna"</span> )</span>
@@ -476,9 +476,8 @@ You can set the working directory also by typing: <code>setwd("</code>your desir
 <section id="rstudio-workthrough" class="level3">
 <h3 class="anchored" data-anchor-id="rstudio-workthrough">RStudio workthrough</h3>
 <p>Ok, now open RStudio and let’s take a look!</p>
-<p>Now, that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. So, you can do everything in RStudio that we did above in R. However, there are more tools available in RStudio.</p>
+<p>Now that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. So, you can do everything in RStudio that we did above in R. However, there are more tools available in RStudio.</p>
 <p><br></p>
-<hr>
 </section>
 </section>
 <section id="test-your-knowledge-exercises" class="level2">

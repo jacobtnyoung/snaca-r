@@ -253,7 +253,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Let’s be honest, network analysis is awesome. Where does that awesomeness come from? One sure reason is visualization! There is nothing like an beautiful network visualization that conveys lots of information and is aesthetically pleasing. Right?</p>
+<p>Let’s be honest, network analysis is awesome. Where does that awesomeness come from? One sure reason is visualization! There is nothing like a beautiful network visualization that conveys lots of information and is aesthetically pleasing. Right?</p>
 <p>Not convinced? Examine the plot below. Without me giving you any information about this figure (which is from James Moody and Peter Mucha’s paper, <a href="https://www.cambridge.org/core/journals/network-science/article/portrait-of-political-party-polarization1/F4D2FC8C75B3A160CE68BC3A4A4F6736#article"><em>Portrait of Political Party Polarization</em></a>), what does it tell you?</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -549,7 +549,7 @@ Jim    0   0   1    1   0</code></pre>
 <li><p>manually turn off the display of arrows using the <code>usearrows=</code> argument, <code>gplot( net.u, usearrows = FALSE )</code></p></li>
 <li><p>or indicate that the object to be plotted is a undirected graph or graph, <code>gplot( net.u, gmode = "graph" )</code></p></li>
 </ul>
-<p>The <code>gplot()</code> function has a number of arguments that can be used to work try and better display the information contained in the network.</p>
+<p>The <code>gplot()</code> function has a number of arguments that can be used to better display the information contained in the network.</p>
 <p>For example, we can add labels to the vertices using the <code>network.vertex.names()</code> function.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
@@ -569,7 +569,7 @@ Jim    0   0   1    1   0</code></pre>
 <ul>
 <li><code>gplot( net.u, gmode = "graph",  label = c( "Jen", "Tom", "Bob", "Leaf", "Jim" ) )</code></li>
 </ul>
-<p>Or we could read them in as an object:</p>
+<p>Or we could define them as an object:</p>
 <ul>
 <li><p><code>names &lt;- c( "Jen", "Tom", "Bob", "Leaf", "Jim" )</code></p></li>
 <li><p>add to the plot using <code>gplot( net.u, gmode = "graph", label = names )</code></p></li>
@@ -856,6 +856,7 @@ Jim    0   0   1    1   0</code></pre>
 </div>
 </div>
 </div>
+<p><br></p>
 </section>
 <section id="test-your-knowledge-exercises" class="level2">
 <h2 class="anchored" data-anchor-id="test-your-knowledge-exercises">Test Your Knowledge Exercises</h2>
@@ -864,7 +865,7 @@ Jim    0   0   1    1   0</code></pre>
 <li>Modify the <code>Moreno</code> visualization to color nodes by gender. How does this addition change your interpretation of the network structure?</li>
 <li>When plotting an undirected network, why might <code>gplot()</code> still display arrows? How can this be resolved?</li>
 <li>Experiment with adding labels to a network plot. What are some ways to customize label appearance? Why might label size or color be important?</li>
-<li>Use the <code>rescale()</code> function to adjust node sizes based on a vertex attribute. Try some different values. How do the difference values influence your understanding of the network?</li>
+<li>Use the <code>rescale()</code> function to adjust node sizes based on a vertex attribute. Try some different values. How do the different values influence your understanding of the network?</li>
 <li>Explain why saving node coordinates using the <code>coord=</code> argument can be useful. Demonstrate how to save and reuse coordinates in a network plot.</li>
 <li>Describe the concept of layering in network visualization. Create a plot that layers at least three attributes (e.g., node size, color, edge attributes).</li>
 <li>Compare a basic network plot of the PINS dataset with one that incorporates multiple attributes. What additional insights does the more detailed visualization provide?</li>
