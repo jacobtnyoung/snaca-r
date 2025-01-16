@@ -481,7 +481,7 @@ o_cent_d <- centralization( d_mat, degree, mode="digraph", cmode="outdegree" )
 
 ## Degree Centrality in PINS *Get Along With* and *Power/Influence* Networks
 
-The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
+The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
 
 -   The *get along with network* was created by asking individuals whom they "get along with" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 
@@ -552,7 +552,7 @@ gplot(
 
 ```
 
-Woops! Let's try that again AFTER rescaling the degree. We can use the `rescale()` function to do this.
+Whoops! Let's try that again AFTER rescaling the degree. We can use the `rescale()` function to do this.
 
 ```{r}
 
@@ -690,6 +690,8 @@ A few questions:
 -   What do we see in the plot?
 -   What does the indegree centralization score of `r round( centralization( pi_net_d, degree, mode="digraph", cmode = "indegree" ), 2 )` indicate?
 -   What does the outdegree centralization score of `r round( centralization( pi_net_d, degree, mode="digraph", cmode = "outdegree" ), 2 )` indicate?
+
+<br>
 
 ## Test Your Knowledge Excercises
 

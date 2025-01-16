@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. We will also cover RStudio. Even if you have used R and/or RStudio before (awesome!), I would encourage you to review the tutorial as a refresher.
 
-As a reminder, this tutorial (and the tutorials throughout this book) will contain R code which is in "code chunks". You will notice a code chunk because the font will change. Code chunks will have text that `looks like this`. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by coping and pasting the `code` and seeing it work on your end.
+As a reminder, this tutorial (and the tutorials throughout this book) will contain R code which is in "code chunks". You will notice a code chunk because the font will change. Code chunks will have text that `looks like this`. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by copying and pasting the `code` and seeing it work on your end.
 
 <br>
 
@@ -24,7 +24,7 @@ As a reminder, this tutorial (and the tutorials throughout this book) will conta
 
 R is a dialect of the *S* language that was written by John Chambers and others at Bell labs in the 70s. In the 90s, R was developed and made available to the public with the GNU general public license. Importantly, R is *free*, meaning that you don't have to pay for it (duh), but it is also **open source**, meaning that you have freedom to use and modify it.
 
-Think of R as an operating system. Just as Windows allows you to turn on your computer, open a web browser, moved files around, and write a paper using MS Word, R allows you to install and run packages, perform analyses, and manage files while organizing data for crime analyst projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.
+Think of R as an operating system. Just as Windows allows you to turn on your computer, open a web browser, move files around, and write a paper using MS Word, R allows you to install and run packages, perform analyses, and manage files while organizing data for crime analyst projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.
 
 ### **2. Installing and Starting**
 
@@ -38,7 +38,7 @@ This prompt is the fundamental entry point for communicating with R. We type exp
 
 R is a programming language. That means, it allows us to give instructions to our computer to do stuff. We will see that there is a lot of "stuff" we can do. But, the basic orientation to R is understanding **objects**.
 
-What is an *object*? Without getting to philosophical, an *object* is something we create in the R environment. To help, consider this analogy: think of an R session as a box. As we give different instructions to R, we are creating objects and putting them into the box. We are also telling R to do different things to these objects. This may seem unusual at first as it is quite different from data analysis programs like SPSS or Stata which are spreadsheet oriented.
+What is an *object*? Without getting too philosophical, an *object* is something we create in the R environment. To help, consider this analogy: think of an R session as a box. As we give different instructions to R, we are creating objects and putting them into the box. We are also telling R to do different things to these objects. This may seem unusual at first as it is quite different from data analysis programs like SPSS or Stata which are spreadsheet oriented.
 
 We create objects by using the assignment operator: `<-`
 
@@ -49,7 +49,7 @@ What you type on the right is assigned to what you type on the left. For example
 
 After assigning a value to an object, type the name of the object and hit return/enter to see what the value is.
 
-Objects can start with a letter or a period. *But*, you cannot name a object starting with a number (or other symbols used by R).\
+Objects can start with a letter or a period. *But*, you cannot name an object starting with a number (or other symbols used by R).\
 Some examples:\
 `the.number.two <- 2`\
 `2 <- the.number.two`\
@@ -240,7 +240,7 @@ We could also have used the `length=` argument: `seq( from=1, to=10, length=5 )`
 
 Since R knows that `from=` or `to=` or `by=` or `length=` are arguments, we do not have to type them in the syntax: `seq( 1, 9, 2 )` is identical to `seq( from=1, to=9, by=2 )` (as far as R is concerned).
 
-For the help function to work, you need to know the exact name of the function. If you don't know this, but have a fuzzy idea of what it might be are what you want the function to do, you can use the `help.search("`fuzzy notion`")` function (or just put `??` in front of the word).
+For the help function to work, you need to know the exact name of the function. If you don't know this, but have a fuzzy idea of what it might be or what you want the function to do, you can use the `help.search("`fuzzy notion`")` function (or just put `??` in front of the word).
 
 For example, say you want to calculate the standard deviation for an object, but do not know the function name. Try: `help.search( "standarddeviation" )` or `??standarddeviation` (note the absence of a space). This returns the list of help topics that contain the phrase. We see that the standard deviation function is called `sd()`.
 
@@ -262,7 +262,7 @@ If you have installed the package, but have not loaded it, R will return an erro
 
 For example, the function `rgraph()` in the package `sna` (which is a set of tools for working with social networks) is used to create random graphs. Type `?rgraph` and you get an error stating that there is no documentation available. This is because the `sna` library has not been loaded (even if you have installed `sna`). Typing `install.packages( "sna" )` and `library( sna )` prior to `?rgraph()` will solve this problem.
 
-A final point on loading packages. Since anyone can write and contributes packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.
+A final point on loading packages. Since anyone can write and contribute packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.
 
 For example, the `sna` package and the `tnet` package both have a function called `betweenness`, but the functions are programmed differently. When you load `tnet` after loading `sna` (or *visa versa*), R will give you a warning that an "object is being masked". That means the functionality of `betweenness` in `sna` is no longer used. Let's check it out:
 
@@ -325,11 +325,9 @@ This was just the nature of working with R until some awesome human beings creat
 
 Ok, now open RStudio and let's take a look!
 
-Now, that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. So, you can do everything in RStudio that we did above in R. However, there are more tools available in RStudio.
+Now that you have RStudio up and running, try rerunning some of the code above. You will see that R operates within the RStudio environment. So, you can do everything in RStudio that we did above in R. However, there are more tools available in RStudio.
 
 <br>
-
-------------------------------------------------------------------------
 
 ## Test Your Knowledge Exercises
 

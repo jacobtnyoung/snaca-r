@@ -99,9 +99,9 @@ mat
 
 We can refer to specific elements, rows, or columns by using the `[` and `]` symbols. This reads as: "object\[row,column\]".
 
-For example, lets look at the relation Jen sends to Tom.
+For example, let's look at the relation Jen sends to Tom.
 
-Recall from th [**Network Data Structures**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html) chapter that this is element 1,2 in the matrix (i.e. row one, column two). In R code that is: `mat[1,2]`.
+Recall from the [**Network Data Structures**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html) chapter that this is element 1,2 in the matrix (i.e. row one, column two). In R code that is: `mat[1,2]`.
 
 This command reads as follows: for the object `mat`, return the value at row 1 column 2. The row number is the first dimension and the column is the second dimension. Remember: "rows by columns"
 
@@ -163,7 +163,7 @@ mat[,c(1,3)]
 
 ```
 
-We can also call a group of values that that do not contain specified values by putting a `-` (i.e. a minus sign) in front of the c function:
+We can also call a group of values that do not contain specified values by putting a `-` (i.e. a minus sign) in front of the c function:
 
 ```{r}
 
@@ -175,11 +175,11 @@ mat[,-c(1,3)]
 
 ```
 
-Got it? If yes, then GREAT! If no, hang in there: you got this! If you are a bit hesitant with working with indexing, the best way to get better is to practice. Feel free to work back through the section above to get better at this basic skill we will use a LOT in subsequen tutorials.
+Got it? If yes, then GREAT! If no, hang in there: you got this! If you are a bit hesitant with working with indexing, the best way to get better is to practice. Feel free to work back through the section above to get better at this basic skill we will use a LOT in subsequent tutorials.
 
 ## Exploring the `network` Package
 
-Now that we have our object `mat` is created, let's manipulate it into a network and a graph. To do this, we can use the `network` package. `network` is a package containing tools to create and modify network objects created by [Carter Butts](https://ncasd.org/~buttsc/). See the [network page](http://cran.r-project.org/web/packages/network/index.html) for an overview of package functionality.
+Now that we have created the `mat` object, let's manipulate it into a network and a graph. To do this, we can use the `network` package. `network` is a package containing tools to create and modify network objects created by [Carter Butts](https://ncasd.org/~buttsc/). See the [network page](http://cran.r-project.org/web/packages/network/index.html) for an overview of package functionality.
 
 First, we need to install the package using: `install.packages( "network" )`. *Note*: if you have already installed the package, no **do not** need to reinstall it.
 
@@ -198,9 +198,9 @@ To get a list of the contents of the package, as for help with respect to the pa
 
 ### Working with *Unidirected*, Binary Networks
 
-Now that the package is loaded, lets create a new object from our matrix that is a network. In R lingo, we will use the `network()` function to create an object that is of *class* `network`. To use some of the functions, it has to be a specific class.
+Now that the package is loaded, let's create a new object from our matrix that is a network. In R lingo, we will use the `network()` function to create an object that is of *class* `network`. To use some of the functions, it has to be a specific class.
 
-Just like you can't perform calculations on a object that is of class `character` (e.g. a list of names), the functions in this page are designed to work with a `network` object.
+Just like you can't perform calculations on an object that is of class `character` (e.g. a list of names), the functions in this page are designed to work with a `network` object.
 
 ```{r}
 
@@ -246,7 +246,7 @@ We could also enter the data as an edgelist using the `matrix.type =` argument. 
 
 ```{r}
 
-# for example, lets make an edgelist called edge
+# for example, let's make an edgelist called edge
 # it will be a matrix of 5 rows and we are reading off by row
 edge <- matrix(
   c( "Jen","Tom","Tom","Bob","Bob","Leaf","Bob","Jim","Leaf","Jim" ),
@@ -475,20 +475,22 @@ net_d
 
 ```
 
+<br>
+
 ## Test Your Knowledge Exercises
 
--   Create a 5x5 adjacency matrix using the `matrix()` function. 
+-   Create a 5x5 adjacency matrix using the `matrix()` function.
     -   What happens if the number of elements doesn't match the dimensions of the matrix?
-    -   Assign meaningful row and column names to the adjacency matrix using the `rownames()` and `colnames()` functions. 
+    -   Assign meaningful row and column names to the adjacency matrix using the `rownames()` and `colnames()` functions.
     -   How can you reference a specific row or column by name?
--   Use the `[` and `]` symbols to extract specific elements, rows, or columns from a matrix.  
--   Coerce an adjacency matrix into a `network` object using the `as.network()` function. 
-    -   What argument must you modify to create an undirected network?  
--   Create an edgelist for a directed network and convert it to a `network` object. How does this process differ from working with adjacency matrices?  
--   Summarize a `network` object using the `summary()` function. 
-    -   What insights can you gain from this output?  
--   Explain the difference between directed and undirected networks in the context of the `as.network()` function. 
-    -   What specific arguments are used to define these properties?  
+-   Use the `[` and `]` symbols to extract specific elements, rows, or columns from a matrix.\
+-   Coerce an adjacency matrix into a `network` object using the `as.network()` function.
+    -   What argument must you modify to create an undirected network?\
+-   Create an edgelist for a directed network and convert it to a `network` object. How does this process differ from working with adjacency matrices?\
+-   Summarize a `network` object using the `summary()` function.
+    -   What insights can you gain from this output?\
+-   Explain the difference between directed and undirected networks in the context of the `as.network()` function.
+    -   What specific arguments are used to define these properties?
 
 ## Tutorial Summary
 

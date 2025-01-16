@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 
 # Basics of Network Visualization {.unnumbered}
 
-Let's be honest, network analysis is awesome. Where does that awesomeness come from? One sure reason is visualization! There is nothing like an beautiful network visualization that conveys lots of information and is aesthetically pleasing. Right?
+Let's be honest, network analysis is awesome. Where does that awesomeness come from? One sure reason is visualization! There is nothing like a beautiful network visualization that conveys lots of information and is aesthetically pleasing. Right?
 
 Not convinced? Examine the plot below. Without me giving you any information about this figure (which is from James Moody and Peter Mucha's paper, [*Portrait of Political Party Polarization*](https://www.cambridge.org/core/journals/network-science/article/portrait-of-political-party-polarization1/F4D2FC8C75B3A160CE68BC3A4A4F6736#article)), what does it tell you?
 
@@ -245,7 +245,7 @@ That is because `gplot()` assumes a directed network. We can see this in the hel
 
 -   or indicate that the object to be plotted is a undirected graph or graph, `gplot( net.u, gmode = "graph" )`
 
-The `gplot()` function has a number of arguments that can be used to work try and better display the information contained in the network.
+The `gplot()` function has a number of arguments that can be used to better display the information contained in the network.
 
 For example, we can add labels to the vertices using the `network.vertex.names()` function.
 
@@ -263,7 +263,7 @@ Alternatively, we could add in a string of names for the label:
 
 -   `gplot( net.u, gmode = "graph",  label = c( "Jen", "Tom", "Bob", "Leaf", "Jim" ) )`
 
-Or we could read them in as an object:
+Or we could define them as an object:
 
 -   `names <- c( "Jen", "Tom", "Bob", "Leaf", "Jim" )`
 
@@ -615,13 +615,15 @@ gplot( PI_net,
 
 ```
 
+<br>
+
 ## Test Your Knowledge Exercises
 
 -   Using the `Moreno` dataset, compare the circle layout and the Fruchterman-Reingold layout. Which layout better adheres to the aesthetic principles discussed above? Why?
 -   Modify the `Moreno` visualization to color nodes by gender. How does this addition change your interpretation of the network structure?
 -   When plotting an undirected network, why might `gplot()` still display arrows? How can this be resolved?
 -   Experiment with adding labels to a network plot. What are some ways to customize label appearance? Why might label size or color be important?
--   Use the `rescale()` function to adjust node sizes based on a vertex attribute. Try some different values. How do the difference values influence your understanding of the network?
+-   Use the `rescale()` function to adjust node sizes based on a vertex attribute. Try some different values. How do the different values influence your understanding of the network?
 -   Explain why saving node coordinates using the `coord=` argument can be useful. Demonstrate how to save and reuse coordinates in a network plot.
 -   Describe the concept of layering in network visualization. Create a plot that layers at least three attributes (e.g., node size, color, edge attributes).
 -   Compare a basic network plot of the PINS dataset with one that incorporates multiple attributes. What additional insights does the more detailed visualization provide?
