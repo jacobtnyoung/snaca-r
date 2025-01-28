@@ -168,7 +168,7 @@ gplot(
 
 ```
 
-This setup, where we define the actor properties and event properties and combine them into a vector will be used for any attribute we want to attach to the nodes. We will work through more examples below illustrating this point.
+This setup, where we define the actor properties and event properties and combine them into a vector, will be used for any attribute we want to attach to the nodes. We will work through more examples below illustrating this point.
 
 ## Structural Properties of Bipartite Graphs/Two-Mode Networks
 
@@ -211,7 +211,7 @@ For a bipartite graph there are *two* degree distributions:
 
 -   The distribution of ties in the second mode
 
-We can calculate the degree centrality scores for each node in each corresponding vertex set by taking the *row* sum for *N* nodes in the first mode and taking the *column* sum for *M* nodes in the second mode. We can do so using the `rowSums()` and `colSums()` functions, recspectively.
+We can calculate the degree centrality scores for each node in each corresponding vertex set by taking the *row* sum for *N* nodes in the first mode and taking the *column* sum for *M* nodes in the second mode. We can do so using the `rowSums()` and `colSums()` functions, respectively.
 
 ```{r}
 
@@ -303,9 +303,9 @@ gplot(
 
 ## Structural Properties of [Young & Ready (2015)](https://journals.sagepub.com/doi/10.1177/1043986214553380) Police Officer Network
 
-Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
+Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers' views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
 
-Let's import the the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.
+Let's import the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.
 
 ```{r}
 
@@ -463,7 +463,7 @@ mean( mean_incident_deg )
 
 *What is the interpretation of the mean degree for each node set?*
 
-## Test Your Knowledge Excercises
+## Test Your Knowledge Exercises
 
 -   Explain the difference between bipartite graphs and unipartite graphs. Provide examples of contexts where each might be used.
 -   What is the purpose of the `bipartite` argument in the `as.network()` function? How does it relate to the dimensions of the adjacency matrix?
@@ -477,4 +477,4 @@ mean( mean_incident_deg )
 
 ## Tutorial Summary
 
-This tutorial explored bipartite graphs, or two-mode networks, as a foundational tool for representing relationships between two distinct node sets, such as individuals and events. Crime analysts often work with these graph structures, so we learned in this tutorial how to construct these networks through adjacency matrices, transform them into `network` objects, and visualize them using the `gplot()` function from the `sna` package. We also reviewed several propoerties of these networks, such as calculating network density and degree centrality.
+This tutorial explored bipartite graphs, or two-mode networks, as a foundational tool for representing relationships between two distinct node sets, such as individuals and events. Crime analysts often work with these graph structures, so we learned in this tutorial how to construct these networks through adjacency matrices, transform them into `network` objects, and visualize them using the `gplot()` function from the `sna` package. We also reviewed several properties of these networks, such as calculating network density and degree centrality.

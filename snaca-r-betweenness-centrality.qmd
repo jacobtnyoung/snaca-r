@@ -40,7 +40,7 @@ The difference here is that we are dividing by $(g-1)(g-2)/2$ which is the numbe
 
 ### Using the `sna` Package
 
-Let's go ahead and set up a simple matrix and see how we use can calculate betweenness centrality using the `betweenness()` function in the `sna` package:
+Let's go ahead and set up a simple matrix and see how we can calculate betweenness centrality using the `betweenness()` function in the `sna` package:
 
 ```{r}
 
@@ -218,7 +218,7 @@ Bonus question: *Which one is larger? What does the difference in the values mea
 
 ## Betweenness Centrality in PINS Get Along With Network
 
-The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
+The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
 
 -   The *get along with network* was created by asking individuals whom they "get along with" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 
@@ -431,7 +431,7 @@ A few questions:
 -   What do we see in the plot?
 -   What does the closeness centralization score of `r round( centralization( pi_mat, betweenness, mode="digraph" ), 4 )` indicate?
 
-## Test Your Knowledge Excercises
+## Test Your Knowledge Exercises
 
 -   Define betweenness centrality and explain its importance in network analysis.
 -   Modify the matrix `u_mat` to include a new node and recalculate the betweenness centrality scores. How do the scores change?
