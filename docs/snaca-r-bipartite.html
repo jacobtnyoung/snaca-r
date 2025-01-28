@@ -253,7 +253,7 @@ div.csl-indent {
   <li><a href="#plotting-the-network" id="toc-plotting-the-network" class="nav-link" data-scroll-target="#plotting-the-network">Plotting the Network</a></li>
   <li><a href="#structural-properties-of-the-network" id="toc-structural-properties-of-the-network" class="nav-link" data-scroll-target="#structural-properties-of-the-network">Structural Properties of the Network</a></li>
   </ul></li>
-  <li><a href="#test-your-knowledge-excercises" id="toc-test-your-knowledge-excercises" class="nav-link" data-scroll-target="#test-your-knowledge-excercises">Test Your Knowledge Excercises</a></li>
+  <li><a href="#test-your-knowledge-exercises" id="toc-test-your-knowledge-exercises" class="nav-link" data-scroll-target="#test-your-knowledge-exercises">Test Your Knowledge Exercises</a></li>
   <li><a href="#tutorial-summary" id="toc-tutorial-summary" class="nav-link" data-scroll-target="#tutorial-summary">Tutorial Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -435,7 +435,7 @@ No edge attributes</code></pre>
 <p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This setup, where we define the actor properties and event properties and combine them into a vector will be used for any attribute we want to attach to the nodes. We will work through more examples below illustrating this point.</p>
+<p>This setup, where we define the actor properties and event properties and combine them into a vector, will be used for any attribute we want to attach to the nodes. We will work through more examples below illustrating this point.</p>
 </section>
 </section>
 <section id="structural-properties-of-bipartite-graphstwo-mode-networks" class="level2">
@@ -474,7 +474,7 @@ No edge attributes</code></pre>
 <li><p>The distribution of ties in the first mode</p></li>
 <li><p>The distribution of ties in the second mode</p></li>
 </ul>
-<p>We can calculate the degree centrality scores for each node in each corresponding vertex set by taking the <em>row</em> sum for <em>N</em> nodes in the first mode and taking the <em>column</em> sum for <em>M</em> nodes in the second mode. We can do so using the <code>rowSums()</code> and <code>colSums()</code> functions, recspectively.</p>
+<p>We can calculate the degree centrality scores for each node in each corresponding vertex set by taking the <em>row</em> sum for <em>N</em> nodes in the first mode and taking the <em>column</em> sum for <em>M</em> nodes in the second mode. We can do so using the <code>rowSums()</code> and <code>colSums()</code> functions, respectively.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># raw scores for actors</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>actor_deg <span class="ot">&lt;-</span> <span class="fu">rowSums</span>( bipartite_example )</span>
@@ -573,8 +573,8 @@ No edge attributes</code></pre>
 </section>
 <section id="structural-properties-of-young-ready-2015-police-officer-network" class="level2">
 <h2 class="anchored" data-anchor-id="structural-properties-of-young-ready-2015-police-officer-network">Structural Properties of <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready (2015)</a> Police Officer Network</h2>
-<p>Now, let’s work with a real example. As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
-<p>Let’s import the the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.</p>
+<p>Now, let’s work with a real example. As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers’ views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
+<p>Let’s import the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the location for the file</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="st">"https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-officer-events-adj.csv"</span></span>
@@ -738,8 +738,8 @@ No edge attributes</code></pre>
 </section>
 </section>
 </section>
-<section id="test-your-knowledge-excercises" class="level2">
-<h2 class="anchored" data-anchor-id="test-your-knowledge-excercises">Test Your Knowledge Excercises</h2>
+<section id="test-your-knowledge-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge-exercises">Test Your Knowledge Exercises</h2>
 <ul>
 <li>Explain the difference between bipartite graphs and unipartite graphs. Provide examples of contexts where each might be used.</li>
 <li>What is the purpose of the <code>bipartite</code> argument in the <code>as.network()</code> function? How does it relate to the dimensions of the adjacency matrix?</li>
@@ -754,7 +754,7 @@ No edge attributes</code></pre>
 </section>
 <section id="tutorial-summary" class="level2">
 <h2 class="anchored" data-anchor-id="tutorial-summary">Tutorial Summary</h2>
-<p>This tutorial explored bipartite graphs, or two-mode networks, as a foundational tool for representing relationships between two distinct node sets, such as individuals and events. Crime analysts often work with these graph structures, so we learned in this tutorial how to construct these networks through adjacency matrices, transform them into <code>network</code> objects, and visualize them using the <code>gplot()</code> function from the <code>sna</code> package. We also reviewed several propoerties of these networks, such as calculating network density and degree centrality.</p>
+<p>This tutorial explored bipartite graphs, or two-mode networks, as a foundational tool for representing relationships between two distinct node sets, such as individuals and events. Crime analysts often work with these graph structures, so we learned in this tutorial how to construct these networks through adjacency matrices, transform them into <code>network</code> objects, and visualize them using the <code>gplot()</code> function from the <code>sna</code> package. We also reviewed several properties of these networks, such as calculating network density and degree centrality.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

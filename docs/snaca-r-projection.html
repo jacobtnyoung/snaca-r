@@ -252,7 +252,7 @@ div.csl-indent {
   <li><a href="#create-the-projections" id="toc-create-the-projections" class="nav-link" data-scroll-target="#create-the-projections">Create the Projections</a></li>
   <li><a href="#using-the-weights-in-the-plot" id="toc-using-the-weights-in-the-plot" class="nav-link" data-scroll-target="#using-the-weights-in-the-plot">Using the Weights in the Plot</a></li>
   </ul></li>
-  <li><a href="#test-your-knowledge-excercises" id="toc-test-your-knowledge-excercises" class="nav-link" data-scroll-target="#test-your-knowledge-excercises">Test Your Knowledge Excercises</a></li>
+  <li><a href="#test-your-knowledge-exercises" id="toc-test-your-knowledge-exercises" class="nav-link" data-scroll-target="#test-your-knowledge-exercises">Test Your Knowledge Exercises</a></li>
   <li><a href="#tutorial-summary" id="toc-tutorial-summary" class="nav-link" data-scroll-target="#tutorial-summary">Tutorial Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -318,7 +318,7 @@ F 0 0 1 0 1</code></pre>
 </div>
 <section id="transposition" class="level3">
 <h3 class="anchored" data-anchor-id="transposition">Transposition</h3>
-<p>In R, the <code>t()</code> function, or <code>transpose()</code> returns the transposition of a matrix. To see the the help on the <code>transpose()</code> function, just use <code>?t</code> to pull up the help page.</p>
+<p>In R, the <code>t()</code> function, or <code>transpose()</code> returns the transposition of a matrix. To see the help on the <code>transpose()</code> function, just use <code>?t</code> to pull up the help page.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the transpose of our example</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>( A )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -531,7 +531,7 @@ F 0 0 0 2 1 2</code></pre>
 </section>
 <section id="projecting-young-readys-2015-police-officer-network" class="level2">
 <h2 class="anchored" data-anchor-id="projecting-young-readys-2015-police-officer-network">Projecting <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready’s (2015)</a> Police Officer Network</h2>
-<p>Now, let’s work with a real example. As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
+<p>Now, let’s work with a real example. As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers’ views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
 <p>Let’s import the the matrix, create a network, assign an attribute, and plot it. Then, we will work create the projection.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the location for the file</span></span>
@@ -729,8 +729,8 @@ F 0 0 0 2 1 2</code></pre>
 </section>
 </section>
 </section>
-<section id="test-your-knowledge-excercises" class="level2">
-<h2 class="anchored" data-anchor-id="test-your-knowledge-excercises">Test Your Knowledge Excercises</h2>
+<section id="test-your-knowledge-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge-exercises">Test Your Knowledge Exercises</h2>
 <ul>
 <li>Explain the process of projection in the context of bipartite graphs. Why is it useful for crime analysts?</li>
 <li>Using R, describe the difference between the <code>t()</code> function and <code>%*%</code> operator. Provide an example illustrating their use.</li>

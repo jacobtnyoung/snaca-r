@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#get-along-with-network-undirected-network" id="toc-get-along-with-network-undirected-network" class="nav-link" data-scroll-target="#get-along-with-network-undirected-network">Get Along with Network (Undirected Network)</a></li>
   <li><a href="#power-and-influence-network-directed-network" id="toc-power-and-influence-network-directed-network" class="nav-link" data-scroll-target="#power-and-influence-network-directed-network">Power and Influence Network (Directed Network)</a></li>
   </ul></li>
-  <li><a href="#test-your-knowledge-excercises" id="toc-test-your-knowledge-excercises" class="nav-link" data-scroll-target="#test-your-knowledge-excercises">Test Your Knowledge Excercises</a></li>
+  <li><a href="#test-your-knowledge-exercises" id="toc-test-your-knowledge-exercises" class="nav-link" data-scroll-target="#test-your-knowledge-exercises">Test Your Knowledge Exercises</a></li>
   <li><a href="#tutorial-summary" id="toc-tutorial-summary" class="nav-link" data-scroll-target="#tutorial-summary">Tutorial Summary</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The difference here is that we are dividing by <span class="math inline">\((g-1)(g-2)/2\)</span> which is the number of pairs of actors not including <em>i</em>.</p>
 <section id="using-the-sna-package" class="level3">
 <h3 class="anchored" data-anchor-id="using-the-sna-package">Using the <code>sna</code> Package</h3>
-<p>Let’s go ahead and set up a simple matrix and see how we use can calculate betweenness centrality using the <code>betweenness()</code> function in the <code>sna</code> package:</p>
+<p>Let’s go ahead and set up a simple matrix and see how we can calculate betweenness centrality using the <code>betweenness()</code> function in the <code>sna</code> package:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up the matrix</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>u_mat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="betweenness-centrality-in-pins-get-along-with-network" class="level2">
 <h2 class="anchored" data-anchor-id="betweenness-centrality-in-pins-get-along-with-network">Betweenness Centrality in PINS Get Along With Network</h2>
-<p>The <a href="https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/"><em>Prison Inmate Networks Study (PINS)</em></a> examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collection sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:</p>
+<p>The <a href="https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/"><em>Prison Inmate Networks Study (PINS)</em></a> examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:</p>
 <ul>
 <li><p>The <em>get along with network</em> was created by asking individuals whom they “get along with” on the unit. We can think of this as “friends” in a prison setting. (People don’t really have “friends” in prison, but there are people they “get along with”)</p></li>
 <li><p>The <em>power and influence network</em> was created by asking individuals whom they believed was “powerful and influential” on the unit.</p></li>
@@ -752,8 +752,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="test-your-knowledge-excercises" class="level2">
-<h2 class="anchored" data-anchor-id="test-your-knowledge-excercises">Test Your Knowledge Excercises</h2>
+<section id="test-your-knowledge-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="test-your-knowledge-exercises">Test Your Knowledge Exercises</h2>
 <ul>
 <li>Define betweenness centrality and explain its importance in network analysis.</li>
 <li>Modify the matrix <code>u_mat</code> to include a new node and recalculate the betweenness centrality scores. How do the scores change?</li>
