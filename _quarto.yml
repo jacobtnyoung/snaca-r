@@ -29,6 +29,7 @@ book:
     - snaca-r-betweenness-centrality.qmd
     - snaca-r-bipartite.qmd
     - snaca-r-projection.qmd
+    - snaca-r-conclusion.qmd
     - references.qmd
 
 bibliography: references.bib
