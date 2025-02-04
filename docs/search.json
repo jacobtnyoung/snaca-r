@@ -249,7 +249,7 @@
     "href": "snaca-r-betweenness-centrality.html#tutorial-summary",
     "title": "Betweenness Centrality and Centralization",
     "section": "Tutorial Summary",
-    "text": "Tutorial Summary\nThis tutorial introduced the concept of betweenness centrality and centralization and how it can be calculated using the betweenness() function in the sna package in R., key measures in social network analysis used to identify important nodes in a network based on their intermediary roles. We reviewed this calculation for both undirected and directed networks, illustrating how directionality influences betweenness scores and centralization metrics.These exercises demonstrated how betweenness centrality and centralization provide valuable insights into social dynamics and power structures within criminal justice contexts."
+    "text": "Tutorial Summary\nThis tutorial introduced the concept of betweenness centrality and centralization and how it can be calculated using the betweenness() function in the sna package in R, key measures in social network analysis used to identify important nodes in a network based on their intermediary roles. We reviewed this calculation for both undirected and directed networks, illustrating how directionality influences betweenness scores and centralization metrics. These exercises demonstrated how betweenness centrality and centralization provide valuable insights into social dynamics and power structures within criminal justice contexts."
   },
   {
     "objectID": "snaca-r-bipartite.html#bipartite-graphstwo-mode-networks",
