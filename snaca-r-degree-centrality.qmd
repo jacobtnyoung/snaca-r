@@ -166,6 +166,8 @@ mean( deg_u_mat )
 
 ```
 
+In the code above, we used the `sum()` function. This function sums over the entire matrix. In this case, that sum represents $2L$, not $L$. Why? Because $L$ is the number of edges in the graph. When we create the adjacency matrix, we duplicate each edge. So, when we sum this matrix, we are count each edge twice. This is why the sum represents $2L$.
+
 <br>
 
 We can also calculate how centralized the graph itself is. *Group degree centralization* measures the extent to which the actors in a social network differ from one another in their individual degree centralities. Following @wasserman1994social, an index of *group degree centralization* can be calculated as:
