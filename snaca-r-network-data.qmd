@@ -1,7 +1,8 @@
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(
-  echo = TRUE, 
+  echo = TRUE,
+  eval = TRUE,
   message=FALSE, 
   warning=FALSE, 
   fig.width = 10,
@@ -12,7 +13,7 @@ knitr::opts_chunk$set(
 
 # Working with Networks in R {.unnumbered}
 
-In the [**Network Data Structures**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html) chapter of the [*Social Network Analysis for Crime Analysts*](https://jacobtnyoung.github.io/snaca-textbook/) textbook, we reviewed how networks can be represented as sociomatrices. These matrices form the basic unit of data analysis in SNA. In this tutorial, we will review how we can build networks in R. Understanding how to work with networks in R is essential for crime analysts because networks provide a powerful lens for analyzing relationships and interactions that drive criminal behavior. Whether you're mapping connections between individuals in a gang, examining the flow of illicit goods, or identifying key actors in a criminal enterprise, networks reveal critical structures and patterns that traditional data analysis might overlook.
+In the [**Network Data Structures**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-data-structures.html) chapter of the [*Social Network Analysis for Crime Analysts*](https://jacobtnyoung.github.io/snaca-textbook/) textbook, we reviewed how networks can be represented as sociomatrices. These matrices form the basic unit of data analysis in SNA. In this tutorial, we will review how we can build networks in R. Why? Understanding how to work with networks in R is essential for crime analysts because networks provide a powerful lens for analyzing relationships and interactions that drive criminal behavior. Whether you're mapping connections between individuals in a gang, examining the flow of illicit goods, or identifying key actors in a criminal enterprise, networks reveal critical structures and patterns that traditional data analysis might overlook.
 
 As a reminder, in the tutorials for this textbook, R code appears `like this` and can be copied directly into R or RStudio. Let's start getting our hands dirty (figuratively of course) by building some networks in R!
 
@@ -20,7 +21,7 @@ As a reminder, in the tutorials for this textbook, R code appears `like this` an
 
 First, clear the workspace. To do so, we use the following statement:
 
-```{r, eval=FALSE}
+```{r}
 
 rm( list = ls() )
 
@@ -133,7 +134,7 @@ mat[,"Jen"]
 
 ```{r, eval=FALSE}
 
-# returns an error because there is no OBJECT called Jen 
+# returns an error because there is no object called Jen 
 mat[,Jen]
 
 # compare the difference with the prior line
@@ -175,11 +176,11 @@ mat[,-c(1,3)]
 
 ```
 
-Got it? If yes, then GREAT! If no, hang in there: you got this! If you are a bit hesitant with working with indexing, the best way to get better is to practice. Feel free to work back through the section above to get better at this basic skill we will use a LOT in subsequent tutorials.
+Got it? If yes, then GREAT! If no, hang in there: you got this! If you are a bit hesitant with working with indexing, the best way to get better is to practice. Feel free to work back through the section above to get better at this basic skill that we will use a LOT in subsequent tutorials.
 
 ## Exploring the `network` Package
 
-Now that we have created the `mat` object, let's manipulate it into a network and a graph. To do this, we can use the `network` package. `network` is a package containing tools to create and modify network objects created by [Carter Butts](https://ncasd.org/~buttsc/). See the [network page](http://cran.r-project.org/web/packages/network/index.html) for an overview of package functionality.
+Now that we have created the `mat` object, let's manipulate it into a network and a graph. To do this, we can use the `network` package. `network` is a package containing tools to create and modify network objects created by [Carter Butts](https://ncasd.org/~buttsc/). See the [network package page](http://cran.r-project.org/web/packages/network/index.html) for an overview of its functionality.
 
 First, we need to install the package using: `install.packages( "network" )`. *Note*: if you have already installed the package, no **do not** need to reinstall it.
 
@@ -187,14 +188,14 @@ If it is already installed, we should check to make sure we have the most recent
 
 Whenever we start R, we need to load the package because it is not automatically loaded. To do this, use the `library()` function. `library( "network" )`
 
-```{r,echo=FALSE,eval=TRUE,message=FALSE}
+```{r, echo=FALSE, eval=TRUE, message=FALSE}
 
 # load the network package
 library( network )
 
 ```
 
-To get a list of the contents of the package, as for help with respect to the package itself use the `help()` function, but tell R we want help on the particular package: `help( package="network" )`.
+To get a list of the contents of the package, as for help with respect to the package itself use the `help()` function, but tell R we want help on the particular package: `help( package = "network" )`.
 
 ### Working with *Unidirected*, Binary Networks
 
@@ -258,25 +259,38 @@ edge <- matrix(
 # take a look
 edge
 
+```
+
+We can see that there are two columns and five rows. Recall that in an **edgelist**, each row corresponds to an edge in the network. So, the first row of `edge`, or `edge[1,]`, is the tie between `r edge[1,][1]` and `r edge[1,][2]`. From this edgelist, we can build a network:
+
+```{r}
+
 # create an object called edge_net_u
 # but change the default to edgelist for the matrix.type argument.
+
 edge_net_u <- as.network(
   edge, 
   directed = FALSE, 
   matrix.type = "edgelist" ) 
 
+
 # now take a look
+
 summary( edge_net_u )
+
 
 # The as.network() function will often recognize the matrix type being entered
 # create the object again, but do not toggle the matrix.type argument
+
 edge_net_u <- as.network( 
   edge,
   directed = FALSE )
 
+
 # is it different
 # no, because the function is programmed to 
 # read the dimensions of the input object
+
 summary( edge_net_u )
 
 ```
@@ -289,12 +303,15 @@ Now, let's work with the example of a directed, binary network. We will create a
 
 # these were written in by row
 # so we want it to read by row, byrow=TRUE
+
 mat_d <- matrix(
   c( 0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,1,0,0,1,1,0 ),
   nrow = 5,
   byrow = TRUE )
 
+
 # take a look at the matrix
+
 mat_d 
 
 ```
@@ -307,7 +324,9 @@ net_d <- as.network(
   mat_d,
   directed = TRUE )
 
+
 # take a look
+
 summary( net_d )
 
 ```
@@ -317,23 +336,30 @@ Just as before, we could also enter the data as an edgelist. Since we have direc
 ```{r}
 
 # create the edgelist
+
 edge_d <- matrix(
   c( "Jen","Tom","Tom","Bob","Bob","Leaf","Bob","Jim",
      "Leaf","Bob","Leaf","Jim","Jim","Bob","Jim","Leaf" ),
   nrow = 8,
   byrow = TRUE )
 
+
 # create the network object
+
 edge_d_net <- as.network(
   edge_d,
   directed = TRUE,
   matrix.type = "edgelist" )
 
+
 # take a look
+
 summary( edge_d_net )
+
 
 # I have added the argument print.adj=FALSE
 # what is different?
+
 summary( edge_d_net,
          print.adj = FALSE )
 
@@ -357,15 +383,22 @@ Here is the url: <https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-und
 ```{r, echo=TRUE, eval=FALSE, warning=FALSE}
 
 # define the path
+
 url <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-undirected-example.csv"
 
+
 # define the data using the url object
+
 mat_u <- read.csv( url )
 
+
 # look at the object
+
 mat_u
 
+
 # note that the read.csv function creates an object of class data.frame.
+
 class( mat_u )
 
 ```
@@ -378,9 +411,11 @@ We need to adjust the arguments to read in the file how we want it. Specifically
 
 -   Set the `row.names =` argument equal to 1 to indicate that the name of the rows are in the first column.
 
+
 ```{r,echo=TRUE,eval=FALSE}
 
 # look at the arguments
+
 mat_u2 <- read.csv( 
   url,
   as.is = TRUE,
@@ -390,8 +425,11 @@ mat_u2 <- read.csv(
 
 mat_u2
 
+
 # compare them
+
 mat_u
+
 mat_u2
 
 ```
@@ -401,10 +439,13 @@ Now, make the object into one of `class` network:
 ```{r,echo=TRUE,eval=FALSE}
 
 # we have to first coerce the object to a matrix
+
 mat_u2 <- as.matrix( mat_u2 )
+
 
 # recall that since this network is undirected
 # we set the directed= argument to FALSE
+
 net_u <- as.network( 
   mat_u2,
   directed = FALSE
@@ -412,7 +453,9 @@ net_u <- as.network(
 
 net_u
 
+
 # we could combine the as.matrix and as.network functions
+
 net_u <- as.network( 
   as.matrix( 
     mat_u2 ), 
@@ -459,10 +502,12 @@ mat_d <- read.csv(
   row.names=1
   )
 
+
 # Note: we don't need to tell it that 
 # the network is directed since 
 # this is the default, 
 # but a good habit to get into.
+
 net_d <- as.network(
   as.matrix( data_d ),
   directed=TRUE
@@ -472,10 +517,73 @@ net_d <- as.network(
 
 ```{r}
 
-# now, print the object.
+# now, print the object
+
 net_d
 
 ```
+
+### Calling Network Data in **SNACpack** 
+
+We have seen how you can build a network object manually and how you can import one. As we will see throughout the tutorials, the [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) package contains several prebuilt data sets for you to use. To access these, we need to make sure we have the **SNACpack** package installed. We covered this in the [Getting Started with R]() tutorial, but we will review it here. 
+
+Recall that this package is not on CRAN, rather it is located on [Github](https://github.com), which is an online repository for storing code and various projects. To install the **SNACpack** package, we need to first install a package called `devtools` because it has a function `install_github()` that we will use to install the **SNACpack** package. Remember, if you have *already* installed `devtools` and `SNACpack` you do not need to reinstall them.
+
+To install **SNACpack**, let's use the following code chunk:
+
+```{r}
+
+# first install the devtools package
+
+install.packages( "devtools" )
+
+
+# now, load the devtools package
+
+library( devtools )
+
+```
+
+Ok, no we are ready to use the `install_github()` function. For this function to work, you need to know the location of the package you want to install. The location of the **SNACpack** package is: `jacobtnyoung/SNACpack`. If you want, you can access the repository using this link: [https://github.com/jacobtnyoung/SNACpack](https://github.com/jacobtnyoung/SNACpack). Now that we have the location, we can install it:
+
+```{r}
+
+# install the package
+
+install_github( "jacobtnyoung/SNACpack" )
+
+
+# now, load the library
+
+library( SNACpack )
+
+```
+
+Done! Take a look at the package using `help( package = "SNACpack" )` to get a sense of what it contains (don't worry, we will be going through this in more detail throughout the tutorials).
+
+The networks in `SNACpack` are stored as objects of class `network`. To load them properly, you need to make sure you have loaded the `network` package. Also, to call the data files, we need to use the `data()` function. For example, let's take a look at a network examining relationships among cocaine dealers:
+
+```{r}
+
+# load the network package
+
+library( network )
+
+
+# load the cocaine_dealing_net network
+
+data( cocaine_dealing_net )
+
+
+# examine the network
+
+cocaine_dealing_net
+
+```
+
+What do we see? Well, there are 28 vertices (i.e. nodes), and 40 edges (ties). We also see that the network is directed. To learn more about the network, we can call the help file for the object by using `?cocaine_dealing_net`.
+
+As mentioned, we will use data in `SNACpack` throughout the book, so you will get more practice working with these objects.
 
 <br>
 
