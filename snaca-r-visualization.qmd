@@ -1,7 +1,8 @@
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(
-  echo = TRUE, 
+  echo = TRUE,
+  eval = FALSE,
   message=FALSE, 
   warning=FALSE, 
   fig.width = 10,
@@ -17,13 +18,13 @@ Let's be honest, network analysis is awesome. Where does that awesomeness come f
 Not convinced? Examine the plot below. Without me giving you any information about this figure (which is from James Moody and Peter Mucha's paper, [*Portrait of Political Party Polarization*](https://www.cambridge.org/core/journals/network-science/article/portrait-of-political-party-polarization1/F4D2FC8C75B3A160CE68BC3A4A4F6736#article)), what does it tell you?
 
 ```{r, echo=FALSE, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "/Users/jyoung20/Github/snaca-r/assets/images/moody-mucha-polarization.png" )
+knitr::include_graphics( "assets/images/moody-mucha-polarization.png" )
 ```
 
 What about this one showing political blogs? (from David Lazer and colleagues paper [*Computational Social Science*](https://www.science.org/doi/10.1126/science.1167742)). What does the visualization "say" or "tell you"?
 
 ```{r, echo=FALSE, fig.cap = "", out.width = "60%"}
-knitr::include_graphics( "/Users/jyoung20/Github/snaca-r/assets/images/lazer-etal-blogs.png" )
+knitr::include_graphics( "assets/images/lazer-etal-blogs.png" )
 ```
 
 In this tutorial, you will be introduced to the basics of visualizing networks using the `gplot()` function in the `sna` package. We will also look at some approaches to building plots to help guide you in honing your SNA toolkit.
@@ -44,64 +45,68 @@ Think about each of these suggestions. Why do they aid in visualizing the networ
 
 ## Getting Started
 
-Now that you have a sense of what a good visualization should try to do, let's look at the example Luke uses as an illustration by working with the `gplot()` function in the `sna` package.
+Now that you have a sense of what a good visualization should try to do, let's look at an example to help illustrate working with the `gplot()` function in the `sna` package.
 
 First, we need to install the `sna` package using `install.packages( "sna" )` and load the library using `library( sna )`.
 
 Remember, if you have already installed a package then you do not need to use the `install.packages()` function. But, if you have not installed the package in a while, you should use `update.packages()` to incorporate any changes that have been made to the page.
 
-Next, let's get the `UserNetR` package from [Douglas Luke's GitHub page](https://github.com/DougLuke/UserNetR). Since this package is not on the CRAN package repository, we need to install it directly from Github. We do this in four steps:
-
--   First, install the devtools package using `install.packages( "devtools" )`
-
--   And then load the library for the package with `library( devtools )`
-
--   Now, install the `UserNetR` package `install_github( "DougLuke/UserNetR" )`
-
--   Finally, load the library `library( UserNetR )`
+Next, let's use a network of phone calls among members of the Sicilian Mafia as discussed by @cavallaro2020sicilian. This network is available in the `SNACpack` package and is called: `mafia_calls_net`. To learn more about the data, use `?mafia_calls_net` to pull up the help page.
 
 Altogether, that looks something like this:
 
-```{r, eval=FALSE}
+```{r}
 
 # install the packages
 install.packages( "sna" )
-install.packages( "devtools" )
 
-# call the libraries
+# call the sna library
 library( sna )
-library( devtools )
 
-# install from Github
-install_github( "DougLuke/UserNetR" )
+# call the SNACpack library (NOTE the case sensitivity!)
+library( SNACpack )
 
-# call that library
-library( UserNetR )
+# if you need to reinstall SNACpack for whatever reason, remember
+# to use devtools like this:
+# devtools::install_github("jacobtnyoung/SNACpack")
 
 ```
 
 ```{r,echo=FALSE, eval=TRUE, message=FALSE}
 
 library( sna )
-library( devtools )
-library( UserNetR )
+library( SNACpack )
 
 ```
 
-Now, let's take a look at the `Moreno` network (see `help( Moreno, package = UserNetR )`. These data are contained in a sociogram constructed by [Jacob Moreno](https://en.wikipedia.org/wiki/Jacob_L._Moreno), and published in the New York Times in 1933 (see Moreno, J. L. 1934. *Who shall survive? A new approach to the problem of human interrelations*. Nervous and mental disease monograph series, no. 58. Washington, DC: Nervous and Mental Disease Publishing Co. for a more extensive discussion).
+Now that we have `sna` and `SNACpack` loaded, we can examine the `mafia_calls_net` (to learn more about the data, use `?mafia_calls_net` to pull up the help page). We can do this just by typing out the name of the network:
 
 ```{r}
 
-# Note that we ask the summary() function to not print out the adjacency matrix.
-summary( Moreno, print.adj = FALSE )
+mafia_calls_net
 
-# Now, let's compare two different plot layouts.
+```
+
+Take a look at what is printed out. We see that there are 98 vertices (i.e., nodes) and 123 edges (i.e. ties). So, the network represents 123 phone calls between 98 individuals. Note that it is *undirected*.
+
+Let's plot it!
+
+```{r,eval=TRUE, echo=FALSE, message=FALSE}
+
+# adjust the margins for how this gets plotted
+par( mar = c( 0, 0, 0, 0 ) )
+
+```
+
+```{r}
+
+# Compare two different plot layouts.
 
 # Here is a circle.
-gplot( Moreno, mode = "circle" )
+gplot( mafia_calls_net, gmode = "graph", mode = "circle" )
 
 # Here is a separate layout.
-gplot( Moreno, mode = "fruchtermanreingold" )
+gplot( mafia_calls_net, gmode = "graph", mode = "fruchtermanreingold" )
 
 ```
 
@@ -109,76 +114,28 @@ Think back to the aesthetic elements we discussed above. How do these two plots 
 
 To think about these questions, let's plot the two layouts together. To do this we will use the `par()` function. This allows us to partition the plotting region.
 
-```{r}
+```{r,eval=TRUE, echo=FALSE, message=FALSE}
 
-# First, we define the plot layout window.
-op <- par( 
-  mar = rep( 2, 4 ), # set the margins
-  mfrow = c( 1, 2 )  # set the dimensions
-  )
-
-# plot the circle layout (add the main() argument for a title)
-gplot( Moreno, mode = "circle", main = "Plotted as a circle" )
-
-# plot the Fruchterman Reingold layout
-gplot( Moreno, mode = "fruchtermanreingold", main = "Plotted using a spring algorithm" )
+# adjust the margins for how this gets plotted
+par( 
+  mar = c( 2, 2, 2, 2 ),
+  oma = c( 0, 0, 0, 0 ),
+  mfrow = c( 1, 2 )
+)
 
 ```
 
-```{r,eval=TRUE, echo=FALSE, message=FALSE}
+```{r}
 
-par( op )
+# plot the circle layout (add the main() argument for a title)
+gplot( mafia_calls_net, gmode = "graph", mode = "circle", main = "Plotted as a circle" )
+
+# plot the Fruchterman Reingold layout
+gplot( mafia_calls_net, gmode = "graph", mode = "fruchtermanreingold", main = "Plotted using a spring algorithm" )
 
 ```
 
 Again, think about our questions: How do these two plots differ in how well they convey the **same** information? Which one is better? Why is it better?
-
-### Adding Attributes
-
-If we add information about gender, we can see a bit more that is revealed by the spring algorithm.
-
-To do so, we use the `vertex.col=` argument with the vertex attribute *gender*. To do so, we need to access the vertex attribute. We can do this with:
-
--   the `get.vertex.attribute()` function in the `sna` package. Use `library( sna )` and specify the attribute we want, like `get.vertex.attribute( Moreno,  "gender" )`
-
--   or use the shorthand for this with `network object %v% atttribute`, like `Moreno %v% "gender"`
-
-```{r}
-
-op <- par( mar = rep( 2, 4 ), mfrow = c( 1, 2 ) )
-
-gplot( Moreno,
-      mode = "circle",
-      main = "Plotted as a circle",
-      vertex.col = get.vertex.attribute( Moreno, "gender" ) # use the vertex attribute.
-      )
-
-gplot( Moreno,
-       mode = "fruchtermanreingold",
-       main = "Plotted using a spring algorithm",
-       vertex.col = Moreno %v% "gender" # note the difference here compared to above.
-       )
-
-# let's add a legend to the plot
-legend(
-  "bottomleft",
-  legend = c( "Male","Female" ),
-  col = c( "red","black" ),
-  title = "legend",
-  pt.cex = 0.75,
-  bty = "n",
-  pch = 19 
-  )
-
-```
-
-```{r,eval=TRUE,echo=FALSE,message=FALSE}
-
-par( op )
-
-```
-
-What is the primary story that the plot tells? Does a particular layout help us see that better?
 
 Ok, that was a lot. Let's work our way back through the mechanics of building a plot to better get a sense of what we are doing.
 
@@ -186,54 +143,11 @@ Ok, that was a lot. Let's work our way back through the mechanics of building a 
 
 Let's take a look at some of the visualization capabilities of `gplot()`. Let's start by looking at the function's help page: `?gplot`.
 
-To see the various functionality of the function, let's work with our example of an undirected network.
+To see the various functionality of the function, let's work with our example of an undirected network. Remember that the network `undirected_example_net` is available in `SNACpack`. Let's plot it.
 
-```{r}
+```{r,eval=TRUE}
 
-# define the path where the data are
-url <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-undirected-example.csv"
-
-# define the object
-mat_u <- as.matrix(
-  read.csv( 
-    url,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1
-    )
-  )
-
-# now, create the network
-net_u <- network(
-  mat_u,
-  directed = FALSE
-)
-
-# take a look at the network
-summary( net_u )
-
-#NOTE: we could have wrapped all of this into two statements
-net_u <- as.network( 
-  as.matrix( 
-    read.csv( 
-      "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-undirected-example.csv", 
-      as.is = TRUE, 
-      header = TRUE, 
-      row.names = 1 
-      ) 
-    ),
-  directed = FALSE 
-  )
-
-summary( net_u )
-
-```
-
-Now that we have the object built, we can plot it.
-
-```{r}
-
-gplot( net_u )
+gplot( undirected_example_net )
 
 ```
 
@@ -241,33 +155,36 @@ Hold on, this plot shows arrows. But this network is undirected. What gives?
 
 That is because `gplot()` assumes a directed network. We can see this in the help menu, `?gplot`, where is shows that for the type of network, the `gmode=` argument defaults to a directed graph. To fix this we can either:
 
--   manually turn off the display of arrows using the `usearrows=` argument, `gplot( net.u, usearrows = FALSE )`
+-   manually turn off the display of arrows using the `usearrows=` argument, `gplot( undirected_example_net, usearrows = FALSE )`
 
--   or indicate that the object to be plotted is a undirected graph or graph, `gplot( net.u, gmode = "graph" )`
+-   or indicate that the object to be plotted is a undirected graph or graph, `gplot( undirected_example_net, gmode = "graph" )`
 
 The `gplot()` function has a number of arguments that can be used to better display the information contained in the network.
 
 For example, we can add labels to the vertices using the `network.vertex.names()` function.
 
-```{r}
+```{r,eval=TRUE}
 
 gplot(
-  net_u, 
+  undirected_example_net, 
   gmode = "graph", 
-  label = network.vertex.names( net_u )
+  label = network.vertex.names( undirected_example_net )
   )
 
 ```
 
 Alternatively, we could add in a string of names for the label:
 
--   `gplot( net.u, gmode = "graph",  label = c( "Jen", "Tom", "Bob", "Leaf", "Jim" ) )`
+-   `gplot( undirected_example_net, gmode = "graph",  label = c( "Jen", "Tom", "Bob", "Leaf", "Jim" ) )`
 
 Or we could define them as an object:
 
 -   `names <- c( "Jen", "Tom", "Bob", "Leaf", "Jim" )`
 
--   add to the plot using `gplot( net.u, gmode = "graph", label = names )`
+-   add to the plot using `gplot( undirected_example_net, gmode = "graph", label = names )`
+
+There is no "right" way to do this, so figure out what works best for you!
+
 
 A great feature of R is that we can tune the graphing parameters. Here are several examples:
 
@@ -289,24 +206,25 @@ A great feature of R is that we can tune the graphing parameters. Here are sever
 
 There is a LOT of functionality to the `gplot()` function. See the arguments in the help file: `?gplot`. I would encourage you to take some time to look through it and play around with the various features.
 
+
 ### Adjusting Plot Layout
 
 When a layout is generated, the results can be saved for later reuse using the `coord=` argument.
 
-```{r}
+```{r,eval=TRUE}
 
 # Set the seed for the random number generator 
-# so we can always get the same plot layout.
-set.seed( 605 ) 
+# so we can always get the same plot layout
+set.seed( 507 ) 
 
-# Define an object that will be the coordinates we want to use.
+# Define an object that will be the coordinates we want to use
 coords <- gplot( 
-  net_u, 
+  undirected_example_net, 
   gmode = "graph",
-  label = network.vertex.names( net_u )
+  label = network.vertex.names( undirected_example_net )
   )
 
-# Show the vertex coordinates.
+# Show the vertex coordinates
 coords
 
 ```
@@ -315,13 +233,13 @@ Take a close look at the `coords` object. What do the values represent? Think ab
 
 Now, we can pass the coordinates into a plot.
 
-```{r}
+```{r,eval=TRUE}
 
 # Saved layouts can be used via the coord= argument:
 gplot(
-  net_u, 
+  undirected_example_net, 
   gmode = "graph",
-  label = network.vertex.names( net_u ),
+  label = network.vertex.names( undirected_example_net ),
   coord = coords 
   )
 
@@ -331,13 +249,13 @@ Cool but, *why do this?* The placement of the nodes shift when we call the `gplo
 
 *But*, suppose the default settings are insufficient and we want to make a few small changes. The `interactive=` argument allows for tweaking.
 
-```{r, eval=FALSE}
+```{r}
 
 # First, set up the coordinates you want.
 coords <- gplot(
-  net_u, 
+  undirected_example_net, 
   gmode = "graph",
-  label = network.vertex.names( net_u ),
+  label = network.vertex.names( undirected_example_net ),
   coord = coords, 
   interactive=TRUE 
   )
@@ -346,14 +264,14 @@ coords <- gplot(
 
 When this renders on your system, move a few of the nodes around. Then, after you close the window it will save the coordinates.
 
-```{r, eval=FALSE}
+```{r}
 
 # Then, use these in the plot.
 gplot( 
-  net_u, 
+  undirected_example_net, 
   coord = coords, 
   gmode = "graph",
-  label=network.vertex.names( net_u )
+  label=network.vertex.names( undirected_example_net )
   ) 
 
 ```
@@ -364,39 +282,7 @@ As we have seen, we can start with a basic plot and add information. Creating gr
 
 Take a look at this series of plots:
 
-```{r, fig.height=6, fig.width=18, fig.align="center", echo=FALSE }
-
-# define the adjacency matrix
-PI_mat <- as.matrix(
-  read.csv( 
-    "https://raw.githubusercontent.com/jacobtnyoung/snaca-r/main/data/data-PINS-power-w1-adj.csv",
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1
-    )
-  )
-
-# create an object of class network
-PI_net <- network( PI_mat, directed = TRUE )
-
-# define the attributes object
-PI_attrs <- read.csv( 
-    "https://raw.githubusercontent.com/jacobtnyoung/snaca-r/main/data/data-PINS-w1-age-race-attributes.csv",
-    as.is = TRUE,
-    header = TRUE 
-    )
-
-# assign the attributes to the network
-PI_net %v% "Age" <- PI_attrs[,1]
-PI_net %v% "Race" <- PI_attrs[,2]
-
-# define the rescale function
-rescale <- function( nchar, low, high ){
-  min_d <- min( nchar )
-  max_d <- max( nchar )
-  rscl  <- ( ( high - low )*( nchar - min_d ) ) / ( max_d - min_d ) + low
-  rscl
-}
+```{r, fig.height=8, fig.width=18, fig.align="center", echo=FALSE }
 
 # tweak the margins to cut some whitespace
 par( mfrow = c( 1,3 ),
@@ -404,32 +290,36 @@ par( mfrow = c( 1,3 ),
      )
 
 # now execute the plots
-set.seed( 605 )
-gplot( PI_net, 
+set.seed( 507 )
+gplot( pins_pi_net, 
        displayisolates = FALSE,
        arrowhead.cex=0.5,
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ),
-       #vertex.col = PI.net %v% "Race" + 2,
+       vertex.cex = vertex_rescale( pins_pi_net %v% "age", 0.5, 1.5 ),
+       #vertex.col = pins_pi_net %v% "race" + 2,
        #edge.col = "#888483"
        )
 
-set.seed( 605 )
-gplot( PI_net, 
+set.seed( 507 )
+gplot( pins_pi_net, 
        displayisolates = FALSE,
        arrowhead.cex=0.5,
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ),
-       vertex.col = PI_net %v% "Race" + 2,
+       vertex.cex = vertex_rescale( pins_pi_net %v% "age", 0.5, 1.5 ),
+       vertex.col = pins_pi_net %v% "race" + 2,
        #edge.col = "#888483"
        )
 
-set.seed( 605 )
-gplot( PI_net, 
+set.seed( 507 )
+gplot( pins_pi_net, 
        displayisolates = FALSE,
        arrowhead.cex=0.5,
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ),
-       vertex.col = PI_net %v% "Race" + 2,
+       vertex.cex = vertex_rescale( pins_pi_net %v% "age", 0.5, 1.5 ),
+       vertex.col = pins_pi_net %v% "race" + 2,
        edge.col = "#888483"
        )
+
+
+# reset the plot options
+par( op )
 
 ```
 
@@ -441,118 +331,68 @@ The plot uses several layers of information:
 
 As we create a plot, we want to think about what information we should convey and how best to convey that information (i.e. colors?, shapes?, size?, all of the above?)
 
+
 ## Plotting the Power/Influence Network from the Prison Inmate Networks Study (PINS)
 
 The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks.
 
-Let's plot the *power and influence network*, which was created by asking individuals whom they believed was "powerful and influential" on the unit. We will continue working with the `gplot()` function.
+Let's plot the *power and influence network*, which was created by asking individuals whom they believed was "powerful and influential" on the unit. This network is available in `SNACpack` and is called: `pins_pi_net`. 
 
-We are going to do this in a few steps:
-
--   First, load the adjacency matrix, `data-PINS-power-w1-adj.csv`, and create an object of class `network`.
-
--   Second, load the file with Age and Race attributes, `data-PINS-w1-age-race-attributes.csv`, and assign each attribute to the network object.
+First, take a look at the network:
 
 ```{r}
 
-# define the adjacency matrix
-PI_mat <- as.matrix(
-  read.csv( 
-    "https://raw.githubusercontent.com/jacobtnyoung/snaca-r/main/data/data-PINS-power-w1-adj.csv",
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1
-    )
-  )
-
-# create an object of class network
-PI_net <- network( PI_mat, directed = TRUE )
-
-# define the attributes object
-PI_attrs <- read.csv( 
-    "https://raw.githubusercontent.com/jacobtnyoung/snaca-r/main/data/data-PINS-w1-age-race-attributes.csv",
-    as.is = TRUE,
-    header = TRUE 
-    )
-
-# assign the attributes to the network
-PI_net %v% "Age" <- PI_attrs[,1]
-PI_net %v% "Race" <- PI_attrs[,2]
+pins_pi_net
 
 ```
 
-Note that we used a shorthand notation: `%v%`. This is an assignment operation that tells R to assign something to the network. Specifically, `%v%` indicates the assignment to a vertex, hence the *v*.
+We see that it has 205 vertices (nodes), 161 edges (trust nominations), and is directed.
 
-The operate *also* let's us pull a specific attribute. We can look at the various vertex data by using the shorthand `network %v% "attribute"`. For example:
+We also see that there are several attributes. To learn more about the attributes, review the help documentation for the network by using `?pins_pi_net`.
 
--   `PI_net %v% "Age"` shows the age variable.
+We can access network attributes using a shorthand notation: `%v%`. The operate let's us pull a specific attribute. We can look at the various vertex data by using the shorthand `network %v% "attribute"`. For example:
 
--   `PI_._net %v% "Race"` shows the race variable.
+-   `pins_pi_net %v% "age"` shows the age variable.
+
+-   `pins_pi_net %v% "race"` shows the race variable.
 
 ```{r}
 
 # look at the values for age
-PI_net %v% "Age" <- PI_attrs[,1]
+pins_pi_net %v% "age"
 
 # look at the values for race
-PI_net %v% "Race" <- PI_attrs[,2]
+pins_pi_net %v% "race"
 
 ```
-
-Note that we can also reference edges (i.e. `%e%`) if a network has an assigned edge. For example, we could pull the information network and assign that to the power influence network:
-
-```{r}
-
-# define the adjacency matrix
-INFO_mat <- as.matrix(
-  read.csv( 
-    "https://raw.githubusercontent.com/jacobtnyoung/snaca-r/main/data/data-PINS-info-w1-adj.csv",
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1
-    )
-  )
-
-# assign the matrix as an edge attribute
-PI_net %e% "info" <- INFO_mat
-
-```
-
-Think about what we did on the last line. For the power influence edges, we assigned `INFO_._mat` as an attribute. This represents whether a power/influence tie was ***also*** an information network tie.
 
 Now, we can use that information in our plot. For example:
 
 ```{r}
 
-gplot( PI_net,
+gplot( pins_pi_net,
        arrowhead.cex=0.5,
-       vertex.cex = PI_net %v% "Age" )
+       vertex.cex = pins_pi_net %v% "age" )
 
 ```
 
 YIKES!!! What is wrong?
 
-The problem is that we need to rescale the vertex attribute so that the nodes are not too big. Let's build a function to do that and then execute the `gplot()` function:
+The problem is that we need to *rescale* the vertex attribute so that the nodes are not too big. Essentially, we want to be able to rework the values of the attribute so the plot sizes make sense. In `SNACpack` there is a function called `vertex_rescale` that does just that! I take a vector for plotting, and it allows you to specify the minimum and maximum values. Use `?vertex_rescale` for more information.
 
-```{r}
-
-rescale <- function( nchar, low, high ){
-  min_d <- min( nchar )
-  max_d <- max( nchar )
-  rscl  <- ( ( high - low )*( nchar - min_d ) ) / ( max_d - min_d ) + low
-  rscl
-}
-
-```
-
-Now, use the function we created to rescale the vertex attribute:
+We can use the `vertex_rescale` function to rescale the vertex attribute so it looks better:
 
 ```{r}
 
 # now execute the plot
-gplot( PI_net, 
+gplot( pins_pi_net, 
        arrowhead.cex=0.5,
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ) )
+       vertex.cex = vertex_rescale( 
+         pins_pi_net %v% "age", # the attribute we want to plot
+         0.5,  # the minimum size of a node
+         1.5   # the maximum size of a node
+         ) 
+       )
 
 ```
 
@@ -564,36 +404,24 @@ Note that the plot above has a lot of "whitespace" due to the margins. We can ad
 par( mar = c( 0.1,0.1,0.1,0.1 ) )
 
 # now execute the plot
-gplot( PI_net, 
+gplot( pins_pi_net, 
        arrowhead.cex=0.5,
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ) )
+       vertex.cex = vertex_rescale( pins_pi_net %v% "age", 0.5, 1.5 ) )
 
 ```
 
-That looks better. Let's drop the isolates (using the `displayisolates = FALSE` argument) to help with the visualization.
+Try adjusting the minimum and maximum values in the `vertex_rescale` function and see how it changes the plot.
+
+Our plot is looking better, but there is still room for improvement. Let's drop the isolates (using the `displayisolates = FALSE` argument) to help with the visualization.
 
 ```{r}
 
 par( mar = c( 0.1,0.1,0.1,0.1 ) )
 
-gplot( PI_net,
+gplot( pins_pi_net,
        displayisolates = FALSE,
        arrowhead.cex=0.5,
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ) )
-
-```
-
-How about we color the edges based on whether there was a information network tie.
-
-```{r}
-
-par( mar = c( 0.1,0.1,0.1,0.1 ) )
-
-gplot( PI_net,
-       edge.col = PI_net %e% "info" + 1,
-       displayisolates = FALSE,
-       arrowhead.cex=0.5,
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ) )
+       vertex.cex = vertex_rescale( pins_pi_net %v% "age", 0.5, 1.5 ) )
 
 ```
 
@@ -603,14 +431,13 @@ As we build layers, we can get a fairly useful graphic that tells us a lot of in
 
 par( mar = c( 5,0.1,3,0.1 ) )
 
-gplot( PI_net,
-       main="PINS Power/Influence Network", # add a title
-       vertex.col = PI_net %e% "Race", # color the nodes by the Race variable
-       edge.col = PI_net %e% "info" + 2, # color the edges by the information network attribute
-       displayisolates = FALSE, # don't display the isolated cases
-       arrowhead.cex=0.5, # augment the size of the arrowheads
-       vertex.cex = rescale( PI_net %v% "Age", 0.5, 1.5 ), # size the nodes by the Age variable
-       sub="Nodes colored by Race, \n edges colored by Info net \n nodes sized by Age" # add a subtitle
+gplot( pins_pi_net,
+       main="PINS Power & Influence Network", # add a title
+       vertex.col = pins_pi_net %v% "race",      # color the nodes by the race variable
+       displayisolates = FALSE,             # don't display the isolated cases
+       arrowhead.cex = 0.5,                 # augment the size of the arrowheads
+       vertex.cex = vertex_rescale( pins_pi_net %v% "age", 0.5, 1.5 ), # size the nodes by the Age variable
+       sub = "Nodes colored by Race, \n edges colored by Info net \n nodes sized by Age" # add a subtitle
        )
 
 ```
@@ -623,7 +450,7 @@ gplot( PI_net,
 -   Modify the `Moreno` visualization to color nodes by gender. How does this addition change your interpretation of the network structure?
 -   When plotting an undirected network, why might `gplot()` still display arrows? How can this be resolved?
 -   Experiment with adding labels to a network plot. What are some ways to customize label appearance? Why might label size or color be important?
--   Use the `rescale()` function to adjust node sizes based on a vertex attribute. Try some different values. How do the different values influence your understanding of the network?
+-   Use the `vertex_rescale()` function to adjust node sizes based on a vertex attribute. Try some different values. How do the different values influence your understanding of the network?
 -   Explain why saving node coordinates using the `coord=` argument can be useful. Demonstrate how to save and reuse coordinates in a network plot.
 -   Describe the concept of layering in network visualization. Create a plot that layers at least three attributes (e.g., node size, color, edge attributes).
 -   Compare a basic network plot of the PINS dataset with one that incorporates multiple attributes. What additional insights does the more detailed visualization provide?
