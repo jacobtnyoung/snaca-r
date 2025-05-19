@@ -36,7 +36,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: superhero
+    theme: slate
 
     navbar:
       right:

@@ -2,7 +2,7 @@
 
 knitr::opts_chunk$set(
   echo = TRUE,
-  eval = FALSE,
+  eval = TRUE,
   message=FALSE, 
   warning=FALSE, 
   fig.width = 10,
@@ -18,13 +18,17 @@ Let's be honest, network analysis is awesome. Where does that awesomeness come f
 Not convinced? Examine the plot below. Without me giving you any information about this figure (which is from James Moody and Peter Mucha's paper, [*Portrait of Political Party Polarization*](https://www.cambridge.org/core/journals/network-science/article/portrait-of-political-party-polarization1/F4D2FC8C75B3A160CE68BC3A4A4F6736#article)), what does it tell you?
 
 ```{r, echo=FALSE, fig.cap = "", out.width = "60%"}
+
 knitr::include_graphics( "assets/images/moody-mucha-polarization.png" )
+
 ```
 
 What about this one showing political blogs? (from David Lazer and colleagues paper [*Computational Social Science*](https://www.science.org/doi/10.1126/science.1167742)). What does the visualization "say" or "tell you"?
 
 ```{r, echo=FALSE, fig.cap = "", out.width = "60%"}
+
 knitr::include_graphics( "assets/images/lazer-etal-blogs.png" )
+
 ```
 
 In this tutorial, you will be introduced to the basics of visualizing networks using the `gplot()` function in the `sna` package. We will also look at some approaches to building plots to help guide you in honing your SNA toolkit.
@@ -55,7 +59,7 @@ Next, let's use a network of phone calls among members of the Sicilian Mafia as 
 
 Altogether, that looks something like this:
 
-```{r}
+```{r, eval=FALSE}
 
 # install the packages
 install.packages( "sna" )
@@ -72,7 +76,7 @@ library( SNACpack )
 
 ```
 
-```{r,echo=FALSE, eval=TRUE, message=FALSE}
+```{r,echo=FALSE, message=FALSE}
 
 library( sna )
 library( SNACpack )
@@ -91,7 +95,7 @@ Take a look at what is printed out. We see that there are 98 vertices (i.e., nod
 
 Let's plot it!
 
-```{r,eval=TRUE, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 
 # adjust the margins for how this gets plotted
 par( mar = c( 0, 0, 0, 0 ) )
@@ -114,7 +118,7 @@ Think back to the aesthetic elements we discussed above. How do these two plots 
 
 To think about these questions, let's plot the two layouts together. To do this we will use the `par()` function. This allows us to partition the plotting region.
 
-```{r,eval=TRUE, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE}
 
 # adjust the margins for how this gets plotted
 par( 
@@ -145,7 +149,7 @@ Let's take a look at some of the visualization capabilities of `gplot()`. Let's 
 
 To see the various functionality of the function, let's work with our example of an undirected network. Remember that the network `undirected_example_net` is available in `SNACpack`. Let's plot it.
 
-```{r,eval=TRUE}
+```{r}
 
 gplot( undirected_example_net )
 
@@ -163,7 +167,7 @@ The `gplot()` function has a number of arguments that can be used to better disp
 
 For example, we can add labels to the vertices using the `network.vertex.names()` function.
 
-```{r,eval=TRUE}
+```{r}
 
 gplot(
   undirected_example_net, 
@@ -185,7 +189,6 @@ Or we could define them as an object:
 
 There is no "right" way to do this, so figure out what works best for you!
 
-
 A great feature of R is that we can tune the graphing parameters. Here are several examples:
 
 -   Labels:
@@ -206,12 +209,11 @@ A great feature of R is that we can tune the graphing parameters. Here are sever
 
 There is a LOT of functionality to the `gplot()` function. See the arguments in the help file: `?gplot`. I would encourage you to take some time to look through it and play around with the various features.
 
-
 ### Adjusting Plot Layout
 
 When a layout is generated, the results can be saved for later reuse using the `coord=` argument.
 
-```{r,eval=TRUE}
+```{r}
 
 # Set the seed for the random number generator 
 # so we can always get the same plot layout
@@ -233,7 +235,7 @@ Take a close look at the `coords` object. What do the values represent? Think ab
 
 Now, we can pass the coordinates into a plot.
 
-```{r,eval=TRUE}
+```{r}
 
 # Saved layouts can be used via the coord= argument:
 gplot(
@@ -249,9 +251,9 @@ Cool but, *why do this?* The placement of the nodes shift when we call the `gplo
 
 *But*, suppose the default settings are insufficient and we want to make a few small changes. The `interactive=` argument allows for tweaking.
 
-```{r}
+```{r, eval=FALSE}
 
-# First, set up the coordinates you want.
+# First, set up the coordinates you want
 coords <- gplot(
   undirected_example_net, 
   gmode = "graph",
@@ -264,12 +266,12 @@ coords <- gplot(
 
 When this renders on your system, move a few of the nodes around. Then, after you close the window it will save the coordinates.
 
-```{r}
+```{r, eval=FALSE}
 
-# Then, use these in the plot.
+# Then, use these in the plot
 gplot( 
   undirected_example_net, 
-  coord = coords, 
+  coord = coords, # use the coords object in the "coord=" argument
   gmode = "graph",
   label=network.vertex.names( undirected_example_net )
   ) 
@@ -317,10 +319,6 @@ gplot( pins_pi_net,
        edge.col = "#888483"
        )
 
-
-# reset the plot options
-par( op )
-
 ```
 
 The plot uses several layers of information:
@@ -331,12 +329,11 @@ The plot uses several layers of information:
 
 As we create a plot, we want to think about what information we should convey and how best to convey that information (i.e. colors?, shapes?, size?, all of the above?)
 
-
 ## Plotting the Power/Influence Network from the Prison Inmate Networks Study (PINS)
 
 The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks.
 
-Let's plot the *power and influence network*, which was created by asking individuals whom they believed was "powerful and influential" on the unit. This network is available in `SNACpack` and is called: `pins_pi_net`. 
+Let's plot the *power and influence network*, which was created by asking individuals whom they believed was "powerful and influential" on the unit. This network is available in `SNACpack` and is called: `pins_pi_net`.
 
 First, take a look at the network:
 

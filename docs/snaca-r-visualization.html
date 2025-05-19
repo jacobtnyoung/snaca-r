@@ -288,7 +288,25 @@ div.csl-indent {
 
 <p>Let’s be honest, network analysis is awesome. Where does that awesomeness come from? One sure reason is visualization! There is nothing like a beautiful network visualization that conveys lots of information and is aesthetically pleasing. Right?</p>
 <p>Not convinced? Examine the plot below. Without me giving you any information about this figure (which is from James Moody and Peter Mucha’s paper, <a href="https://www.cambridge.org/core/journals/network-science/article/portrait-of-political-party-polarization1/F4D2FC8C75B3A160CE68BC3A4A4F6736#article"><em>Portrait of Political Party Polarization</em></a>), what does it tell you?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/images/moody-mucha-polarization.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>What about this one showing political blogs? (from David Lazer and colleagues paper <a href="https://www.science.org/doi/10.1126/science.1167742"><em>Computational Social Science</em></a>). What does the visualization “say” or “tell you”?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/images/lazer-etal-blogs.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>In this tutorial, you will be introduced to the basics of visualizing networks using the <code>gplot()</code> function in the <code>sna</code> package. We will also look at some approaches to building plots to help guide you in honing your SNA toolkit.</p>
 <section id="network-visualization" class="level2">
 <h2 class="anchored" data-anchor-id="network-visualization">Network Visualization</h2>
@@ -327,26 +345,69 @@ div.csl-indent {
 <p>Now that we have <code>sna</code> and <code>SNACpack</code> loaded, we can examine the <code>mafia_calls_net</code> (to learn more about the data, use <code>?mafia_calls_net</code> to pull up the help page). We can do this just by typing out the name of the network:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mafia_calls_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Network attributes:
+  vertices = 98 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 123 
+    missing edges= 0 
+    non-missing edges= 123 
+
+ Vertex attribute names: 
+    vertex.names 
+
+No edge attributes</code></pre>
+</div>
 </div>
 <p>Take a look at what is printed out. We see that there are 98 vertices (i.e., nodes) and 123 edges (i.e.&nbsp;ties). So, the network represents 123 phone calls between 98 individuals. Note that it is <em>undirected</em>.</p>
 <p>Let’s plot it!</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare two different plot layouts.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is a circle.</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"circle"</span> )</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is a separate layout.</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"fruchtermanreingold"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare two different plot layouts.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is a circle.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"circle"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is a separate layout.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"fruchtermanreingold"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Think back to the aesthetic elements we discussed above. How do these two plots differ in how well they convey the <strong>same</strong> information? Which one is better? Why is it better?</p>
 <p>To think about these questions, let’s plot the two layouts together. To do this we will use the <code>par()</code> function. This allows us to partition the plotting region.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the circle layout (add the main() argument for a title)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"circle"</span>, <span class="at">main =</span> <span class="st">"Plotted as a circle"</span> )</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the Fruchterman Reingold layout</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"fruchtermanreingold"</span>, <span class="at">main =</span> <span class="st">"Plotted using a spring algorithm"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the circle layout (add the main() argument for a title)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"circle"</span>, <span class="at">main =</span> <span class="st">"Plotted as a circle"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the Fruchterman Reingold layout</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( mafia_calls_net, <span class="at">gmode =</span> <span class="st">"graph"</span>, <span class="at">mode =</span> <span class="st">"fruchtermanreingold"</span>, <span class="at">main =</span> <span class="st">"Plotted using a spring algorithm"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Again, think about our questions: How do these two plots differ in how well they convey the <strong>same</strong> information? Which one is better? Why is it better?</p>
 <p>Ok, that was a lot. Let’s work our way back through the mechanics of building a plot to better get a sense of what we are doing.</p>
@@ -356,7 +417,7 @@ div.csl-indent {
 <p>Let’s take a look at some of the visualization capabilities of <code>gplot()</code>. Let’s start by looking at the function’s help page: <code>?gplot</code>.</p>
 <p>To see the various functionality of the function, let’s work with our example of an undirected network. Remember that the network <code>undirected_example_net</code> is available in <code>SNACpack</code>. Let’s plot it.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( undirected_example_net )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( undirected_example_net )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -374,11 +435,11 @@ div.csl-indent {
 <p>The <code>gplot()</code> function has a number of arguments that can be used to better display the information contained in the network.</p>
 <p>For example, we can add labels to the vertices using the <code>network.vertex.names()</code> function.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>, </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net )</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net )</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -417,16 +478,16 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="adjusting-plot-layout">Adjusting Plot Layout</h3>
 <p>When a layout is generated, the results can be saved for later reuse using the <code>coord=</code> argument.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed for the random number generator </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># so we can always get the same plot layout</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> ) </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define an object that will be the coordinates we want to use</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net )</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the seed for the random number generator </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># so we can always get the same plot layout</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> ) </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define an object that will be the coordinates we want to use</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net )</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -434,8 +495,8 @@ div.csl-indent {
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the vertex coordinates</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>coords</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the vertex coordinates</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>coords</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            x        y
 [1,] 3.240723 6.485256
@@ -448,13 +509,13 @@ div.csl-indent {
 <p>Take a close look at the <code>coords</code> object. What do the values represent? Think about how this information is used in the plot.</p>
 <p>Now, we can pass the coordinates into a plot.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Saved layouts can be used via the coord= argument:</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net ),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Saved layouts can be used via the coord= argument:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net ),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -466,24 +527,24 @@ div.csl-indent {
 <p>Cool but, <em>why do this?</em> The placement of the nodes shift when we call the <code>gplot()</code> function just due to the operation of the algorithm. Controlling where nodes are plotted in the 2-dimensional space is useful if we want to show different aspects of the plot. Note that we can have different layouts of the nodes. If we like a particular one, we can save the coordinates.</p>
 <p><em>But</em>, suppose the default settings are insufficient and we want to make a few small changes. The <code>interactive=</code> argument allows for tweaking.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, set up the coordinates you want.</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net ),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords, </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">interactive=</span><span class="cn">TRUE</span> </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, set up the coordinates you want</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">network.vertex.names</span>( undirected_example_net ),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">interactive=</span><span class="cn">TRUE</span> </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When this renders on your system, move a few of the nodes around. Then, after you close the window it will save the coordinates.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, use these in the plot.</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords, </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">label=</span><span class="fu">network.vertex.names</span>( undirected_example_net )</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, use these in the plot</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  undirected_example_net, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords, <span class="co"># use the coords object in the "coord=" argument</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">label=</span><span class="fu">network.vertex.names</span>( undirected_example_net )</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -491,6 +552,15 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="a-layering-approach">A Layering Approach</h2>
 <p>As we have seen, we can start with a basic plot and add information. Creating graphics in this way is referred to as <em>layering</em> because we are stacking additional layers of elements on top of each other.</p>
 <p>Take a look at this series of plots:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1728"></p>
+</figure>
+</div>
+</div>
+</div>
 <p>The plot uses several layers of information:</p>
 <ul>
 <li>the size of the nodes (<code>vertex.cex</code>)</li>
@@ -505,7 +575,24 @@ div.csl-indent {
 <p>Let’s plot the <em>power and influence network</em>, which was created by asking individuals whom they believed was “powerful and influential” on the unit. This network is available in <code>SNACpack</code> and is called: <code>pins_pi_net</code>.</p>
 <p>First, take a look at the network:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pins_pi_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pins_pi_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Network attributes:
+  vertices = 205 
+  directed = TRUE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 161 
+    missing edges= 0 
+    non-missing edges= 161 
+
+ Vertex attribute names: 
+    age race time_in_prison vertex.names 
+
+No edge attributes</code></pre>
+</div>
 </div>
 <p>We see that it has 205 vertices (nodes), 161 edges (trust nominations), and is directed.</p>
 <p>We also see that there are several attributes. To learn more about the attributes, review the help documentation for the network by using <code>?pins_pi_net</code>.</p>
@@ -515,64 +602,117 @@ div.csl-indent {
 <li><p><code>pins_pi_net %v% "race"</code> shows the race variable.</p></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the values for age</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the values for race</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>pins_pi_net <span class="sc">%v%</span> <span class="st">"race"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the values for age</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 30 60 43 33 54 40 52 54 42 49 24 30 49 43 45 25 43 61 44 29 48 49 41 36 33
+ [26] 22 32 35 33 32 30 28 22 37 35 47 62 40 44 50 29 51 50 33 34 44 53 24 34 65
+ [51] 27 49 25 29 48 39 53 23 37 56 50 27 45 47 37 27 37 43 40 68 46 41 24 53 50
+ [76] 26 40 45 43 37 38 59 32 35 28 37 33 30 47 30 37 48 42 37 30 55 36 31 31 29
+[101] 26 55 39 30 52 29 50 69 37 39 39 42 47 38 54 41 28 21 33 47 51 44 51 35 28
+[126] 30 54 26 60 58 31 32 46 37 45 23 39 35 40 39 52 32 57 24 24 52 61 33 51 47
+[151] 39 29 30 51 52 47 28 69 51 21 49 55 72 23 25 44 45 36 40 24 23 50 53 32 28
+[176] 29 46 40 32 39 30 30 26 25 44 57 42 30 43 42 33 36 26 24 26 33 37 34 33 24
+[201] 24 37 42 47 32</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the values for race</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pins_pi_net <span class="sc">%v%</span> <span class="st">"race"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 1 2 1 2 2 2 1 2 2 3 2 1 1 1 1 2 1 2 1 2 3 1 1 3 4 2 1 1 3 2 2 2 2 1 2 2 2
+ [38] 3 1 2 2 1 1 3 1 2 2 3 2 1 1 1 2 3 1 1 1 1 3 1 2 1 1 2 2 3 2 1 2 1 1 1 2 2
+ [75] 1 1 2 2 3 2 2 1 3 1 1 1 2 2 2 1 2 2 2 3 1 1 1 2 2 2 2 1 3 2 2 2 1 1 3 2 1
+[112] 1 1 2 2 1 3 2 2 1 2 1 2 1 1 2 1 2 1 2 1 2 3 3 2 2 3 3 3 3 2 2 2 3 2 1 1 2
+[149] 2 3 2 1 2 1 1 1 2 2 2 3 2 2 1 1 1 2 2 2 1 2 1 1 1 2 2 1 1 1 1 2 2 2 1 2 2
+[186] 2 1 2 1 1 1 3 2 2 2 1 2 2 2 3 2 3 3 2 2</code></pre>
+</div>
 </div>
 <p>Now, we can use that information in our plot. For example:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>YIKES!!! What is wrong?</p>
 <p>The problem is that we need to <em>rescale</em> the vertex attribute so that the nodes are not too big. Essentially, we want to be able to rework the values of the attribute so the plot sizes make sense. In <code>SNACpack</code> there is a function called <code>vertex_rescale</code> that does just that! I take a vector for plotting, and it allows you to specify the minimum and maximum values. Use <code>?vertex_rescale</code> for more information.</p>
 <p>We can use the <code>vertex_rescale</code> function to rescale the vertex attribute so it looks better:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now execute the plot</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net, </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>         pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="co"># the attribute we want to plot</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0.5</span>,  <span class="co"># the minimum size of a node</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>         <span class="fl">1.5</span>   <span class="co"># the maximum size of a node</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>         ) </span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now execute the plot</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>         pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="co"># the attribute we want to plot</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>         <span class="fl">0.5</span>,  <span class="co"># the minimum size of a node</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>         <span class="fl">1.5</span>   <span class="co"># the maximum size of a node</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>         ) </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Note that the plot above has a lot of “whitespace” due to the margins. We can adjust this using the <code>par()</code> function.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tweak the margins to cut some whitespace</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar =</span> <span class="fu">c</span>( <span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span> ) )</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># now execute the plot</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net, </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tweak the margins to cut some whitespace</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar =</span> <span class="fu">c</span>( <span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span> ) )</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># now execute the plot</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net, </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Try adjusting the minimum and maximum values in the <code>vertex_rescale</code> function and see how it changes the plot.</p>
 <p>Our plot is looking better, but there is still room for improvement. Let’s drop the isolates (using the <code>displayisolates = FALSE</code> argument) to help with the visualization.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar =</span> <span class="fu">c</span>( <span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span> ) )</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar =</span> <span class="fu">c</span>( <span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span> ) )</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex=</span><span class="fl">0.5</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span> ) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>As we build layers, we can get a fairly useful graphic that tells us a lot of information:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">5</span>,<span class="fl">0.1</span>,<span class="dv">3</span>,<span class="fl">0.1</span> ) )</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">"PINS Power &amp; Influence Network"</span>, <span class="co"># add a title</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> pins_pi_net <span class="sc">%v%</span> <span class="st">"race"</span>,      <span class="co"># color the nodes by the race variable</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,             <span class="co"># don't display the isolated cases</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex =</span> <span class="fl">0.5</span>,                 <span class="co"># augment the size of the arrowheads</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span> ), <span class="co"># size the nodes by the Age variable</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">sub =</span> <span class="st">"Nodes colored by Race, </span><span class="sc">\n</span><span class="st"> edges colored by Info net </span><span class="sc">\n</span><span class="st"> nodes sized by Age"</span> <span class="co"># add a subtitle</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">5</span>,<span class="fl">0.1</span>,<span class="dv">3</span>,<span class="fl">0.1</span> ) )</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( pins_pi_net,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">main=</span><span class="st">"PINS Power &amp; Influence Network"</span>, <span class="co"># add a title</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> pins_pi_net <span class="sc">%v%</span> <span class="st">"race"</span>,      <span class="co"># color the nodes by the race variable</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,             <span class="co"># don't display the isolated cases</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">arrowhead.cex =</span> <span class="fl">0.5</span>,                 <span class="co"># augment the size of the arrowheads</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pins_pi_net <span class="sc">%v%</span> <span class="st">"age"</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span> ), <span class="co"># size the nodes by the Age variable</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">sub =</span> <span class="st">"Nodes colored by Race, </span><span class="sc">\n</span><span class="st"> edges colored by Info net </span><span class="sc">\n</span><span class="st"> nodes sized by Age"</span> <span class="co"># add a subtitle</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-visualization_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 <p><br></p>
 </section>

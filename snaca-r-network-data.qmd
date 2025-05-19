@@ -558,21 +558,17 @@ library( SNACpack )
 
 ```
 
+```{r, echo=FALSE}
+
+library( SNACpack )
+
+```
+
 Done! Take a look at the package using `help( package = "SNACpack" )` to get a sense of what it contains (don't worry, we will be going through this in more detail throughout the tutorials).
 
-The networks in `SNACpack` are stored as objects of class `network`. To load them properly, you need to make sure you have loaded the `network` package. Also, to call the data files, we need to use the `data()` function. For example, let's take a look at a network examining relationships among cocaine dealers:
+The networks in `SNACpack` are stored as objects of class `network`. R recongizes this, and loads the `network` package for you. So, to examine the network object, you just have to type it out. Let's look at a network of cocaine dealers:
 
 ```{r}
-
-# load the network package
-
-library( network )
-
-
-# load the cocaine_dealing_net network
-
-data( cocaine_dealing_net )
-
 
 # examine the network
 
