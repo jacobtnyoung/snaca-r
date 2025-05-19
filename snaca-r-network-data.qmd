@@ -411,7 +411,6 @@ We need to adjust the arguments to read in the file how we want it. Specifically
 
 -   Set the `row.names =` argument equal to 1 to indicate that the name of the rows are in the first column.
 
-
 ```{r,echo=TRUE,eval=FALSE}
 
 # look at the arguments
@@ -523,15 +522,15 @@ net_d
 
 ```
 
-### Calling Network Data in **SNACpack** 
+### Calling Network Data in **SNACpack**
 
-We have seen how you can build a network object manually and how you can import one. As we will see throughout the tutorials, the [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) package contains several prebuilt data sets for you to use. To access these, we need to make sure we have the **SNACpack** package installed. We covered this in the [Getting Started with R]() tutorial, but we will review it here. 
+We have seen how you can build a network object manually and how you can import one. As we will see throughout the tutorials, the [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) package contains several prebuilt data sets for you to use. To access these, we need to make sure we have the **SNACpack** package installed. We covered this in the [Getting Started with R]() tutorial, but we will review it here.
 
 Recall that this package is not on CRAN, rather it is located on [Github](https://github.com), which is an online repository for storing code and various projects. To install the **SNACpack** package, we need to first install a package called `devtools` because it has a function `install_github()` that we will use to install the **SNACpack** package. Remember, if you have *already* installed `devtools` and `SNACpack` you do not need to reinstall them.
 
 To install **SNACpack**, let's use the following code chunk:
 
-```{r}
+```{r, eval = FALSE}
 
 # first install the devtools package
 
@@ -544,9 +543,9 @@ library( devtools )
 
 ```
 
-Ok, no we are ready to use the `install_github()` function. For this function to work, you need to know the location of the package you want to install. The location of the **SNACpack** package is: `jacobtnyoung/SNACpack`. If you want, you can access the repository using this link: [https://github.com/jacobtnyoung/SNACpack](https://github.com/jacobtnyoung/SNACpack). Now that we have the location, we can install it:
+Ok, no we are ready to use the `install_github()` function. For this function to work, you need to know the location of the package you want to install. The location of the **SNACpack** package is: `jacobtnyoung/SNACpack`. If you want, you can access the repository using this link: <https://github.com/jacobtnyoung/SNACpack>. Now that we have the location, we can install it:
 
-```{r}
+```{r, eval = FALSE}
 
 # install the package
 
