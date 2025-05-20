@@ -326,7 +326,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="degree-centrality-undirected-binary-graphs">Degree Centrality (Undirected Binary Graphs)</h2>
 <p>In an undirected binary graph, <em>actor degree centrality</em> measures the extent to which a node connects to all other nodes in a network. In other words, the number of edges incident with a node. This is symbolized as: <span class="math inline">\(d(n_i)\)</span>. For an undirected binary graph, the degree <span class="math inline">\(d(n_i)\)</span> is the row or column sum. If we have an object of <code>class(matrix)</code> in the workspace, we can use the <code>colSums()</code> and/or <code>rowSums()</code> functions to return this information.</p>
 <p>First, let’s set up our graph from the degree centrality chapter:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, clear the workspace</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>( <span class="at">list =</span> <span class="fu">ls</span>() )</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -351,9 +351,9 @@ window.Quarto = {
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( u_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -369,15 +369,15 @@ window.Quarto = {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Since the graph is undirected, we can print the degree centrality for each node as a vector using the <code>colSums()</code> or <code>rowSums()</code> functions:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>( u_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Jen  Tom  Bob Leaf  Jim 
@@ -392,7 +392,7 @@ window.Quarto = {
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>deg_u_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( u_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, we can use that information in the plot by passing the degree object to the <code>vertex.cex=</code> argument. This will make nodes with higher degree larger.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  u_mat,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode=</span><span class="st">"graph"</span>, </span>
@@ -405,15 +405,15 @@ window.Quarto = {
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Another approach is to shade the nodes. Rather than just the size, we might want to have nodes with larger degree to be darker (or lighter) to better visualize differences in degree. To do this, we could use the <code>RColorBrewer</code> package to shade the nodes.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages( "RColorBrewer" )</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( RColorBrewer, <span class="at">quietly=</span><span class="cn">TRUE</span> )</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -436,9 +436,9 @@ window.Quarto = {
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -447,7 +447,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="standardized-degree-centrality-mean-degree-and-centralization">Standardized degree centrality, mean degree, and centralization</h3>
 <p>Actor degree centrality not only reflects each node’s connectivity to other nodes but also depends on the size of the network, <em>g</em>. As a result, larger networks will have a higher maximum possible degree centrality values. This makes comparison across networks problematic. The solution is to take into account the number of nodes and the maximum possible nodes to which <em>i</em> could be connected, <em>g-1</em>.</p>
 <p>Let’s calculate the standardized centrality scores for our undirected graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unstandardized or raw centrality</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>deg_u_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( u_mat )</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -473,7 +473,7 @@ window.Quarto = {
 <p><span class="math display">\[\frac{\sum_{i=1}^g d(n_i)}{g}\]</span> or</p>
 <p><span class="math display">\[\frac{2L}{g}\]</span></p>
 <p>where <em>L</em> is the number of edges in the graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mean_deg <span class="ot">&lt;-</span> <span class="fu">sum</span>( deg_u_mat ) <span class="sc">/</span> <span class="fu">dim</span>( u_mat )[<span class="dv">1</span>] </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mean_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -491,7 +491,7 @@ window.Quarto = {
 <p>We can also calculate how centralized the graph itself is. <em>Group degree centralization</em> measures the extent to which the actors in a social network differ from one another in their individual degree centralities. Following <span class="citation" data-cites="wasserman1994social">Wasserman and Faust (<a href="references.html#ref-wasserman1994social" role="doc-biblioref">1994</a>)</span>, an index of <em>group degree centralization</em> can be calculated as:</p>
 <p><span class="math display">\[C_D = \frac{\sum\limits_{i=1}^g [C_D(n^*) - C_D(n_i)]}{[(g-1)(g-2)]}\]</span></p>
 <p>for undirected graphs where <span class="math inline">\(C_D(n^*)\)</span> is the maximum degree in the graph. We can write out the components of the equation using the <code>max()</code> function:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In separate pieces</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>deviations <span class="ot">&lt;-</span> <span class="fu">max</span>( deg_u_mat ) <span class="sc">-</span> deg_u_mat</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sum_deviations <span class="ot">&lt;-</span> <span class="fu">sum</span>( deviations )</span>
@@ -518,7 +518,7 @@ window.Quarto = {
 <p>In a directed binary graph, actor degree centrality can be broken down into <em>indegree</em> and <em>outdegree</em> centrality. Indegree, <span class="math inline">\(C_I(n_i)\)</span>, measures the number of ties that <em>i</em> receives. For the sociomatrix <span class="math inline">\(Xij\)</span>, the indegree for <em>i</em> is the <strong>column</strong> sum. Outdegree, <span class="math inline">\(C_O(n_i)\)</span>, measures the number of ties that <em>i</em> sends. For the sociomatrix <span class="math inline">\(Xij\)</span>, the outdegree for <em>i</em> is the <strong>row</strong> sum.</p>
 <p>As before, if we have an object of <code>class(matrix)</code> in the workspace, we can use the <code>rowSums()</code> and <code>colSums()</code> functions. However, the <code>colSums()</code> function will return the <em>indegree</em> centrality for <em>i</em> and the <code>rowSums()</code> function will return the <em>outdegree</em> centrality for <em>i</em>.</p>
 <p>First, let’s set up our directed graph from the degree centrality lecture:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, clear the workspace</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>( <span class="at">list =</span> <span class="fu">ls</span>() )</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -542,9 +542,9 @@ window.Quarto = {
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co"># set the new coordinates</span></span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( d_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -560,14 +560,14 @@ window.Quarto = {
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's look at the different centrality scores </span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># by assigning them to different objects</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ideg_d_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( d_mat )</span>
@@ -622,7 +622,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -671,7 +671,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -679,7 +679,7 @@ window.Quarto = {
 <section id="standardized-degree-centrality-mean-degree-and-centralization-1" class="level3">
 <h3 class="anchored" data-anchor-id="standardized-degree-centrality-mean-degree-and-centralization-1">Standardized degree centrality, mean degree, and centralization</h3>
 <p>Let’s calculate the standardized centrality scores for our directed graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unstandardized or raw centrality</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ideg_d_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( d_mat )</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>odeg_d_mat <span class="ot">&lt;-</span> <span class="fu">rowSums</span>( d_mat )</span>
@@ -693,7 +693,7 @@ window.Quarto = {
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>s_o_deg_u_mat <span class="ot">&lt;-</span> odeg_d_mat <span class="sc">/</span> ( g<span class="dv">-1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also examine the <em>average</em> degree of the graph using <span class="math inline">\(\frac{\sum_{i=1}^g C_I(n_i)}{g} = \frac{\sum_{i=1}^g C_O(n_i)}{g}\)</span> or <span class="math inline">\(\frac{L}{g}\)</span>, where <em>L</em> is the number of edges in the graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mean_i_deg <span class="ot">&lt;-</span> <span class="fu">sum</span>( ideg_d_mat ) <span class="sc">/</span> <span class="fu">dim</span>( d_mat )[<span class="dv">1</span>] </span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mean_o_deg <span class="ot">&lt;-</span> <span class="fu">sum</span>( odeg_d_mat ) <span class="sc">/</span> <span class="fu">dim</span>( d_mat )[<span class="dv">1</span>] </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mean_i_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -717,7 +717,7 @@ window.Quarto = {
 <p>Again, following <span class="citation" data-cites="wasserman1994social">Wasserman and Faust (<a href="references.html#ref-wasserman1994social" role="doc-biblioref">1994</a>)</span>, an index of <em>group indegree/outdegree centralization</em> can be calculated as:</p>
 <p><span class="math display">\[ C_D = \frac{\sum\limits_{i=1}^g [C_D(n^*) - C_D(n_i)]}{[(g-1)^2]} \]</span></p>
 <p>for undirected graphs where <span class="math inline">\(C_D(n^*)\)</span> is the maximum indegree/outdegree in the graph. We can write out the components of the equation using the <code>max()</code> function:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In separate pieces</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>deviations <span class="ot">&lt;-</span> <span class="fu">max</span>( ideg_d_mat ) <span class="sc">-</span> ideg_d_mat</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>sum_deviations <span class="ot">&lt;-</span> <span class="fu">sum</span>( deviations )</span>
@@ -756,7 +756,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="degree-centrality-using-the-sna-package">Degree Centrality using the <code>sna</code> Package</h2>
 <p>Did that feel tedious? If no, go back and do it again :)</p>
 <p>As you probably have guessed, there <em>are</em> functions in the <code>sna</code> package that calculate degree centrality and graph centralization! In the <code>sna</code> package, these are the <code>degree()</code> and <code>centralization()</code> functions, respectively. Let’s take a look at how these work.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the library</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( sna )</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -829,7 +829,7 @@ window.Quarto = {
 <section id="get-along-with-network-undirected-network" class="level3">
 <h3 class="anchored" data-anchor-id="get-along-with-network-undirected-network"><em>Get Along With</em> Network (Undirected Network)</h3>
 <p>For the <em>get along with</em> network, individuals could have asymmetric nominations. That is, <em>i</em> could nominate <em>j</em> and <em>j</em> didn’t necessarily nominate <em>i</em>. But, we are going to <strong>symmetrize</strong> the network by only taking ties for which <strong><em>both</em></strong> <em>i</em> and <em>j</em> indicated that the get along with the other person. This will give us an undirected network.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the SNACpack package</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( SNACpack )</span>
@@ -847,13 +847,13 @@ window.Quarto = {
 </div>
 <p>Now we have created an undirected network where ties represent “get along with” nominations from both individuals. Let’s calculate the degree centrality scores, the centralization score, and then use the degree centrality scores to size our nodes in a plot using the <code>vertex.cex()</code> argument in the <code>gplot()</code> function.</p>
 <p><br></p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the coordinates</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( ga_net_u )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now lets build the objects and the plot:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the degrees.</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>ga_net_deg <span class="ot">&lt;-</span> <span class="fu">degree</span>( ga_net_u, <span class="at">gmode=</span><span class="st">"graph"</span> )</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -872,9 +872,9 @@ window.Quarto = {
 <span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">"node sized by degree centrality"</span></span>
 <span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -895,7 +895,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -917,7 +917,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -931,7 +931,7 @@ window.Quarto = {
 <section id="power-and-influence-network-directed-network" class="level3">
 <h3 class="anchored" data-anchor-id="power-and-influence-network-directed-network">Power and Influence Network (Directed Network)</h3>
 <p>For the <em>power and influence</em> network, individuals could have asymmetric nominations. That is, <em>i</em> could nominate <em>j</em> and <em>j</em> didn’t necessarily nominate <em>i</em>. We will keep this asymmetry so that we can treat the network as directed. As mentioned above, the <em>power and influence</em> exists in <code>SNACpack</code> as <code>pins_pi_net</code>:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pins_pi_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Network attributes:
@@ -951,12 +951,12 @@ window.Quarto = {
 No edge attributes</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the coordinates</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>coords2 <span class="ot">&lt;-</span> <span class="fu">gplot</span>( pins_pi_net )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the degrees.</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>pi_net_ideg <span class="ot">&lt;-</span> <span class="fu">degree</span>( pins_pi_net, <span class="at">gmode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"indegree"</span> )</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>pi_net_odeg <span class="ot">&lt;-</span> <span class="fu">degree</span>( pins_pi_net, <span class="at">gmode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"outdegree"</span> )</span>
@@ -994,7 +994,7 @@ No edge attributes</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>

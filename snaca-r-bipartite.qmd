@@ -4,7 +4,10 @@ knitr::opts_chunk$set(
   eval = TRUE,
   echo = TRUE, 
   message=FALSE, 
-  warning=FALSE 
+  warning=FALSE,
+  fig.width=6, 
+  fig.height=6,
+  fig.align="center"
   )
 
 ```
@@ -26,7 +29,7 @@ This tutorial examines various properties of bipartite graphs (e.g. density, deg
 
 To begin, let's build the example bipartite graph from the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter:
 
-```{r}
+```{r, create-example-matrix}
 
 # create the example network
 bipartite_example <- rbind(
@@ -68,7 +71,7 @@ In looking through the help file for the `as.network()` function, we see that th
 
 For example:
 
-```{r}
+```{r, create-example-network}
 
 # identify the number of actors in the example
 N <- dim( bipartite_example )[1]
@@ -122,7 +125,7 @@ gplot(
 
 As we saw in the [Basics of Network Visualization](snaca-r-visualization.html) tutorial, there are a lot of options that help us convey important information about a network. When we are working with a two mode network object, we need to make sure that whatever information we pass to the nodes matches the order of the nodes in the network. For example, we saw above that the network first labels the actor nodes and then labels the event nodes. If we wanted to choose a different set of colors, for example, using the `vertex.col=` argument, then we would want a set of colors for the actors and a set of colors for the events. Then, we would want these combined into a single object. Let's do that here to demonstrate:
 
-```{r}
+```{r, examine-dimensions}
 
 # identify the number of actors in the example
 N <- dim( bipartite_example )[1]
@@ -305,50 +308,34 @@ gplot(
 
 Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html) chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers' views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
 
-Let's import the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.
+This network is available in `SNACpack` under the name `officer_event_net`. We can type the name of the network to see it's properties:
 
 ```{r}
 
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-officer-events-adj.csv"
+# load SNACpack 
 
-# read in the .csv file
-cam_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
-
-# identify the number of police officers
-N <- dim( cam_mat )[1]
-
-# identify the number of incidents
-M <- dim( cam_mat )[2]
-
-```
-
-Now, we want to coerce this to an object of class `network`.
-
-```{r}
+library( SNACpack )
 
 
-# create the network object
-officer_event_net <- as.network( 
-  cam_mat,
-  bipartite = N
-)
+# print out the network
 
-# take a look
 officer_event_net
 
 ```
 
+If you inspect the output, you will see that there are `r dim( as.matrix( officer_event_net ) )[1]` officers (the *N* dimension of the sociomatrix) and `r dim( as.matrix( officer_event_net ) )[2]` events (the *M* dimension of the sociomatrix).
+
 ### Plotting the Network
 
-Now, let's create a plot of the network. To aid in visualization, we need to create a variable indicating whether the officer was in the treatment (i.e. received a body-cam) or control group. If you look at the `network.vertex.names( officer_event_net )` object, you will see that the officer ids start with "C" or "T". The "C" prefix indicates a **control** officer and a "T" prefix indicates a **treatment** officer. The first 44 ids are for control officers and the subsequent 37 ids are for treatment officers. The remaining 153 correspond to events. We can use this info to create a variable that indicates treatment status.
+Now, let's create a plot of the network. To aid in visualization, we need to create a variable indicating whether the officer was in the treatment (i.e. received a body-cam) or control group. If you look at the `network.vertex.names( officer_event_net )` object, you will see that the officer ids start with "C" or "T":
+
+```{r}
+
+network.vertex.names( officer_event_net )
+
+```
+
+The first `r dim( as.matrix( officer_event_net ) )[1]` elements are officers. For the officer ids, the "C" prefix indicates a **control** officer and a "T" prefix indicates a **treatment** officer. The first 44 ids are for control officers and the subsequent 37 ids are for treatment officers. The remaining 153 correspond to events. We can use this info to create a variable that indicates treatment status.
 
 We will use this information to create an attribute. To do so, we will use the `rep()` function which repeats a sequence of numbers of characters.
 
@@ -375,8 +362,8 @@ vsides[ status == "Incident" ]  <- 50 # make events circles
 
 # create the node sizes
 nsize <- c(
-  rep( 2,   N ), # sizes for officers
-  rep( 1.2, M )  # size for the events
+  rep( 2,   81 ), # sizes for officers
+  rep( 1.2, 153 )  # size for the events
   ) 
 
 ```
@@ -384,6 +371,9 @@ nsize <- c(
 Now, we can plot this using the `gplot()` function.
 
 ```{r}
+
+# adjust the margins to cut some white space
+par( mar=c( 0, 0, 2, 0 ) )
 
 # set the seed for the plot
 set.seed( 507 )
@@ -414,8 +404,15 @@ Remember, the density is the total number of edges divided by `N x M`.
 
 ```{r}
 
+# coerce to a matrix for ease of working with the object
+officer_event_mat <- as.matrix( officer_event_net )
+
+# create the N and M objects
+N <- dim( officer_event_mat )[1]
+M <- dim( officer_event_mat )[2]
+
 # identify the number of edges in the graph
-L <- sum( cam_mat )
+L <- sum( officer_event_mat )
 
 L / ( N * M )
 
@@ -430,10 +427,10 @@ Now, let's take a look at the degree distributions.
 ```{r}
 
 # raw scores for officers
-officer_deg <- rowSums( cam_mat )
+officer_deg <- rowSums( officer_event_mat )
 
 # raw scores for incidents
-incident_deg <- colSums( cam_mat )
+incident_deg <- colSums( officer_event_mat )
 
 ```
 

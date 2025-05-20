@@ -327,7 +327,7 @@ window.Quarto = {
 <section id="bipartite-graphstwo-mode-networks" class="level2">
 <h2 class="anchored" data-anchor-id="bipartite-graphstwo-mode-networks">Bipartite Graphs/Two-Mode Networks</h2>
 <p>To begin, let’s build the example bipartite graph from the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the example network</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>bipartite_example <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>( <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span> ),</span>
@@ -359,7 +359,7 @@ F 0 0 1 0 1</code></pre>
 <section id="using-the-network-package" class="level3">
 <h3 class="anchored" data-anchor-id="using-the-network-package">Using the <code>network</code> Package</h3>
 <p>We can create an object of class <code>network</code> by using the <code>as.network()</code> function in the <code>network</code> package. First, take a look at the help for the <code>as.network()</code> function, paying particular attention to the <code>bipartite=</code> argument.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the network package</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( network )</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -368,7 +368,7 @@ F 0 0 1 0 1</code></pre>
 </div>
 <p>In looking through the help file for the <code>as.network()</code> function, we see that the <code>bipartite=</code> argument says that this argument allows the count of the number of actors in the bipartite network. A bipartite adjacency matrix has order <em>NxM</em>, where <em>N</em> represents the number of rows (e.g.&nbsp;actors) and <em>M</em> represents the number of columns (e.g.&nbsp;events). In the <code>bipartite=</code> argument, we can specify the count of actors as <em>N</em>.</p>
 <p>For example:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of actors in the example</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>( bipartite_example )[<span class="dv">1</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -402,7 +402,7 @@ No edge attributes</code></pre>
 <section id="using-gplot-in-the-sna-package" class="level3">
 <h3 class="anchored" data-anchor-id="using-gplot-in-the-sna-package">Using <code>gplot()</code> in the <code>sna</code> Package</h3>
 <p>Now that our object is created, we can take a look at a plot of the network using the <code>gplot()</code> function. Before we do so, let’s take a look at a few changes we need to make. First, note that the <code>gplot()</code> function reads the labels by starting with the names in the first mode, then the names in the second mode. We can see this by printing the vertex labels the function assigns with the <code>network.vertex.names()</code> function.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look how it reads the labels</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">network.vertex.names</span>( bipartite_example_net ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -411,7 +411,7 @@ No edge attributes</code></pre>
 </div>
 <p>We can see that it first labels the actor nodes (i.e.&nbsp;A, B, C, D, E, and F) and then names the event nodes (i.e.&nbsp;1, 2, 3, 4, 5).</p>
 <p>Second, we need to tell the <code>gplot()</code> function that the network has two modes, not one mode. We do this using the <code>gmode=</code> argument, which automatically changes the colors and the shapes of the nodes when we specify that the graph is <code>twomode</code>. Third, we need to set the <code>usearrows=</code> argument to <code>FALSE</code> so that the arrowheads are turned off. (<em>Note that there</em> <strong>are</strong> <em>directed two-mode networks in which you would use arrowheads, but we will skip that for now</em>). Let’s check it out:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the sna library to get the gplot() function</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( sna )</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -429,15 +429,15 @@ No edge attributes</code></pre>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">"Bipartite Graph of Example Graph"</span>                 <span class="co"># add a title</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>As we saw in the <a href="snaca-r-visualization.html">Basics of Network Visualization</a> tutorial, there are a lot of options that help us convey important information about a network. When we are working with a two mode network object, we need to make sure that whatever information we pass to the nodes matches the order of the nodes in the network. For example, we saw above that the network first labels the actor nodes and then labels the event nodes. If we wanted to choose a different set of colors, for example, using the <code>vertex.col=</code> argument, then we would want a set of colors for the actors and a set of colors for the events. Then, we would want these combined into a single object. Let’s do that here to demonstrate:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of actors in the example</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>( bipartite_example )[<span class="dv">1</span>]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -461,7 +461,7 @@ No edge attributes</code></pre>
 </div>
 </div>
 <p>Now that we have a set of colors that match the order of the nodes, we can pass it into the <code>gplot()</code> function using the <code>vertex.col=</code> argument:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the seed to reproduce the plot layout</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -480,9 +480,9 @@ No edge attributes</code></pre>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.col =</span> node_col                                   <span class="co"># add the colors</span></span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -498,7 +498,7 @@ No edge attributes</code></pre>
 <p>The <em>density</em> of a bipartite graph is the number of observed edges in the graph, <em>L</em>, divided by the number of nodes in the first mode, <em>N</em>, multiplied by the number of nodes in the second mode, <em>M</em>. That is:</p>
 <p><span class="math display">\[\frac{L}{N \times M}\]</span></p>
 <p>In other words, the density of the graph is the number of edges we observed divided by the maximum number of possible edges in the graph. We can calculate this using the <code>sum()</code> and <code>dim()</code> functions.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of edges in the graph</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">sum</span>( bipartite_example )</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -527,7 +527,7 @@ No edge attributes</code></pre>
 <li><p>The distribution of ties in the second mode</p></li>
 </ul>
 <p>We can calculate the degree centrality scores for each node in each corresponding vertex set by taking the <em>row</em> sum for <em>N</em> nodes in the first mode and taking the <em>column</em> sum for <em>M</em> nodes in the second mode. We can do so using the <code>rowSums()</code> and <code>colSums()</code> functions, respectively.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># raw scores for actors</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>actor_deg <span class="ot">&lt;-</span> <span class="fu">rowSums</span>( bipartite_example )</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>actor_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -551,7 +551,7 @@ No edge attributes</code></pre>
 <li><p>for the first node set we divide by <span class="math inline">\(\frac{L}{N}\)</span>, the number of nodes in that set.</p></li>
 <li><p>for the second node set we divide by <span class="math inline">\(\frac{L}{M}\)</span>, the number of nodes in that set.</p></li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean degree for actors</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mean_actor_deg <span class="ot">&lt;-</span> L <span class="sc">/</span> N</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -575,7 +575,7 @@ No edge attributes</code></pre>
 <p>Degree centrality scores for each node/vertex set not only reflects each node’s connectivity to nodes in the other set, but also depend on the size of that set. As a result, larger networks will have a higher maximum possible degree centrality value. <em>Solution?</em></p>
 <p><strong>Standardize!!!</strong></p>
 <p>As we saw for unipartite graphs, we can adjust the raw degree centrality scores by taking into account the size of the graph. In a bipartite graph, we can standardize, or <em>normalize</em>, by dividing the raw centrality scores by the number of nodes in the <strong>opposite</strong> vertex set. That is, for the centrality scores in the first mode we divide by <em>M</em> and for the centrality scores in the second mode we divide by <em>N</em>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># standardized score for actors</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>actor_deg <span class="sc">/</span> M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -590,7 +590,7 @@ No edge attributes</code></pre>
 </div>
 </div>
 <p>In networks with lots of nodes, this information might be useful for visualizing differences in nodes degree centrality. Let’s create a plot with the standardized scores where larger degree centrality influences the size of the nodes. As we did above, we will want to create a single object that has these sizes. We can do this using the <code>c()</code> function.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the standardized scores for actors</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>actor_size <span class="ot">&lt;-</span> actor_deg <span class="sc">/</span> M</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -617,9 +617,9 @@ No edge attributes</code></pre>
 <span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> v_size <span class="sc">+</span> <span class="fl">0.5</span>                               <span class="co"># set the size (add 0.5 so it is not too small) </span></span>
 <span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -630,37 +630,16 @@ No edge attributes</code></pre>
 <section id="structural-properties-of-young-ready-2015-police-officer-network" class="level2">
 <h2 class="anchored" data-anchor-id="structural-properties-of-young-ready-2015-police-officer-network">Structural Properties of <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready (2015)</a> Police Officer Network</h2>
 <p>Now, let’s work with a real example. As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-bipartite.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers’ views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
-<p>Let’s import the matrix, create a network, assign an attribute, and plot it. Then, we will work through the structural properties.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the location for the file</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="st">"https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-officer-events-adj.csv"</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the .csv file</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>cam_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>( </span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    loc,</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">as.is =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="dv">1</span> </span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of police officers</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>( cam_mat )[<span class="dv">1</span>]</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of incidents</span></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">dim</span>( cam_mat )[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now, we want to coerce this to an object of class <code>network</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the network object</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>officer_event_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>( </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  cam_mat,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">bipartite =</span> N</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>officer_event_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This network is available in <code>SNACpack</code> under the name <code>officer_event_net</code>. We can type the name of the network to see it’s properties:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load SNACpack </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( SNACpack )</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print out the network</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>officer_event_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Network attributes:
   vertices = 234 
@@ -679,58 +658,115 @@ No edge attributes</code></pre>
 No edge attributes</code></pre>
 </div>
 </div>
+<p>If you inspect the output, you will see that there are 81 officers (the <em>N</em> dimension of the sociomatrix) and 153 events (the <em>M</em> dimension of the sociomatrix).</p>
 <section id="plotting-the-network" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-the-network">Plotting the Network</h3>
-<p>Now, let’s create a plot of the network. To aid in visualization, we need to create a variable indicating whether the officer was in the treatment (i.e.&nbsp;received a body-cam) or control group. If you look at the <code>network.vertex.names( officer_event_net )</code> object, you will see that the officer ids start with “C” or “T”. The “C” prefix indicates a <strong>control</strong> officer and a “T” prefix indicates a <strong>treatment</strong> officer. The first 44 ids are for control officers and the subsequent 37 ids are for treatment officers. The remaining 153 correspond to events. We can use this info to create a variable that indicates treatment status.</p>
+<p>Now, let’s create a plot of the network. To aid in visualization, we need to create a variable indicating whether the officer was in the treatment (i.e.&nbsp;received a body-cam) or control group. If you look at the <code>network.vertex.names( officer_event_net )</code> object, you will see that the officer ids start with “C” or “T”:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network.vertex.names</span>( officer_event_net )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "C1223"       "C1224"       "C1225"       "C1226"       "C1227"      
+  [6] "C1228"       "C1229"       "C1230"       "C1231"       "C1232"      
+ [11] "C1234"       "C1235"       "C1237"       "C1238"       "C1239"      
+ [16] "C1240"       "C1241"       "C1242"       "C1243"       "C1245"      
+ [21] "C1247"       "C1248"       "C1249"       "C1250"       "C1251"      
+ [26] "C1252"       "C1253"       "C1254"       "C1255"       "C1256"      
+ [31] "C1257"       "C1258"       "C1259"       "C1260"       "C1261"      
+ [36] "C1262"       "C1263"       "C1264"       "C1265"       "C1266"      
+ [41] "C1268"       "C1269"       "C1270"       "C1271"       "T1223"      
+ [46] "T1224"       "T1225"       "T1226"       "T1227"       "T1228"      
+ [51] "T1229"       "T1231"       "T1232"       "T1236"       "T1237"      
+ [56] "T1238"       "T1239"       "T1240"       "T1242"       "T1243"      
+ [61] "T1245"       "T1247"       "T1248"       "T1249"       "T1251"      
+ [66] "T1252"       "T1253"       "T1255"       "T1256"       "T1259"      
+ [71] "T1260"       "T1261"       "T1262"       "T1264"       "T1265"      
+ [76] "T1270"       "T1273"       "T1275"       "T1276"       "T1277"      
+ [81] "T1278"       "12272012_16" "02102013_9"  "02102013_10" "02102013_8" 
+ [86] "02102013_7"  "12272012_7"  "12272012_5"  "12272012_6"  "12272012_4" 
+ [91] "12272012_3"  "12272012_1"  "12262012_5"  "12272012_2"  "12272012_18"
+ [96] "02072013_17" "12292012_6"  "12292012_7"  "12292012_4"  "12292012_5" 
+[101] "02092013_5"  "12292012_17" "12292012_23" "12272012_17" "12282012_1" 
+[106] "02092013_2"  "02092013_3"  "02092013_26" "06122013_1"  "01012013_2" 
+[111] "01012013_3"  "01012013_1"  "12302012_7"  "12292012_26" "12302012_8" 
+[116] "12302012_9"  "12302012_2"  "12292012_24" "12282012_2"  "02092013_6" 
+[121] "12312012_2"  "12312012_3"  "02072013_1"  "02072013_3"  "02072013_4" 
+[126] "12292012_18" "12292012_20" "02092013_22" "12292012_21" "02092013_23"
+[131] "02092013_25" "02092013_15" "02092013_21" "12292012_19" "12292012_22"
+[136] "02092013_18" "12292012_15" "12292012_16" "02092013_14" "02092013_19"
+[141] "02092013_17" "02082013_2"  "12292012_3"  "12282012_3"  "12312012_1" 
+[146] "12302012_21" "02112013_3"  "02102013_11" "02112013_1"  "12302012_11"
+[151] "12302012_10" "01012013_4"  "02092013_8"  "02092013_10" "12292012_13"
+[156] "12292012_14" "12292012_12" "02092013_13" "12292012_10" "12292012_11"
+[161] "12292012_9"  "02092013_7"  "02092013_9"  "02162013_1"  "02092013_20"
+[166] "02092013_16" "02092013_11" "02092013_12" "12302012_3"  "12302012_6" 
+[171] "12302012_5"  "12292012_25" "12302012_4"  "02092013_24" "12292012_8" 
+[176] "12262012_3"  "12262012_2"  "12262012_1"  "02062013_5"  "02062013_3" 
+[181] "12272012_10" "12272012_8"  "12302012_14" "12302012_12" "12302012_16"
+[186] "12302012_13" "12312012_5"  "12312012_4"  "02072013_7"  "02072013_5" 
+[191] "02072013_16" "02072013_10" "12272012_11" "02072013_13" "02072013_9" 
+[196] "12272012_15" "02072013_8"  "12272012_12" "02072013_15" "02072013_11"
+[201] "02072013_2"  "02072013_6"  "02062013_4"  "12302012_19" "12302012_17"
+[206] "02102013_3"  "02102013_6"  "12292012_27" "02102013_2"  "02102013_5" 
+[211] "02102013_1"  "12292012_1"  "12302012_1"  "12292012_28" "02102013_4" 
+[216] "02082013_1"  "12312012_6"  "12302012_18" "12302012_20" "02232013_1" 
+[221] "12292012_2"  "02092013_4"  "02092013_1"  "02062013_1"  "12262012_4" 
+[226] "02072013_14" "12272012_9"  "02072013_12" "02062013_2"  "12302012_15"
+[231] "12272012_14" "12272012_13" "02112013_2"  "02252013_1" </code></pre>
+</div>
+</div>
+<p>The first 81 elements are officers. For the officer ids, the “C” prefix indicates a <strong>control</strong> officer and a “T” prefix indicates a <strong>treatment</strong> officer. The first 44 ids are for control officers and the subsequent 37 ids are for treatment officers. The remaining 153 correspond to events. We can use this info to create a variable that indicates treatment status.</p>
 <p>We will use this information to create an attribute. To do so, we will use the <code>rep()</code> function which repeats a sequence of numbers of characters.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable using the information in the ids</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>( </span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="st">"Control"</span>, <span class="dv">44</span> ),   <span class="co"># repeat "Control" 44 times because there are 44 control officers</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="st">"Treatment"</span>, <span class="dv">37</span> ), <span class="co"># repeat "Treatment" 37 times because there are 37 control officers</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="st">"Incident"</span>, <span class="dv">153</span> )     <span class="co"># repeat "Incident" 153 times because there are 153 incident</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create colors for the plot</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>vcol <span class="ot">&lt;-</span> status</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>vcol[ status <span class="sc">==</span> <span class="st">"Control"</span> ]   <span class="ot">&lt;-</span> <span class="st">"green"</span> <span class="co"># make controls green</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>vcol[ status <span class="sc">==</span> <span class="st">"Treatment"</span> ] <span class="ot">&lt;-</span> <span class="st">"red"</span>   <span class="co"># make treatment group red</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>vcol[ status <span class="sc">==</span> <span class="st">"Incident"</span> ]  <span class="ot">&lt;-</span> <span class="st">"white"</span> <span class="co"># make events white</span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co"># create the shapes</span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>vsides <span class="ot">&lt;-</span> <span class="fu">rep</span>( <span class="dv">0</span>, <span class="fu">length</span>( status ) )</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>vsides[ status <span class="sc">==</span> <span class="st">"Control"</span> ]   <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># make controls triangles</span></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>vsides[ status <span class="sc">==</span> <span class="st">"Treatment"</span> ] <span class="ot">&lt;-</span> <span class="dv">4</span>  <span class="co"># make treatment group squares</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>vsides[ status <span class="sc">==</span> <span class="st">"Incident"</span> ]  <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># make events circles</span></span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="co"># create the node sizes</span></span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>nsize <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="dv">2</span>,   N ), <span class="co"># sizes for officers</span></span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="fl">1.2</span>, M )  <span class="co"># size for the events</span></span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable using the information in the ids</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>status <span class="ot">&lt;-</span> <span class="fu">c</span>( </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="st">"Control"</span>, <span class="dv">44</span> ),   <span class="co"># repeat "Control" 44 times because there are 44 control officers</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="st">"Treatment"</span>, <span class="dv">37</span> ), <span class="co"># repeat "Treatment" 37 times because there are 37 control officers</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="st">"Incident"</span>, <span class="dv">153</span> )     <span class="co"># repeat "Incident" 153 times because there are 153 incident</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create colors for the plot</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>vcol <span class="ot">&lt;-</span> status</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>vcol[ status <span class="sc">==</span> <span class="st">"Control"</span> ]   <span class="ot">&lt;-</span> <span class="st">"green"</span> <span class="co"># make controls green</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>vcol[ status <span class="sc">==</span> <span class="st">"Treatment"</span> ] <span class="ot">&lt;-</span> <span class="st">"red"</span>   <span class="co"># make treatment group red</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>vcol[ status <span class="sc">==</span> <span class="st">"Incident"</span> ]  <span class="ot">&lt;-</span> <span class="st">"white"</span> <span class="co"># make events white</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co"># create the shapes</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>vsides <span class="ot">&lt;-</span> <span class="fu">rep</span>( <span class="dv">0</span>, <span class="fu">length</span>( status ) )</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>vsides[ status <span class="sc">==</span> <span class="st">"Control"</span> ]   <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># make controls triangles</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>vsides[ status <span class="sc">==</span> <span class="st">"Treatment"</span> ] <span class="ot">&lt;-</span> <span class="dv">4</span>  <span class="co"># make treatment group squares</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>vsides[ status <span class="sc">==</span> <span class="st">"Incident"</span> ]  <span class="ot">&lt;-</span> <span class="dv">50</span> <span class="co"># make events circles</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a><span class="co"># create the node sizes</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>nsize <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="dv">2</span>,   <span class="dv">81</span> ), <span class="co"># sizes for officers</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep</span>( <span class="fl">1.2</span>, <span class="dv">153</span> )  <span class="co"># size for the events</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we can plot this using the <code>gplot()</code> function.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the seed for the plot</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  officer_event_net,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">displayisolates=</span><span class="cn">FALSE</span>,</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.col=</span>vcol,</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.sides=</span>vsides,</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge.lwd=</span><span class="fl">1.2</span>,</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.cex =</span> nsize,</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Plot of Officers and Events"</span></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># adjust the margins to cut some white space</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mar=</span><span class="fu">c</span>( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span> ) )</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set the seed for the plot</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot it</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  officer_event_net,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">displayisolates=</span><span class="cn">FALSE</span>,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.col=</span>vcol,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.sides=</span>vsides,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge.lwd=</span><span class="fl">1.2</span>,</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.cex =</span> nsize,</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Plot of Officers and Events"</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-bipartite_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -742,11 +778,18 @@ No edge attributes</code></pre>
 <section id="density-1" class="level4">
 <h4 class="anchored" data-anchor-id="density-1">Density</h4>
 <p>Remember, the density is the total number of edges divided by <code>N x M</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of edges in the graph</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">sum</span>( cam_mat )</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>L <span class="sc">/</span> ( N <span class="sc">*</span> M )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># coerce to a matrix for ease of working with the object</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>officer_event_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( officer_event_net )</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create the N and M objects</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>( officer_event_mat )[<span class="dv">1</span>]</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">dim</span>( officer_event_mat )[<span class="dv">2</span>]</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of edges in the graph</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">sum</span>( officer_event_mat )</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>L <span class="sc">/</span> ( N <span class="sc">*</span> M )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02791899</code></pre>
 </div>
@@ -756,12 +799,12 @@ No edge attributes</code></pre>
 <section id="degree" class="level4">
 <h4 class="anchored" data-anchor-id="degree">Degree</h4>
 <p>Now, let’s take a look at the degree distributions.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># raw scores for officers</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>officer_deg <span class="ot">&lt;-</span> <span class="fu">rowSums</span>( cam_mat )</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># raw scores for incidents</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>incident_deg <span class="ot">&lt;-</span> <span class="fu">colSums</span>( cam_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># raw scores for officers</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>officer_deg <span class="ot">&lt;-</span> <span class="fu">rowSums</span>( officer_event_mat )</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># raw scores for incidents</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>incident_deg <span class="ot">&lt;-</span> <span class="fu">colSums</span>( officer_event_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="mean-degree-centrality-1" class="level4">
@@ -771,25 +814,25 @@ No edge attributes</code></pre>
 <li><p>for the first node set we divide by <span class="math inline">\(\frac{L}{N}\)</span>, the number of nodes in that set.</p></li>
 <li><p>for the second node set we divide by <span class="math inline">\(\frac{L}{M}\)</span>, the number of nodes in that set.</p></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean degree for officers</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>mean_officer_deg <span class="ot">&lt;-</span> L <span class="sc">/</span> N</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>mean_officer_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean degree for officers</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mean_officer_deg <span class="ot">&lt;-</span> L <span class="sc">/</span> N</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>mean_officer_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.271605</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean degree for incidents</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>mean_incident_deg <span class="ot">&lt;-</span> L <span class="sc">/</span> M</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>mean_incident_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean degree for incidents</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mean_incident_deg <span class="ot">&lt;-</span> L <span class="sc">/</span> M</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>mean_incident_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.261438</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># an alternative is to just use the mean() function with the degree data</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( mean_officer_deg )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># an alternative is to just use the mean() function with the degree data</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( mean_officer_deg )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.271605</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( mean_incident_deg )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>( mean_incident_deg )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.261438</code></pre>
 </div>
