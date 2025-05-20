@@ -333,7 +333,7 @@ window.Quarto = {
 <li><p>An <em>MxM</em> matrix (ties among <em>M</em> nodes via <em>N</em>)</p></li>
 </ul>
 <p>To examine how this works, let’s first set up an example:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create an example matrix</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>( <span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span> ),</span>
@@ -363,7 +363,7 @@ F 0 0 1 0 1</code></pre>
 <section id="transposition" class="level3">
 <h3 class="anchored" data-anchor-id="transposition">Transposition</h3>
 <p>In R, the <code>t()</code> function, or <code>transpose()</code> returns the transposition of a matrix. To see the help on the <code>transpose()</code> function, just use <code>?t</code> to pull up the help page.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the transpose of our example</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>( A )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -379,7 +379,7 @@ F 0 0 1 0 1</code></pre>
 <section id="matrix-multiplication-in-r" class="level4">
 <h4 class="anchored" data-anchor-id="matrix-multiplication-in-r">Matrix Multiplication in R</h4>
 <p>To create the project, we need to use matrix algebra. To multiply matrices in R, we have to use the following operator: <code>%*%</code>. This is different then <code>*</code> in that <code>%*%</code> tells R to use matrix multiplication. For example, compare the differences:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create two matrices</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span> )</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">matrix</span>( <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">nrow=</span><span class="dv">2</span>, <span class="at">byrow=</span><span class="cn">TRUE</span> )</span>
@@ -413,7 +413,7 @@ F 0 0 1 0 1</code></pre>
 </ul></li>
 </ul>
 <p>Let’s create each of these with our example network.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the NxN matrix</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>A <span class="sc">%*%</span> <span class="fu">t</span>( A )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -444,7 +444,7 @@ F 0 0 0 2 1 2</code></pre>
 <section id="the-person-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="the-person-matrix">The Person Matrix</h3>
 <p>Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Projection</a> chapter that <span class="citation" data-cites="breiger1974duality">Breiger (<a href="references.html#ref-breiger1974duality" role="doc-biblioref">1974</a>)</span> referred to the <em>person</em> matrix (i.e.&nbsp;the <em>NxN</em> matrix) and the <em>group</em> matrix (i.e.&nbsp;the <em>MxM</em> matrix).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the "person" matrix: recall this is A X t(A)</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> A <span class="sc">%*%</span> <span class="fu">t</span>( A )</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -463,7 +463,7 @@ F 0 0 0 2 1 2</code></pre>
 <p>The <em>diagonal</em> elements represent the number of nodes in the second mode of the bipartite graph to which a node is connected. Put differently, if we have a <strong>two-mode network</strong> where one set of nodes are individuals and the other set of nodes are events, then the <em>diagonal</em> of the projection for the “person” matrix represents the number of events that an individual attended.</p>
 <p>The <em>off-diagonal</em> elements represent the ties between nodes in the same node set of the bipartite graph. That is, ties between individuals.</p>
 <p>To visualize this by plotting each network, then we can better see what is happening. We will use the <code>gplot()</code> function, so be sure to call the <code>sna</code> package library.</p>
-<div class="cell" data-fig.fullwidth="true">
+<div class="cell" data-layout-align="center" data-fig.fullwidth="true">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the library</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( sna )</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -503,9 +503,9 @@ F 0 0 0 2 1 2</code></pre>
 <span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>       )</span>
 <span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Person Matrix"</span>, <span class="at">line =</span> <span class="sc">-</span><span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -515,7 +515,7 @@ F 0 0 0 2 1 2</code></pre>
 <section id="the-group-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="the-group-matrix">The Group Matrix</h3>
 <p>Now, let’s take a look at the “group” matrix. The projection for the “group” matrix has a different interpretation. Let’s work through this to see it.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the "group" matrix: recall this is t(A) X A</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">t</span>( A ) <span class="sc">%*%</span> A</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -531,7 +531,7 @@ F 0 0 0 2 1 2</code></pre>
 </div>
 <p><em>What does the diagonal represent in this matrix? What do the off-diagonal elements represent?</em></p>
 <p>The <em>diagonal</em> elements represent the number of nodes in the first mode of the bipartite graph to which a node is connected. If we have a <strong>two-mode network</strong> where one set of nodes are individuals and the other set of nodes are events, then the <em>diagonal</em> of the projection for the “group” matrix represents the number of individuals that attend an event. The <em>off-diagonal</em> elements represent the ties between events. Essentially, how events are connected by people attending them. Let’s plot this to see it.</p>
-<div class="cell" data-fig.fullwidth="true">
+<div class="cell" data-layout-align="center" data-fig.fullwidth="true">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the library</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( sna )</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -571,9 +571,9 @@ F 0 0 0 2 1 2</code></pre>
 <span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>       )</span>
 <span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Group Matrix"</span>, <span class="at">line =</span> <span class="sc">-</span><span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -584,86 +584,103 @@ F 0 0 0 2 1 2</code></pre>
 <section id="projecting-young-readys-2015-police-officer-network" class="level2">
 <h2 class="anchored" data-anchor-id="projecting-young-readys-2015-police-officer-network">Projecting <a href="https://journals.sagepub.com/doi/10.1177/1043986214553380">Young &amp; Ready’s (2015)</a> Police Officer Network</h2>
 <p>Now, let’s work with a real example. As discussed in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Bipartite Graphs &amp; Two-Mode Networks</a> chapter, <span class="citation" data-cites="young2015">Young and Ready (<a href="references.html#ref-young2015" role="doc-biblioref">2015</a>)</span> examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers’ views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.</p>
-<p>Let’s import the the matrix, create a network, assign an attribute, and plot it. Then, we will work create the projection.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the location for the file</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="st">"https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-officer-events-adj.csv"</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the .csv file</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>cam_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>( </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    loc,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">as.is =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="dv">1</span> </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>his network is available in <code>SNACpack</code> under the name <code>officer_event_net</code>. We can type the name of the network to see it’s properties:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load SNACpack </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( SNACpack )</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print out the network</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>officer_event_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Network attributes:
+  vertices = 234 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = 81 
+  total edges= 346 
+    missing edges= 0 
+    non-missing edges= 346 
+
+ Vertex attribute names: 
+    vertex.names 
+
+No edge attributes</code></pre>
 </div>
-<p>We can check the dimensions of the matrix using the <code>dim()</code> function. The <code>cam_mat</code> matrix has 81 rows and 153 columns. Recall that this is police officers and incidents, so there are 81 police officers and 153 incidents that connect officers.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of police officers</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>( cam_mat )[<span class="dv">1</span>]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of incidents</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">dim</span>( cam_mat )[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>officer_event_net</code> object is stored as one of class <code>network</code>. Let’s coerce it to a matrix to make it easer to handle:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>officer_event_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>( officer_event_net )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can check the dimensions of the matrix using the <code>dim()</code> function. The <code>officer_event_mat</code> matrix has 81 rows and 153 columns. Recall that this is police officers and incidents, so there are 81 police officers and 153 incidents that connect officers.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of police officers</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">dim</span>( officer_event_mat )[<span class="dv">1</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># identify the number of incidents</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">dim</span>( officer_event_mat )[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="create-the-projections" class="level3">
 <h3 class="anchored" data-anchor-id="create-the-projections">Create the Projections</h3>
-<p>Now that we have it put together, let’s create the projections. To do this, we just need to employ matrix multiplication on the <code>cam_mat</code> matrix.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the "person" matrix</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cam_mat_P <span class="ot">&lt;-</span> cam_mat <span class="sc">%*%</span> <span class="fu">t</span>( cam_mat )</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create the "group" matrix</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>cam_mat_G <span class="ot">&lt;-</span> <span class="fu">t</span>( cam_mat ) <span class="sc">%*%</span> cam_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now that we have it put together, let’s create the projections. To do this, we just need to employ matrix multiplication on the <code>officer_event_mat</code> matrix.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the "person" matrix</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>officer_event_mat_P <span class="ot">&lt;-</span> officer_event_mat <span class="sc">%*%</span> <span class="fu">t</span>( officer_event_mat )</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create the "group" matrix</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>officer_event_mat_G <span class="ot">&lt;-</span> <span class="fu">t</span>( officer_event_mat ) <span class="sc">%*%</span> officer_event_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, let’s plot the networks!</p>
-<div class="cell" data-fig.fullwidth="true">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the plot regions to ease with visualization</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mfrow =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">2</span> ),</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set the seed to reproduce the plot</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bipartite network</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="fu">c</span>( </span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#34e5eb"</span>, <span class="fu">dim</span>( cam_mat )[<span class="dv">1</span>] ), </span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#4f0a1a"</span>, <span class="fu">dim</span>( cam_mat )[<span class="dv">2</span>] ) ),</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Bipartite Matrix of Officers and Incidents"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the person matrix</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat_P,</span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span>,</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#34e5eb"</span></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Officers (Person) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the group matrix</span></span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat_G,</span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span>,</span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#4f0a1a"</span>,</span>
-<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.sides =</span> <span class="dv">4</span></span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Incidents (Group) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center" data-fig.fullwidth="true">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the plot regions to ease with visualization</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mfrow =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">2</span> ),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set the seed to reproduce the plot</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bipartite network</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="fu">c</span>( </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#34e5eb"</span>, <span class="fu">dim</span>( officer_event_mat )[<span class="dv">1</span>] ), </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#4f0a1a"</span>, <span class="fu">dim</span>( officer_event_mat )[<span class="dv">2</span>] ) ),</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Bipartite Matrix of Officers and Incidents"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the person matrix</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat_P,</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span>,</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#34e5eb"</span></span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Officers (Person) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the group matrix</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat_G,</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span>,</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#4f0a1a"</span>,</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.sides =</span> <span class="dv">4</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Incidents (Group) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -673,119 +690,125 @@ F 0 0 0 2 1 2</code></pre>
 <section id="using-the-weights-in-the-plot" class="level3">
 <h3 class="anchored" data-anchor-id="using-the-weights-in-the-plot">Using the Weights in the Plot</h3>
 <p>Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html">Projection</a> chapter. We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let’s build a few functions.</p>
-<section id="reworking-the-rescale-function-to-incorporate-edge-weights" class="level4">
-<h4 class="anchored" data-anchor-id="reworking-the-rescale-function-to-incorporate-edge-weights">Reworking the <code>rescale()</code> function to incorporate edge weights</h4>
-<p>First, we will create the <code>edge.rescale()</code> function to help us here. This function returns a weighted edgelist that can be used to aid with plotting. Then, we will create the <code>edge.shade()</code> function that shades the edges based on the size of the edge.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>edge.rescale <span class="ot">&lt;-</span> <span class="cf">function</span>( uni_mat, low, high ){</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>( uni_mat ) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  min_w <span class="ot">&lt;-</span> <span class="fu">min</span>( uni_mat[uni_mat <span class="sc">!=</span> <span class="dv">0</span>] )</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  max_w <span class="ot">&lt;-</span> <span class="fu">max</span>( uni_mat[uni_mat <span class="sc">!=</span> <span class="dv">0</span>] )</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  rscl <span class="ot">&lt;-</span> ( ( high<span class="sc">-</span>low )  <span class="sc">*</span> ( uni_mat[uni_mat <span class="sc">!=</span> <span class="dv">0</span>] <span class="sc">-</span> min_w ) ) <span class="sc">/</span> ( max_w <span class="sc">-</span> min_w ) <span class="sc">+</span> low</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  rscl</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>edge.shade <span class="ot">&lt;-</span> <span class="cf">function</span>( uni_mat ){</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  net_edges <span class="ot">&lt;-</span> <span class="fu">edge.rescale</span>( uni_mat, <span class="fl">0.01</span>, <span class="dv">1</span> )</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  vec_to_color <span class="ot">&lt;-</span> <span class="fu">as.vector</span>( <span class="fu">abs</span>( net_edges ) )</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  vec_to_color <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> vec_to_color <span class="co"># subtract 1 to flip the grey function scale.</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  edge_cols <span class="ot">&lt;-</span> <span class="fu">grey</span>( vec_to_color )</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>( edge_cols )</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="the-edge_rescale-and-edge_shade-functions-for-incorporating-edge-weights" class="level4">
+<h4 class="anchored" data-anchor-id="the-edge_rescale-and-edge_shade-functions-for-incorporating-edge-weights">The <code>edge_rescale()</code> and <code>edge_shade()</code> functions for incorporating edge weights</h4>
+<p>As we have seen in prior tutorials, the <code>vertex_rescale()</code> function can be used to rescale the size of the <em>nodes</em> in a plot based on an attribute. We can do the same thing for <em>edge</em> values. That is, we can make edges that have larger values in the projection to be thicker and darker and smaller values to be thinner and lighter. This helps us better visualize the weights assigned to the edges. In <code>SNACpack</code>, there are two functions that do just that: <code>edge_rescale()</code> and <code>edge_shade</code>. (Use <code>?edge_rescale</code> and <code>?edge_shade</code> to see more about the function in the help file).</p>
 <p>Now, let’s plot the networks with the edges adjusted. We will plot the bipartite graph, the officer network, and the officer network with the shading.</p>
-<div class="cell" data-fig.fullwidth="true">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the plot regions to ease with visualization</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mfrow =</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">3</span> ),</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bipartite network</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat,</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="fu">c</span>( </span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#34e5eb"</span>, <span class="fu">dim</span>( cam_mat )[<span class="dv">1</span>] ), </span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#4f0a1a"</span>, <span class="fu">dim</span>( cam_mat )[<span class="dv">2</span>] ) ),</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Bipartite Matrix of Officers and Incidents"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the person matrix</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat_P,</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#34e5eb"</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Officers (Person) Matrix</span><span class="sc">\n</span><span class="st"> (no shading)"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the person matrix</span></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat_P,</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col =</span> <span class="fu">edge.shade</span>( cam_mat_P ),           <span class="co"># note the usage here</span></span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd =</span> <span class="fu">edge.rescale</span>( cam_mat_P, <span class="fl">0.1</span>, <span class="dv">5</span> ), <span class="co"># note the usage here</span></span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#34e5eb"</span></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Officers (Person) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center" data-fig.fullwidth="true">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the plot regions to ease with visualization</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mfrow =</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">3</span> ),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bipartite network</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="fu">c</span>( </span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#34e5eb"</span>, <span class="fu">dim</span>( officer_event_mat )[<span class="dv">1</span>] ), </span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#4f0a1a"</span>, <span class="fu">dim</span>( officer_event_mat )[<span class="dv">2</span>] ) ),</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Bipartite Matrix of Officers and Incidents"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the person matrix</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat_P,</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#34e5eb"</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Officers (Person) Matrix</span><span class="sc">\n</span><span class="st"> (no shading)"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the person matrix</span></span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat_P,</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col =</span> <span class="fu">edge_shade</span>( officer_event_mat_P ),           <span class="co"># note the usage here</span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd =</span> <span class="fu">edge_rescale</span>( officer_event_mat_P, <span class="fl">0.1</span>, <span class="dv">5</span> ), <span class="co"># note the usage here</span></span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#34e5eb"</span></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Officers (Person) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Now, we will plot the bipartite graph, the incident network, and the incident network with the shading.</p>
-<div class="cell" data-fig.fullwidth="true">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the plot regions to ease with visualization</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( </span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mfrow =</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">3</span> ),</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bipartite network</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat,</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="fu">c</span>( </span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#34e5eb"</span>, <span class="fu">dim</span>( cam_mat )[<span class="dv">1</span>] ), </span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#4f0a1a"</span>, <span class="fu">dim</span>( cam_mat )[<span class="dv">2</span>] ) ),</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Bipartite Matrix of Officers and Incidents"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the group matrix</span></span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat_G,</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#4f0a1a"</span>,</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.sides =</span> <span class="dv">4</span></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Incidents (Group) Matrix</span><span class="sc">\n</span><span class="st"> (no shading)"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the group matrix</span></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( cam_mat_G,</span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col =</span> <span class="fu">edge.shade</span>( cam_mat_G ),           <span class="co"># note the usage here</span></span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd =</span> <span class="fu">edge.rescale</span>( cam_mat_G, <span class="fl">0.1</span>, <span class="dv">5</span> ), <span class="co"># note the usage here</span></span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#4f0a1a"</span>,</span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.sides =</span> <span class="dv">4</span></span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>       )</span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Incidents (Group) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-layout-align="center" data-fig.fullwidth="true">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the plot regions to ease with visualization</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mfrow =</span> <span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">3</span> ),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>( <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the bipartite network</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat,</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode=</span><span class="st">"twomode"</span>,</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows=</span><span class="cn">FALSE</span>,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col=</span><span class="st">"grey60"</span>,</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="fu">c</span>( </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#34e5eb"</span>, <span class="fu">dim</span>( officer_event_mat )[<span class="dv">1</span>] ), </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>         <span class="fu">rep</span>( <span class="st">"#4f0a1a"</span>, <span class="fu">dim</span>( officer_event_mat )[<span class="dv">2</span>] ) ),</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd=</span><span class="fl">1.2</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Bipartite Matrix of Officers and Incidents"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the group matrix</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat_G,</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#4f0a1a"</span>,</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.sides =</span> <span class="dv">4</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Incidents (Group) Matrix</span><span class="sc">\n</span><span class="st"> (no shading)"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the group matrix</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( officer_event_mat_G,</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>       <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.col =</span> <span class="fu">edge_shade</span>( officer_event_mat_G ),           <span class="co"># note the usage here</span></span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.lwd =</span> <span class="fu">edge_rescale</span>( officer_event_mat_G, <span class="fl">0.1</span>, <span class="dv">5</span> ), <span class="co"># note the usage here</span></span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.col =</span> <span class="st">"#4f0a1a"</span>,</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.sides =</span> <span class="dv">4</span></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>( <span class="st">"Unipartite Projection of</span><span class="sc">\n</span><span class="st"> Incidents (Group) Matrix"</span>, <span class="at">line =</span> <span class="dv">1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="960"></p>
+<p><img src="snaca-r-projection_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -803,7 +826,7 @@ F 0 0 0 2 1 2</code></pre>
 <li>What is the significance of the diagonal elements in the “person” matrix for crime analysts studying shared events?</li>
 <li>Write R code to visualize the “group” matrix using the <code>gplot()</code> function. How would you ensure that event nodes have distinct shapes and colors?</li>
 <li>What are edge weights in a projection, and how can they be represented visually in R?</li>
-<li>Describe how the <code>edge.rescale()</code> and <code>edge.shade()</code> functions created above work to adjust edge properties in a weighted graph. Why might this be helpful in a crime analysis context?</li>
+<li>Describe how the <code>edge_rescale()</code> and <code>edge_shade()</code> functions created above work to adjust edge properties in a weighted graph. Why might this be helpful in a crime analysis context?</li>
 <li>Why might a crime analyst choose to visualize both weighted and unweighted projections of a bipartite network? What insights can be gained from each?</li>
 <li>When plotting the unipartite projections, why is it important to use consistent colors and shapes for nodes? How does this enhance the interpretation of the graph?</li>
 </ul>
