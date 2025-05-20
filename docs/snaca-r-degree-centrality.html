@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jacob T.N. Young">
 
-<title>Social Network Analysis for Crime Analysts using R - Degree Centrality and Centralization</title>
+<title>Degree Centrality and Centralization – Social Network Analysis for Crime Analysts using R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -59,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -91,17 +92,23 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e1132380c9e666ea8bafbb74da8850ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -110,13 +117,42 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -126,12 +162,12 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-r-degree-centrality.html">Degree Centrality and Centralization</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./snaca-r-degree-centrality.html">Degree Centrality and Centralization</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -141,7 +177,7 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Social Network Analysis for Crime Analysts using R</a> 
@@ -237,7 +273,7 @@ div.csl-indent {
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -261,7 +297,7 @@ div.csl-indent {
   <li><a href="#test-your-knowledge-excercises" id="toc-test-your-knowledge-excercises" class="nav-link" data-scroll-target="#test-your-knowledge-excercises">Test Your Knowledge Excercises</a></li>
   <li><a href="#tutorial-summary" id="toc-tutorial-summary" class="nav-link" data-scroll-target="#tutorial-summary">Tutorial Summary</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -281,14 +317,16 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <p>How do we know whether a node is important in a network? As was discussed in the textbook chapter on <a href="https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html">Degree Centrality</a>, one of the most popular concepts in network analysis is <em>centrality</em>. That is, important nodes are those who are central. Also, we can compare networks by examining how they differ (or are similar) based on the distribution of centrality scores. In this lab, we will examine how to calculate degree centrality and centralization scores in R using the <code>degree()</code> and <code>centralization()</code> functions in the <code>sna</code> package.</p>
 <section id="degree-centrality-undirected-binary-graphs" class="level2">
 <h2 class="anchored" data-anchor-id="degree-centrality-undirected-binary-graphs">Degree Centrality (Undirected Binary Graphs)</h2>
 <p>In an undirected binary graph, <em>actor degree centrality</em> measures the extent to which a node connects to all other nodes in a network. In other words, the number of edges incident with a node. This is symbolized as: <span class="math inline">\(d(n_i)\)</span>. For an undirected binary graph, the degree <span class="math inline">\(d(n_i)\)</span> is the row or column sum. If we have an object of <code>class(matrix)</code> in the workspace, we can use the <code>colSums()</code> and/or <code>rowSums()</code> functions to return this information.</p>
 <p>First, let’s set up our graph from the degree centrality chapter:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, clear the workspace</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>( <span class="at">list =</span> <span class="fu">ls</span>() )</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -313,7 +351,11 @@ div.csl-indent {
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( u_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the network</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
@@ -327,11 +369,15 @@ div.csl-indent {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Since the graph is undirected, we can print the degree centrality for each node as a vector using the <code>colSums()</code> or <code>rowSums()</code> functions:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>( u_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Jen  Tom  Bob Leaf  Jim 
@@ -346,7 +392,7 @@ div.csl-indent {
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>deg_u_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( u_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, we can use that information in the plot by passing the degree object to the <code>vertex.cex=</code> argument. This will make nodes with higher degree larger.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  u_mat,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode=</span><span class="st">"graph"</span>, </span>
@@ -359,11 +405,15 @@ div.csl-indent {
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Another approach is to shade the nodes. Rather than just the size, we might want to have nodes with larger degree to be darker (or lighter) to better visualize differences in degree. To do this, we could use the <code>RColorBrewer</code> package to shade the nodes.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages( "RColorBrewer" )</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( RColorBrewer, <span class="at">quietly=</span><span class="cn">TRUE</span> )</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -386,14 +436,18 @@ div.csl-indent {
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="standardized-degree-centrality-mean-degree-and-centralization" class="level3">
 <h3 class="anchored" data-anchor-id="standardized-degree-centrality-mean-degree-and-centralization">Standardized degree centrality, mean degree, and centralization</h3>
 <p>Actor degree centrality not only reflects each node’s connectivity to other nodes but also depends on the size of the network, <em>g</em>. As a result, larger networks will have a higher maximum possible degree centrality values. This makes comparison across networks problematic. The solution is to take into account the number of nodes and the maximum possible nodes to which <em>i</em> could be connected, <em>g-1</em>.</p>
 <p>Let’s calculate the standardized centrality scores for our undirected graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unstandardized or raw centrality</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>deg_u_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( u_mat )</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -419,7 +473,7 @@ div.csl-indent {
 <p><span class="math display">\[\frac{\sum_{i=1}^g d(n_i)}{g}\]</span> or</p>
 <p><span class="math display">\[\frac{2L}{g}\]</span></p>
 <p>where <em>L</em> is the number of edges in the graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mean_deg <span class="ot">&lt;-</span> <span class="fu">sum</span>( deg_u_mat ) <span class="sc">/</span> <span class="fu">dim</span>( u_mat )[<span class="dv">1</span>] </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mean_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -432,11 +486,12 @@ div.csl-indent {
 <pre><code>[1] 2</code></pre>
 </div>
 </div>
+<p>In the code above, we used the <code>sum()</code> function. This function sums over the entire matrix. In this case, that sum represents <span class="math inline">\(2L\)</span>, not <span class="math inline">\(L\)</span>. Why? Because <span class="math inline">\(L\)</span> is the number of edges in the graph. When we create the adjacency matrix, we duplicate each edge. So, when we sum this matrix, we are count each edge twice. This is why the sum represents <span class="math inline">\(2L\)</span>.</p>
 <p><br></p>
 <p>We can also calculate how centralized the graph itself is. <em>Group degree centralization</em> measures the extent to which the actors in a social network differ from one another in their individual degree centralities. Following <span class="citation" data-cites="wasserman1994social">Wasserman and Faust (<a href="references.html#ref-wasserman1994social" role="doc-biblioref">1994</a>)</span>, an index of <em>group degree centralization</em> can be calculated as:</p>
 <p><span class="math display">\[C_D = \frac{\sum\limits_{i=1}^g [C_D(n^*) - C_D(n_i)]}{[(g-1)(g-2)]}\]</span></p>
 <p>for undirected graphs where <span class="math inline">\(C_D(n^*)\)</span> is the maximum degree in the graph. We can write out the components of the equation using the <code>max()</code> function:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In separate pieces</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>deviations <span class="ot">&lt;-</span> <span class="fu">max</span>( deg_u_mat ) <span class="sc">-</span> deg_u_mat</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sum_deviations <span class="ot">&lt;-</span> <span class="fu">sum</span>( deviations )</span>
@@ -463,7 +518,7 @@ div.csl-indent {
 <p>In a directed binary graph, actor degree centrality can be broken down into <em>indegree</em> and <em>outdegree</em> centrality. Indegree, <span class="math inline">\(C_I(n_i)\)</span>, measures the number of ties that <em>i</em> receives. For the sociomatrix <span class="math inline">\(Xij\)</span>, the indegree for <em>i</em> is the <strong>column</strong> sum. Outdegree, <span class="math inline">\(C_O(n_i)\)</span>, measures the number of ties that <em>i</em> sends. For the sociomatrix <span class="math inline">\(Xij\)</span>, the outdegree for <em>i</em> is the <strong>row</strong> sum.</p>
 <p>As before, if we have an object of <code>class(matrix)</code> in the workspace, we can use the <code>rowSums()</code> and <code>colSums()</code> functions. However, the <code>colSums()</code> function will return the <em>indegree</em> centrality for <em>i</em> and the <code>rowSums()</code> function will return the <em>outdegree</em> centrality for <em>i</em>.</p>
 <p>First, let’s set up our directed graph from the degree centrality lecture:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, clear the workspace</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>( <span class="at">list =</span> <span class="fu">ls</span>() )</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -487,7 +542,11 @@ div.csl-indent {
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co"># set the new coordinates</span></span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( d_mat )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, plot the graph (remember to load the sna package)</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(</span>
@@ -501,10 +560,14 @@ div.csl-indent {
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords</span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
 </div>
 </div>
-<div class="cell">
+</div>
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's look at the different centrality scores </span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># by assigning them to different objects</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ideg_d_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( d_mat )</span>
@@ -559,7 +622,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -608,7 +671,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -616,7 +679,7 @@ div.csl-indent {
 <section id="standardized-degree-centrality-mean-degree-and-centralization-1" class="level3">
 <h3 class="anchored" data-anchor-id="standardized-degree-centrality-mean-degree-and-centralization-1">Standardized degree centrality, mean degree, and centralization</h3>
 <p>Let’s calculate the standardized centrality scores for our directed graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unstandardized or raw centrality</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ideg_d_mat <span class="ot">&lt;-</span> <span class="fu">colSums</span>( d_mat )</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>odeg_d_mat <span class="ot">&lt;-</span> <span class="fu">rowSums</span>( d_mat )</span>
@@ -630,7 +693,7 @@ div.csl-indent {
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>s_o_deg_u_mat <span class="ot">&lt;-</span> odeg_d_mat <span class="sc">/</span> ( g<span class="dv">-1</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can also examine the <em>average</em> degree of the graph using <span class="math inline">\(\frac{\sum_{i=1}^g C_I(n_i)}{g} = \frac{\sum_{i=1}^g C_O(n_i)}{g}\)</span> or <span class="math inline">\(\frac{L}{g}\)</span>, where <em>L</em> is the number of edges in the graph:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mean_i_deg <span class="ot">&lt;-</span> <span class="fu">sum</span>( ideg_d_mat ) <span class="sc">/</span> <span class="fu">dim</span>( d_mat )[<span class="dv">1</span>] </span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mean_o_deg <span class="ot">&lt;-</span> <span class="fu">sum</span>( odeg_d_mat ) <span class="sc">/</span> <span class="fu">dim</span>( d_mat )[<span class="dv">1</span>] </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mean_i_deg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -654,7 +717,7 @@ div.csl-indent {
 <p>Again, following <span class="citation" data-cites="wasserman1994social">Wasserman and Faust (<a href="references.html#ref-wasserman1994social" role="doc-biblioref">1994</a>)</span>, an index of <em>group indegree/outdegree centralization</em> can be calculated as:</p>
 <p><span class="math display">\[ C_D = \frac{\sum\limits_{i=1}^g [C_D(n^*) - C_D(n_i)]}{[(g-1)^2]} \]</span></p>
 <p>for undirected graphs where <span class="math inline">\(C_D(n^*)\)</span> is the maximum indegree/outdegree in the graph. We can write out the components of the equation using the <code>max()</code> function:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In separate pieces</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>deviations <span class="ot">&lt;-</span> <span class="fu">max</span>( ideg_d_mat ) <span class="sc">-</span> ideg_d_mat</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>sum_deviations <span class="ot">&lt;-</span> <span class="fu">sum</span>( deviations )</span>
@@ -693,7 +756,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="degree-centrality-using-the-sna-package">Degree Centrality using the <code>sna</code> Package</h2>
 <p>Did that feel tedious? If no, go back and do it again :)</p>
 <p>As you probably have guessed, there <em>are</em> functions in the <code>sna</code> package that calculate degree centrality and graph centralization! In the <code>sna</code> package, these are the <code>degree()</code> and <code>centralization()</code> functions, respectively. Let’s take a look at how these work.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the library</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( sna )</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -760,41 +823,37 @@ div.csl-indent {
 <p>The <a href="https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/"><em>Prison Inmate Networks Study (PINS)</em></a> examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:</p>
 <ul>
 <li><p>The <em>get along with network</em> was created by asking individuals whom they “get along with” on the unit. We can think of this as “friends” in a prison setting. (People don’t really have “friends” in prison, but there are people they “get along with”)</p></li>
-<li><p>The <em>power and influence network</em> was created by asking individuals whom they believed was “powerful and influential” on the unit.</p></li>
+<li><p>The <em>power and influence network</em> was created by asking individuals whom they believed was “powerful and influential” on the unit</p></li>
 </ul>
-<p>Let’s examine the degree centrality scores for both of these networks.</p>
+<p>Both of these networks are available in <code>SNACpack</code>. The <em>get along with network</em> is called: <code>pins_ga_net</code>, and the <em>power and influence network</em> is called: <code>pins_pi_net</code>. Let’s examine the degree centrality scores for both of these networks.</p>
 <section id="get-along-with-network-undirected-network" class="level3">
 <h3 class="anchored" data-anchor-id="get-along-with-network-undirected-network"><em>Get Along With</em> Network (Undirected Network)</h3>
 <p>For the <em>get along with</em> network, individuals could have asymmetric nominations. That is, <em>i</em> could nominate <em>j</em> and <em>j</em> didn’t necessarily nominate <em>i</em>. But, we are going to <strong>symmetrize</strong> the network by only taking ties for which <strong><em>both</em></strong> <em>i</em> and <em>j</em> indicated that the get along with the other person. This will give us an undirected network.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the location for the file</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="st">"https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-getalong-w1-adj.csv"</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the .csv file</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>ga_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>( </span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    loc,</span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">as.is =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="dv">1</span> </span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the SNACpack package</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( SNACpack )</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use the symmetrize() function to create an undirected matrix</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co"># you will notice that this creates an object of class "matrix"</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>ga_mat_u <span class="ot">&lt;-</span> <span class="fu">symmetrize</span>( pins_ga_net, <span class="at">rule =</span> <span class="st">"strong"</span> )</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="co"># create the network object</span></span>
 <span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="co"># use the symmetrize() function to create an undirected matrix</span></span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>ga_mat_u <span class="ot">&lt;-</span> <span class="fu">symmetrize</span>( ga_mat, <span class="at">rule =</span> <span class="st">"strong"</span> )</span>
-<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="co"># create the network object</span></span>
-<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>ga_net_u <span class="ot">&lt;-</span> <span class="fu">as.network</span>( ga_mat_u, <span class="at">directed =</span> <span class="cn">FALSE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>ga_net_u <span class="ot">&lt;-</span> <span class="fu">as.network</span>( ga_mat_u, <span class="at">directed =</span> <span class="cn">FALSE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we have created an undirected network where ties represent “get along with” nominations from both individuals. Let’s calculate the degree centrality scores, the centralization score, and then use the degree centrality scores to size our nodes in a plot using the <code>vertex.cex()</code> argument in the <code>gplot()</code> function.</p>
 <p><br></p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the coordinates</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot</span>( ga_net_u )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now lets build the objects and the plot:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the degrees.</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>ga_net_deg <span class="ot">&lt;-</span> <span class="fu">degree</span>( ga_net_u, <span class="at">gmode=</span><span class="st">"graph"</span> )</span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -813,20 +872,35 @@ div.csl-indent {
 <span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">"node sized by degree centrality"</span></span>
 <span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
 </div>
 </div>
-<p>Whoops! Let’s try that again AFTER rescaling the degree. We can use the <code>rescale()</code> function to do this.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the rescale function</span></span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>rescale <span class="ot">&lt;-</span> <span class="cf">function</span>( nchar, low, high ){</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  min_d <span class="ot">&lt;-</span> <span class="fu">min</span>( nchar )</span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  max_d <span class="ot">&lt;-</span> <span class="fu">max</span>( nchar )</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  rscl  <span class="ot">&lt;-</span> ( ( high <span class="sc">-</span> low )<span class="sc">*</span>( nchar <span class="sc">-</span> min_d ) ) <span class="sc">/</span> ( max_d <span class="sc">-</span> min_d ) <span class="sc">+</span> low</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  rscl</span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now we can plot it after adding in the <code>rescale()</code> function to <code>gplot()</code>:</p>
+<p>Whoops! Let’s try that again AFTER rescaling the degree. We can use the <code>vertex_rescale()</code> function to do this. Now we can plot it after adding in the <code>vertex_rescale()</code> function to <code>gplot()</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, take a look at the plot.</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  ga_net_u, </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.col=</span><span class="st">"grey40"</span>, </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.col=</span><span class="st">"#3250a8"</span>,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( ga_net_deg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords,</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"PINS Get</span><span class="sc">\n</span><span class="st"> Along With Network (Undirected)"</span>,</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">"node sized by degree centrality"</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Almost there! Let’s drop the isolates to help with the size:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, take a look at the plot.</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
@@ -834,37 +908,16 @@ div.csl-indent {
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.col=</span><span class="st">"grey40"</span>, </span>
 <span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.col=</span><span class="st">"#3250a8"</span>,</span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">rescale</span>( ga_net_deg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords,</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"PINS Get</span><span class="sc">\n</span><span class="st"> Along With Network (Undirected)"</span>,</span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">"node sized by degree centrality"</span></span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( ga_net_deg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords,</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"PINS Get</span><span class="sc">\n</span><span class="st"> Along With Network (Undirected)"</span>,</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">"node sized by degree centrality"</span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Almost there! Let’s drop the isolates to help with the size:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, take a look at the plot.</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  ga_net_u, </span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"graph"</span>,</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.col=</span><span class="st">"grey40"</span>, </span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.col=</span><span class="st">"#3250a8"</span>,</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">rescale</span>( ga_net_deg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords,</span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"PINS Get</span><span class="sc">\n</span><span class="st"> Along With Network (Undirected)"</span>,</span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">"node sized by degree centrality"</span></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -877,48 +930,50 @@ div.csl-indent {
 </section>
 <section id="power-and-influence-network-directed-network" class="level3">
 <h3 class="anchored" data-anchor-id="power-and-influence-network-directed-network">Power and Influence Network (Directed Network)</h3>
-<p>For the <em>power and influence</em> network, individuals could have asymmetric nominations. That is, <em>i</em> could nominate <em>j</em> and <em>j</em> didn’t necessarily nominate <em>i</em>. We will keep this asymmetry so that we can treat the network as directed.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the location for the file</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="st">"https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-power-w1-adj.csv"</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the .csv file</span></span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>pi_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>( </span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    loc,</span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">as.is =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="dv">1</span> </span>
-<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a><span class="co"># create the network object</span></span>
-<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>pi_net_d <span class="ot">&lt;-</span> <span class="fu">as.network</span>( pi_mat, <span class="at">directed =</span> <span class="cn">TRUE</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For the <em>power and influence</em> network, individuals could have asymmetric nominations. That is, <em>i</em> could nominate <em>j</em> and <em>j</em> didn’t necessarily nominate <em>i</em>. We will keep this asymmetry so that we can treat the network as directed. As mentioned above, the <em>power and influence</em> exists in <code>SNACpack</code> as <code>pins_pi_net</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pins_pi_net</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Network attributes:
+  vertices = 205 
+  directed = TRUE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 161 
+    missing edges= 0 
+    non-missing edges= 161 
+
+ Vertex attribute names: 
+    age race time_in_prison vertex.names 
+
+No edge attributes</code></pre>
 </div>
-<p>Now we have created an undirected network where ties represent “get along with” nominations from both individuals. Let’s calculate the degree centrality scores, the centralization score, and then use the degree centrality scores to size our nodes in a plot using the <code>vertex.cex()</code> argument in the <code>gplot()</code> function.</p>
-<div class="cell">
+</div>
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the coordinates</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>( <span class="dv">507</span> )</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>coords2 <span class="ot">&lt;-</span> <span class="fu">gplot</span>( pi_net_d )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>coords2 <span class="ot">&lt;-</span> <span class="fu">gplot</span>( pins_pi_net )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the degrees.</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>pi_net_ideg <span class="ot">&lt;-</span> <span class="fu">degree</span>( pi_net_d, <span class="at">gmode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"indegree"</span> )</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>pi_net_odeg <span class="ot">&lt;-</span> <span class="fu">degree</span>( pi_net_d, <span class="at">gmode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"outdegree"</span> )</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>pi_net_ideg <span class="ot">&lt;-</span> <span class="fu">degree</span>( pins_pi_net, <span class="at">gmode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"indegree"</span> )</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>pi_net_odeg <span class="ot">&lt;-</span> <span class="fu">degree</span>( pins_pi_net, <span class="at">gmode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"outdegree"</span> )</span>
 <span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co"># now the centralization scores.</span></span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>pi_net_ideg_cent <span class="ot">&lt;-</span> <span class="fu">centralization</span>( pi_net_d, degree, <span class="at">mode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"indegree"</span> )</span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>pi_net_odeg_cent <span class="ot">&lt;-</span> <span class="fu">centralization</span>( pi_net_d, degree, <span class="at">mode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"outdegree"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>pi_net_ideg_cent <span class="ot">&lt;-</span> <span class="fu">centralization</span>( pins_pi_net, degree, <span class="at">mode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"indegree"</span> )</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>pi_net_odeg_cent <span class="ot">&lt;-</span> <span class="fu">centralization</span>( pins_pi_net, degree, <span class="at">mode=</span><span class="st">"digraph"</span>, <span class="at">cmode =</span> <span class="st">"outdegree"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>( <span class="at">mfrow=</span><span class="fu">c</span>( <span class="dv">1</span>, <span class="dv">2</span> ) )</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  pi_net_d, </span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  pins_pi_net, </span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"digraph"</span>,</span>
 <span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.col=</span><span class="st">"grey40"</span>, </span>
 <span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.col=</span><span class="st">"#693859"</span>,</span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">rescale</span>( pi_net_ideg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pi_net_ideg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
 <span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords2,</span>
 <span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"PINS Power/Influnece</span><span class="sc">\n</span><span class="st"> Network (Directed)"</span>,</span>
@@ -926,11 +981,11 @@ div.csl-indent {
 <span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>( </span>
-<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>  pi_net_d, </span>
+<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a>  pins_pi_net, </span>
 <span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">gmode =</span> <span class="st">"digraph"</span>,</span>
 <span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.col=</span><span class="st">"grey40"</span>, </span>
 <span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.col=</span><span class="st">"#2b868c"</span>,</span>
-<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">rescale</span>( pi_net_odeg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
+<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">vertex.cex =</span> <span class="fu">vertex_rescale</span>( pi_net_odeg, <span class="fl">0.2</span>, <span class="dv">4</span> ),</span>
 <span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">coord =</span> coords2,</span>
 <span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"PINS Power/Influnece</span><span class="sc">\n</span><span class="st"> Network (Directed)"</span>,</span>
@@ -939,7 +994,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="snaca-r-degree-centrality_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -971,7 +1026,7 @@ div.csl-indent {
 <p>This tutorial introduced the concept of degree centrality, a measure of node importance based on connectivity within a network, and explores its calculation and visualization for both undirected and directed graphs in R. For undirected graphs, degree centrality is computed using row or column sums, and standardized to account for network size. Directed graphs distinguish between indegree and outdegree centrality, reflecting incoming and outgoing connections, respectively. The tutorial demonstrated graph centralization, highlighting the variability in node centrality within a network. Visualization techniques, including node sizing and shading based on centrality scores, were covered, alongside practical applications using real-world data from the <em>Prison Inmate Networks Study (PINS)</em>, where networks like “Get Along With” and “Power/Influence” are analyzed. The use of R’s <code>sna</code> package simplifies centrality calculations and graph plotting, enabling users to gain insights into the structure and dynamics of social networks.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-wasserman1994social" class="csl-entry" role="listitem">
 Wasserman, Stanley, and Katherine Faust. 1994. <em>Social Network Analysis: Methods and Applications</em>. Vol. 8. Structural Analysis in the Social Sciences. Cambridge, UK: Cambridge University Press.
 </div>
@@ -1014,18 +1069,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1057,11 +1101,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/jacobtnyoung\.github\.io\/snaca-r\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1071,8 +1152,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1084,7 +1174,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1128,6 +1340,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1153,6 +1366,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1214,12 +1453,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./snaca-r-visualization.html" class="pagination-link">
+      <a href="./snaca-r-visualization.html" class="pagination-link" aria-label="Basics of Network Visualization">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Basics of Network Visualization</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./snaca-r-closeness-centrality.html" class="pagination-link">
+      <a href="./snaca-r-closeness-centrality.html" class="pagination-link" aria-label="Closeness Centrality and Centralization">
         <span class="nav-page-text">Closeness Centrality and Centralization</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -1227,13 +1466,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Social Network Analysis for Crime Analysts using R was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a></div>   
+    <div class="nav-footer-left">
+<p>Social Network Analysis for Crime Analysts using R was written by <a href="https://jacobtnyoung.github.io/">Jacob T.N. Young</a></p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
-    <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jacobtnyoung/snaca-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
   </div>
 </footer>
+
 
 
 

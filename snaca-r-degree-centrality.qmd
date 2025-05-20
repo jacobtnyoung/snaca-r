@@ -4,7 +4,10 @@ knitr::opts_chunk$set(
   eval = TRUE,
   echo = TRUE, 
   message=FALSE, 
-  warning=FALSE 
+  warning=FALSE,
+  fig.width=6, 
+  fig.height=6,
+  fig.align="center"
   )
 
 ```
@@ -487,9 +490,9 @@ The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funde
 
 -   The *get along with network* was created by asking individuals whom they "get along with" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 
--   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit.
+-   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit
 
-Let's examine the degree centrality scores for both of these networks.
+Both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the degree centrality scores for both of these networks.
 
 ### *Get Along With* Network (Undirected Network)
 
@@ -497,23 +500,19 @@ For the *get along with* network, individuals could have asymmetric nominations.
 
 ```{r}
 
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-getalong-w1-adj.csv"
+# load the SNACpack package
 
-# read in the .csv file
-ga_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
+library( SNACpack )
+
 
 # use the symmetrize() function to create an undirected matrix
-ga_mat_u <- symmetrize( ga_mat, rule = "strong" )
+# you will notice that this creates an object of class "matrix"
+
+ga_mat_u <- symmetrize( pins_ga_net, rule = "strong" )
+
 
 # create the network object
+
 ga_net_u <- as.network( ga_mat_u, directed = FALSE )
 
 ```
@@ -554,21 +553,7 @@ gplot(
 
 ```
 
-Whoops! Let's try that again AFTER rescaling the degree. We can use the `rescale()` function to do this.
-
-```{r}
-
-# define the rescale function
-rescale <- function( nchar, low, high ){
-  min_d <- min( nchar )
-  max_d <- max( nchar )
-  rscl  <- ( ( high - low )*( nchar - min_d ) ) / ( max_d - min_d ) + low
-  rscl
-}
-
-```
-
-Now we can plot it after adding in the `rescale()` function to `gplot()`:
+Whoops! Let's try that again AFTER rescaling the degree. We can use the `vertex_rescale()` function to do this. Now we can plot it after adding in the `vertex_rescale()` function to `gplot()`:
 
 ```{r, fig.align="center"}
 
@@ -578,7 +563,7 @@ gplot(
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#3250a8",
-  vertex.cex = rescale( ga_net_deg, 0.2, 4 ),
+  vertex.cex = vertex_rescale( ga_net_deg, 0.2, 4 ),
   coord = coords,
   main = "PINS Get\n Along With Network (Undirected)",
   sub = "node sized by degree centrality"
@@ -596,7 +581,7 @@ gplot(
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#3250a8",
-  vertex.cex = rescale( ga_net_deg, 0.2, 4 ),
+  vertex.cex = vertex_rescale( ga_net_deg, 0.2, 4 ),
   displayisolates = FALSE,
   coord = coords,
   main = "PINS Get\n Along With Network (Undirected)",
@@ -612,47 +597,31 @@ A few questions:
 
 ### Power and Influence Network (Directed Network)
 
-For the *power and influence* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. We will keep this asymmetry so that we can treat the network as directed.
+For the *power and influence* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. We will keep this asymmetry so that we can treat the network as directed. As mentioned above, the *power and influence* exists in `SNACpack` as `pins_pi_net`:
 
-```{r,echo=TRUE, eval=TRUE, message=FALSE}
+```{r}
 
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-power-w1-adj.csv"
-
-# read in the .csv file
-pi_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
-
-# create the network object
-pi_net_d <- as.network( pi_mat, directed = TRUE )
+pins_pi_net
 
 ```
-
-Now we have created an undirected network where ties represent "get along with" nominations from both individuals. Let's calculate the degree centrality scores, the centralization score, and then use the degree centrality scores to size our nodes in a plot using the `vertex.cex()` argument in the `gplot()` function.
 
 ```{r, fig.show="hide"}
 
 # Set the coordinates
 set.seed( 507 )
-coords2 <- gplot( pi_net_d )
+coords2 <- gplot( pins_pi_net )
 
 ```
 
 ```{r}
 
 # get the degrees.
-pi_net_ideg <- degree( pi_net_d, gmode="digraph", cmode = "indegree" )
-pi_net_odeg <- degree( pi_net_d, gmode="digraph", cmode = "outdegree" )
+pi_net_ideg <- degree( pins_pi_net, gmode="digraph", cmode = "indegree" )
+pi_net_odeg <- degree( pins_pi_net, gmode="digraph", cmode = "outdegree" )
 
 # now the centralization scores.
-pi_net_ideg_cent <- centralization( pi_net_d, degree, mode="digraph", cmode = "indegree" )
-pi_net_odeg_cent <- centralization( pi_net_d, degree, mode="digraph", cmode = "outdegree" )
+pi_net_ideg_cent <- centralization( pins_pi_net, degree, mode="digraph", cmode = "indegree" )
+pi_net_odeg_cent <- centralization( pins_pi_net, degree, mode="digraph", cmode = "outdegree" )
 
 ```
 
@@ -661,11 +630,11 @@ pi_net_odeg_cent <- centralization( pi_net_d, degree, mode="digraph", cmode = "o
 par( mfrow=c( 1, 2 ) )
 
 gplot( 
-  pi_net_d, 
+  pins_pi_net, 
   gmode = "digraph",
   edge.col="grey40", 
   vertex.col="#693859",
-  vertex.cex = rescale( pi_net_ideg, 0.2, 4 ),
+  vertex.cex = vertex_rescale( pi_net_ideg, 0.2, 4 ),
   displayisolates = FALSE,
   coord = coords2,
   main = "PINS Power/Influnece\n Network (Directed)",
@@ -673,11 +642,11 @@ gplot(
   )
 
 gplot( 
-  pi_net_d, 
+  pins_pi_net, 
   gmode = "digraph",
   edge.col="grey40", 
   vertex.col="#2b868c",
-  vertex.cex = rescale( pi_net_odeg, 0.2, 4 ),
+  vertex.cex = vertex_rescale( pi_net_odeg, 0.2, 4 ),
   displayisolates = FALSE,
   coord = coords2,
   main = "PINS Power/Influnece\n Network (Directed)",
@@ -690,8 +659,8 @@ gplot(
 A few questions:
 
 -   What do we see in the plot?
--   What does the indegree centralization score of `r round( centralization( pi_net_d, degree, mode="digraph", cmode = "indegree" ), 2 )` indicate?
--   What does the outdegree centralization score of `r round( centralization( pi_net_d, degree, mode="digraph", cmode = "outdegree" ), 2 )` indicate?
+-   What does the indegree centralization score of `r round( centralization( pins_pi_net, degree, mode="digraph", cmode = "indegree" ), 2 )` indicate?
+-   What does the outdegree centralization score of `r round( centralization( pins_pi_net, degree, mode="digraph", cmode = "outdegree" ), 2 )` indicate?
 
 <br>
 

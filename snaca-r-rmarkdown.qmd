@@ -1,7 +1,8 @@
 ```{r setup, include=FALSE}
 
 knitr::opts_chunk$set(
-  echo = FALSE, 
+  echo = TRUE,
+  eval = FALSE,
   message=FALSE, 
   warning=FALSE, 
   fig.width = 10,
@@ -38,7 +39,7 @@ Let's see how it works!
 
 First, you need to install the `rmarkdown` and `knitr` packages using:
 
-```{r, echo = TRUE, eval = FALSE}
+```{r}
 
 install.packages( "rmarkdown" )
 install.packages( "knitr" )

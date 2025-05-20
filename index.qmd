@@ -8,6 +8,8 @@ This book is written with the unique needs of crime analysts in mind. Using real
 
 This book is a companion to [*Social Network Analysis for Crime Analysts*](https://jacobtnyoung.github.io/snaca-textbook/). It is organized as *tutorials* that show the "how to" of SNA in RStudio that correspond to conceptual chapters in the [*Social Network Analysis for Crime Analysts*](https://jacobtnyoung.github.io/snaca-textbook/) textbook.
 
+This book will use a custom R package, [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/), that is specifically designed as a companion as you go through the materials. Packages are a fundamental part of the R ecosystem—they allow users to bundle together functions, data, and documentation in a structured and reusable format. Throughout the course, we will rely on a variety of packages, both from the broader R community and those purpose-built to support our specific learning goals. [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) contains curated datasets and functions designed to simply learning. By working with packages like [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/), you will not only gain proficiency in applied social network analysis, but also build habits and skills that translate to broader data science practices in R.
+
 Each tutorial in this book will contain R code which is in "code chunks". You will notice a code chunk because the font will change. Code chunks will have text that `looks like this`. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by coping and pasting the `code` and seeing it work on your end.
 
 Let's get to it!

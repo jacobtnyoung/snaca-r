@@ -1,15 +1,4 @@
-```{r setup, include=FALSE}
 
-knitr::opts_chunk$set(
-  echo = TRUE, 
-  message=FALSE, 
-  warning=FALSE, 
-  fig.width = 10,
-  fig.align = "center"
-  )
-
-```
-
-# Concluding Rewards {.unnumbered}
+# Concluding Remarks {.unnumbered}
 
 Congratulations! You have made it all the way through the "Social Network Analysis for Crime Analysts using R" book! The goal of this book has been to equip you, the crime analyst, with the tools and knowledge to effectively apply social network analysis (SNA) using the R programming language. Throughout the tutorials, the book has emphasized practical application, guiding you through the process of conducting SNA in RStudio with real-world examples. Progressing through these topics, you have gained a comprehensive understanding of SNA techniques and how to implement them using R, ultimately enabling you to uncover critical insights within complex relational data. We did not cover everything there is in network analysis, but we covered most of it. My hope in writing this book is that it serves as a valuable resource for you as a crime analyst seeking to harness the power of social network analysis through R. And, that it has helped bridge the gap between theoretical concepts and practical application, providing the tools necessary to analyze and interpret complex networks within the realm of crime analysis. Good luck out there!

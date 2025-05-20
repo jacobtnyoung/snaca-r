@@ -4,7 +4,10 @@ knitr::opts_chunk$set(
   eval = TRUE,
   echo = TRUE, 
   message=FALSE, 
-  warning=FALSE 
+  warning=FALSE,
+  fig.width=6, 
+  fig.height=6,
+  fig.align="center" 
   )
 
 ```
@@ -36,7 +39,7 @@ The two-mode, *NxM*, adjacency matrix, when multiplied by it's transpose, produc
 
 To examine how this works, let's first set up an example:
 
-```{r}
+```{r, create-example-matrix}
 
 # create an example matrix
 A <- rbind(
@@ -74,7 +77,7 @@ t( A )
 
 To create the project, we need to use matrix algebra. To multiply matrices in R, we have to use the following operator: `%*%`. This is different then `*` in that `%*%` tells R to use matrix multiplication. For example, compare the differences:
 
-```{r}
+```{r, show-matrix-multiplication}
 
 # create two matrices
 a <- matrix( c(1,1,1,1), nrow=2, byrow=TRUE )
@@ -104,7 +107,7 @@ Recall that from the two-mode, *NxM*, adjacency matrix, we can produce two diffe
 
 Let's create each of these with our example network.
 
-```{r}
+```{r, show-transpose-function}
 
 # create the NxN matrix
 A %*% t( A )
@@ -120,7 +123,7 @@ t( A ) %*% A
 
 Ok, so we have created the projections, which are the one-mode networks that represent information in the two-mode networks. Recall from the [Projection](https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html) chapter that @breiger1974duality referred to the *person* matrix (i.e. the *NxN* matrix) and the *group* matrix (i.e. the *MxM* matrix).
 
-```{r}
+```{r, create-projection}
 
 # create the "person" matrix: recall this is A X t(A)
 P <- A %*% t( A )
@@ -249,48 +252,52 @@ From the plots we can see what the projection is doing. It is creating a unipart
 
 Now, let's work with a real example. As discussed in the [Bipartite Graphs & Two-Mode Networks](https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html) chapter, @young2015 examined how police officers develop cognitive frames about the usefulness of body-worn cameras. They argued that police officers' views of body-worn cameras influence whether they use their cameras in incidents and that these views partly result from sharing incidents with other officers where they exchanged views about the legitimacy of body-worn cameras.
 
-Let's import the the matrix, create a network, assign an attribute, and plot it. Then, we will work create the projection.
+his network is available in `SNACpack` under the name `officer_event_net`. We can type the name of the network to see it's properties:
 
 ```{r}
 
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-officer-events-adj.csv"
+# load SNACpack 
 
-# read in the .csv file
-cam_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
+library( SNACpack )
+
+
+# print out the network
+
+officer_event_net
 
 ```
 
-We can check the dimensions of the matrix using the `dim()` function. The `cam_mat` matrix has `r dim( cam_mat )[1]` rows and `r dim( cam_mat )[2]` columns. Recall that this is police officers and incidents, so there are `r dim( cam_mat )[1]` police officers and `r dim( cam_mat )[2]` incidents that connect officers.
+The `officer_event_net` object is stored as one of class `network`. Let's coerce it to a matrix to make it easer to handle:
+
+```{r}
+
+officer_event_mat <- as.matrix( officer_event_net )
+
+```
+
+We can check the dimensions of the matrix using the `dim()` function. The `officer_event_mat` matrix has `r dim( officer_event_mat )[1]` rows and `r dim( officer_event_mat )[2]` columns. Recall that this is police officers and incidents, so there are `r dim( officer_event_mat )[1]` police officers and `r dim( officer_event_mat )[2]` incidents that connect officers.
 
 ```{r}
 
 # identify the number of police officers
-N <- dim( cam_mat )[1]
+N <- dim( officer_event_mat )[1]
 
 # identify the number of incidents
-M <- dim( cam_mat )[2]
+M <- dim( officer_event_mat )[2]
 
 ```
 
 ### Create the Projections
 
-Now that we have it put together, let's create the projections. To do this, we just need to employ matrix multiplication on the `cam_mat` matrix.
+Now that we have it put together, let's create the projections. To do this, we just need to employ matrix multiplication on the `officer_event_mat` matrix.
 
 ```{r}
 
 # create the "person" matrix
-cam_mat_P <- cam_mat %*% t( cam_mat )
+officer_event_mat_P <- officer_event_mat %*% t( officer_event_mat )
 
 # create the "group" matrix
-cam_mat_G <- t( cam_mat ) %*% cam_mat
+officer_event_mat_G <- t( officer_event_mat ) %*% officer_event_mat
 
 ```
 
@@ -308,19 +315,19 @@ par(
 set.seed( 507 )
 
 # plot the bipartite network
-gplot( cam_mat,
+gplot( officer_event_mat,
        gmode="twomode",
        usearrows=FALSE,
        edge.col="grey60",
        vertex.col = c( 
-         rep( "#34e5eb", dim( cam_mat )[1] ), 
-         rep( "#4f0a1a", dim( cam_mat )[2] ) ),
+         rep( "#34e5eb", dim( officer_event_mat )[1] ), 
+         rep( "#4f0a1a", dim( officer_event_mat )[2] ) ),
        edge.lwd=1.2
        )
 title( "Bipartite Matrix of Officers and Incidents", line = 1 )
 
 # plot the person matrix
-gplot( cam_mat_P,
+gplot( officer_event_mat_P,
        gmode = "graph",
        usearrows = FALSE,
        edge.col="grey60",
@@ -330,7 +337,7 @@ gplot( cam_mat_P,
 title( "Unipartite Projection of\n Officers (Person) Matrix", line = 1 )
 
 # plot the group matrix
-gplot( cam_mat_G,
+gplot( officer_event_mat_G,
        gmode = "graph",
        usearrows = FALSE,
        edge.col="grey60",
@@ -348,70 +355,62 @@ Now that we have reduced our bipartite graph to a unipartite graph, we can emplo
 
 Note that when we create the projection, the matrix is actually a weighted matrix. We saw this in the [Projection](https://jacobtnyoung.github.io/snaca-textbook/snaca-projection.html) chapter. We can use this information in our plot. That is, we can use the weighted matrix to shade the edges (darker are larger weights) and size the edges (where larger are bigger weights). To see how this works, let's build a few functions.
 
-#### Reworking the `rescale()` function to incorporate edge weights
+#### The `edge_rescale()` and `edge_shade()` functions for incorporating edge weights
 
-First, we will create the `edge.rescale()` function to help us here. This function returns a weighted edgelist that can be used to aid with plotting. Then, we will create the `edge.shade()` function that shades the edges based on the size of the edge.
-
-```{r}
-
-edge.rescale <- function( uni_mat, low, high ){
-  diag( uni_mat ) <- 0
-  min_w <- min( uni_mat[uni_mat != 0] )
-  max_w <- max( uni_mat[uni_mat != 0] )
-  rscl <- ( ( high-low )  * ( uni_mat[uni_mat != 0] - min_w ) ) / ( max_w - min_w ) + low
-  rscl
-}
-
-edge.shade <- function( uni_mat ){
-  net_edges <- edge.rescale( uni_mat, 0.01, 1 )
-  vec_to_color <- as.vector( abs( net_edges ) )
-  vec_to_color <- 1 - vec_to_color # subtract 1 to flip the grey function scale.
-  edge_cols <- grey( vec_to_color )
-  return( edge_cols )
-}
-
-```
+As we have seen in prior tutorials, the `vertex_rescale()` function can be used to rescale the size of the *nodes* in a plot based on an attribute. We can do the same thing for *edge* values. That is, we can make edges that have larger values in the projection to be thicker and darker and smaller values to be thinner and lighter. This helps us better visualize the weights assigned to the edges. In `SNACpack`, there are two functions that do just that: `edge_rescale()` and `edge_shade`. (Use `?edge_rescale` and `?edge_shade` to see more about the function in the help file).
 
 Now, let's plot the networks with the edges adjusted. We will plot the bipartite graph, the officer network, and the officer network with the shading.
 
 ```{r, fig.width=10, fig.height=5, fig.fullwidth=TRUE}
 
 # set the plot regions to ease with visualization
+
 par( 
   mfrow = c( 1, 3 ),
   mar = c( 2, 1, 5, 1)
   )
 
+
 # plot the bipartite network
-gplot( cam_mat,
+
+gplot( officer_event_mat,
        gmode="twomode",
        usearrows=FALSE,
        edge.col="grey60",
        vertex.col = c( 
-         rep( "#34e5eb", dim( cam_mat )[1] ), 
-         rep( "#4f0a1a", dim( cam_mat )[2] ) ),
+         rep( "#34e5eb", dim( officer_event_mat )[1] ), 
+         rep( "#4f0a1a", dim( officer_event_mat )[2] ) ),
        edge.lwd=1.2
        )
+
 title( "Bipartite Matrix of Officers and Incidents", line = 1 )
 
-# plot the person matrix
-set.seed( 507 )
-gplot( cam_mat_P,
-       gmode = "graph",
-       usearrows = FALSE,
-       vertex.col = "#34e5eb"
-       )
-title( "Unipartite Projection of\n Officers (Person) Matrix\n (no shading)", line = 1 )
 
 # plot the person matrix
+
 set.seed( 507 )
-gplot( cam_mat_P,
+
+gplot( officer_event_mat_P,
        gmode = "graph",
        usearrows = FALSE,
-       edge.col = edge.shade( cam_mat_P ),           # note the usage here
-       edge.lwd = edge.rescale( cam_mat_P, 0.1, 5 ), # note the usage here
        vertex.col = "#34e5eb"
        )
+
+title( "Unipartite Projection of\n Officers (Person) Matrix\n (no shading)", line = 1 )
+
+
+# plot the person matrix
+
+set.seed( 507 )
+
+gplot( officer_event_mat_P,
+       gmode = "graph",
+       usearrows = FALSE,
+       edge.col = edge_shade( officer_event_mat_P ),           # note the usage here
+       edge.lwd = edge_rescale( officer_event_mat_P, 0.1, 5 ), # note the usage here
+       vertex.col = "#34e5eb"
+       )
+
 title( "Unipartite Projection of\n Officers (Person) Matrix", line = 1 )
 
 ```
@@ -421,44 +420,55 @@ Now, we will plot the bipartite graph, the incident network, and the incident ne
 ```{r, fig.width=10, fig.height=5, fig.fullwidth=TRUE}
 
 # set the plot regions to ease with visualization
+
 par( 
   mfrow = c( 1, 3 ),
   mar = c( 2, 1, 4, 1)
   )
 
+
 # plot the bipartite network
-gplot( cam_mat,
+
+gplot( officer_event_mat,
        gmode="twomode",
        usearrows=FALSE,
        edge.col="grey60",
        vertex.col = c( 
-         rep( "#34e5eb", dim( cam_mat )[1] ), 
-         rep( "#4f0a1a", dim( cam_mat )[2] ) ),
+         rep( "#34e5eb", dim( officer_event_mat )[1] ), 
+         rep( "#4f0a1a", dim( officer_event_mat )[2] ) ),
        edge.lwd=1.2
        )
+
 title( "Bipartite Matrix of Officers and Incidents", line = 1 )
 
+
 # plot the group matrix
+
 set.seed( 507 )
-gplot( cam_mat_G,
+
+gplot( officer_event_mat_G,
        gmode = "graph",
        usearrows = FALSE,
        vertex.col = "#4f0a1a",
        vertex.sides = 4
        )
+
 title( "Unipartite Projection of\n Incidents (Group) Matrix\n (no shading)", line = 1 )
 
 
 # plot the group matrix
+
 set.seed( 507 )
-gplot( cam_mat_G,
+
+gplot( officer_event_mat_G,
        gmode = "graph",
        usearrows = FALSE,
-       edge.col = edge.shade( cam_mat_G ),           # note the usage here
-       edge.lwd = edge.rescale( cam_mat_G, 0.1, 5 ), # note the usage here
+       edge.col = edge_shade( officer_event_mat_G ),           # note the usage here
+       edge.lwd = edge_rescale( officer_event_mat_G, 0.1, 5 ), # note the usage here
        vertex.col = "#4f0a1a",
        vertex.sides = 4
        )
+
 title( "Unipartite Projection of\n Incidents (Group) Matrix", line = 1 )
 
 ```
@@ -472,7 +482,7 @@ title( "Unipartite Projection of\n Incidents (Group) Matrix", line = 1 )
 -   What is the significance of the diagonal elements in the "person" matrix for crime analysts studying shared events?
 -   Write R code to visualize the "group" matrix using the `gplot()` function. How would you ensure that event nodes have distinct shapes and colors?
 -   What are edge weights in a projection, and how can they be represented visually in R?
--   Describe how the `edge.rescale()` and `edge.shade()` functions created above work to adjust edge properties in a weighted graph. Why might this be helpful in a crime analysis context?
+-   Describe how the `edge_rescale()` and `edge_shade()` functions created above work to adjust edge properties in a weighted graph. Why might this be helpful in a crime analysis context?
 -   Why might a crime analyst choose to visualize both weighted and unweighted projections of a bipartite network? What insights can be gained from each?
 -   When plotting the unipartite projections, why is it important to use consistent colors and shapes for nodes? How does this enhance the interpretation of the graph?
 

@@ -4,7 +4,10 @@ knitr::opts_chunk$set(
   eval = TRUE,
   echo = TRUE, 
   message=FALSE, 
-  warning=FALSE 
+  warning=FALSE,
+  fig.width=6, 
+  fig.height=6,
+  fig.align="center"
   )
 
 ```
@@ -345,7 +348,7 @@ The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funde
 
 -   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit.
 
-Let's examine the closeness centrality scores for both of these networks.
+As we saw in the prior tutorial, both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the closeness centrality scores for both of these networks.
 
 ### Get Along with Network (Undirected Network)
 
@@ -353,23 +356,20 @@ For the *get along with* network, individuals could have asymmetric nominations.
 
 ```{r}
 
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-getalong-w1-adj.csv"
 
-# read in the .csv file
-ga_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
+# load the SNACpack package
+
+library( SNACpack )
+
 
 # use the symmetrize() function to create an undirected matrix
-ga_mat_u <- symmetrize( ga_mat, rule = "strong" )
+# you will notice that this creates an object of class "matrix"
+
+ga_mat_u <- symmetrize( pins_ga_net, rule = "strong" )
+
 
 # create the network object
+
 ga_net_u <- as.network( ga_mat_u, directed = FALSE )
 
 ```
@@ -378,7 +378,7 @@ ga_net_u <- as.network( ga_mat_u, directed = FALSE )
 
 Now, we have created an undirected network where ties represent "get along with" nominations from both individuals.
 
-Before we calculate the closeness scores, recall that in a graph with multiple components (i.e. disconnected subgraphs) individuals who cannot be reached will have a closeness score of zero. So, what do we do? Call it a day and go home? (We could, but we have some options)
+*Before* we calculate the closeness scores, recall that in a graph with multiple components (i.e. disconnected subgraphs) individuals who cannot be reached will have a closeness score of zero. So, what do we do? Call it a day and go home? (We could, but we have some options)
 
 What often happens in practice when we have multiple components in a network is that researchers will take the "first component" and analyze the closeness scores for that graph. The first component is the largest subgraph in a graph. We can see this visually in the following plot:
 
@@ -397,9 +397,12 @@ comp_col[ cd$membership == 4 ] <- "#9cde18"
 
 ```
 
-```{r,echo=FALSE, figure.align = "center", figure.height = 5, figure.width = 5}
+```{r, echo=FALSE, figure.align = "center", figure.height = 5, figure.width = 5}
 
 set.seed ( 507 )
+
+par( mar=c( 0.1, 0.5, 1, 0.1 ) )
+
 gplot( ga_net_u, gmode = "graph", vertex.col = comp_col, main = "Get Along With Network (Undirected)" )
 
 ```
@@ -409,34 +412,48 @@ In the plot above, the first component (i.e. the largest subgraph) is colored gr
 ```{r, figure.align = "center", figure.height = 5, figure.width = 5}
 
 # find the component membership
+
 cd <- component.dist( as.matrix( ga_net_u ), connected="weak" )
 
+
 # find which component is the largest
+
 sort( table( cd$membership ) )
+
 
 # we can see that group number 4 is the largest group. This is the first component.
 # so, we can assign the membership in the first component
+
 first_comp <- cd$membership
 first_comp[ cd$membership != 4 ] <- 0
 first_comp[ cd$membership == 4 ] <- 1
 
+
 # now we set this as a network attribute
+
 ga_net_u %v% "first_comp" <- first_comp
 
-# Now, remove those not in the first component by using the get.inducedSubgraph() function.
-# Specifically, we stipulate in the v= argument that we only want vertices that are in the first component.
+
+# Now, remove those not in the first component 
+# by using the get.inducedSubgraph() function.
+# Specifically, we stipulate in the v= argument that 
+# we only want vertices that are in the first component.
+
 ga_net_ucomp <- get.inducedSubgraph( 
   ga_net_u, # the network                 
   v = which( ga_net_u %v% "first_comp" == 1 )  # the condition
   )
 
+
 # Now, take a look at the plot.
+
 gplot( 
   ga_net_ucomp, 
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#9cde18", 
   main = "First Component of Get\n Along With Network (Undirected)" )
+
 
 ```
 
@@ -458,16 +475,9 @@ centralization( ga_net_ucomp, closeness, mode="graph" )
 
 ```
 
+Now that we have the scores, we can use them in the plot with the `vertex_rescale()` function:
+
 ```{r}
-
-# define the rescale function
-rescale <- function( nchar, low, high ){
-  min_d <- min( nchar )
-  max_d <- max( nchar )
-  rscl  <- ( ( high - low )*( nchar - min_d ) ) / ( max_d - min_d ) + low
-  rscl
-}
-
 
 # now, take a look at the plot
 gplot( 
@@ -475,7 +485,7 @@ gplot(
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#9cde18",
-  vertex.cex = rescale( closeness( ga_net_ucomp, gmode="graph" ), 0.4, 3 ),
+  vertex.cex = vertex_rescale( closeness( ga_net_ucomp, gmode="graph" ), 0.4, 3 ),
   main = "First Component of Get\n Along With Network (Undirected)",
   sub = "node sized by closeness centrality"
   )
@@ -484,36 +494,14 @@ gplot(
 
 ### Power and Influence Network (Directed Network)
 
-For the *power and influence* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. We will keep this asymmetry so that we can treat the network as directed.
-
-```{r,echo=TRUE, eval=TRUE, message=FALSE}
-
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-power-w1-adj.csv"
-
-# read in the .csv file
-pi_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
-
-# create the network object
-pi_net_d <- as.network( pi_mat, directed = TRUE )
-
-```
-
-Now, we have created a directed network where ties represent "power and influence" nominations from *i* to *j*.
+For the *power and influence* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. We will keep this asymmetry so that we can treat the network as directed. As mentioned above, the *power and influence* exists in `SNACpack` as `pins_pi_net`.
 
 As before, we need to extract the first component:
 
 ```{r,echo=FALSE}
 
 # find the component membership
-cd <- component.dist( as.matrix( pi_net_d ), connected="weak" )
+cd <- component.dist( as.matrix( pins_pi_net ), connected="weak" )
 
 # find which component is the largest
 # sort( table( cd$membership ) ) # commented to hide in the .html
@@ -528,7 +516,10 @@ comp_col[ cd$membership == 1 ] <- "#ab163b"
 ```{r,echo=FALSE, figure.align = "center", figure.height = 5, figure.width = 5}
 
 set.seed ( 507 )
-gplot( pi_net_d, gmode = "digraph", vertex.col = comp_col, main = "Power Network (Directed)" )
+
+par( mar=c( 0.1, 0.5, 1, 0.1 ) )
+
+gplot( pins_pi_net, gmode = "digraph", vertex.col = comp_col, main = "Power Network (Directed)" )
 
 ```
 
@@ -536,31 +527,45 @@ In the plot above, the first component (i.e. the largest subgraph) is shown in r
 
 ```{r, figure.align = "center", figure.height = 5, figure.width = 5}
 
+
 # find the component membership
-cd <- component.dist( as.matrix( pi_net_d ), connected="weak" )
+
+cd <- component.dist( as.matrix( pins_pi_net ), connected="weak" )
+
 
 # find which component is the largest
+
 sort( table( cd$membership ) )
+
 
 # we can see that group number 1 is the largest group. This is the first component.
 # so, we can assign the membership in the first component
+
 first_comp <- cd$membership
 first_comp[ cd$membership != 1 ] <- 0
 first_comp[ cd$membership == 1 ] <- 1
 
-# now we set this as a network attribute
-pi_net_d %v% "first_comp" <- first_comp
 
-# Now, remove those not in the first component by using the get.inducedSubgraph() function.
-# Specifically, we stipulate in the v= argument that we only want vertices that are in the first component.
-pi_net_d_comp <- get.inducedSubgraph( 
-  pi_net_d, # the network                 
-  v = which( pi_net_d %v% "first_comp" == 1 )  # the condition
+# now we set this as a network attribute
+
+pins_pi_net %v% "first_comp" <- first_comp
+
+
+# Now, remove those not in the first component by using 
+# the get.inducedSubgraph() function.
+# Specifically, we stipulate in the v= argument 
+# that we only want vertices that are in the first component.
+
+pins_pi_net_comp <- get.inducedSubgraph( 
+  pins_pi_net, # the network                 
+  v = which( pins_pi_net %v% "first_comp" == 1 )  # the condition
   )
 
-# Now, take a look at the plot
+
+# Now, take a look at the plot:
+
 gplot( 
-  pi_net_d_comp, 
+  pins_pi_net_comp, 
   gmode = "digraph",
   edge.col="grey40", 
   vertex.col="#ab163b", 
@@ -573,24 +578,29 @@ Now, let's calculate our closeness scores. Note a slight change though, in the `
 ```{r}
 
 # get the number of nodes
-n_nodes <- dim( as.matrix( pi_net_d_comp ) )[1]
+n_nodes <- dim( as.matrix( pins_pi_net_comp ) )[1]
 
 #unstandardized closeness
-closeness( pi_net_d_comp, gmode="graph" ) / ( n_nodes - 1 ) 
+closeness( pins_pi_net_comp, gmode="graph" ) / ( n_nodes - 1 ) 
 
 #standardized closeness
-closeness( pi_net_d_comp, gmode="graph" ) 
+closeness( pins_pi_net_comp, gmode="graph" ) 
 
 # Group Closeness Centralization
-centralization( pi_net_d_comp, closeness, mode="graph" )
+centralization( pins_pi_net_comp, closeness, mode="graph" )
 
-# Now, take a look at the plot
+```
+
+Again, we can use the closeness scores in the plot using the `vertex_rescale()` function:
+
+```{r}
+
 gplot( 
-  pi_net_d_comp, 
+  pins_pi_net_comp, 
   gmode = "digraph",
   edge.col="grey40", 
   vertex.col="#ab163b",
-  vertex.cex = rescale( closeness( pi_net_d_comp, gmode="graph" ), 0.4, 3 ),
+  vertex.cex = vertex_rescale( closeness( pins_pi_net_comp, gmode="graph" ), 0.4, 3 ),
   main = "First Component of Power\n Network (Directed)",
   sub = "node sized by closeness centrality"
   )
@@ -600,7 +610,7 @@ gplot(
 A few questions:
 
 -   What do we see in the plot?
--   What does the closeness centralization score of `r round( centralization( pi_net_d_comp, closeness, mode="graph" ), 2 )` indicate?
+-   What does the closeness centralization score of `r round( centralization( pins_pi_net_comp, closeness, mode="graph" ), 2 )` indicate?
 
 ## Test Your Knowledge Exercises
 
