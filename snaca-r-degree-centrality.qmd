@@ -489,7 +489,7 @@ The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funde
 
 -   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit
 
-Both of these networks are available in `SNACpack`. The *get along with network* is  called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the degree centrality scores for both of these networks.
+Both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the degree centrality scores for both of these networks.
 
 ### *Get Along With* Network (Undirected Network)
 
@@ -591,7 +591,6 @@ A few questions:
 
 -   What do we see in the plot?
 -   What does the degree centralization score of `r round( centralization( ga_net_u, degree, mode="graph" ), 2 )` indicate?
-
 
 ### Power and Influence Network (Directed Network)
 
