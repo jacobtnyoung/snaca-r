@@ -4,7 +4,10 @@ knitr::opts_chunk$set(
   eval = TRUE,
   echo = TRUE, 
   message=FALSE, 
-  warning=FALSE 
+  warning=FALSE,
+  fig.width=6, 
+  fig.height=6,
+  fig.align="center"
   )
 
 ```
@@ -345,7 +348,7 @@ The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funde
 
 -   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit.
 
-As we saw in the prior tutorial, both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the degree centrality scores for both of these networks.
+As we saw in the prior tutorial, both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the closeness centrality scores for both of these networks.
 
 ### Get Along with Network (Undirected Network)
 
@@ -609,7 +612,6 @@ A few questions:
 -   What do we see in the plot?
 -   What does the closeness centralization score of `r round( centralization( pins_pi_net_comp, closeness, mode="graph" ), 2 )` indicate?
 
-
 ## Test Your Knowledge Exercises
 
 -   Explain the concept of closeness centrality in your own words. How does it differ from degree centrality?
@@ -621,7 +623,6 @@ A few questions:
 -   Explain why `Inf` values appear in the geodesic distance matrix for directed graphs and how these values are handled during calculations.
 -   Using the "Power and Influence Network," examine the visual representation of the first component. What structural patterns do you observe, and how do these relate to the closeness centrality scores?
 -   After calculating the closeness centralization scores for both networks, compare their values. What do the differences in scores suggest about the overall structure of the two networks?
-
 
 ## Tutorial Summary
 

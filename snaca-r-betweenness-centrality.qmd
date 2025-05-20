@@ -4,7 +4,10 @@ knitr::opts_chunk$set(
   eval = TRUE,
   echo = TRUE, 
   message=FALSE, 
-  warning=FALSE 
+  warning=FALSE,
+  fig.width=6, 
+  fig.height=6,
+  fig.align="center"
   )
 
 ```
@@ -224,7 +227,7 @@ The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funde
 
 -   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit.
 
-Let's examine the betweenness centrality scores for both of these networks.
+As we saw in the past tutorials, both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the betweeness centrality scores for both of these networks.
 
 ### Get Along with Network (Undirected Network)
 
@@ -232,21 +235,20 @@ For the *get along with* network, individuals could have asymmetric nominations.
 
 ```{r}
 
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-getalong-w1-adj.csv"
+# load the SNACpack package
 
-# read in the .csv file
-ga_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
+library( SNACpack )
+
 
 # use the symmetrize() function to create an undirected matrix
-ga_mat_u <- symmetrize( ga_mat, rule = "strong" )
+# you will notice that this creates an object of class "matrix"
+
+ga_mat_u <- symmetrize( pins_ga_net, rule = "strong" )
+
+
+# create the network object
+
+ga_net_u <- as.network( ga_mat_u, directed = FALSE )
 
 ```
 
@@ -255,13 +257,24 @@ Now, let's calculate our betweenness scores:
 ```{r}
 
 # define the number of nodes in the graph for our calculation
-g <- dim( ga_mat_u )[1]
+
+g <- dim( as.matrix( ga_net_u ) )[1]
+
+
+# another way to do this is with the network.size 
+# function in the network package (which is less code to write)
+
+g <- network.size( ga_net_u )
+
 
 # unstandardized
-betweenness( ga_mat_u, gmode="graph" )
+
+betweenness( ga_net_u, gmode="graph" )
+
 
 # standardized
-betweenness( ga_mat_u, gmode="graph" ) / ( ( ( g-1 ) * ( g-2 ) ) / 2 )
+
+betweenness( ga_net_u, gmode="graph" ) / ( ( ( g-1 ) * ( g-2 ) ) / 2 )
 
 ```
 
@@ -270,11 +283,11 @@ Let's create a plot that has the nodes sized by their betweenness centrality sco
 ```{r}
 
 gplot( 
-  ga_mat_u, 
+  ga_net_u, 
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#ba491c",
-  vertex.cex = betweenness( ga_mat_u, gmode="graph" ),
+  vertex.cex = betweenness( ga_net_u, gmode="graph" ),
   main = "Get Along With Network (Undirected)",
   sub = "node sized by betweenness centrality"
   )
@@ -285,35 +298,22 @@ gplot(
 
 ```{r}
 
-max( betweenness( ga_mat_u, gmode="graph" ) )
+max( betweenness( ga_net_u, gmode="graph" ) )
 
 ```
 
-The largest betweenness centrality score is `r max( betweenness( ga_mat_u, gmode="graph" ) )`, so the plot is using this value. What we need is to adjust the centrality scores so that they are not so large. Fortunately, there is a simple function we can write to do this.
+The largest betweenness centrality score is `r max( betweenness( ga_net_u, gmode="graph" ) )`, so the plot is using this value. What we need is to adjust the centrality scores so that they are not so large. Fortunately, there is a simple function we can write to do this.
 
-Let's use the `rescale()` function to adjust the node sizes in our plot:
-
-```{r}
-
-rescale <- function( nchar, low, high ){
-  min_d <- min( nchar )
-  max_d <- max( nchar )
-  rscl  <- ( ( high - low )*( nchar - min_d ) ) / ( max_d - min_d ) + low
-  rscl
-}
-
-```
-
-Now, use the function we created to rescale the size of the nodes:
+Let's use the `vertex_rescale()` function to adjust the node sizes in our plot:
 
 ```{r}
 
 gplot( 
-  ga_mat_u, 
+  ga_net_u, 
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#ba491c",
-  vertex.cex = rescale( betweenness( ga_mat_u, gmode="graph" ), 0.5, 2.5 ),
+  vertex.cex = vertex_rescale( betweenness( ga_net_u, gmode="graph" ), 0.5, 2.5 ),
   main = "Get\n Along With Network (Undirected)",
   sub = "node sized by betweenness centrality"
   )
@@ -325,11 +325,11 @@ Much better. Yet, it is still a bit difficult to see the differences due to the 
 ```{r}
 
 gplot( 
-  ga_mat_u, 
+  ga_net_u, 
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#ba491c",
-  vertex.cex = rescale( betweenness( ga_mat_u, gmode="graph" ), 0.5, 2.5 ),
+  vertex.cex = vertex_rescale( betweenness( ga_net_u, gmode="graph" ), 0.5, 2.5 ),
   main = "Get\n Along With Network (Undirected)",
   sub = "node sized by betweenness centrality",
   displayisolates = FALSE # here we set it to FALSE, TRUE is the default
@@ -341,45 +341,28 @@ Now we can examine the centralization score for the network:
 
 ```{r}
 
-centralization( ga_mat_u, betweenness, mode="graph" ) 
+# note the "mode=" argument!
+centralization( ga_net_u, betweenness, mode="graph" ) 
 
 ```
 
-*What does the centralization score of `r round( centralization( ga_mat_u, betweenness, mode="graph" ) , 2 )` tell us?*
+*What does the centralization score of `r round( centralization( ga_net_u, betweenness, mode="graph" ) , 2 )` tell us?*
+
 
 ### Power and Influence Network (Directed Network)
 
-For the *power and influence* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. We will keep this asymmetry so that we can treat the network as directed.
-
-```{r}
-
-# set the location for the file
-loc <- "https://github.com/jacobtnyoung/snaca-r/raw/main/data/data-PINS-power-w1-adj.csv"
-
-# read in the .csv file
-pi_mat <- as.matrix(
-  read.csv( 
-    loc,
-    as.is = TRUE,
-    header = TRUE,
-    row.names = 1 
-    )
-  )
-
-```
-
-We have created a directed network where ties represent "power and influence" nominations from *i* to *j*. Now, let's calculate our betweenness scores.
+For the *power and influence* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. We will keep this asymmetry so that we can treat the network as directed. As we have seen, the *power and influence* exists in `SNACpack` as `pins_pi_net`.
 
 ```{r}
 
 # define the number of nodes in the graph for our calculation
-g <- dim( pi_mat )[1]
+g <- network.size( pins_pi_net )
 
 # unstandardized
-betweenness( pi_mat, gmode="digraph" )
+betweenness( pins_pi_net, gmode="digraph" )
 
 # standardized
-betweenness( pi_mat, gmode="digraph" ) / ( ( ( g-1 ) * ( g-2 ) ) / 2 )
+betweenness( pins_pi_net, gmode="digraph" ) / ( ( ( g-1 ) * ( g-2 ) ) / 2 )
 
 ```
 
@@ -387,15 +370,18 @@ Now, we can plot it to examine the scores:
 
 ```{r}
 
+# adjust the margins to cut some white space
+par( mar=c( 0, 0, 2, 0 ) )
+
+# render the plot
 gplot( 
-  pi_mat, 
+  pins_pi_net, 
   gmode = "digraph",
   edge.col="grey40", 
   vertex.col="#0b7344",
-  vertex.cex = rescale( betweenness( pi_mat, gmode="digraph" ), 0.5, 2.5 ),
+  vertex.cex = vertex_rescale( betweenness( pins_pi_net, gmode="digraph" ), 0.5, 2.5 ),
   arrowhead.cex = 0.5,
-  main = "Power/Influence Network (Directed)",
-  sub = "node sized by betweenness centrality"
+  main = "Power/Influence Network (Directed) \n (node sized by betweenness centrality)"
   )
 
 ```
@@ -404,15 +390,18 @@ Again, let's remove the isolates:
 
 ```{r}
 
+# adjust the margins to cut some white space
+par( mar=c( 0, 0, 2, 0 ) )
+
+# render the plot
 gplot( 
-  pi_mat, 
+  pins_pi_net, 
   gmode = "digraph",
   edge.col="grey40", 
   vertex.col="#0b7344",
-  vertex.cex = rescale( betweenness( pi_mat, gmode="digraph" ), 0.5, 2.5 ),
+  vertex.cex = vertex_rescale( betweenness( pins_pi_net, gmode="digraph" ), 0.5, 2.5 ),
   arrowhead.cex = 0.5,
-  main = "Power/Influence Network (Directed)",
-  sub = "node sized by betweenness centrality",
+  main = "Power/Influence Network (Directed) \n (node sized by betweenness centrality)",
   displayisolates = FALSE
   )
 
@@ -422,14 +411,16 @@ Examine the centralization score for the network:
 
 ```{r}
 
-centralization( pi_mat, betweenness, mode="digraph" ) 
+# note the "mode=" argument here is different!
+centralization( pins_pi_net, betweenness, mode="digraph" ) 
 
 ```
 
 A few questions:
 
 -   What do we see in the plot?
--   What does the closeness centralization score of `r round( centralization( pi_mat, betweenness, mode="digraph" ), 4 )` indicate?
+-   What does the closeness centralization score of `r round( centralization( pins_pi_net, betweenness, mode="digraph" ), 4 )` indicate?
+
 
 ## Test Your Knowledge Exercises
 
