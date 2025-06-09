@@ -12,13 +12,6 @@ knitr::opts_chunk$set(
 
 ```
 
-```{r,echo=FALSE}
-
-library( sna )     # for sna functions
-library( network ) # for working with network objects
-
-```
-
 # Closeness Centrality and Centralization {.unnumbered}
 
 How do we know whether a node is important in a network? As was discussed at the beginning of the chapter on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html), one of the most popular concepts in network analysis is *centrality*. In that chapter, we covered how centrality can be measured by the number of edges incident on a node. But, that is not the only way that a node can be *central*. The chapter on [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html) discussed an alternative conceptualization, *closeness*, where important nodes are those who are "close" to other nodes in the network.
@@ -53,7 +46,11 @@ $$\frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$ Here is what the equation is doin
 
 ### Manually Calculating Closeness Centrality
 
-We can manually calculate the distance matrix using the `geodist()` function in the `sna` package. Let's take a look:
+We can manually calculate the distance matrix using the `geodist()` function in the `sna` package. Be sure to load the `sna` library using `library( sna )` Let's take a look:
+
+```{r, echo=FALSE}
+library( sna )
+```
 
 ```{r,eval=FALSE}
 
@@ -356,15 +353,11 @@ For the *get along with* network, individuals could have asymmetric nominations.
 
 ```{r}
 
-
 # load the SNACpack package
-
 library( SNACpack )
-
 
 # use the symmetrize() function to create an undirected matrix
 # you will notice that this creates an object of class "matrix"
-
 ga_mat_u <- symmetrize( pins_ga_net, rule = "strong" )
 
 
@@ -412,25 +405,21 @@ In the plot above, the first component (i.e. the largest subgraph) is colored gr
 ```{r, figure.align = "center", figure.height = 5, figure.width = 5}
 
 # find the component membership
-
 cd <- component.dist( as.matrix( ga_net_u ), connected="weak" )
 
 
 # find which component is the largest
-
 sort( table( cd$membership ) )
 
 
 # we can see that group number 4 is the largest group. This is the first component.
 # so, we can assign the membership in the first component
-
 first_comp <- cd$membership
 first_comp[ cd$membership != 4 ] <- 0
 first_comp[ cd$membership == 4 ] <- 1
 
 
 # now we set this as a network attribute
-
 ga_net_u %v% "first_comp" <- first_comp
 
 
@@ -438,7 +427,6 @@ ga_net_u %v% "first_comp" <- first_comp
 # by using the get.inducedSubgraph() function.
 # Specifically, we stipulate in the v= argument that 
 # we only want vertices that are in the first component.
-
 ga_net_ucomp <- get.inducedSubgraph( 
   ga_net_u, # the network                 
   v = which( ga_net_u %v% "first_comp" == 1 )  # the condition
@@ -446,7 +434,6 @@ ga_net_ucomp <- get.inducedSubgraph(
 
 
 # Now, take a look at the plot.
-
 gplot( 
   ga_net_ucomp, 
   gmode = "graph",
@@ -475,7 +462,11 @@ centralization( ga_net_ucomp, closeness, mode="graph" )
 
 ```
 
-Now that we have the scores, we can use them in the plot with the `vertex_rescale()` function:
+Wait, did you notice something about the undstandardized closeness scores? Go back and take a look. I will wait...
+
+Ok, I hope you noticed it also. If not, look *again* and you will see that all the scores are really small. Specifically, the mean is `r round( mean( closeness( ga_net_ucomp, gmode="graph" ) / ( n_nodes - 1 ) ), 4 )`. Now, think about why it is so small.
+
+If it is not immediately apparent, take a look at the plot of the network below where we size the nodes based on their closeness centrality score. All we have to do is pass these to the `vertex_rescale()` function:
 
 ```{r}
 
@@ -485,12 +476,47 @@ gplot(
   gmode = "graph",
   edge.col="grey40", 
   vertex.col="#9cde18",
-  vertex.cex = vertex_rescale( closeness( ga_net_ucomp, gmode="graph" ), 0.4, 3 ),
+  vertex.cex = vertex_rescale( closeness( ga_net_ucomp, gmode="graph" ), 0.7, 1.8 ),
   main = "First Component of Get\n Along With Network (Undirected)",
   sub = "node sized by closeness centrality"
   )
 
 ```
+
+Now, looking at th plot, why is it that the maximum closenessness centrality score is only `r round( max( closeness( ga_net_ucomp, gmode="graph" ) / ( n_nodes - 1 ) ), 4 )`? This mainly has to do with the graph being fairly "spread-out". That is, there is not a lot of clustering and the average node has to go through a lot of edges to reach most other nodes. To see this, we can calculate the distance matrix as we did above:
+
+```{r}
+
+# get the geodesics
+ga_net_ucomp_geodist <- geodist( ga_net_ucomp )
+
+# calculate the distances
+ga_net_ucomp_distance <- rowSums( ga_net_ucomp_geodist$gdist )
+
+```
+
+The mean distance is `r round( mean( ga_net_ucomp_distance ), 3 )` meaning that the average nodes has to go through a lot of edges to reach other nodes. Again, a visual aid may help. Take a look at the plot below:
+
+```{r, echo=FALSE}
+
+new_labels <- network.vertex.names( ga_net_ucomp )
+new_labels <- ifelse( network.vertex.names( ga_net_ucomp ) == c( 4, 13, 135 ), network.vertex.names( ga_net_ucomp ), NA )
+new_sizes  <- ifelse( network.vertex.names( ga_net_ucomp ) == c( 4, 13, 135 ), 2.2, 0.5 )
+new_cols   <- ifelse( network.vertex.names( ga_net_ucomp ) == c( 4, 13, 135 ), "#9cde18", "grey80" )
+
+gplot(
+  ga_net_ucomp,
+  gmode = "graph",
+  edge.col="grey40",
+  vertex.col= new_cols,
+  label = new_labels,
+  label.pos = 5,
+  vertex.cex = new_sizes,
+  main = "First Component of Get\n Along With Network (Undirected)" )
+
+```
+
+What are the fewest number of edges node 4 has to traverse to reach node 13? To reach 135? These are large distances! That is how we get such small closeness centrality scores. 
 
 ### Power and Influence Network (Directed Network)
 
@@ -527,27 +553,22 @@ In the plot above, the first component (i.e. the largest subgraph) is shown in r
 
 ```{r, figure.align = "center", figure.height = 5, figure.width = 5}
 
-
 # find the component membership
-
 cd <- component.dist( as.matrix( pins_pi_net ), connected="weak" )
 
 
 # find which component is the largest
-
 sort( table( cd$membership ) )
 
 
 # we can see that group number 1 is the largest group. This is the first component.
 # so, we can assign the membership in the first component
-
 first_comp <- cd$membership
 first_comp[ cd$membership != 1 ] <- 0
 first_comp[ cd$membership == 1 ] <- 1
 
 
 # now we set this as a network attribute
-
 pins_pi_net %v% "first_comp" <- first_comp
 
 
@@ -555,7 +576,6 @@ pins_pi_net %v% "first_comp" <- first_comp
 # the get.inducedSubgraph() function.
 # Specifically, we stipulate in the v= argument 
 # that we only want vertices that are in the first component.
-
 pins_pi_net_comp <- get.inducedSubgraph( 
   pins_pi_net, # the network                 
   v = which( pins_pi_net %v% "first_comp" == 1 )  # the condition
@@ -563,7 +583,6 @@ pins_pi_net_comp <- get.inducedSubgraph(
 
 
 # Now, take a look at the plot:
-
 gplot( 
   pins_pi_net_comp, 
   gmode = "digraph",
@@ -573,17 +592,21 @@ gplot(
 
 ```
 
-Now, let's calculate our closeness scores. Note a slight change though, in the `closeness()` function there is the `gmode=` argument where we specify whether the graph is directed (i.e. `"digraph"` or undirected `"graph"`. If we use `gmode = "digraph"` we will get all zeros because it is using the directionality of the network. For our purposes here, we will set it to `gmode = "graph"` so we can actually get values:
+Now, let's calculate our closeness scores. Note a slight change though, in the `closeness()` function there is the `gmode=` argument where we specify whether the graph is directed (i.e. `"digraph"` or undirected `"graph"`. If we use `gmode = "digraph"` we will get all zeros because it is using the directionality of the network. For our purposes here, we will set the `gmode =` argument to `"graph"`. 
+
+*Why do this*? Well, let's think about what we are doing. By setting the `gmode =` argument to `"graph"`, we are saying that the directionality doesn't really matter for our network in terms of what closeness means. For example, consider the following: *A -> B -> C*. Here, by removing the directionality we are saying that *A* is as close to *C* as *C* is to *A*. Note that if we didn't ignore the directionalty, then *A* is of distance 2 from *C*, but *C* is of **infinite** distance from *A*. We don't want all those infinite distances, so we ignore the directionality here. In our case, with power influence ties, it makes sense to do this. **But**, this does <u> not apply to all networks </u>  and you should think about this decision when working with your network. Essentially ask yourself: *does it make sense to ignore the directionality?*
+
+Ok, back to where we were. Let's go ahead and set the `gmode = "graph"` so we can actually get values:
 
 ```{r}
 
 # get the number of nodes
 n_nodes <- dim( as.matrix( pins_pi_net_comp ) )[1]
 
-#unstandardized closeness
+# unstandardized closeness
 closeness( pins_pi_net_comp, gmode="graph" ) / ( n_nodes - 1 ) 
 
-#standardized closeness
+# standardized closeness
 closeness( pins_pi_net_comp, gmode="graph" ) 
 
 # Group Closeness Centralization
