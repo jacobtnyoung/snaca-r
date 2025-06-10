@@ -267,7 +267,7 @@ officer_event_net
 
 ```
 
-The `officer_event_net` object is stored as one of class `network`. Let's coerce it to a matrix to make it easer to handle:
+The `officer_event_net` object is stored as one of class `network`. Let's coerce it to a matrix to make it easier to handle:
 
 ```{r}
 
