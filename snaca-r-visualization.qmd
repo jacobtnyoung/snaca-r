@@ -443,8 +443,6 @@ gplot( pins_pi_net,
 
 ## Test Your Knowledge Exercises
 
--   Using the `Moreno` dataset, compare the circle layout and the Fruchterman-Reingold layout. Which layout better adheres to the aesthetic principles discussed above? Why?
--   Modify the `Moreno` visualization to color nodes by gender. How does this addition change your interpretation of the network structure?
 -   When plotting an undirected network, why might `gplot()` still display arrows? How can this be resolved?
 -   Experiment with adding labels to a network plot. What are some ways to customize label appearance? Why might label size or color be important?
 -   Use the `vertex_rescale()` function to adjust node sizes based on a vertex attribute. Try some different values. How do the different values influence your understanding of the network?
