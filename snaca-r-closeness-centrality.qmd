@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # Closeness Centrality and Centralization {.unnumbered}
 
-How do we know whether a node is important in a network? As was discussed at the beginning of the chapter on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html), one of the most popular concepts in network analysis is *centrality*. In that chapter, we covered how centrality can be measured by the number of edges incident on a node. But, that is not the only way that a node can be *central*. The chapter on [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html) discussed an alternative conceptualization, *closeness*, where important nodes are those who are "close" to other nodes in the network.
+How do we know whether a node is important in a network? As was discussed at the beginning of the chapter on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html), one of the most popular concepts in network analysis is *centrality*. In that chapter, we covered how centrality can be measured by the number of edges incident on a node. But that is not the only way that a node can be *central*. The chapter on [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html) discussed an alternative conceptualization, *closeness*, where important nodes are those who are "close" to other nodes in the network.
 
 In this tutorial, we will examine how to calculate closeness centrality and centralization scores in R using the `closeness()` and `centralization()` functions in the `sna` package.
 
@@ -28,7 +28,7 @@ Terminology:
 
 -   The **distance**, $d(n_i,n_j)$, is the length of the path between *i* and *j*. For example, suppose Sally is friends with Tom, Ulrica, and Violet; Violet is friends with Tom and Walter. What are the *paths* from Violet to Ulrica? Walter from Ulrica?
 
--   A **geodesic** is the shortest path between two nodes. What is the *shortest path* (i.e. geodesic) from Violet to Ulrica?
+-   A **geodesic** is the shortest path between two nodes. What is the *shortest path* (i.e., geodesic) from Violet to Ulrica?
 
 **Closeness** centrality is calculated as:
 
@@ -38,15 +38,15 @@ or
 
 $$\frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$ Here is what the equation is doing:
 
--   first identify the distances between *i* and *j* (i.e. $d(n_i,n_j)$) and sum them.
+-   First identify the distances between *i* and *j* (i.e., $d(n_i,n_j)$) and sum them.
 
 -   Note that $\sum\limits_{j=1}^g$ is indicating that for *i*, we want to sum over all the *j*s in the graph, *g*.
 
--   then take the inverse of this quantity.
+-   Then take the inverse of this quantity.
 
 ### Manually Calculating Closeness Centrality
 
-We can manually calculate the distance matrix using the `geodist()` function in the `sna` package. Be sure to load the `sna` library using `library( sna )` Let's take a look:
+We can manually calculate the distance matrix using the `geodist()` function in the `sna` package. Be sure to load the `sna` library using `library( sna ).` Let's take a look:
 
 ```{r, echo=FALSE}
 library( sna )
@@ -222,7 +222,7 @@ closeness( u_mat,gmode="graph" ) / ( g-1 )
 
 ### Closeness Centralization
 
-We can also summarize the entire network in terms of how close nodes are to each other. *Group closeness centralization* tells us how much variation there is in the closeness scores. As we saw in the textbook chapters on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html) and [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html), this measure is bound between 0 and 1 where a value of 0 indicates complete uniformity across nodes in their centrality scores and a value of 1 indicates that one node has the highest possible centrality score, and all others are at the minimum.
+We can also summarize the entire network in terms of how close nodes are to each other. *Group closeness centralization* tells us how much variation there is in the closeness scores. As we saw in the textbook chapters on [Degree Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-degree.html) and [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html), this measure is bound between 0 and 1, where a value of 0 indicates complete uniformity across nodes in their centrality scores, and a value of 1 indicates that one node has the highest possible centrality score, and all others are at the minimum.
 
 This is calculated as: $C_C = \frac{\sum\limits_{i=1}^g[C'_C(n^*)-C'_C(n_i)]}{[(g-2)(g-1)]/(2g-3)}$.
 
@@ -240,12 +240,12 @@ centralization( u_mat, closeness, mode="graph" )
 
 ## Closeness Centrality (Directed Binary Graphs)
 
-In a directed binary graph, closeness centrality has the same interpretation (i.e. it is the inverse of the average distance between nodes), but it takes into account the directional nature of the graph.
+In a directed binary graph, closeness centrality has the same interpretation (i.e., it is the inverse of the average distance between nodes), but it takes into account the directional nature of the graph.
 
 For example, consider two scenarios:
 
--   Suppose Laura sends a tie to Miguel and he sends a tie to Bruce (i.e. Laura -\> Miguel -\> Bruce). Here, Laura is of distance 2 from Bruce.
--   Now suppose Laura sends a tie to Miguel and Bruce sends a tie to Miguel (i.e. Laura -\> Miguel \<- Bruce).
+-   Suppose Laura sends a tie to Miguel and he sends a tie to Bruce (i.e., Laura -\> Miguel -\> Bruce). Here, Laura is of distance 2 from Bruce.
+-   Now suppose Laura sends a tie to Miguel and Bruce sends a tie to Miguel (i.e., Laura -\> Miguel \<- Bruce).
 -   *How far is Laura from Bruce now?*
 
 Let's take a look at this using the network from the [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html) chapter.
@@ -327,7 +327,7 @@ closeness( d_mat, gmode="digraph" ) / ( g-1 )
 
 ### Closeness Centralization
 
-As discussed in [@wasserman1994social, p. 200-201], the denominator is not defined for closeness centralization for directed graphs. Yet, score can be computed using the `centralization()` function.
+As discussed in [@wasserman1994social, p. 200-201], the denominator is not defined for closeness centralization for directed graphs. Yet, the score can be computed using the `centralization()` function.
 
 ```{r}
 
@@ -341,15 +341,15 @@ centralization( d_mat, closeness, mode="digraph" )
 
 The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
 
--   The *get along with network* was created by asking individuals whom they "get along with" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
+-   The *get along with network* was created by asking individuals with whom they "get along" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 
--   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit.
+-   The *power and influence network* was created by asking individuals who they believed were "powerful and influential" on the unit.
 
 As we saw in the prior tutorial, both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the closeness centrality scores for both of these networks.
 
 ### Get Along with Network (Undirected Network)
 
-For the *get along with* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. But, we are going to **symmetrize** the network by only taking ties for which ***both*** *i* and *j* indicated that the get along with the other person. This will give us an undirected network.
+For the *get along with* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. But, we are going to **symmetrize** the network by only taking ties for which ***both*** *i* and *j* indicated that they get along with the other person. This will give us an undirected network.
 
 ```{r}
 
@@ -371,7 +371,7 @@ ga_net_u <- as.network( ga_mat_u, directed = FALSE )
 
 Now, we have created an undirected network where ties represent "get along with" nominations from both individuals.
 
-*Before* we calculate the closeness scores, recall that in a graph with multiple components (i.e. disconnected subgraphs) individuals who cannot be reached will have a closeness score of zero. So, what do we do? Call it a day and go home? (We could, but we have some options)
+*Before* we calculate the closeness scores, recall that in a graph with multiple components (i.e., disconnected subgraphs), individuals who cannot be reached will have a closeness score of zero. So, what do we do? Call it a day and go home? (We could, but we have some options)
 
 What often happens in practice when we have multiple components in a network is that researchers will take the "first component" and analyze the closeness scores for that graph. The first component is the largest subgraph in a graph. We can see this visually in the following plot:
 
@@ -400,7 +400,7 @@ gplot( ga_net_u, gmode = "graph", vertex.col = comp_col, main = "Get Along With 
 
 ```
 
-In the plot above, the first component (i.e. the largest subgraph) is colored green. To get the closeness centrality scores, we can use a function called `get.inducedSubgraph()` in the `sna` package to extract a subgraph that meets a condition. In this case, we want to take those cases who are in the first component. Let's walk through the pieces.
+In the plot above, the first component (i.e., the largest subgraph) is colored green. To get the closeness centrality scores, we can use a function called `get.inducedSubgraph()` in the `sna` package to extract a subgraph that meets a condition. In this case, we want to take those cases who are in the first component. Let's walk through the pieces.
 
 ```{r, figure.align = "center", figure.height = 5, figure.width = 5}
 
@@ -462,11 +462,11 @@ centralization( ga_net_ucomp, closeness, mode="graph" )
 
 ```
 
-Wait, did you notice something about the undstandardized closeness scores? Go back and take a look. I will wait...
+Wait, did you notice something about the unstandardized closeness scores? Go back and take a look. I will wait...
 
-Ok, I hope you noticed it also. If not, look *again* and you will see that all the scores are really small. Specifically, the mean is `r round( mean( closeness( ga_net_ucomp, gmode="graph" ) / ( n_nodes - 1 ) ), 4 )`. Now, think about why it is so small.
+Ok, I hope you noticed it also. If not, look *again,* and you will see that all the scores are really small. Specifically, the mean is `r round( mean( closeness( ga_net_ucomp, gmode="graph" ) / ( n_nodes - 1 ) ), 4 )`. Now, think about why it is so small.
 
-If it is not immediately apparent, take a look at the plot of the network below where we size the nodes based on their closeness centrality score. All we have to do is pass these to the `vertex_rescale()` function:
+If it is not immediately apparent, take a look at the plot of the network below, where we size the nodes based on their closeness centrality score. All we have to do is pass these to the `vertex_rescale()` function:
 
 ```{r}
 
@@ -483,7 +483,7 @@ gplot(
 
 ```
 
-Now, looking at th plot, why is it that the maximum closenessness centrality score is only `r round( max( closeness( ga_net_ucomp, gmode="graph" ) / ( n_nodes - 1 ) ), 4 )`? This mainly has to do with the graph being fairly "spread-out". That is, there is not a lot of clustering and the average node has to go through a lot of edges to reach most other nodes. To see this, we can calculate the distance matrix as we did above:
+Now, looking at the plot, why is it that the maximum closeness centrality score is only `r round( max( closeness( ga_net_ucomp, gmode="graph" ) / ( n_nodes - 1 ) ), 4 )`? This mainly has to do with the graph being fairly "spread-out". That is, there is not a lot of clustering, and the average node has to go through a lot of edges to reach most other nodes. To see this, we can calculate the distance matrix as we did above:
 
 ```{r}
 
@@ -495,7 +495,7 @@ ga_net_ucomp_distance <- rowSums( ga_net_ucomp_geodist$gdist )
 
 ```
 
-The mean distance is `r round( mean( ga_net_ucomp_distance ), 3 )` meaning that the average nodes has to go through a lot of edges to reach other nodes. Again, a visual aid may help. Take a look at the plot below:
+The mean distance is `r round( mean( ga_net_ucomp_distance ), 3 ),` meaning that the average node has to go through a lot of edges to reach other nodes. Again, a visual aid may help. Take a look at the plot below:
 
 ```{r, echo=FALSE}
 
@@ -516,7 +516,7 @@ gplot(
 
 ```
 
-What are the fewest number of edges node 4 has to traverse to reach node 13? To reach 135? These are large distances! That is how we get such small closeness centrality scores. 
+What is the fewest number of edges node 4 has to traverse to reach node 13? To reach 135? These are large distances! That is how we get such small closeness centrality scores.
 
 ### Power and Influence Network (Directed Network)
 
@@ -549,7 +549,7 @@ gplot( pins_pi_net, gmode = "digraph", vertex.col = comp_col, main = "Power Netw
 
 ```
 
-In the plot above, the first component (i.e. the largest subgraph) is shown in red. Now, let's again use the `get.inducedSubgraph()` function in the `sna` package to extract a subgraph that meets the first component condition.
+In the plot above, the first component (i.e., the largest subgraph) is shown in red. Now, let's again use the `get.inducedSubgraph()` function in the `sna` package to extract a subgraph that meets the first component condition.
 
 ```{r, figure.align = "center", figure.height = 5, figure.width = 5}
 
@@ -592,9 +592,9 @@ gplot(
 
 ```
 
-Now, let's calculate our closeness scores. Note a slight change though, in the `closeness()` function there is the `gmode=` argument where we specify whether the graph is directed (i.e. `"digraph"` or undirected `"graph"`. If we use `gmode = "digraph"` we will get all zeros because it is using the directionality of the network. For our purposes here, we will set the `gmode =` argument to `"graph"`. 
+Now, let's calculate our closeness scores. Note a slight change, though, in the `closeness()` function: there is the `gmode=` argument where we specify whether the graph is directed (i.e., `"digraph"` or undirected `"graph"`. If we use `gmode = "digraph",` we will get all zeros because it is using the directionality of the network. For our purposes here, we will set the `gmode =` argument to `"graph"`.
 
-*Why do this*? Well, let's think about what we are doing. By setting the `gmode =` argument to `"graph"`, we are saying that the directionality doesn't really matter for our network in terms of what closeness means. For example, consider the following: *A -> B -> C*. Here, by removing the directionality we are saying that *A* is as close to *C* as *C* is to *A*. Note that if we didn't ignore the directionalty, then *A* is of distance 2 from *C*, but *C* is of **infinite** distance from *A*. We don't want all those infinite distances, so we ignore the directionality here. In our case, with power influence ties, it makes sense to do this. **But**, this does <u> not apply to all networks </u>  and you should think about this decision when working with your network. Essentially ask yourself: *does it make sense to ignore the directionality?*
+*Why do this*? Well, let's think about what we are doing. By setting the `gmode =` argument to `"graph"`, we are saying that the directionality doesn't really matter for our network in terms of what closeness means. For example, consider the following: *A -\> B -\> C*. Here, by removing the directionality, we are saying that *A* is as close to *C* as *C* is to *A*. Note that if we didn't ignore the directionality, then *A* is of distance 2 from *C*, but *C* is of **infinite** distance from *A*. We don't want all those infinite distances, so we ignore the directionality here. In our case, with power influence ties, it makes sense to do this. **But**, this does <u> not apply to all networks </u> and you should think about this decision when working with your network. Essentially, ask yourself: *Does it make sense to ignore the directionality?*
 
 Ok, back to where we were. Let's go ahead and set the `gmode = "graph"` so we can actually get values:
 
