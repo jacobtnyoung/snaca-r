@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 In this tutorial, you will be introduced to the programming language R. The tutorial is designed for those who have no experience with R. We begin with what R is, how you install it, and work through how to navigate the environment. We will also cover RStudio. Even if you have used R and/or RStudio before (awesome!), I would encourage you to review the tutorial as a refresher.
 
-As a reminder, this tutorial (and the tutorials throughout this book) will contain R code which is in "code chunks". You will notice a code chunk because the font will change. Code chunks will have text that `looks like this`. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by copying and pasting the `code` and seeing it work on your end.
+As a reminder, this tutorial (and the tutorials throughout this book) will contain R code, which is in "code chunks". You will notice a code chunk because the font will change. Code chunks will have text that `looks like this`. There is also regular text. The R code chunks can be copied and pasted directly into R and RStudio. As you work through the tutorials, follow along in the software by copying and pasting the `code` and seeing it work on your end.
 
 <br>
 
@@ -23,7 +23,7 @@ As a reminder, this tutorial (and the tutorials throughout this book) will conta
 
 ### **1. What is R**
 
-R is a dialect of the *S* language that was written by John Chambers and others at Bell labs in the 70s. In the 90s, R was developed and made available to the public with the GNU general public license. Importantly, R is *free*, meaning that you don't have to pay for it (duh), but it is also **open source**, meaning that you have freedom to use and modify it.
+R is a dialect of the *S* language that was written by John Chambers and others at Bell Labs in the 70s. In the 90s, R was developed and made available to the public with the GNU General Public License. Importantly, R is *free*, meaning that you don't have to pay for it (duh), but it is also **open source**, meaning that you have the freedom to use and modify it.
 
 Think of R as an operating system. Just as Windows allows you to turn on your computer, open a web browser, move files around, and write a paper using MS Word, R allows you to install and run packages, perform analyses, and manage files while organizing data for crime analyst projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.
 
@@ -31,33 +31,33 @@ Think of R as an operating system. Just as Windows allows you to turn on your co
 
 Go to <http://cran.r-project.org>. Find the "Download R for..." link that is appropriate for your operating system.
 
-When R starts it loads some basic info and provides you with a prompt: `>`
+When R starts, it loads some basic info and provides you with a prompt: `>`
 
 This prompt is the fundamental entry point for communicating with R. We type expressions at the prompt, R evaluates these expressions, and returns output.
 
 ### **3. Objects in R**
 
-R is a programming language. That means, it allows us to give instructions to our computer to do stuff. We will see that there is a lot of "stuff" we can do. But, the basic orientation to R is understanding **objects**.
+R is a programming language. That means it allows us to give instructions to our computer to do stuff. We will see that there is a lot of "stuff" we can do. But the basic orientation to R is understanding **objects**.
 
-What is an *object*? Without getting too philosophical, an *object* is something we create in the R environment. To help, consider this analogy: think of an R session as a box. As we give different instructions to R, we are creating objects and putting them into the box. We are also telling R to do different things to these objects. This may seem unusual at first as it is quite different from data analysis programs like SPSS or Stata which are spreadsheet oriented.
+What is an *object*? Without getting too philosophical, an *object* is something we create in the R environment. To help, consider this analogy: think of an R session as a box. As we give different instructions to R, we are creating objects and putting them into the box. We are also telling R to do different things to these objects. This may seem unusual at first, as it is quite different from data analysis programs like SPSS or Stata, which are spreadsheet-oriented.
 
 We create objects by using the assignment operator: `<-`
 
 What you type on the right is assigned to what you type on the left. For example:\
 `y <- 4` (we have assigned the value 4 to the object y)\
 `x <- 6` (we have assigned the value 6 to the object x)\
-`z <- y` (we have assigned the value of the object y to the object z, i.e. z = 4)
+`z <- y` (we have assigned the value of the object y to the object z, i.e., z = 4)
 
 After assigning a value to an object, type the name of the object and hit return/enter to see what the value is.
 
-Objects can start with a letter or a period. *But*, you cannot name an object starting with a number (or other symbols used by R).\
+Objects can start with a letter or a period. *But* you cannot name an object starting with a number (or other symbols used by R).\
 Some examples:\
 `the.number.two <- 2`\
 `2 <- the.number.two`\
 `2.the.number <- 2`\
 `;.2 <- 2`
 
-R is case sensitive (i.e. `A` is a different object than `a`). R is insensitive to white space though.\
+R is case sensitive (i.e., `A` is a different object than `a`). R is insensitive to white space, though.\
 These two examples are treated the same in R:\
 `x <- 2`\
 `x<-              2`
@@ -65,23 +65,23 @@ These two examples are treated the same in R:\
 To have R ignore text, use the `#` sign to make comments.\
 For example: `x <- 2 # this assigns the value 2 to object x.`
 
-In R there are no carriage returns (e.g. Stata uses `///` in code). Sorry :(
+In R, there are no carriage returns (e.g., Stata uses `///` in code). Sorry :(
 
 ## **4. Functions in R**
 
 A major strength of R is the ability to manipulate objects using functions. A function takes an argument (aka input) and returns some value (aka output).
 
-For example, suppose we wanted to create a list of numbers, called a *vector*. We want to create an object that is defined by the list of numbers. In R, there is a preprogrammed function `c()`, which combines or *concatenates* values to create a single object. We can create an object `x`, that is a vector of 1, 2, 3, 4, and 5 using: `x <- c(1,2,3,4,5)`.
+For example, suppose we wanted to create a list of numbers, called a *vector*. We want to create an object that is defined by a list of numbers. In R, there is a preprogrammed function `c()`, which combines or *concatenates* values to create a single object. We can create an object `x`, that is a vector of 1, 2, 3, 4, and 5 using: `x <- c(1,2,3,4,5)`.
 
 This reads: the object x is assigned the values 1, 2, 3, 4, and 5. The function is "`c`" and the argument is `1,2,3,4,5`.
 
-The number of values (aka elements) a vector contains is referred to as the "length". We can use the `length()` function to return this information for us. For example: `length(x)` shows that the vector `x` has 5 values or elements.
+The number of values (aka elements) a vector contains is referred to as the "length". We can use the `length()` function to return this information for us. For example, `length(x)` shows that the vector `x` has 5 values or elements.
 
 *Reminder*: R is a language, so part of the learning curve is getting familiar with the names of functions.
 
 ## **5. Referencing and Indexing Objects in R**
 
-In R, specific elements in an object are referenced by using brackets (i.e. `[` or `]`).
+In R, specific elements in an object are referenced by using brackets (i.e., `[` or `]`).
 
 For example, let's create a vector and work with it:
 
@@ -112,10 +112,10 @@ Using brackets to identify particular elements, called *indexing*, is VERY usefu
 
 Objects in R can be of different types or **classes**. There are four:
 
--   numeric, a number (e.g. `1, 2`)
--   character, a letter or word (e.g. `"Shelley", "Trevor"`)
--   factor, a category (e.g. `female, male`)
--   logical, True or False values (e.g. `TRUE, FALSE`)
+-   numeric, a number (e.g., `1, 2`)
+-   character, a letter or word (e.g., `"Shelley", "Trevor"`)
+-   factor, a category (e.g., `female, male`)
+-   logical, True or False values (e.g., `TRUE, FALSE`)
 
 Each type of vector serves different purposes:
 
@@ -135,7 +135,7 @@ is_female <- sex == "female"
 
 ```
 
-Note that numbers **do not** require `" "` around them but characters **do** require `" "` around them. Also, that the object `is.female` is created by stating a condition.
+Note that numbers **do not** require `" "` around them, but characters **do** require `" "` around them. Also, that the object `is.female` is created by stating a condition.
 
 Each object has a class, which defines the "type" of vector a particular object is:
 
@@ -176,7 +176,7 @@ m2 #just enter the name of the object to print it.
 
 ```
 
-For both functions, the dimensions of the vectors must be the same (i.e. same number of rows and columns).\
+For both functions, the dimensions of the vectors must be the same (i.e., the same number of rows and columns).\
 Let's see some examples:
 
 ```{r}
@@ -187,7 +187,7 @@ m2 <- rbind( l,n ) # returns an error because the dimensions differ.
 
 ```
 
-We can index the matrix `m1` or `m2` by using the brackets `[ ]` with a comma between the two dimensions. Since a matrix is 2-dimensions, we can reference a specific element, an entire row, or an entire column:
+We can index the matrix `m1` or `m2` by using the brackets `[ ]` with a comma between the two dimensions. Since a matrix is 2-dimensional, we can reference a specific element, an entire row, or an entire column:
 
 ```{r}
 
@@ -205,9 +205,9 @@ m2[,2]  <- 0 #change the second column to zeros.
 
 ```
 
-In the code chunk above, note the difference between `[,#]` and `[#,]`. A comma in front of the argument (i.e. `[,#]`) applies to the columns) and a common after the argument (i.e. `[#,]`) applies to the rows.
+In the code chunk above, note the difference between `[,#]` and `[#,]`. A comma in front of the argument (i.e., `[,#]`) applies to the columns, and a common after the argument (i.e., `[#,]`) applies to the rows.
 
-Also, notice that `m1[2,2]`, is an object, just as `m1` is an object. In effect, we are *subsetting* the object `m1` when we index it.
+Also, notice that `m1[2,2]` is an object, just as `m1` is an object. In effect, we are *subsetting* the object `m1` when we index it.
 
 Matrices can also be created from a list of numbers using the `matrix()` and `c()` functions.
 
@@ -223,7 +223,7 @@ m3
 A useful feature of R is an extensive documentation of each of the functions. To access the main R help archive online, type: `help.start()`\
 The `help()` function, or a simple `?`, can be used to get help about a specific function. For example: `help(c)` or `?c` returns the help page for the `c()` function.
 
-Take a look at the help page. The first line shows you the function and the package it is written for in brackets (more on packages below). The help page provides a description, how to use it (i.e. what are the arguments), and a description of what each argument does. Further details and examples are provided as well.
+Take a look at the help page. The first line shows you the function and the package it is written for in brackets (more on packages below). The help page provides a description, how to use it (i.e., what are the arguments), and a description of what each argument does. Further details and examples are provided as well.
 
 Let's take a look at another function that creates sequences of numbers, the `seq( )` function. There are several ways to use the `seq( )` function. The most common are:
 
@@ -235,8 +235,8 @@ seq( from=, to=, length= ) # Starts at from, ends at to, steps defined by length
 ```
 
 For example:\
-if we want to create an object of 5 values that starts with 1 and ends with 5, we type: `seq( from=1, to=5, by=1 )`.\
-if we want to create an object of 5 values that starts with 1 and ends with 9, we type: `seq( from=1, to=9, by=2 )`.\
+If we want to create an object of 5 values that starts with 1 and ends with 5, we type: `seq( from=1, to=5, by=1 )`.\
+If we want to create an object of 5 values that starts with 1 and ends with 9, we type: `seq( from=1, to=9, by=2 )`.\
 We could also have used the `length=` argument: `seq( from=1, to=10, length=5 )`.
 
 Since R knows that `from=` or `to=` or `by=` or `length=` are arguments, we do not have to type them in the syntax: `seq( 1, 9, 2 )` is identical to `seq( from=1, to=9, by=2 )` (as far as R is concerned).
@@ -255,9 +255,9 @@ Take a few moments and look through the packages by following this link: [packag
 
 If there is a particular package you want to add, you simply use the `install.packages()` function like this: `install.packages("`package name`")`.
 
-After the package is installed on your machine, you do <u>not</u> (I repeat NOT) need to reinstall the package each time you open a new session. Rather, you just need to load the package using the `library()` function like this: `library("`package name`")`. The `install.packages()` function is getting the package contents and installing it on your machine. The `library()` function is simply loading the package.
+After the package is installed on your machine, you do <u>not</u> (I repeat NOT) need to reinstall the package each time you open a new session. Rather, you just need to load the package using the `library()` function like this: `library("`package name`")`. The `install.packages()` function is getting the package contents and installing them on your machine. The `library()` function is simply loading the package.
 
-Note that each time you open R you have to load any packages that you manually loaded using the `install.packages()` function. In other words, if we closed R and then reopened it, we would need to type `library( "sna" )` to load the functions in `sna`. Note that we *do not* have to reinstall the package using `install.packages()`, we just have to load the library.
+Note that each time you open R, you have to load any packages that you manually loaded using the `install.packages()` function. In other words, if we closed R and then reopened it, we would need to type `library( "sna" )` to load the functions in `sna`. Note that we *do not* have to reinstall the package using `install.packages()`, we just have to load the library.
 
 If you have installed the package, but have not loaded it, R will return an error saying that a particular function is not found.
 
@@ -265,7 +265,7 @@ For example, the function `rgraph()` in the package `sna` (which is a set of too
 
 #### Installing Packages from Other Locations: SNACpack Package
 
-When you use the `install.packages()` function, you are access packages that are stored on CRAN's website. As you become more accustomed with using R, you will notice that there are a lot of packages that are not on CRAN. As was mentioned in the [Preface](), [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) is an R package specifically designed for the [*Social Network Analysis for Crime Analysts using R*](https://jacobtnyoung.github.io/snaca-r/) book. This package is not on CRAN, rather it is located on [Github](https://github.com), which is an online repository for storing code and various projects. To install the **SNACpack** package, we need to first install a package called `devtools` because it has a function `install_github()` that we will use to install the **SNACpack** package. (If this seems like a lot of info, it is!, but hang in there!).
+When you use the `install.packages()` function, you are accessing packages that are stored on CRAN's website. As you become more accustomed to using R, you will notice that there are a lot of packages that are not on CRAN. As was mentioned in the [Preface](), [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) is an R package specifically designed for the [*Social Network Analysis for Crime Analysts using R*](https://jacobtnyoung.github.io/snaca-r/) book. This package is not on CRAN; rather, it is located on [GitHub](https://github.com), which is an online repository for storing code and various projects. To install the **SNACpack** package, we need to first install a package called `devtools` because it has a function `install_github()` that we will use to install the **SNACpack** package. (If this seems like a lot of info, it is!, but hang in there!).
 
 To install **SNACpack**, let's use the following code chunk:
 
@@ -279,7 +279,7 @@ library( devtools )
 
 ```
 
-Ok, no we are ready to use the `install_github()` function. For this function to work, you need to know the location of the package you want to install. The location of the **SNACpack** package is: `jacobtnyoung/SNACpack`. If you want, you can access the repository using this link: [https://github.com/jacobtnyoung/SNACpack](https://github.com/jacobtnyoung/SNACpack). Now that we have the location, we can install it:
+Ok, now we are ready to use the `install_github()` function. For this function to work, you need to know the location of the package you want to install. The location of the **SNACpack** package is: `jacobtnyoung/SNACpack`. If you want, you can access the repository using this link: <https://github.com/jacobtnyoung/SNACpack>. Now that we have the location, we can install it:
 
 ```{r}
 
@@ -295,11 +295,11 @@ Done! Take a look at the package using `help( package = "SNACpack" )` to get a s
 
 #### Package Dependence
 
-Some packages require other packages for them to work. If there is an error, you need to install the additional packages. Usually these will install automatically. For example, when you installed **SNACpack** above, you might have noticed a line stating that it also installed `plotrix`. This is a package that is used by one of the functions in **SNACpack**, so it installs it for you.
+Some packages require other packages for them to work. If there is an error, you need to install the additional packages. Usually, these will install automatically. For example, when you installed **SNACpack** above, you might have noticed a line stating that it also installed `plotrix`. This is a package that is used by one of the functions in **SNACpack**, so it installs it for you.
 
 A final point on loading packages. Since anyone can write and contribute packages to R, it is not surprising that some packages occasionally use the same names for functions. When you have loaded libraries for packages that have conflicting functions, R will output a message indicating there is an issue.
 
-For example, the `sna` package and the `tnet` package both have a function called `betweenness`, but the functions are programmed differently. When you load `tnet` after loading `sna` (or *visa versa*), R will give you a warning that an "object is being masked". That means the functionality of `betweenness` in `sna` is no longer used. Let's check it out:
+For example, the `sna` package and the `tnet` package both have a function called `betweenness`, but the functions are programmed differently. When you load `tnet` after loading `sna` (or *vice versa*), R will give you a warning that an "object is being masked". That means the functionality of `betweenness` in `sna` is no longer used. Let's check it out:
 
 ```{r}
 
@@ -315,11 +315,11 @@ This can be a bit frustrating. In such cases, you can unload the package using t
 
 ### **10. R Session Management**
 
-All variables created in R are stored in the "workspace". Think of it as a work bench that has a bunch of stuff on it that you have created.
+All variables created in R are stored in the "workspace". Think of it as a workbench that has a bunch of stuff on it that you have created.
 
 To see what exists in the workspace, type: `ls()`.
 
-We can remove specific variables with the `rm()` function. This helps clear up space (i.e. conserve memory). For example:
+We can remove specific variables with the `rm()` function. This helps clear up space (i.e., conserve memory). For example:
 
 ```{r}
 
@@ -330,32 +330,32 @@ ls()          # no more x.
 
 ```
 
-To remove everything from the workspace use: `rm( list=ls() )`. This is helpful for starting a session to make sure everything is cleaned out.
+To remove everything from the workspace, use: `rm( list=ls() )`. This is helpful for starting a session to make sure everything is cleaned out.
 
 When you start R, it nominates one of the directories on your hard drive as a working directory, which is where it looks for user-written programs and data files.
 
 To determine the current directory, type: `getwd()`.\
-You can set the working directory also by typing: `setwd("`your desired directory here`")`.
+You can also set the working directory by typing: `setwd("`your desired directory here`")`.
 
-For example, if you are using Windows OS and want to set your directory to be the "C" drive, type: `setwd( "C:/" )`. *NOTE*: when you copy and paste filepaths in Windows, the folders are denoted with `\`, while R uses `/`.
+For example, if you are using Windows OS and want to set your directory to be the "C" drive, type: `setwd( "C:/" )`. *NOTE*: When you copy and paste filepaths in Windows, the folders are denoted with `\`, while R uses `/`.
 
 Or, if you are using Mac OS and want to set your directory to be a folder called "Users", type: `setwd( "/Users" )`.
 
-On the Windows OS you can set R to automatically start up in your preferred working directory by right clicking on the program shortcut, choosing properties, and completing the 'Start in' field. On the Mac OS you can set the initial working directory using the Preferences menu.
+On the Windows OS, you can set R to automatically start up in your preferred working directory by right-clicking on the program shortcut, choosing properties, and completing the 'Start in' field. On the Mac OS, you can set the initial working directory using the Preferences menu.
 
-To save the workspace use the `save.image()` function. This function requires a file path, a file name, and the extension ".RData" which is the format for an R workspace file.
+To save the workspace, use the `save.image()` function. This function requires a file path, a file name, and the extension ".RData", which is the format for an R workspace file.
 
-For example, to save a workspace called "OurFirstTutorial" to the current directory, simply type: `save.image("OurFirstTutorial.Rdata")`. You can also write in the directory of you want to save it somewhere else. You can also do this by the pull-down menu with the File/Save option.
+For example, to save a workspace called "OurFirstTutorial" to the current directory, simply type: `save.image("OurFirstTutorial.Rdata")`. You can also write in the directory if you want to save it somewhere else. You can also do this by the pull-down menu with the File/Save option.
 
-To load a previously saved workspace, you can either click on the file outside of R or use the `load()` function (e.g. `load("OurFirstTutorial.Rdata")`). If you get an error, make sure you are referring the correct directory. You can also choose Load Workspace from the pull-down menu.
+To load a previously saved workspace, you can either click on the file outside of R or use the `load()` function (e.g., `load("OurFirstTutorial.Rdata")`). If you get an error, make sure you are referring to the correct directory. You can also choose Load Workspace from the pull-down menu.
 
 Note that only the objects in the workspace are saved, not the text of what you have written.
 
 ### **11. (Bonus!) RStudio**
 
-You may be surprised to discover how little functionality is implemented in the standard R GUI (i.e. graphical user interface). The standard R GUI implements only very rudimentary functionality through menus: reading help, managing multiple graphics windows, editing some source and data files, and some other basic functionality. There are no menu items, buttons, or palettes for loading data, transforming data, plotting data, or doing any real work with data. Commercial applications like SAS, SPSS, and Stata include user interfaces with much more functionality.
+You may be surprised to discover how little functionality is implemented in the standard R GUI (i.e., graphical user interface). The standard R GUI implements only very rudimentary functionality through menus: reading help, managing multiple graphics windows, editing some source and data files, and some other basic functionality. There are no menu items, buttons, or palettes for loading data, transforming data, plotting data, or doing any real work with data. Commercial applications like SAS, SPSS, and Stata include user interfaces with much more functionality.
 
-This was just the nature of working with R until some awesome human beings created RStudio. RStudio is one of several projects to build an easier-to-use GUI for R. It is a free, open-source IDE (i.e. integrated development environment) for working with R. Unlike the standard R GUI, RStudio tiles windows on the screen and puts different windows in different tabs. RStudio can be downloaded from: <http://www.rstudio.com>.
+This was just the nature of working with R until some awesome human beings created RStudio. RStudio is one of several projects to build an easier-to-use GUI for R. It is a free, open-source IDE (i.e., integrated development environment) for working with R. Unlike the standard R GUI, RStudio tiles windows on the screen and puts different windows in different tabs. RStudio can be downloaded from: <http://www.rstudio.com>.
 
 ### RStudio workthrough
 
@@ -389,4 +389,4 @@ Now that you have RStudio up and running, try rerunning some of the code above. 
 
 ## Tutorial Summary
 
-This tutorial provides a quick introduction to R and RStudio. R is a versatile and open-source programming language that is well-suited for social network analysis. As we will see, it is one of the best environments for crime analysts to work with social network data and conduct analyses. We began with an overview of R's history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R's extensive documentation, installing and loading packages, and managing the R workspace effectively. We also installed the [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) package that we will use throughtout the tutorials. Finally, we reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.
+This tutorial provides a quick introduction to R and RStudio. R is a versatile and open-source programming language that is well-suited for social network analysis. As we will see, it is one of the best environments for crime analysts to work with social network data and conduct analyses. We began with an overview of R's history, emphasizing its unique features, such as being free and customizable through numerous packages. The tutorial then guides readers through essential concepts, including installing R, understanding the R environment, and creating objects, which are fundamental building blocks of any R session. Readers learn how to use functions, reference and manipulate objects, and work with different data types (numeric, character, factor, and logical). The tutorial also covers indexing techniques for accessing specific elements within objects and introduces matrices as a two-dimensional data structure. Practical advice is provided on navigating R's extensive documentation, installing and loading packages, and managing the R workspace effectively. We also installed the [**SNACpack**](https://jacobtnyoung.github.io/SNACpack/) package that we will use throughout the tutorials. Finally, we reviewed (briefly) RStudio, a powerful integrated development environment that enhances the R user experience. You are now equipped with foundational skills to explore R further and apply it to real-world data tasks as you continue developing your skills as a crime analyst.

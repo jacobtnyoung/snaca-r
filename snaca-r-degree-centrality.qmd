@@ -81,7 +81,7 @@ deg_u_mat <- colSums( u_mat )
 
 ```
 
-Then, we can use that information in the plot by passing the degree object to the `vertex.cex=` argument. This will make nodes with higher degree larger.
+Then, we can use that information in the plot by passing the degree object to the `vertex.cex=` argument. This will make nodes with a higher degree larger.
 
 ```{r}
 
@@ -99,7 +99,7 @@ gplot(
 
 ```
 
-Another approach is to shade the nodes. Rather than just the size, we might want to have nodes with larger degree to be darker (or lighter) to better visualize differences in degree. To do this, we could use the `RColorBrewer` package to shade the nodes.
+Another approach is to shade the nodes. Rather than just the size, we might want to have nodes with a larger degree to be darker (or lighter) to better visualize differences in degree. To do this, we could use the `RColorBrewer` package to shade the nodes.
 
 ```{r}
 
@@ -129,7 +129,7 @@ gplot(
 
 ### Standardized degree centrality, mean degree, and centralization
 
-Actor degree centrality not only reflects each node's connectivity to other nodes but also depends on the size of the network, *g*. As a result, larger networks will have a higher maximum possible degree centrality values. This makes comparison across networks problematic. The solution is to take into account the number of nodes and the maximum possible nodes to which *i* could be connected, *g-1*.
+Actor degree centrality not only reflects each node's connectivity to other nodes but also depends on the size of the network, *g*. As a result, larger networks will have higher maximum possible degree centrality values. This makes comparison across networks problematic. The solution is to take into account the number of nodes and the maximum possible nodes to which *i* could be connected, *g-1*.
 
 Let's calculate the standardized centrality scores for our undirected graph:
 
@@ -169,7 +169,7 @@ mean( deg_u_mat )
 
 ```
 
-In the code above, we used the `sum()` function. This function sums over the entire matrix. In this case, that sum represents $2L$, not $L$. Why? Because $L$ is the number of edges in the graph. When we create the adjacency matrix, we duplicate each edge. So, when we sum this matrix, we are count each edge twice. This is why the sum represents $2L$.
+In the code above, we used the `sum()` function. This function sums over the entire matrix. In this case, that sum represents $2L$, not $L$. Why? Because $L$ is the number of edges in the graph. When we create the adjacency matrix, we duplicate each edge. So, when we sum this matrix, we count each edge twice. This is why the sum represents $2L$.
 
 <br>
 
@@ -258,7 +258,7 @@ odeg_d_mat
 
 ```
 
-Now, let's work this information in the plot. We will want to partition the plotting window using the `par()` function to show two plots and we want to change the margins using the `mar=` argument. Use `?par` and/or `?mar` to view the help on how these work.
+Now, let's work this information into the plot. We will want to partition the plotting window using the `par()` function to show two plots, and we want to change the margins using the `mar=` argument. Use `?par` and/or `?mar` to view the help on how these work.
 
 ```{r, fig.align="center"}
 
@@ -488,15 +488,15 @@ o_cent_d <- centralization( d_mat, degree, mode="digraph", cmode="outdegree" )
 
 The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
 
--   The *get along with network* was created by asking individuals whom they "get along with" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
+-   The *get along with network* was created by asking individuals with whom they "get along" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 
--   The *power and influence network* was created by asking individuals whom they believed was "powerful and influential" on the unit
+-   The *power and influence network* was created by asking individuals who they believed were "powerful and influential" on the unit.
 
 Both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the degree centrality scores for both of these networks.
 
 ### *Get Along With* Network (Undirected Network)
 
-For the *get along with* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. But, we are going to **symmetrize** the network by only taking ties for which ***both*** *i* and *j* indicated that the get along with the other person. This will give us an undirected network.
+For the *get along with* network, individuals could have asymmetric nominations. That is, *i* could nominate *j* and *j* didn't necessarily nominate *i*. But, we are going to **symmetrize** the network by only taking ties for which ***both*** *i* and *j* indicated that they get along with the other person. This will give us an undirected network.
 
 ```{r}
 
@@ -529,7 +529,7 @@ coords <- gplot( ga_net_u )
 
 ```
 
-Now lets build the objects and the plot:
+Now, let's build the objects and the plot:
 
 ```{r}
 
@@ -664,7 +664,7 @@ A few questions:
 
 <br>
 
-## Test Your Knowledge Excercises
+## Test Your Knowledge Exercises
 
 -   For the undirected binary graph `u_mat`, calculate the degree centrality for each node manually. Verify your results using the `colSums()` function. What does the degree centrality of each node represent in this network? Which node has the highest degree centrality? Why do you think this is the case?
 -   In the example above, nodes were plotted with sizes proportional to their degree centrality. Using the shaded plot, describe the relationship between node size and shade intensity. Which node has the darkest shade? Explain what this represents in terms of degree centrality.

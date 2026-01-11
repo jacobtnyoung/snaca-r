@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 
 # Creating Data-Driven Documents using RMarkdown {.unnumbered}
 
-In this tutorial, you will be introduced to RMarkdown using RStudio. Learning RMarkdown is essential for crime analysts in criminal justice professions because it allows you to create dynamic, data-driven documents that seamlessly integrate narrative text, statistical analysis, and data visualizations. One of the standout features of RStudio is its ability to produce "reproducible" documents, where all text, analysis syntax, and outputs are maintained in a single file. This eliminates the need to bounce between multiple programs, reducing the risk of errors, and ensuring that your work is fully transparent and repeatable. For crime analysts working with publicly available datasets or collaborating across agencies, this reproducibility is invaluable---it streamlines workflows, fosters accountability, and allows for easy sharing of both the analysis process and results. Mastering RMarkdown not only enhances the efficiency of your reporting but also elevates the integrity and clarity of your analytical work. I hope that sells you on the value of it, so let's get started!
+In this tutorial, you will be introduced to RMarkdown using RStudio. Learning RMarkdown is essential for crime analysts in criminal justice professions because it allows you to create dynamic, data-driven documents that seamlessly integrate narrative text, statistical analysis, and data visualizations. One of the standout features of RStudio is its ability to produce "reproducible" documents, where all text, analysis syntax, and outputs are maintained in a single file. This eliminates the need to bounce between multiple programs, reducing the risk of errors and ensuring that your work is fully transparent and repeatable. For crime analysts working with publicly available datasets or collaborating across agencies, this reproducibility is invaluable---it streamlines workflows, fosters accountability, and allows for easy sharing of both the analysis process and results. Mastering RMarkdown not only enhances the efficiency of your reporting but also elevates the integrity and clarity of your analytical work. I hope that sells you on the value of it, so let's get started!
 
 <br>
 
@@ -21,7 +21,7 @@ In this tutorial, you will be introduced to RMarkdown using RStudio. Learning RM
 
 ### What are Data-Driven Documents?
 
-Data-driven documents are formats that combine text and analysis (i.e. data and code). By combining everything in a single file, we promote transparency and reproducibility. For any given table, figure, or model in the document, you should be able to easily discern how it was created, from what data, and what analysis was used.
+Data-driven documents are formats that combine text and analysis (i.e., data and code). By combining everything in a single file, we promote transparency and reproducibility. For any given table, figure, or model in the document, you should be able to easily discern how it was created, from what data, and what analysis was used.
 
 We will use the [R Markdown](https://rmarkdown.rstudio.com/lesson-1.html) format.
 
@@ -65,7 +65,7 @@ sequenceDiagram
 
 ```
 
-Let's walk through this. First, you need to open RStudio. Then, using the dropdown menu select File \> New File \> RMarkdown. This will bring up the RMarkdown template window. In this window, you can specify the title, author, and output format. Click "OK" and RStudio will create a new RMarkdown file. An RMarkdown file has two essential pieces: text and code chunks (discussed more below). The last piece is to click the "Knit" button to create the output document.
+Let's walk through this. First, you need to open RStudio. Then, using the dropdown menu, select File \> New File \> RMarkdown. This will bring up the RMarkdown template window. In this window, you can specify the title, author, and output format. Click "OK" and RStudio will create a new RMarkdown file. An RMarkdown file has two essential pieces: text and code chunks (discussed more below). The last step is to click the "Knit" button to create the output document.
 
 ### A Closer Look
 
@@ -75,11 +75,11 @@ Code is placed inside of "chunks" in the documents:
 
 [![](https://github.com/DS4PS/ds4ps.github.io/blob/master/gifs/NewCodeChunk/NewCodeChunk_media/NewCodeChunk.gif?raw=true)](../gifs/NewCodeChunk/NewCodeChunk.html)
 
-When you "knit" a file RStudio will run all of code, embed the output into your document, and then convert the file to whichever type you have specified in the file header.
+When you "knit" a file, RStudio will run all of the code, embed the output into your document, and then convert the file to whichever type you have specified in the file header.
 
 ### Output Types
 
-You can select from many different document types, including HTML pages, Microsoft word, presentation formats, or dashboards.
+You can select from many different document types, including HTML pages, Microsoft Word, presentation formats, or dashboards.
 
 **Check out these examples:**
 
@@ -117,7 +117,7 @@ output: pdf_document
 
 ##### A note on PDFs
 
-If you would like to knit to PDF you need one additional program. TeX creates publication-quality PDF files. The open-source version is called MiKTeX [download page](http://miktex.org/download).
+If you would like to knit to PDF, you need one additional program. TeX creates publication-quality PDF files. The open-source version is called MiKTeX [download page](http://miktex.org/download).
 
 If you have problems, you can find some nice tutorials like this one: <https://www.reed.edu/data-at-reed/software/R/r_studio_pc.html>
 
@@ -209,7 +209,7 @@ Insert images in a similar way, but add an exclamation mark in front of square b
 ![alt_text_here](image_file.png)
 ```
 
-The *alt text* appears when the image cannot be located, or is read by devices for the blind when the mouse hovers over the image. It
+The *alt text* appears when the image cannot be located or is read by devices for the blind when the mouse hovers over the image. It
 
 Or you can link directly to an image online using the URL address of the image:
 
@@ -225,7 +225,7 @@ Or you can link directly to an image online using the URL address of the image:
 | Title 1          | Title 2          | Title 3         | Title 4         |
 |------------------|------------------|-----------------|-----------------|
 | First entry      | Second entry     | Third entry     | Fourth entry    |
-| Fifth entry      | Sixth entry      | Seventh entry   | Eight entry     |
+| Fifth entry      | Sixth entry      | Seventh entry   | Eighth entry    |
 | Ninth entry      | Tenth entry      | Eleventh entry  | Twelfth entry   |
 | Thirteenth entry | Fourteenth entry | Fifteenth entry | Sixteenth entry |
 ```
@@ -233,7 +233,7 @@ Or you can link directly to an image online using the URL address of the image:
 | Title 1          | Title 2          | Title 3         | Title 4         |
 |------------------|------------------|-----------------|-----------------|
 | First entry      | Second entry     | Third entry     | Fourth entry    |
-| Fifth entry      | Sixth entry      | Seventh entry   | Eight entry     |
+| Fifth entry      | Sixth entry      | Seventh entry   | Eighth entry    |
 | Ninth entry      | Tenth entry      | Eleventh entry  | Twelfth entry   |
 | Thirteenth entry | Fourteenth entry | Fifteenth entry | Sixteenth entry |
 

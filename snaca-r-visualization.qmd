@@ -53,7 +53,7 @@ Now that you have a sense of what a good visualization should try to do, let's l
 
 First, we need to install the `sna` package using `install.packages( "sna" )` and load the library using `library( sna )`.
 
-Remember, if you have already installed a package then you do not need to use the `install.packages()` function. But, if you have not installed the package in a while, you should use `update.packages()` to incorporate any changes that have been made to the page.
+Remember, if you have already installed a package, then you do not need to use the `install.packages()` function. But, if you have not installed the package in a while, you should use `update.packages()` to incorporate any changes that have been made to the page.
 
 Next, let's use a network of phone calls among members of the Sicilian Mafia as discussed by @cavallaro2020sicilian. This network is available in the `SNACpack` package and is called: `mafia_calls_net`. To learn more about the data, use `?mafia_calls_net` to pull up the help page.
 
@@ -91,7 +91,7 @@ mafia_calls_net
 
 ```
 
-Take a look at what is printed out. We see that there are 98 vertices (i.e., nodes) and 123 edges (i.e. ties). So, the network represents 123 phone calls between 98 individuals. Note that it is *undirected*.
+Take a look at what is printed out. We see that there are 98 vertices (i.e., nodes) and 123 edges (i.e., ties). So, the network represents 123 phone calls between 98 individuals. Note that it is *undirected*.
 
 Let's plot it!
 
@@ -116,7 +116,7 @@ gplot( mafia_calls_net, gmode = "graph", mode = "fruchtermanreingold" )
 
 Think back to the aesthetic elements we discussed above. How do these two plots differ in how well they convey the **same** information? Which one is better? Why is it better?
 
-To think about these questions, let's plot the two layouts together. To do this we will use the `par()` function. This allows us to partition the plotting region.
+To think about these questions, let's plot the two layouts together. To do this, we will use the `par()` function. This allows us to partition the plotting region.
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -147,7 +147,7 @@ Ok, that was a lot. Let's work our way back through the mechanics of building a 
 
 Let's take a look at some of the visualization capabilities of `gplot()`. Let's start by looking at the function's help page: `?gplot`.
 
-To see the various functionality of the function, let's work with our example of an undirected network. Remember that the network `undirected_example_net` is available in `SNACpack`. Let's plot it.
+To see the various functionalities of the function, let's work with our example of an undirected network. Remember that the network `undirected_example_net` is available in `SNACpack`. Let's plot it.
 
 ```{r}
 
@@ -157,11 +157,11 @@ gplot( undirected_example_net )
 
 Hold on, this plot shows arrows. But this network is undirected. What gives?
 
-That is because `gplot()` assumes a directed network. We can see this in the help menu, `?gplot`, where is shows that for the type of network, the `gmode=` argument defaults to a directed graph. To fix this we can either:
+That is because `gplot()` assumes a directed network. We can see this in the help menu, `?gplot`, where it shows that for the type of network, the `gmode=` argument defaults to a directed graph. To fix this, we can either:
 
 -   manually turn off the display of arrows using the `usearrows=` argument, `gplot( undirected_example_net, usearrows = FALSE )`
 
--   or indicate that the object to be plotted is a undirected graph or graph, `gplot( undirected_example_net, gmode = "graph" )`
+-   or indicate that the object to be plotted is an undirected graph or graph, `gplot( undirected_example_net, gmode = "graph" )`
 
 The `gplot()` function has a number of arguments that can be used to better display the information contained in the network.
 
@@ -207,7 +207,7 @@ A great feature of R is that we can tune the graphing parameters. Here are sever
 
     -   different colored edges, using `edge.col=`, such as: `edge.col=c("red","blue","green","orange","grey")`
 
-There is a LOT of functionality to the `gplot()` function. See the arguments in the help file: `?gplot`. I would encourage you to take some time to look through it and play around with the various features.
+There is a LOT of functionality to the `gplot()` function. See the arguments in the help file: `?gplot`. I would encourage you to take some time to look through it and play around with its various features.
 
 ### Adjusting Plot Layout
 
@@ -247,7 +247,7 @@ gplot(
 
 ```
 
-Cool but, *why do this?* The placement of the nodes shift when we call the `gplot()` function just due to the operation of the algorithm. Controlling where nodes are plotted in the 2-dimensional space is useful if we want to show different aspects of the plot. Note that we can have different layouts of the nodes. If we like a particular one, we can save the coordinates.
+Cool, but *why do this?* The placement of the nodes shifts when we call the `gplot()` function, just due to the operation of the algorithm. Controlling where nodes are plotted in the 2-dimensional space is useful if we want to show different aspects of the plot. Note that we can have different layouts of the nodes. If we like a particular one, we can save the coordinates.
 
 *But*, suppose the default settings are insufficient and we want to make a few small changes. The `interactive=` argument allows for tweaking.
 
@@ -264,7 +264,7 @@ coords <- gplot(
 
 ```
 
-When this renders on your system, move a few of the nodes around. Then, after you close the window it will save the coordinates.
+When this renders on your system, move a few of the nodes around. Then, after you close the window, it will save the coordinates.
 
 ```{r, eval=FALSE}
 
@@ -327,7 +327,7 @@ The plot uses several layers of information:
 -   the color of the nodes (`vertex.col`)
 -   the color of the edges (`edge.col`)
 
-As we create a plot, we want to think about what information we should convey and how best to convey that information (i.e. colors?, shapes?, size?, all of the above?)
+As we create a plot, we want to think about what information we should convey and how best to convey that information (i.e., colors?, shapes?, size?, all of the above?)
 
 ## Plotting the Power/Influence Network from the Prison Inmate Networks Study (PINS)
 
@@ -347,7 +347,7 @@ We see that it has 205 vertices (nodes), 161 edges (trust nominations), and is d
 
 We also see that there are several attributes. To learn more about the attributes, review the help documentation for the network by using `?pins_pi_net`.
 
-We can access network attributes using a shorthand notation: `%v%`. The operate let's us pull a specific attribute. We can look at the various vertex data by using the shorthand `network %v% "attribute"`. For example:
+We can access network attributes using a shorthand notation: `%v%`. The operator lets us pull a specific attribute. We can look at the various vertex data by using the shorthand `network %v% "attribute"`. For example:
 
 -   `pins_pi_net %v% "age"` shows the age variable.
 
@@ -375,7 +375,7 @@ gplot( pins_pi_net,
 
 YIKES!!! What is wrong?
 
-The problem is that we need to *rescale* the vertex attribute so that the nodes are not too big. Essentially, we want to be able to rework the values of the attribute so the plot sizes make sense. In `SNACpack` there is a function called `vertex_rescale` that does just that! I take a vector for plotting, and it allows you to specify the minimum and maximum values. Use `?vertex_rescale` for more information.
+The problem is that we need to *rescale* the vertex attribute so that the nodes are not too big. Essentially, we want to be able to rework the values of the attribute so the plot sizes make sense. In `SNACpack`, there is a function called `vertex_rescale` that does just that! I take a vector for plotting, and it allows you to specify the minimum and maximum values. Use `?vertex_rescale` for more information.
 
 We can use the `vertex_rescale` function to rescale the vertex attribute so it looks better:
 
