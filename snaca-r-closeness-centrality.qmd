@@ -26,9 +26,9 @@ In an undirected binary graph, **closeness centrality** measures how near a node
 
 Terminology:
 
--   The **distance**, $d(n_i,n_j)$, is the length of the path between *i* and *j*. For example, suppose Sally is friends with Tom, Ulrica, and Violet; Violet is friends with Tom and Walter. What are the *paths* from Violet to Ulrica? Walter from Ulrica?
+- The **distance**, $d(n_i,n_j)$, is the length of the path between *i* and *j*. For example, suppose Sally is friends with Tom, Ulrica, and Violet; Violet is friends with Tom and Walter. What are the *paths* from Violet to Ulrica? Walter from Ulrica?
 
--   A **geodesic** is the shortest path between two nodes. What is the *shortest path* (i.e., geodesic) from Violet to Ulrica?
+- A **geodesic** is the shortest path between two nodes. What is the *shortest path* (i.e., geodesic) from Violet to Ulrica?
 
 **Closeness** centrality is calculated as:
 
@@ -38,11 +38,11 @@ or
 
 $$\frac{1}{[\sum\limits_{j=1}^g d(n_i,n_j)]}$$ Here is what the equation is doing:
 
--   First identify the distances between *i* and *j* (i.e., $d(n_i,n_j)$) and sum them.
+- First identify the distances between *i* and *j* (i.e., $d(n_i,n_j)$) and sum them.
 
--   Note that $\sum\limits_{j=1}^g$ is indicating that for *i*, we want to sum over all the *j*s in the graph, *g*.
+- Note that $\sum\limits_{j=1}^g$ is indicating that for *i*, we want to sum over all the *j*s in the graph, *g*.
 
--   Then take the inverse of this quantity.
+- Then take the inverse of this quantity.
 
 ### Manually Calculating Closeness Centrality
 
@@ -129,15 +129,15 @@ gplot(
 
 In this plot, we see that **Jen** has a distance score of *9*. (She is so far away!) To see how we get that score, let's do the calculation:
 
--   recall that $d(n_i,n_j)$ is the length of the path from *i* to *j*
+- recall that $d(n_i,n_j)$ is the length of the path from *i* to *j*
 
-    -   Jen -\> Tom ($d(Jen,Tom)$) is 1
+  - Jen -\> Tom ($d(Jen,Tom)$) is 1
 
-    -   Jen -\> Bob ($d(Jen,Bob)$) is 2
+  - Jen -\> Bob ($d(Jen,Bob)$) is 2
 
-    -   Jen -\> Leaf ($d(Jen,Leaf)$) and Jen -\> Jim ($d(Jen,Jim)$) are both 3
+  - Jen -\> Leaf ($d(Jen,Leaf)$) and Jen -\> Jim ($d(Jen,Jim)$) are both 3
 
-    -   So that is $\sum\limits_{Jen}^g d(Jen,Tom/Bob/Leaf/Jim) = 1+2+3+3=9$.
+  - So that is $\sum\limits_{Jen}^g d(Jen,Tom/Bob/Leaf/Jim) = 1+2+3+3=9$.
 
 To get the closeness centrality score, we divide that quantity by 1.
 
@@ -244,9 +244,9 @@ In a directed binary graph, closeness centrality has the same interpretation (i.
 
 For example, consider two scenarios:
 
--   Suppose Laura sends a tie to Miguel and he sends a tie to Bruce (i.e., Laura -\> Miguel -\> Bruce). Here, Laura is of distance 2 from Bruce.
--   Now suppose Laura sends a tie to Miguel and Bruce sends a tie to Miguel (i.e., Laura -\> Miguel \<- Bruce).
--   *How far is Laura from Bruce now?*
+- Suppose Laura sends a tie to Miguel and he sends a tie to Bruce (i.e., Laura -\> Miguel -\> Bruce). Here, Laura is of distance 2 from Bruce.
+- Now suppose Laura sends a tie to Miguel and Bruce sends a tie to Miguel (i.e., Laura -\> Miguel \<- Bruce).
+- *How far is Laura from Bruce now?*
 
 Let's take a look at this using the network from the [Closeness Centrality](https://jacobtnyoung.github.io/snaca-textbook/snaca-centrality-closeness.html) chapter.
 
@@ -341,9 +341,9 @@ centralization( d_mat, closeness, mode="digraph" )
 
 The [*Prison Inmate Networks Study (PINS)*](https://cjrc.la.psu.edu/active-funded-research-projects/completed-projects/) examines the social networks of prison inmates in a state correctional institution. The study was unique in that it was the first in nearly a century to collect sociometric data in a prison. The researchers collected data on several types of networks. There are two we want to look at here:
 
--   The *get along with network* was created by asking individuals with whom they "get along" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
+- The *get along with network* was created by asking individuals with whom they "get along" on the unit. We can think of this as "friends" in a prison setting. (People don't really have "friends" in prison, but there are people they "get along with")
 
--   The *power and influence network* was created by asking individuals who they believed were "powerful and influential" on the unit.
+- The *power and influence network* was created by asking individuals who they believed were "powerful and influential" on the unit.
 
 As we saw in the prior tutorial, both of these networks are available in `SNACpack`. The *get along with network* is called: `pins_ga_net`, and the *power and influence network* is called: `pins_pi_net`. Let's examine the closeness centrality scores for both of these networks.
 
@@ -495,7 +495,7 @@ ga_net_ucomp_distance <- rowSums( ga_net_ucomp_geodist$gdist )
 
 ```
 
-The mean distance is `r round( mean( ga_net_ucomp_distance ), 3 ),` meaning that the average node has to go through a lot of edges to reach other nodes. Again, a visual aid may help. Take a look at the plot below:
+The mean distance is `r round( mean( ga_net_ucomp_distance ), 3 )`, meaning that the average node has to go through a lot of edges to reach other nodes. Again, a visual aid may help. Take a look at the plot below:
 
 ```{r, echo=FALSE}
 
@@ -517,6 +517,24 @@ gplot(
 ```
 
 What is the fewest number of edges node 4 has to traverse to reach node 13? To reach 135? These are large distances! That is how we get such small closeness centrality scores.
+
+## An Alternative
+
+When dealing with disconnected graphs, restricting our analysis to the first component is one option. This works well when we have a single large component that captures most of the network. 
+But, in some cases we might have multiple components and performing separate analyses can be cumbersome.
+
+In such cases, we can use an alternate form of closeness developed by [Gil and Schmidt (1996)]() which the sum of the inverse distances to each node. 
+In the `sna` package, this can be computed using the argument `cmode="suminvdir"` for directed networks and `cmode="suminvundir"` for undirected networks. 
+For example, compare these two:
+
+```{r}
+
+# standardized closeness
+closeness( ga_net_u, gmode="graph" ) 
+
+closeness( ga_net_u, gmode="graph", cmode = "suminvundir" ) 
+
+```
 
 ### Power and Influence Network (Directed Network)
 
@@ -632,20 +650,20 @@ gplot(
 
 A few questions:
 
--   What do we see in the plot?
--   What does the closeness centralization score of `r round( centralization( pins_pi_net_comp, closeness, mode="graph" ), 2 )` indicate?
+- What do we see in the plot?
+- What does the closeness centralization score of `r round( centralization( pins_pi_net_comp, closeness, mode="graph" ), 2 )` indicate?
 
 ## Test Your Knowledge Exercises
 
--   Explain the concept of closeness centrality in your own words. How does it differ from degree centrality?
--   Using the `u_mat` matrix in the tutorial, manually calculate the closeness centrality for the node "Jen." Show your calculations step by step.
--   Using the "Get Along With" network, identify why only the largest component is analyzed for closeness centrality. What are the potential consequences of ignoring smaller components?
--   In the "Power and Influence Network," why do we adjust the `gmode` argument when calculating closeness centrality? What are the implications of analyzing a directed network as undirected?
--   For both the "Get Along With" and "Power and Influence" networks, calculate the standardized closeness centrality for a specific node of your choice. Compare the results between the two networks.
--   Interpret the group closeness centralization score for the "Get Along With" network. What does this score reveal about the structure of the network?
--   Explain why `Inf` values appear in the geodesic distance matrix for directed graphs and how these values are handled during calculations.
--   Using the "Power and Influence Network," examine the visual representation of the first component. What structural patterns do you observe, and how do these relate to the closeness centrality scores?
--   After calculating the closeness centralization scores for both networks, compare their values. What do the differences in scores suggest about the overall structure of the two networks?
+- Explain the concept of closeness centrality in your own words. How does it differ from degree centrality?
+- Using the `u_mat` matrix in the tutorial, manually calculate the closeness centrality for the node "Jen." Show your calculations step by step.
+- Using the "Get Along With" network, identify why only the largest component is analyzed for closeness centrality. What are the potential consequences of ignoring smaller components?
+- In the "Power and Influence Network," why do we adjust the `gmode` argument when calculating closeness centrality? What are the implications of analyzing a directed network as undirected?
+- For both the "Get Along With" and "Power and Influence" networks, calculate the standardized closeness centrality for a specific node of your choice. Compare the results between the two networks.
+- Interpret the group closeness centralization score for the "Get Along With" network. What does this score reveal about the structure of the network?
+- Explain why `Inf` values appear in the geodesic distance matrix for directed graphs and how these values are handled during calculations.
+- Using the "Power and Influence Network," examine the visual representation of the first component. What structural patterns do you observe, and how do these relate to the closeness centrality scores?
+- After calculating the closeness centralization scores for both networks, compare their values. What do the differences in scores suggest about the overall structure of the two networks?
 
 ## Tutorial Summary
 
