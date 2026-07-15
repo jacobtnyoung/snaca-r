@@ -1,0 +1,243 @@
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = FALSE,
+  message=FALSE, 
+  warning=FALSE, 
+  fig.width = 10,
+  fig.align = "center"
+  )
+
+```
+
+# Network Description {.unnumbered}
+
+In the [**Network Description**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-description.html) chapter of the [*Social Network Analysis for Crime Analysts*](https://jacobtnyoung.github.io/snaca-textbook/) textbook, we learned four basic ways to describe a network (i.e. size, density, components, diameter). 
+In this tutorial, we will review how we can do this in R. 
+
+## Simple Network Summary
+
+So you have your network data, now what? The next step is to summarize its most critical features, which can guide your analysis. First, consider the size: How *big* is the network? This is the number of nodes involved, giving a sense of its scale. Next, think about how tightly connected the network is---this is the *density*, or the proportion of actual connections relative to all possible ones. Another key question is separation: How fragmented or divided is the network? Understanding its *components* or *subgraphs* can highlight isolated clusters. Finally, consider the network's compactness, or its *diameter*, how far do nodes have to travel through connections to reach others? These four basic measures lay the groundwork for describing and understanding the structure of any network you encounter in your analysis.
+
+As a refresher:
+
+  - The *size* of the network is just the number of nodes in the network, which we represent with $g$;
+  - The *density* the number of edges compared to how many ties there could be, which we calculate with $\frac{2L}{g(g-1)}$ for an **undirected** graph and $\frac{L}{g(g-1)}$ for a **directed** graph where $L$ is the number of edges and $g$ is the number of nodes;
+  - Disconnected **subgraphs** are referred to as *components*;
+  - The *diameter* is the longest of **all** the shortest paths in the network, where a **shortest path** is the fewest number of steps node $A$ has to take to reach node $B$.
+
+Let's take a look at these in R.
+
+## Setup 
+
+First, let's set up our undirected graph and our directed graph from the [**Network Description**](https://jacobtnyoung.github.io/snaca-textbook/snaca-net-description.html) chapter:
+
+```{r}
+
+# first, clear the workspace
+rm( list = ls() )
+
+
+# then, build the undirected network using the matrix function
+u_mat <- matrix(
+  c( 0,1,0,0,0,
+     1,0,1,0,0,
+     0,1,0,1,1,
+     0,0,1,0,1,
+     0,0,1,1,0 ),
+  nrow = 5,
+  byrow = TRUE 
+  )
+
+# assign the names to the object
+rownames( u_mat ) <- c( "Jen","Tom","Bob","Leaf","Jim" )
+colnames( u_mat ) <- c( "Jen","Tom","Bob","Leaf","Jim" )
+
+# take a look at what we made
+u_mat
+
+
+# now, let's build the directed network
+d_mat <- matrix(
+  c( 0,1,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,1,0,0,1,1,0 ),
+  nrow = 5,
+  byrow = TRUE )
+  
+# assign the names to the object
+rownames( d_mat ) <- c( "Jen","Tom","Bob","Leaf","Jim" )
+colnames( d_mat ) <- c( "Jen","Tom","Bob","Leaf","Jim" )
+
+# take a look at what we made
+d_mat
+
+```
+
+### Size
+
+To get the size of the network we can examine the dimensions, or order, using the `dim()` function.
+
+```{r}
+
+# get the dimensions
+dim( u_mat )
+
+```
+
+This shows that the object `u_mat` has `r dim( u_mat )[1]` rows and `r dim( u_mat )[1]` columns.
+Since this is an object, we can use indexing to refer to each element in the object.
+
+```{r}
+
+# set the number of rows as the size of the network
+u_g <- dim( u_mat )[1]
+
+u_g
+
+
+# set the number of rows as the size of the network
+d_g <- dim( d_mat )[1]
+
+d_g
+
+
+```
+
+### Density
+
+Recall that the density of an **undirected** graph is given by: $\frac{2L}{g(g-1)}$ and the density of a **directed** graph is given by: $\frac{L}{g(g-1)}$. 
+This means that for both networks we need to find $L$ and $g$.
+
+We already have $g$ from our use of the `dim()` function above.
+
+Now, we just need to count how many edges are in the network.
+To do this, we can use the `sum()` function, which adds up all the values in an object.
+Since the adjacency matrix is 0s and 1s, we can just sum the matrix to get $L$.
+
+However, for the **undirected** network, the `sum()` function is going to double count our edges. 
+As a result, we have to divide that one by 2.
+
+```{r}
+
+# sum up the undirected network and then divide by 2
+u_L <- sum( u_mat ) / 2
+
+u_L
+
+
+# sum up the directed network
+d_L <- sum( d_mat )
+
+d_L
+
+```
+
+Now that we have `L` and `g` for each network, we can find the density:
+
+```{r}
+
+# for the undirected network
+u_density <- ( 2 * u_L ) / ( u_g * ( u_g - 1 ) )
+
+u_density
+
+# for the directed network (note the difference)
+d_density <- ( d_L ) / ( d_g * ( d_g - 1 ) )
+
+d_density
+
+```
+
+### Components
+
+Disconnected **subgraphs** are referred to as *components*. 
+In each of our example networks, there is only a single component because there are no subgraphs.
+In other words, all of the nodes are correctly either directly or indirectly.
+
+In the `sna` package, there is a function called `component.dist()` which finds the distribution of components in a graph. 
+Let's take a look at it:
+
+```{r}
+
+# first, load the sna library
+library( sna )
+
+# now, calculate the component distributionsfor the undirected graph
+u_comp <- component.dist( u_mat )
+
+u_comp
+
+```
+
+Now let's do it for the directed graph.
+Because there is directionality, we have to use the `connected = weak` argument to tell the function to ignore the direction (we will discuss this more later).
+
+```{r}
+
+# calculate the component distribution for the directed graph and ignore the directionality
+d_comp <- component.dist( d_mat, connected = "weak" )
+
+d_comp
+
+```
+
+
+HERE HERE 
+HERE 
+HERE 
+HERE 
+HERE 
+HERE 
+
+
+
+
+### Diameter
+
+A final question we can ask is how *compact* is the network? In other words, can nodes reach other nodes directly and indirectly fairly easily? Or, are nodes really far from each other?
+
+To understand diameter, let's set up a definition: A *step* is movement along an edge. Let's think about how this works. For example, take two nodes $A$ and $B$ who are directly connected. How many steps is $A$ from $B$? Since $A$ is directly tied to $B$, the number of steps is 1. Now, take another example where $A$ and $B$ are *not* directly connected. Rather, suppose $A$ is connected to $D$, whom is connected to $C$, whom is connected to $B$, like this: $A-D-C-B$. How many steps is $A$ from $B$? Well, how many edges are there between them? There are 3 edges.
+
+We can extend this to an entire graph by calculating the steps for every pair of nodes (i.e., dyads) in the graph. When we do this, we can define two other terms:
+
+-   A *shortest path* is the fewest number of steps node $A$ has to take to reach node $B$;
+
+-   The *diameter* is the longest of **all** the shortest paths in the network.
+
+#### Undirected Graph
+
+Let's see how this works in an **undirected** graph. In the plot below, what is the shortest path from Leaf to Jen?
+
+```{r}
+
+u_graph
+
+```
+
+To answer this question, we need to first figure out what the paths are, then figure out which is the shortest (i.e., has the fewest edges to traverse). In this plot, there are two:
+
+-   $Leaf-Jim-Bob-Tom-Jen$
+-   $Leaf-Bob-Tom-Jen$
+
+The second path, $Leaf-Bob-Tom-Jen$, is the shortest path.
+
+Now, what is the *diameter* of the network? To figure this out, we would identify the shortest paths for all pairs of nodes, then see which is the largest. So, taking a look at this plot, what is the *diameter*? It is 3. The longest shortest paths (I know, it sounds confusing) are $Leaf-Bob-Tom-Jen$ and $Jim-Bob-Tom-Jen$. Both are of length 3.
+
+#### Directed Graph
+
+Paths with *directed graphs* can be a bit tricky to comprehend due to the directionality of the ties. For example, how many steps is $A$ from $B$ in this graph, $B \rightarrow D \rightarrow C \rightarrow A$? If we focus on the direction of the ties, then $A$ cannot reach $B$. But, if we **ignore** the direction of the ties, then $A$ is 3 steps from $B$. Often, we ignore the directionality of a network to calculate the diameter. But, in some cases, it might not make sense to do so. Just keep this in mind as you are working with different networks as a crime analyst.
+
+<br>
+
+## Test your Knowledge
+
+-   What are the key features of a network that crime analysts can focus on for identifying trends and prioritizing interventions?
+-   How do you calculate the size of a network, and why is it important to know?
+-   What is network density, and how is the calculation different for undirected and directed graphs?
+-   Why is it important to examine the components of a network?
+-   How do you identify the largest component in a graph, and why might this component be particularly important?
+-   What is the diameter of a network, and why is it a significant measure of network compactness?
+
+## Summary
+
+This chapter focused on how crime analysts can gain an understanding of a network by describing some basic structures. We focused on key network features (size, density, components, and diameter) for gaining insights into relationships and patterns. Examining these properties can help analysts identify areas for targeted interventions. In the next chapters, we will begin focusing on a key idea in social network analysis: *centrality*.
